@@ -15,6 +15,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="hello.txt" />
+    <ClInclude Include="Project.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
