@@ -11,6 +11,9 @@ Initial: Added class's Node, LinkedList, List, HashSC;
 
 
 
+#include <cmath>
+using namespace std;
+
 template <class ItemType>
 class Node;
 
