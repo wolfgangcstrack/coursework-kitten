@@ -6,8 +6,8 @@ files in the project.
 Initial: Added class's Node, LinkedList, List, HashSC;
 */
 
-#ifndef PROJECT_H
-#define PROJECT_H
+#ifndef GLOBAL_H
+#define GLOBAL_H
 
 
 
@@ -30,6 +30,8 @@ class HashSC;
 // Linkded List Node Class
 // Created by Frank M. Carrano and Tim Henry.
 // Modified by CNguyen
+
+// Edit: getItem returns reference to ItemType
 template<class ItemType>
 class Node
 {
@@ -42,7 +44,7 @@ public:
 	Node(const ItemType& anItem)				{ item = anItem; next = 0; }
 	void setItem(const ItemType& anItem)		{ item = anItem; }
 	void setNext(Node<ItemType>* nextNodePtr)	{ next = nextNodePtr; }
-	ItemType getItem() const					{ return item; }
+	ItemType& getItem() const					{ return item; }
 	Node<ItemType>* getNext() const				{ return next; }
 };
 // ---------------------- Node Class End ----------------------------------------------------------
