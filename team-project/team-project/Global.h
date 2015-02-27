@@ -3,14 +3,16 @@ This file is the global header file for the project and has common includes,
 data structure prototypes/definitions, and all other code commonly shared by
 files in the project.
 
-Initial: Added class's Node, LinkedList, List, HashSC;
+This file includes the implementation of the Node, LinkedList, and List classes.
+All other implementations are in their respective files.
 */
 
-#ifndef GLOBAL_H
-#define GLOBAL_H
+#ifndef _GLOBAL_H
+#define _GLOBAL_H
 
 
-
+#include <iostream>
+#include <string>
 #include <cmath>
 using namespace std;
 
@@ -25,6 +27,15 @@ class List;
 
 template <class ItemType>
 class HashSC;
+
+template <class ItemType>
+class BinaryNode;
+
+template <class ItemType>
+class BinaryTree;
+
+template <class ItemType>
+class BinarySearchTree;
 
 // ---------------------- Node Class --------------------------------------------------------------
 // Linkded List Node Class
@@ -226,7 +237,7 @@ Node<ItemType>* List<ItemType>::getNodeAt(int position) const
 }
 // ---------------------- List Class End ----------------------------------------------------------
 
-// ---------------------- HashSC Class ------------------------------------------------------------
+// ---------------------- HashSC Class Interface --------------------------------------------------
 template <class Object>
 class HashSC
 {
@@ -256,177 +267,165 @@ private:
 
 template <class Object>
 const float HashSC<Object>::INIT_MAX_LAMBDA = 1.5;
+// ---------------------- HashSC Class Interface End ----------------------------------------------
 
-// HashSC method definitions -------------------
-template <class Object>
-HashSC<Object>::HashSC(int tableSize) : mSize(0)
+// ---------------------- BinaryNode Class --------------------------------------------------------
+// Node for a binary tree
+// Created by Frank M. Carrano and Tim Henry.
+// Modified by CNguyen
+template<class ItemType>
+class BinaryNode
 {
-	if (tableSize < INIT_TABLE_SIZE)
-		mTableSize = INIT_TABLE_SIZE;
-	else
-		mTableSize = nextPrime(tableSize);
+private:
+	ItemType              item;         // Data portion
+	BinaryNode<ItemType>* leftPtr;		// Pointer to left child
+	BinaryNode<ItemType>* rightPtr;		// Pointer to right child
 
-	mLists = new List<Object>[mTableSize];
-	mMaxLambda = INIT_MAX_LAMBDA;
-}
-
-template <class Object>
-HashSC<Object>::~HashSC()
-{
-	//    for( int i=0; i < mTableSize; ++i )//FIXED******************
-	//        delete mLists[i];//FIXED******************
-	delete[] mLists;
-}
-
-template <class Object>
-int HashSC<Object>::myHash(const Object & x) const
-{
-	int hashVal;
-
-	hashVal = Hash(x) % mTableSize;
-	if (hashVal < 0)
-		hashVal += mTableSize;
-
-	return hashVal;
-}
-
-template <class Object>
-void HashSC<Object>::makeEmpty()
-{
-	int k;
-
-	for (k = 0; k < mTableSize; k++)
-		mLists[k].clear();
-	mSize = 0;
-}
-
-template <class Object>
-bool HashSC<Object>::contains(const Object & x) const
-{
-	const List<Object> & theList = mLists[myHash(x)];
-	Object tempObj;					// ADDED**********************
-
-	for (int i = 0; i < theList.size(); i++)
-	{
-		theList.getEntry((i + 1), tempObj);//FIXED******************
-		if (tempObj == x)		//FIXED******************
-			return true;
+public:
+	// constructors
+	BinaryNode(const ItemType & anItem)			   { item = anItem; leftPtr = 0; rightPtr = 0; }
+	BinaryNode(const ItemType & anItem,
+		BinaryNode<ItemType>* left,
+		BinaryNode<ItemType>* right)		   {
+		item = anItem; leftPtr = left; rightPtr = right;
 	}
+	// accessors
+	void setItem(const ItemType & anItem)		   { item = anItem; }
+	void setLeftPtr(BinaryNode<ItemType>* left)	   { leftPtr = left; }
+	void setRightPtr(BinaryNode<ItemType>* right)  { rightPtr = right; }
+	// mutators
+	ItemType getItem() const					   { return item; }
+	BinaryNode<ItemType>* getLeftPtr() const	   { return leftPtr; }
+	BinaryNode<ItemType>* getRightPtr() const	   { return rightPtr; }
 
-	// not found
-	return false;
+	bool isLeaf() const							   { return (leftPtr == 0 && rightPtr == 0); }
+};
+// ---------------------- BinaryNode Class End ----------------------------------------------------
+
+// ---------------------- BinaryTree Class --------------------------------------------------------
+// Binary tree abstract base class
+// Created by Frank M. Carrano and Tim Henry.
+// Modified by:
+template<class ItemType>
+class BinaryTree
+{
+protected:
+	BinaryNode<ItemType>* rootPtr;		// ptr to root node
+	int count;							// number of nodes in tree
+
+public:
+	// "admin" functions
+	BinaryTree()						{ rootPtr = 0; count = 0; }
+	BinaryTree(const BinaryTree<ItemType> & tree)	{ }
+	virtual ~BinaryTree()				{ }
+	BinaryTree & operator=(const BinaryTree & sourceTree);
+
+	// common functions for all binary trees
+	bool isEmpty() const				{ return count == 0; }
+	int size() const					{ return count; }
+	void clear()						{ destroyTree(rootPtr); rootPtr = 0; count = 0; }
+	void preOrder(void visit(ItemType &)) const		{ _preorder(visit, rootPtr); }
+	void inOrder(void visit(ItemType &)) const		{ _inorder(visit, rootPtr); }
+	void postOrder(void visit(ItemType &)) const	{ _postorder(visit, rootPtr); }
+
+	// abstract functions to be implemented by derived class
+	virtual bool insert(const ItemType & newData) = 0;
+	virtual bool remove(const ItemType & data) = 0;
+	virtual bool getEntry(const ItemType & anEntry, ItemType & returnedItem) const = 0;
+
+private:
+	// delete all nodes from the tree
+	void destroyTree(BinaryNode<ItemType>* nodePtr);
+
+	// copy from the tree rooted at nodePtr and returns a pointer to the copy
+	BinaryNode<ItemType>* copyTree(const BinaryNode<ItemType>* nodePtr);
+
+	// internal traverse
+	void _preorder(void visit(ItemType &), BinaryNode<ItemType>* nodePtr) const;
+	void _inorder(void visit(ItemType &), BinaryNode<ItemType>* nodePtr) const;
+	void _postorder(void visit(ItemType &), BinaryNode<ItemType>* nodePtr) const;
+
+};
+
+//////////////////////////////////////////////////////////////////////////
+
+template<class ItemType>
+BinaryNode<ItemType>* BinaryTree<ItemType>::copyTree(const BinaryNode<ItemType>* nodePtr)
+{
+	BinaryNode<ItemType>* newNodePtr = 0;
+
+	return newNodePtr;
 }
 
-template <class Object>
-bool HashSC<Object>::remove(const Object & x)
+template<class ItemType>
+void BinaryTree<ItemType>::destroyTree(BinaryNode<ItemType>* nodePtr)
 {
-	List<Object> &theList = mLists[myHash(x)];
-	Object tempObj;					// ADDED**********************
 
-	for (int i = 0; i < theList.size(); i++)
+}
+
+template<class ItemType>
+void BinaryTree<ItemType>::_preorder(void visit(ItemType &), BinaryNode<ItemType>* nodePtr) const
+{
+	if (nodePtr != 0)
 	{
-		theList.getEntry((i + 1), tempObj);//FIXED******************
-		if (tempObj == x)		//FIXED******************
-		{
-			theList.remove(i + 1);
-			mSize--;
-			return true;
-		}
-	}
-	// not found
-	return false;
-}
-
-template <class Object>
-bool HashSC<Object>::insert(const Object & x)
-{
-	List<Object> &theList = mLists[myHash(x)];
-	int listSize = theList.size();
-	Object tempObj;					// ADDED**********************
-
-	for (int i = 0; i < listSize; i++)
-	{
-		theList.getEntry((i + 1), tempObj);//FIXED******************
-		if (tempObj == x)		//FIXED******************
-			return false;
-	}
-	// not found so we insert at the beginning
-	theList.insert(x);
-
-	// check load factor
-	if (++mSize > mMaxLambda * mTableSize)
-		rehash();
-
-	return true;
-}
-
-template <class Object>
-void HashSC<Object>::rehash()
-{
-	List<Object> *oldLists = mLists;
-	int k, oldTableSize = mTableSize;
-	List<Object> *currList;           // CHANGED********************
-	Object tempObj;
-
-	mTableSize = nextPrime(2 * oldTableSize);
-	mLists = new List<Object>[mTableSize];
-
-	mSize = 0;
-	for (k = 0; k < oldTableSize; k++)
-	{
-		currList = &oldLists[k];
-		for (int i = 0; i < currList->size(); ++i)//updated***************
-		{
-			currList->getEntry((i + 1), tempObj);//updated***************
-			insert(tempObj);
-		}
-
-	}
-	delete[] oldLists;
-}
-
-template <class Object>
-bool HashSC<Object>::setMaxLambda(float lam)
-{
-	if (lam < .1 || lam > 100)
-		return false;
-	mMaxLambda = lam;
-	return true;
-}
-
-template <class Object>
-long HashSC<Object>::nextPrime(long n)
-{
-	long k, candidate, loopLim;
-
-	// loop doesn't work for 2 or 3
-	if (n <= 2)
-		return 2;
-	else if (n == 3)
-		return 3;
-
-	for (candidate = (n % 2 == 0) ? n + 1 : n; true; candidate += 2)
-	{
-		// all primes > 3 are of the form 6k +/- 1
-		loopLim = (long)((sqrt((float)candidate) + 1) / 6);
-
-		// we know it is odd.  check for divisibility by 3
-		if (candidate % 3 == 0)
-			continue;
-
-		// now we can check for divisibility of 6k +/- 1 up to sqrt
-		for (k = 1; k <= loopLim; k++)
-		{
-			if (candidate % (6 * k - 1) == 0)
-				break;
-			if (candidate % (6 * k + 1) == 0)
-				break;
-		}
-		if (k > loopLim)
-			return candidate;
+		ItemType item = nodePtr->getItem();
+		visit(item);
+		_preorder(visit, nodePtr->getLeftPtr());
+		_preorder(visit, nodePtr->getRightPtr());
 	}
 }
-// ---------------------- HashSC Class End --------------------------------------------------------
 
+template<class ItemType>
+void BinaryTree<ItemType>::_inorder(void visit(ItemType &), BinaryNode<ItemType>* nodePtr) const
+{
+
+}
+
+template<class ItemType>
+void BinaryTree<ItemType>::_postorder(void visit(ItemType &), BinaryNode<ItemType>* nodePtr) const
+{
+
+}
+
+template<class ItemType>
+BinaryTree<ItemType> & BinaryTree<ItemType>::operator=(const BinaryTree<ItemType> & sourceTree)
+{
+
+}
+// ---------------------- BinaryTree Class End ----------------------------------------------------
+
+// ---------------------- BinarySearchTree Class Interface ----------------------------------------
+// Binary Search Tree ADT
+// Created by Frank M. Carrano and Tim Henry.
+// Modified by:
+template<class ItemType>
+class BinarySearchTree : public BinaryTree<ItemType>
+{
+private:
+	// internal insert node: insert newNode in nodePtr subtree
+	BinaryNode<ItemType>* _insert(BinaryNode<ItemType>* nodePtr, BinaryNode<ItemType>* newNode);
+
+	// internal remove node: locate and delete target node under nodePtr subtree
+	BinaryNode<ItemType>* _remove(BinaryNode<ItemType>* nodePtr, const ItemType target, bool & success);
+
+	// delete target node from tree, called by internal remove node
+	BinaryNode<ItemType>* deleteNode(BinaryNode<ItemType>* targetNodePtr);
+
+	// remove the leftmost node in the left subtree of nodePtr
+	BinaryNode<ItemType>* removeLeftmostNode(BinaryNode<ItemType>* nodePtr, ItemType & successor);
+
+	// search for target node
+	BinaryNode<ItemType>* findNode(BinaryNode<ItemType>* treePtr, const ItemType & target) const;
+
+public:
+	// insert a node at the correct location
+	bool insert(const ItemType & newEntry);
+	// remove a node if found
+	bool remove(const ItemType & anEntry);
+	// find a target node
+	bool getEntry(const ItemType & target, ItemType & returnedItem) const;
+
+};
+// ---------------------- BinarySearchTree Class Interface End ------------------------------------
 
 #endif
