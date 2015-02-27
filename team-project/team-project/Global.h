@@ -1,4 +1,6 @@
 /*
+Manager: Wolfgang
+
 This file is the global header file for the project and has common includes,
 data structure prototypes/definitions, and all other code commonly shared by
 files in the project.
