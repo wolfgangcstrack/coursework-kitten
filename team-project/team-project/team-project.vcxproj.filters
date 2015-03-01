@@ -26,5 +26,11 @@
     <ClCompile Include="SAList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BST.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HashSC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

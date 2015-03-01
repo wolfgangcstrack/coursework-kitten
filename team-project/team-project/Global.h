@@ -5,7 +5,7 @@ This file is the global header file for the project and has common includes,
 data structure prototypes/definitions, and all other code commonly shared by
 files in the project.
 
-This file includes the implementation of the Node, LinkedList, and List classes.
+This file includes the implementation of the Node, LinkedList, and SAList classes.
 All other implementations are in their respective files.
 */
 
@@ -25,7 +25,7 @@ template <class ItemType>
 class LinkedList;
 
 template <class ItemType>
-class List;
+class SAList;
 
 template <class ItemType>
 class HashSC;
@@ -125,12 +125,12 @@ public:
 	// Passes back node at a specified position
 	bool getEntry(int position, ItemType & anEntry) const;
 };
-// ---------------------- List Class Interface End ------------------------------------------------
+// ---------------------- SAList Class Interface End ------------------------------------------------
 
 // ---------------------- HashSC Class Interface --------------------------------------------------
 // Modified by: Louis Christopher
 
-// Implementation: 
+// Implementation: HashSC.cpp
 
 template <class Object>
 class HashSC
@@ -138,7 +138,7 @@ class HashSC
 	static const int INIT_TABLE_SIZE = 97;
 	static const float INIT_MAX_LAMBDA;
 private:
-	List<Object> * mLists; // for array of linked lists
+	SAList<Object> * mLists; // for array of linked SALists
 	int mSize;  // number of entries
 	int mTableSize; // array size
 	float mMaxLambda; // max. load factor
@@ -203,7 +203,7 @@ public:
 
 // Modified by: Andrew Wang
 
-// Implementation: 
+// Implementation: BST.cpp
 
 template<class ItemType>
 class BinaryTree
@@ -253,7 +253,7 @@ private:
 
 // Modified by: Andrew Wang
 
-// Implementation: 
+// Implementation: BST.cpp
 
 template<class ItemType>
 class BinarySearchTree : public BinaryTree<ItemType>

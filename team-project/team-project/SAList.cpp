@@ -64,9 +64,9 @@ void LinkedList<ItemType>::clear()
 }
 // ---------------------- LinkedList Class Implementation End -------------------------------------
 
-// ---------------------- List Class Implementation -----------------------------------------------
+// ---------------------- SAList Class Implementation -----------------------------------------------
 template<class ItemType>
-bool List<ItemType>::insert(const ItemType& newEntry, int newPosition)
+bool SASAList<ItemType>::insert(const ItemType& newEntry, int newPosition)
 {
 	// check valid position
 	if (newPosition < 1 || newPosition > itemCount + 1)
@@ -79,7 +79,7 @@ bool List<ItemType>::insert(const ItemType& newEntry, int newPosition)
 		newNodePtr->setNext(headPtr);
 		headPtr = newNodePtr;
 	}
-	else  // insert new node in middle or end of list
+	else  // insert new node in middle or end of SAList
 	{
 		Node<ItemType>* prevPtr = getNodeAt(newPosition - 1);  // go to position
 		newNodePtr->setNext(prevPtr->getNext());
@@ -91,7 +91,7 @@ bool List<ItemType>::insert(const ItemType& newEntry, int newPosition)
 
 
 template<class ItemType>
-bool List<ItemType>::remove(int position)
+bool SAList<ItemType>::remove(int position)
 {
 	// check for valid position
 	if (position < 1 || position > itemCount)
@@ -103,10 +103,10 @@ bool List<ItemType>::remove(int position)
 		deletePtr = headPtr;
 		headPtr = headPtr->getNext();
 	}
-	else   // remove from middle or end of list
+	else   // remove from middle or end of SAList
 	{
 		Node<ItemType>* prevPtr = getNodeAt(position - 1); // get to position
-		deletePtr = prevPtr->getNext();		// remove from list
+		deletePtr = prevPtr->getNext();		// remove from SAList
 		prevPtr->setNext(deletePtr->getNext());
 	}
 	delete deletePtr;
@@ -115,7 +115,7 @@ bool List<ItemType>::remove(int position)
 }
 
 template<class ItemType>
-bool List<ItemType>::getEntry(int position, ItemType & anEntry) const
+bool SAList<ItemType>::getEntry(int position, ItemType & anEntry) const
 {
 	if (position < 1 || position > itemCount)
 		return false;
@@ -127,11 +127,11 @@ bool List<ItemType>::getEntry(int position, ItemType & anEntry) const
 
 
 template<class ItemType>
-Node<ItemType>* List<ItemType>::getNodeAt(int position) const
+Node<ItemType>* SAList<ItemType>::getNodeAt(int position) const
 {
 	Node<ItemType>* curPtr = headPtr;
 	for (int i = 1; i < position; i++)
 		curPtr = curPtr->getNext();
 	return curPtr;
 }
-// ---------------------- List Class Implementation End -------------------------------------------
+// ---------------------- SAList Class Implementation End -------------------------------------------
