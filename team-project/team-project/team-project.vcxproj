@@ -81,6 +81,7 @@
     <ClInclude Include="Global.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SAList.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

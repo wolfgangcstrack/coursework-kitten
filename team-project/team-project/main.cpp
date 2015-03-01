@@ -1,5 +1,5 @@
 /*
-Manager: Wolfgang
+Manager: Wolfgang C. Strack
 
 To include:
 Initialize Data Structures

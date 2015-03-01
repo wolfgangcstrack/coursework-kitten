@@ -1,5 +1,5 @@
 /*
-Manager: Wolfgang
+Manager: Wolfgang C. Strack
 
 This file is the global header file for the project and has common includes,
 data structure prototypes/definitions, and all other code commonly shared by
@@ -68,7 +68,8 @@ public:
 // By CNguyen
 
 // Modified by: Wolfgang C. Strack
-// Implementation:
+
+// Implementation: SAList.cpp
 
 template<class ItemType>
 class LinkedList
@@ -99,16 +100,18 @@ public:
 
 // ---------------------- LinkedList Class Interface End ------------------------------------------
 
-// ---------------------- List Class Interface ----------------------------------------------------
+// ---------------------- SAList Class Interface --------------------------------------------------
 // Linked List ADT 
 // This list allows the user to insert and remove data at a specified position
 // By CNguyen
 
+// Modification: From List to SAList (Self-Adjusting)
 // Modified by: Wolfgang C. Strack
-// Implementation: 
+
+// Implementation: SAList.cpp
 
 template<class ItemType>
-class List : public LinkedList<ItemType>  // derived from abstract LinkedList class
+class SAList : public LinkedList<ItemType>  // derived from abstract LinkedList class
 {
 private:
 	// Finds node at a specified position
@@ -126,6 +129,7 @@ public:
 
 // ---------------------- HashSC Class Interface --------------------------------------------------
 // Modified by: Louis Christopher
+
 // Implementation: 
 
 template <class Object>
@@ -198,6 +202,7 @@ public:
 // Created by Frank M. Carrano and Tim Henry.
 
 // Modified by: Andrew Wang
+
 // Implementation: 
 
 template<class ItemType>
@@ -247,6 +252,7 @@ private:
 // Created by Frank M. Carrano and Tim Henry.
 
 // Modified by: Andrew Wang
+
 // Implementation: 
 
 template<class ItemType>
