@@ -8,13 +8,13 @@ Andrew Wang - Member 3</p>
 <h4>Team Unit Assignment</h4>
 <p>
 <strong>1 &nbsp;2 &nbsp;3  &nbsp;UNIT</strong><br/>
- X &nbsp;_ &nbsp;_  &nbsp;1<br/>
- _ &nbsp;_ &nbsp;X  &nbsp;2<br/>
- _ &nbsp;X &nbsp;_  &nbsp;3<br/>
- X &nbsp;_ &nbsp;_  &nbsp;4<br/>
- _ &nbsp;X &nbsp;X  &nbsp;5<br/>
- X &nbsp;X &nbsp;X  &nbsp;Test Plan/Presentation Outline<br/>
- X &nbsp;_ &nbsp;_  &nbsp;Project Documentation<br/>
+ X &nbsp;_ &nbsp;_  &nbsp;1 Team Coordinator<br/>
+ _ &nbsp;_ &nbsp;X  &nbsp;2 BST Algorithms<br/>
+ _ &nbsp;X &nbsp;_  &nbsp;3 Hash List Algorithms<br/>
+ X &nbsp;_ &nbsp;_  &nbsp;4 Screen Output<br/>
+ _ &nbsp;X &nbsp;X  &nbsp;5 File I/O<br/>
+ X &nbsp;X &nbsp;X  &nbsp;6 Test Plan/Presentation Outline<br/>
+ X &nbsp;_ &nbsp;_  &nbsp;7 Project Documentation<br/>
 </p>
 
 <h4>Git and Visual Studio</h4>
