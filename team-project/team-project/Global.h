@@ -5,8 +5,6 @@ This file is the global header file for the project and has common includes,
 data structure prototypes/definitions, and all other code commonly shared by
 files in the project.
 
-This file includes the implementation of the Node, LinkedList, and SAList classes.
-All other implementations are in their respective files.
 */
 
 #ifndef _GLOBAL_H
@@ -18,7 +16,9 @@ All other implementations are in their respective files.
 #include <cmath>
 using namespace std;
 
-template <class ItemType>
+class Item;		// Data class, implementation included
+
+template <class ItemType>	// implementation included
 class Node;
 
 template <class ItemType>
@@ -30,7 +30,7 @@ class SAList;
 template <class ItemType>
 class HashSC;
 
-template <class ItemType>
+template <class ItemType>	// implementation included
 class BinaryNode;
 
 template <class ItemType>
@@ -38,6 +38,57 @@ class BinaryTree;
 
 template <class ItemType>
 class BinarySearchTree;
+
+// ---------------------- Item Class --------------------------------------------------------------
+class Item
+{
+private:
+	string name;
+	string productID; // not final
+
+	double weight;
+	double dimensions[3];
+	double price;
+
+	string seller;
+	string category;
+public:
+	// constructors
+	Item() {}
+	Item(string nm, string pID, double w, double dims[3], double p, string sell, string categ);
+
+	// accessors
+	const string& getName() const		{ return name; }
+	const string& getProductID() const	{ return productID; }
+	const double& getWeight() const		{ return weight; }
+	const double* getDimensions() const { return dimensions; }
+	const double& getPrice() const		{ return price; }
+	const string& getSeller() const		{ return seller; }
+	const string& getCategory() const	{ return category; }
+
+	void setName(string nm)				{ name = nm; }
+	void setProductID(string pID)		{ productID = pID; }
+	void setWeight(double w)			{ weight = w; }
+	void setDimensions(double dims[3])	{ for (int i = 0; i < 3; i++) dimensions[i] = dims[i]; }
+	void setPrice(double p)				{ price = p; }
+	void setSeller(string sell)			{ seller = sell; }
+	void setCategory(string categ)		{ category = categ; }
+
+	ostream& write(ostream &os); // To include here or as separate static function
+};
+
+Item::Item(string nm, string pID, double w, double dims[3], double p, string sell, string categ)
+{
+	name = nm;
+	productID = pID;
+	weight = w;
+	for (int i = 0; i < 3; i++)
+		dimensions[i] = dims[i];
+	price = p;
+	seller = sell;
+	category = categ;
+}
+// ---------------------- Item Class End ----------------------------------------------------------
 
 // ---------------------- Node Class --------------------------------------------------------------
 // Linkded List Node Class
