@@ -94,8 +94,12 @@ Item::Item(string nm, string pID, double w, double dims[3], double p, string sel
 // Linkded List Node Class
 // Created by Frank M. Carrano and Tim Henry.
 // Modified by CNguyen
+// Doubly Linked Version
 
-// Edit: getItem returns reference to ItemType
+/* Modifications
+getItem() : returns reference to item
+added accessTimes member variable and mutator/accessor function
+*/
 
 template<class ItemType>
 class Node
@@ -103,39 +107,47 @@ class Node
 private:
 	ItemType        item;
 	Node<ItemType>* next;
+	Node<ItemType>* prev;
+
+	int accessTimes;
 
 public:
-	Node()										{ next = 0; }
-	Node(const ItemType& anItem)				{ item = anItem; next = 0; }
+	Node()										{ next = 0; prev = 0; accessTimes = 0; }
+	Node(const ItemType& anItem)				{ item = anItem; next = 0; prev = 0; accessTimes = 0; }
 	void setItem(const ItemType& anItem)		{ item = anItem; }
 	void setNext(Node<ItemType>* nextNodePtr)	{ next = nextNodePtr; }
+	void setPrev(Node<ItemType>* prevNodePtr)	{ prev = prevNodePtr; }
+	void incrementAccessTimes(int increment)	{ accessTimes += increment; }
 	ItemType& getItem() const					{ return item; }
 	Node<ItemType>* getNext() const				{ return next; }
+	Node<ItemTYpe>* getPrev() const				{ return prev; }
+	int& getAccessTimes() const					{ return accessTimes; }
 };
 // ---------------------- Node Class End ----------------------------------------------------------
 
-// ---------------------- LinkedList Class Interface ----------------------------------------------
-// Linked List abstract base class
-// By CNguyen
+// ---------------------- DoublyLinkedList Class Interface ----------------------------------------
+// Doubly Linked List abstract base class
+// By C. Lee-Klawender
 
 // Modified by: Wolfgang C. Strack
 
 // Implementation: SAList.cpp
 
 template<class ItemType>
-class LinkedList
+class DoublyLinkedList
 {
 protected:
-	Node<ItemType>* headPtr; // Pointer to first node in the list
+	Node<ItemType>* headPtr; // Pointer to (dummy) first node in the list
+	Node<ItemType>* tailPtr; // Pointer to (dummy) last node in the list
 	int itemCount;           // Current count of list items
 
 public:
 	// constructor
-	LinkedList()			{ headPtr = 0; itemCount = 0; }
+	DoublyLinkedList();
 	// copy constructor
-	LinkedList(const LinkedList<ItemType>& aList);
+	DoublyLinkedList(const DoublyLinkedList<ItemType>& aList);
 	// destructor
-	virtual ~LinkedList()	{ clear(); }
+	virtual ~DoublyLinkedList()	{ clear(); }
 
 	// check for empty list
 	bool isEmpty() const	{ return itemCount == 0; }
@@ -148,8 +160,7 @@ public:
 	// abstract insert function
 	virtual bool insert(const ItemType& newEntry, int newPosition = 1) = 0;
 };
-
-// ---------------------- LinkedList Class Interface End ------------------------------------------
+// ---------------------- DoublyLinkedList Class Interface End ------------------------------------
 
 // ---------------------- SAList Class Interface --------------------------------------------------
 // Linked List ADT 
@@ -162,15 +173,18 @@ public:
 // Implementation: SAList.cpp
 
 template<class ItemType>
-class SAList : public LinkedList<ItemType>  // derived from abstract LinkedList class
+class SAList : public DoublyLinkedList<ItemType>  // derived from abstract LinkedList class
 {
 private:
 	// Finds node at a specified position
 	Node<ItemType>* getNodeAt(int position) const;
 
+	const int MAX_LENGTH = 5; // not final
+
+	void adjust(Node<ItemType>* adjustPtr);
 public:
-	// Adds node at a specified position
-	bool insert(const ItemType& newEntry, int newPosition = 1);
+	// Adds node at FRONT of list
+	bool insert(const ItemType& newEntry);
 	// Removes node at a specified position
 	bool remove(int position);
 	// Passes back node at a specified position
