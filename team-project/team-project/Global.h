@@ -98,7 +98,8 @@ Item::Item(string nm, string pID, double w, double dims[3], double p, string sel
 
 // Modified by: Wolfgang C. Strack
 /* Modifications
-getItem() : returns reference to item
+item stores a POINTER to the data, NOT THE ACTUAL DATA
+getItem() : returns pointer to item
 added accessTimes member variable and mutator/accessor function
 */
 
@@ -106,7 +107,7 @@ template<class ItemType>
 class Node
 {
 private:
-	ItemType        item;
+	ItemType*       item;
 	Node<ItemType>* next;
 	Node<ItemType>* prev;
 
@@ -114,15 +115,15 @@ private:
 
 public:
 	Node()										{ next = 0; prev = 0; accessTimes = 0; }
-	Node(const ItemType& anItem)				{ item = anItem; next = 0; prev = 0; accessTimes = 0; }
-	void setItem(const ItemType& anItem)		{ item = anItem; }
+	Node(const ItemType* anItem)				{ item = anItem; next = 0; prev = 0; accessTimes = 0; }
+	void setItem(const ItemType* anItem)		{ item = anItem; }
 	void setNext(Node<ItemType>* nextNodePtr)	{ next = nextNodePtr; }
 	void setPrev(Node<ItemType>* prevNodePtr)	{ prev = prevNodePtr; }
 	void incrementAccessTimes(int increment=1)	{ accessTimes += increment; }
-	ItemType& getItem() const					{ return item; }
+	ItemType* getItem() const					{ return item; }
 	Node<ItemType>* getNext() const				{ return next; }
 	Node<ItemType>* getPrev() const				{ return prev; }
-	int& getAccessTimes() const					{ return accessTimes; }
+	const int& getAccessTimes() const			{ return accessTimes; }
 };
 // ---------------------- Node Class End ----------------------------------------------------------
 

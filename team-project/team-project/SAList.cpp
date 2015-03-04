@@ -34,7 +34,7 @@ DoublyLinkedList<ItemType>::DoublyLinkedList(const DoublyLinkedList<ItemType>& a
 	origChainPtr = origChainPtr->getNext();
 	while (origChainPtr != aList.tailPtr)
 	{
-		ItemType nextItem = origChainPtr->getItem();
+		ItemType *nextItem = origChainPtr->getItem();
 		Node<ItemType>* newNodePtr = new Node<ItemType>(nextItem);
 		newChainPtr->setNext(newNodePtr); // link prev to current
 		newNodePtr->setPrev(newChainPtr); // link current to prev
@@ -56,8 +56,8 @@ void DoublyLinkedList<ItemType>::display() const
 	Node<ItemType>* currPtr = headPtr->getNext();
 	while (currPtr != tailPtr)
 	{
-		cout << currPtr->getItem() << " ";	// display data
-		currPtr = currPtr->getNext();		// go to next node
+		cout << *(currPtr->getItem()) << " ";	// display data
+		currPtr = currPtr->getNext();			// go to next node
 	}
 	cout << endl << endl;
 }
@@ -154,7 +154,7 @@ bool SAList<ItemType>::remove(int position)
 }
 
 template<class ItemType>
-bool SAList<ItemType>::getEntry(int position, ItemType & anEntry) const
+bool SAList<ItemType>::getEntry(int position, ItemType * anEntry) const
 {
 	if (position < 1 || position > itemCount) // validate position
 		return false;
