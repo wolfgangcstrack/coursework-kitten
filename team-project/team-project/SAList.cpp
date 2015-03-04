@@ -72,12 +72,14 @@ void DoublyLinkedList<ItemType>::clear()
 	Node<ItemType> * deletePtr, *nodePtr;
 
 	deletePtr = headPtr->getNext();
+	delete headPtr;
 	for (int i = 0; i < itemCount; i++) // walk each node
 	{
 		nodePtr = deletePtr->getNext();
 		delete deletePtr;
 		deletePtr = nodePtr;
 	}
+	delete tailPtr;
 	itemCount = 0;
 }
 // ---------------------- DoublyLinkedList Class Implementation End -------------------------------

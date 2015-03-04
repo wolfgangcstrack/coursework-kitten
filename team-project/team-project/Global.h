@@ -18,9 +18,6 @@ using namespace std;
 
 class Item;					// Data class, implementation included
 
-template <class ItemType>	// Head node
-class Header;				// contains count, array size, pointer to hash table, pointer to bst
-
 template <class ItemType>	// implementation included
 class Node;
 
@@ -50,7 +47,7 @@ private:
 	string productID; // not final
 
 	double weight;
-	double dimensions[3];
+	double *dimensions;
 	double price;
 
 	string seller;
@@ -58,7 +55,8 @@ private:
 public:
 	// constructors
 	Item() {}
-	Item(string nm, string pID, double w, double dims[3], double p, string sell, string categ);
+	Item(string nm, string pID, double w, double *dims, double p, string sell, string categ);
+	~Item() { delete[] dimensions; }
 
 	// accessors
 	const string& getName() const		{ return name; }
@@ -93,13 +91,6 @@ Item::Item(string nm, string pID, double w, double dims[3], double p, string sel
 }
 // ---------------------- Item Class End ----------------------------------------------------------
 
-// ---------------------- Header Class ------------------------------------------------------------
-//class Header
-//{
-	// check
-//};
-// ---------------------- Header Class End --------------------------------------------------------
-
 // ---------------------- Node Class --------------------------------------------------------------
 // Linkded List Node Class
 // Created by Frank M. Carrano and Tim Henry.
@@ -126,6 +117,8 @@ private:
 public:
 	Node()										{ next = 0; prev = 0; accessTimes = 0; }
 	Node(const ItemType* anItem)				{ item = anItem; next = 0; prev = 0; accessTimes = 0; }
+	~Node()										{ delete item; delete next; delete prev; }
+
 	void setItem(const ItemType* anItem)		{ item = anItem; }
 	void setNext(Node<ItemType>* nextNodePtr)	{ next = nextNodePtr; }
 	void setPrev(Node<ItemType>* prevNodePtr)	{ prev = prevNodePtr; }
