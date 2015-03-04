@@ -53,8 +53,8 @@ DoublyLinkedList<ItemType>::DoublyLinkedList(const DoublyLinkedList<ItemType>& a
 template<class ItemType>
 void DoublyLinkedList<ItemType>::display() const
 {
-	Node<ItemType>* currPtr = _________;	//****FOR LAB EX. 4.2
-	while (currPtr != ___)					//****FOR LAB EX. 4.2
+	Node<ItemType>* currPtr = headPtr->getNext();
+	while (currPtr != tailPtr)
 	{
 		cout << currPtr->getItem() << " ";	// display data
 		currPtr = currPtr->getNext();		// go to next node
@@ -68,12 +68,12 @@ void DoublyLinkedList<ItemType>::clear()
 {
 	Node<ItemType> * deletePtr, *nodePtr;
 
-	deletePtr = ___________;//****FOR LAB EX. 4.2
+	deletePtr = headPtr->getNext();
 	for (int i = 0; i < itemCount; i++) // walk each node
 	{
-		nodePtr = ______________;//****FOR LAB EX. 4.2
+		nodePtr = deletePtr->getNext();
 		delete deletePtr;
-		deletePtr = _______________;//****FOR LAB EX. 4.2
+		deletePtr = nodePtr;
 	}
 	itemCount = 0;
 }
@@ -83,7 +83,7 @@ void DoublyLinkedList<ItemType>::clear()
 /* Modifications from List class
 changed ALL functions to work with DoublyLinkedList
 insert() - inserts ONLY to front
-
+added adjust() - adjusts List so that nodes with greatest accessTimes are near the front
 */
 template<class ItemType>
 bool SAList<ItemType>::insert(const ItemType& newEntry)
@@ -113,12 +113,14 @@ bool SAList<ItemType>::insert(const ItemType& newEntry)
 		return true;
 	}
 	else
+	{
 		// ADD
 		// HASH
 		// TABLE
 		// FUNCTIONALITY
 		// HERE
 		return false;
+	}
 }
 
 
@@ -174,19 +176,47 @@ Node<ItemType>* SAList<ItemType>::getNodeAt(int position) const
 		for (int i = 1; i < position; i++)
 			curPtr = curPtr->getNext();
 	}
-	else // node is second half of list
+	else // node is in second half of list
 	{
 		curPtr = tailPtr->getPrev();
 		for (int i = itemCount; i > position; i--)
 			curPtr = curPtr->getPrev();
 	}
 	
+	curPtr->incrementAccessTimes();
+	adjust(curPtr);
 	return curPtr;
 }
 
 template<class ItemType>
 void SAList<ItemType>::adjust(Node<ItemType>* adjustPtr)
 {
+	int moves = 0;
+	int accessTimes = adjustPtr->getAccessTimes();		// save access times for multiple comparisons
+	Node<ItemType>* newPrevPtr = adjustPtr->getPrev();	// previous pointer for adjustPtr's new position
 
+	// find newPrevPtr by comparing access times
+	while (accessTimes > newPrevPtr->getAccessTimes() && newPrevPtr != headPtr)
+	{
+		newPrevPtr = newPrevPtr->getPrev();
+		moves++;
+	}
+
+	if (moves == 0) // if adjustPtr does not need to be adjusted
+		return;		// do nothing
+	else
+	{
+		Node<ItemType>* prevPtr = adjustPtr->getPrev();
+		Node<ItemType>* nextPtr = adjustPtr->getNext();
+		Node<ItemType>* newNextPtr = newPrevPtr->getNext();
+
+		prevPtr->setNext(nextPtr);
+		nextPtr->setPrev(prevPtr);
+
+		newPrevPtr->setNext(adjustPtr);
+		adjustPtr->setPrev(newPrevPtr);
+		adjustPtr->setNext(newNextPtr);
+		newNextPtr->setPrev(adjustPtr);
+	}
 }
 // ---------------------- SAList Class Implementation End -------------------------------------------

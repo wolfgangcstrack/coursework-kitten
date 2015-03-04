@@ -22,7 +22,7 @@ template <class ItemType>	// implementation included
 class Node;
 
 template <class ItemType>
-class LinkedList;
+class DoublyLinkedList;
 
 template <class ItemType>
 class SAList;
@@ -96,6 +96,7 @@ Item::Item(string nm, string pID, double w, double dims[3], double p, string sel
 // Modified by CNguyen
 // Doubly Linked Version
 
+// Modified by: Wolfgang C. Strack
 /* Modifications
 getItem() : returns reference to item
 added accessTimes member variable and mutator/accessor function
@@ -117,10 +118,10 @@ public:
 	void setItem(const ItemType& anItem)		{ item = anItem; }
 	void setNext(Node<ItemType>* nextNodePtr)	{ next = nextNodePtr; }
 	void setPrev(Node<ItemType>* prevNodePtr)	{ prev = prevNodePtr; }
-	void incrementAccessTimes(int increment)	{ accessTimes += increment; }
+	void incrementAccessTimes(int increment=1)	{ accessTimes += increment; }
 	ItemType& getItem() const					{ return item; }
 	Node<ItemType>* getNext() const				{ return next; }
-	Node<ItemTYpe>* getPrev() const				{ return prev; }
+	Node<ItemType>* getPrev() const				{ return prev; }
 	int& getAccessTimes() const					{ return accessTimes; }
 };
 // ---------------------- Node Class End ----------------------------------------------------------
@@ -173,11 +174,11 @@ public:
 // Implementation: SAList.cpp
 
 template<class ItemType>
-class SAList : public DoublyLinkedList<ItemType>  // derived from abstract LinkedList class
+class SAList : public DoublyLinkedList<ItemType>  // derived from abstract DoublyLinkedList class
 {
 private:
 	// Finds node at a specified position
-	Node<ItemType>* getNodeAt(int position) const;
+	Node<ItemType>* getNodeAt(int position) const; // calls adjust()
 
 	const int MAX_LENGTH = 5; // not final
 
