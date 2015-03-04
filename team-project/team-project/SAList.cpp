@@ -9,14 +9,17 @@ SAList class
 #include "Global.h"
 
 // ---------------------- DoublyLinkedList Class Implementation -----------------------------------
+/* Modifications
+implementation adjusted for item as a pointer to the data, not actual data
+*/
 template<class ItemType>
 DoublyLinkedList<ItemType>::DoublyLinkedList()
 {
 	itemCount = 0;
 	headPtr = new Node<ItemType>();
 	tailPtr = new Node<ItemType>();
-	headPtr.setNext(tailPtr);
-	tailPtr.setPrev(headPtr);
+	headPtr->setNext(tailPtr);
+	tailPtr->setPrev(headPtr);
 }
 
 template<class ItemType>

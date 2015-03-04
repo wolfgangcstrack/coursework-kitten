@@ -16,7 +16,10 @@ files in the project.
 #include <cmath>
 using namespace std;
 
-class Item;		// Data class, implementation included
+class Item;					// Data class, implementation included
+
+template <class ItemType>	// Head node
+class Header;				// contains count, array size, pointer to hash table, pointer to bst
 
 template <class ItemType>	// implementation included
 class Node;
@@ -89,6 +92,13 @@ Item::Item(string nm, string pID, double w, double dims[3], double p, string sel
 	category = categ;
 }
 // ---------------------- Item Class End ----------------------------------------------------------
+
+// ---------------------- Header Class ------------------------------------------------------------
+//class Header
+//{
+	// check
+//};
+// ---------------------- Header Class End --------------------------------------------------------
 
 // ---------------------- Node Class --------------------------------------------------------------
 // Linkded List Node Class
@@ -235,28 +245,32 @@ const float HashSC<Object>::INIT_MAX_LAMBDA = 1.5;
 // Created by Frank M. Carrano and Tim Henry.
 // Modified by CNguyen
 
+// Modified by: Wolfgang C. Strack
+/* Modifications
+item stores a POINTER to the data, NOT THE ACTUAL DATA
+getItem() : returns pointer to item
+*/
+
 template<class ItemType>
 class BinaryNode
 {
 private:
-	ItemType              item;         // Data portion
+	ItemType*             item;         // Data portion
 	BinaryNode<ItemType>* leftPtr;		// Pointer to left child
 	BinaryNode<ItemType>* rightPtr;		// Pointer to right child
 
 public:
 	// constructors
-	BinaryNode(const ItemType & anItem)			   { item = anItem; leftPtr = 0; rightPtr = 0; }
-	BinaryNode(const ItemType & anItem,
+	BinaryNode(const ItemType * anItem)			   { item = anItem; leftPtr = 0; rightPtr = 0; }
+	BinaryNode(const ItemType * anItem,
 		BinaryNode<ItemType>* left,
-		BinaryNode<ItemType>* right)		   {
-		item = anItem; leftPtr = left; rightPtr = right;
-	}
+		BinaryNode<ItemType>* right)			   { item = anItem; leftPtr = left; rightPtr = right; }
 	// accessors
-	void setItem(const ItemType & anItem)		   { item = anItem; }
+	void setItem(const ItemType * anItem)		   { item = anItem; }
 	void setLeftPtr(BinaryNode<ItemType>* left)	   { leftPtr = left; }
 	void setRightPtr(BinaryNode<ItemType>* right)  { rightPtr = right; }
 	// mutators
-	ItemType getItem() const					   { return item; }
+	ItemType* getItem() const					   { return item; }
 	BinaryNode<ItemType>* getLeftPtr() const	   { return leftPtr; }
 	BinaryNode<ItemType>* getRightPtr() const	   { return rightPtr; }
 
