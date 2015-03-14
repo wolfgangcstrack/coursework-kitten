@@ -145,17 +145,16 @@ protected:
 	Node<ItemType>* headPtr; // Pointer to (dummy) first node in the list
 	Node<ItemType>* tailPtr; // Pointer to (dummy) last node in the list
 	int itemCount;           // Current count of list items
-
 public:
 	// constructor
 	DoublyLinkedList();
 	// copy constructor
 	DoublyLinkedList(const DoublyLinkedList<ItemType>& aList);
 	// destructor
-	virtual ~DoublyLinkedList()	{ clear(); }
+	virtual ~DoublyLinkedList()	{ clear(); delete headPtr; delete tailPtr; }
 
 	// check for empty list
-	bool isEmpty() const	{ return itemCount == 0; }
+	bool isEmpty() const	{ return (itemCount == 0); }
 	// get number of entries in the list
 	int size() const		{ return itemCount; }
 	// remove all entries from list
@@ -181,19 +180,21 @@ template<class ItemType>
 class SAList : public DoublyLinkedList<ItemType>  // derived from abstract DoublyLinkedList class
 {
 private:
+	const int ACCESS_REQ = 5; // for determining if adjust() is needed
+	// adjust will only be called every ACCESS_REQ times an element is adjusted
+
 	// Finds node at a specified position
-	Node<ItemType>* getNodeAt(int position) const; // calls adjust()
-
-	const int MAX_LENGTH = 5; // not final
-
-	void adjust(Node<ItemType>* adjustPtr);
+	Node<ItemType>* getNodeAt(int position);
 public:
 	// Adds node at FRONT of list
-	bool insert(const ItemType& newEntry);
+	bool insert(const ItemType & newEntry, int position = 1);
 	// Removes node at a specified position
 	bool remove(int position);
 	// Passes back node at a specified position
-	bool getEntry(int position, ItemType & anEntry) const;
+	bool getEntry(int position, ItemType & anEntry);
+
+	// adjusts node based on how many times it was accessed
+	void adjust(int adjPosition);
 };
 // ---------------------- SAList Class Interface End ------------------------------------------------
 
