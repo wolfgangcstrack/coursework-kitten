@@ -2,18 +2,14 @@
 Manager: Wolfgang C. Strack
 
 This file includes the implementation for:
-DoublyLinkedList class
-SAList class
+- DoublyLinkedList class
+- SAList class
 */
 
 #include "Global.h"
 
 // ---------------------- DoublyLinkedList Class Implementation -----------------------------------
 /*
-This is the DoublyLinkedList class. My team project and I
-decided on using DoublyLinkedLists for implementing Self-Adjusting
-List because it would make adjustments much easier and more efficient.
-
 Modifications:
 - completed Destructor
 - clear() uses a while loop instead of a for loop
@@ -90,16 +86,6 @@ void DoublyLinkedList<ItemType>::clear()
 // ---------------------- DoublyLinkedList Class Implementation End -------------------------------
 
 // ---------------------- SAList Class Implementation -----------------------------------------------
-/*
-This is the SAList(Self - Adjusting List) class.I based the implementation
-off of the regular List class and the DoublyLinkedList abstract class.
-The adjust method implementation is not final for our Team Project implementation.
-
-Modifications from List class :
--changed all functions to work with DoublyLinkedList
-- insertions are only performed at the front of the list
-- added adjust(int) - adjusts List so that nodes with greatest accessTimes are near the front
-*/
 template<class ItemType>
 bool SAList<ItemType>::insert(const ItemType & newEntry, int position = 1)
 {
