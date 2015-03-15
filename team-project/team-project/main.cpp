@@ -245,10 +245,10 @@ void find_and_display(vector<ITEM_PTR>*& items, HashSC<ITEM_PTR>*& pHSC)
 	cout << "Enter a Product ID (Format is BLLL-NNNN-NNN, L is any letter and N is any number): ";
 	getline(cin, input);
 
-	while (choice == 'Y')
+	/*while (choice == 'Y')
 	{
 		()
-	}
+	}*/
 }
 
 void list_HashTable(HashSC<ITEM_PTR>*& pHSC)
