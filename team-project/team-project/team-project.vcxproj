@@ -78,13 +78,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DoublyLinkedList.h" />
     <ClInclude Include="Global.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BST.cpp" />
-    <ClCompile Include="HashSC.cpp" />
-    <ClCompile Include="SAList.cpp" />
+    <ClCompile Include="BST.h" />
+    <ClCompile Include="HashSC.h" />
+    <ClCompile Include="SAList.h" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="projectinput_final.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -18,19 +18,25 @@
     <ClInclude Include="Global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DoublyLinkedList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SAList.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="SAList.h">
+      <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="BST.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="HashSC.h">
+      <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="HashSC.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="BST.h">
+      <Filter>Header Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="projectinput_final.txt" />
   </ItemGroup>
 </Project>

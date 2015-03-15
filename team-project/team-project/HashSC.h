@@ -5,7 +5,63 @@ This file includes the implementation for:
 - HashSC class
 */
 
+#pragma once
+
 #include "Global.h"
+#include "SAList.h"
+
+// ---------------------- HashSC Class Interface --------------------------------------------------
+// HashSC class
+// Derived class of abstract HashTable
+
+// Modified by: Louis Christopher
+/* Modifications (besides assignment specifications):
+- uses SAList (self-adjusting list) instead of List
+- mLists is now a pointer to an array of SAList pointers
+- all SALists in mLists are now dynamically allocated pointers
+- all functions change accordingly to work with pointers to SAList
+*/
+
+// Implementation: HashSC.cpp
+
+template<class Object>
+class HashSC : public HashTable<Object>
+{
+	static const int INIT_TABLE_SIZE = 97;
+	static const float INIT_MAX_LAMBDA;
+private:
+	SAList<Object> ** mLists;	// for array of linked lists
+	int mSize;					// number of entries
+	int mTableSize;				// array size
+	float mMaxLambda;			// max. load factor
+
+	// statistics variables
+	static int longestList;
+	static long numCollisions;
+
+public:
+	// constructor
+	HashSC(int(*hashFcn)(const Object &obj),
+		int(*comp)(const Object &left, const Object &right),
+		int tableSize = INIT_TABLE_SIZE);
+	// destructor
+	~HashSC();
+
+	bool contains(const Object & x) const;						// calls SAList adjust() function
+	bool getEntry(const Object & target, Object & returnedItem) const;// calls SAList adjust() function
+	void makeEmpty();
+	bool insert(const Object & x);
+	bool remove(const Object & x);
+	static long nextPrime(long n);
+	int size() const { return mSize; }
+	bool setMaxLambda(float lm);
+
+	void displayStatistics() const;
+private:
+	void rehash();
+	int myHash(const Object & x) const;
+};
+// ---------------------- HashSC Class Interface End ----------------------------------------------
 
 // ---------------------- HashSC Class Implementation -----------------------------------------
 // - Initialize Static Variables ----------------
@@ -20,7 +76,7 @@ long HashSC<Object>::numCollisions = 0;
 // - Initialize Static Variables End ------------
 
 // - HashSC Method Definitions ------------------
-template<class Object>// FIX BELOW: add'l parameters, call base constructor
+template<class Object>
 HashSC<Object>::HashSC(int(*hashFcn)(const Object &obj),
 	int(*comp)(const Object &left, const Object &right),
 	int tableSize)

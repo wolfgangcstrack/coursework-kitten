@@ -10,6 +10,10 @@ files in the project.
 #pragma once
 
 #include <iostream>
+#include <iomanip>
+#include <sstream>
+#include <fstream>
+#include <vector>
 #include <string>
 #include <cmath>
 using namespace std;
@@ -20,22 +24,9 @@ template <class ItemType>	// implementation included
 class Node;
 
 template <class ItemType>
-class DoublyLinkedList;
-
-template <class ItemType>
-class SAList;
-
-template <class ItemType>
 class HashTable;
 
-template <class ItemType>
-class HashSC;
-
 class BinaryNode;
-
-class BinaryTree;
-
-class BinarySearchTree;
 
 // ---------------------- Item Class --------------------------------------------------------------
 class Item
@@ -45,28 +36,38 @@ private:
 	string productID; // not final
 
 	double weight;
-	double *dimensions;
+	double dimensions[3];
 	double price;
 
 	string seller;
 	string category;
 public:
-	// constructors
+	// constructors and destructor
 	Item() {}
-	Item(string nm, string pID, double w, double *dims, double p, string sell, string categ);
-	~Item() { delete[] dimensions; }
+	Item::Item(string pID, string nm, double w, double dims[3], double p, string sell, string categ)
+	{
+		productID = pID;
+		name = nm;
+		weight = w;
+		for (int i = 0; i < 3; i++)
+			dimensions[i] = dims[i];
+		price = p;
+		seller = sell;
+		category = categ;
+	}
+	~Item() {}
 
 	// accessors
-	const string& getName() const		{ return name; }
 	const string& getProductID() const	{ return productID; }
+	const string& getName() const		{ return name; }
 	const double& getWeight() const		{ return weight; }
 	const double* getDimensions() const { return dimensions; }
 	const double& getPrice() const		{ return price; }
 	const string& getSeller() const		{ return seller; }
 	const string& getCategory() const	{ return category; }
-
-	void setName(string nm)				{ name = nm; }
+	// mutators
 	void setProductID(string pID)		{ productID = pID; }
+	void setName(string nm)				{ name = nm; }
 	void setWeight(double w)			{ weight = w; }
 	void setDimensions(double dims[3])	{ for (int i = 0; i < 3; i++) dimensions[i] = dims[i]; }
 	void setPrice(double p)				{ price = p; }
@@ -75,18 +76,6 @@ public:
 
 	//ostream& write(ostream &os); // To include here or as separate static function
 };
-
-Item::Item(string nm, string pID, double w, double dims[3], double p, string sell, string categ)
-{
-	name = nm;
-	productID = pID;
-	weight = w;
-	for (int i = 0; i < 3; i++)
-		dimensions[i] = dims[i];
-	price = p;
-	seller = sell;
-	category = categ;
-}
 // ---------------------- Item Class End ----------------------------------------------------------
 
 // ---------------------- Node Class --------------------------------------------------------------
@@ -128,82 +117,6 @@ public:
 };
 // ---------------------- Node Class End ----------------------------------------------------------
 
-// ---------------------- DoublyLinkedList Class Interface ----------------------------------------
-// Doubly Linked List abstract base class
-// By C. Lee-Klawender
-
-// Modified by: Wolfgang C. Strack
-/* Modifications:
-- completed Destructor
-- clear() uses a while loop instead of a for loop
-*/
-
-// Implementation: SAList.cpp
-
-template<class ItemType>
-class DoublyLinkedList
-{
-protected:
-	Node<ItemType>* headPtr; // Pointer to (dummy) first node in the list
-	Node<ItemType>* tailPtr; // Pointer to (dummy) last node in the list
-	int itemCount;           // Current count of list items
-public:
-	// constructor
-	DoublyLinkedList();
-	// copy constructor
-	DoublyLinkedList(const DoublyLinkedList<ItemType>& aList);
-	// destructor
-	virtual ~DoublyLinkedList()	{ clear(); delete headPtr; delete tailPtr; }
-
-	// check for empty list
-	bool isEmpty() const	{ return (itemCount == 0); }
-	// get number of entries in the list
-	int size() const		{ return itemCount; }
-	// remove all entries from list
-	void clear();
-	// display list from front to end
-	void display() const;
-	// abstract insert function
-	virtual bool insert(const ItemType& newEntry, int newPosition = 1) = 0;
-};
-// ---------------------- DoublyLinkedList Class Interface End ------------------------------------
-
-// ---------------------- SAList Class Interface --------------------------------------------------
-// Linked List ADT 
-// This list allows the user to insert and remove data at a specified position
-// By CNguyen
-
-// Modified by: Wolfgang C. Strack
-/* Modifications from List class:
-- changed all functions to work with DoublyLinkedList
-- insertions are only performed at the front of the list
-- added adjust(int) - adjusts List so that nodes with greatest accessTimes are near the front
-*/
-
-// Implementation: SAList.cpp
-
-template<class ItemType>
-class SAList : public DoublyLinkedList<ItemType>  // derived from abstract DoublyLinkedList class
-{
-private:
-	const int ACCESS_REQ = 5; // for determining if adjust() is needed
-	// adjust will only be called every ACCESS_REQ times an element is adjusted
-
-	// Finds node at a specified position
-	Node<ItemType>* getNodeAt(int position);
-public:
-	// Adds node at FRONT of list
-	bool insert(const ItemType & newEntry, int position = 1);
-	// Removes node at a specified position
-	bool remove(int position);
-	// Passes back node at a specified position
-	bool getEntry(int position, ItemType & anEntry);
-
-	// adjusts node based on how many times it was accessed
-	void adjust(int adjPosition);
-};
-// ---------------------- SAList Class Interface End ----------------------------------------------
-
 // ---------------------- HashTable Class Interface -----------------------------------------------
 // Modified by: Louis Christopher
 
@@ -230,59 +143,6 @@ public:
 	virtual bool getEntry(const Object & target, Object & returnedItem) const = 0;
 };
 // ---------------------- HashTable Class Interface End -------------------------------------------
-
-// ---------------------- HashSC Class Interface --------------------------------------------------
-// HashSC class
-// Derived class of abstract HashTable
-
-// Modified by: Louis Christopher
-/* Modifications (besides assignment specifications):
-- uses SAList (self-adjusting list) instead of List
-- mLists is now a pointer to an array of SAList pointers
-- all SALists in mLists are now dynamically allocated pointers
-	- all functions change accordingly to work with pointers to SAList
-*/
-
-// Implementation: HashSC.cpp
-
-template<class Object>
-class HashSC : public HashTable<Object> // FIX HERE TO BE A DERIVED CLASS OF HashTable
-{
-	static const int INIT_TABLE_SIZE = 97;
-	static const float INIT_MAX_LAMBDA;
-private:
-	SAList<Object> ** mLists;	// for array of linked lists
-	int mSize;					// number of entries
-	int mTableSize;				// array size
-	float mMaxLambda;			// max. load factor
-
-	// statistics variables
-	static int longestList;
-	static long numCollisions;
-
-public:
-	// constructor
-	HashSC(int(*hashFcn)(const Object &obj),
-		int(*comp)(const Object&left, const Object&right),
-		int tableSize = INIT_TABLE_SIZE);
-	// destructor
-	~HashSC();
-
-	bool contains(const Object & x) const;						// calls SAList adjust() function
-	bool getEntry(const Object & target, Object & returnedItem) const;// calls SAList adjust() function
-	void makeEmpty();
-	bool insert(const Object & x);
-	bool remove(const Object & x);
-	static long nextPrime(long n);
-	int size() const { return mSize; }
-	bool setMaxLambda(float lm);
-
-	void displayStatistics() const;
-private:
-	void rehash();
-	int myHash(const Object & x) const;
-};
-// ---------------------- HashSC Class Interface End ----------------------------------------------
 
 // ---------------------- BinaryNode Class --------------------------------------------------------
 // Node for a binary tree

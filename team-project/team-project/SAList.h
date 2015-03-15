@@ -2,88 +2,49 @@
 Manager: Wolfgang C. Strack
 
 This file includes the implementation for:
-- DoublyLinkedList class
 - SAList class
 */
 
-#include "Global.h"
+#pragma once
 
-// ---------------------- DoublyLinkedList Class Implementation -----------------------------------
-/*
-Modifications:
-- completed Destructor
-- clear() uses a while loop instead of a for loop
+#include "Global.h";
+#include "DoublyLinkedList.h"
+
+// ---------------------- SAList Class Interface --------------------------------------------------
+// Linked List ADT 
+// This list allows the user to insert and remove data at a specified position
+// By CNguyen
+
+// Modified by: Wolfgang C. Strack
+/* Modifications from List class:
+- changed all functions to work with DoublyLinkedList
+- insertions are only performed at the front of the list
+- added adjust(int) - adjusts List so that nodes with greatest accessTimes are near the front
 */
-template<class ItemType>
-DoublyLinkedList<ItemType>::DoublyLinkedList()
-{
-	itemCount = 0;
-	headPtr = new Node<ItemType>();
-	tailPtr = new Node<ItemType>();
-	headPtr->setNext(tailPtr);
-	tailPtr->setPrev(headPtr);
-}
+
+// Implementation: SAList.cpp
 
 template<class ItemType>
-DoublyLinkedList<ItemType>::DoublyLinkedList(const DoublyLinkedList<ItemType>& aList)
+class SAList : public DoublyLinkedList<ItemType>  // derived from abstract DoublyLinkedList class
 {
-	itemCount = aList.itemCount;
-	Node<ItemType>  *origChainPtr;
+private:
+	const int ACCESS_REQ = 5; // for determining if adjust() is needed
+	// adjust will only be called every ACCESS_REQ times an element is adjusted
 
-	origChainPtr = aList.headPtr;
+	// Finds node at a specified position
+	Node<ItemType>* getNodeAt(int position);
+public:
+	// Adds node at FRONT of list
+	bool insert(const ItemType & newEntry, int position = 1);
+	// Removes node at a specified position
+	bool remove(int position);
+	// Passes back node at a specified position
+	bool getEntry(int position, ItemType & anEntry);
 
-	headPtr = new Node<ItemType>();				// copy dummy head node
-
-	// Copy remaining nodes BEFORE tailPtr
-	Node<ItemType>* newChainPtr = headPtr;		// ignore data
-	origChainPtr = origChainPtr->getNext();
-	while (origChainPtr != aList.tailPtr)
-	{
-		ItemType *nextItem = origChainPtr->getItem();
-		Node<ItemType>* newNodePtr = new Node<ItemType>(nextItem);
-		newChainPtr->setNext(newNodePtr);		// link prev to current
-		newNodePtr->setPrev(newChainPtr);		// link current to prev
-
-		newChainPtr = newChainPtr->getNext();
-		origChainPtr = origChainPtr->getNext();
-	}
-	// Create tail and init. prev
-	tailPtr = new Node<ItemType>();
-	tailPtr.setPrev(newChainPtr);
-	newChainPtr->setNext(tailPtr);
-}
-
-
-
-template<class ItemType>
-void DoublyLinkedList<ItemType>::display() const
-{
-	Node<ItemType>* currPtr = headPtr->getNext();
-	while (currPtr != tailPtr)
-	{
-		cout << currPtr->getItem() << " ";		// display data
-		currPtr = currPtr->getNext();			// go to next node
-	}
-	cout << endl << endl;
-}
-
-
-template<class ItemType>
-void DoublyLinkedList<ItemType>::clear()
-{
-	Node<ItemType> * deletePtr, *nodePtr;
-	deletePtr = headPtr->getNext();
-	nodePtr = deletePtr;
-	while (nodePtr != tailPtr)					// walk each node
-	{
-		nodePtr = deletePtr->getNext();
-		delete deletePtr;
-		deletePtr = nodePtr;
-	}
-
-	itemCount = 0;
-}
-// ---------------------- DoublyLinkedList Class Implementation End -------------------------------
+	// adjusts node based on how many times it was accessed
+	void adjust(int adjPosition);
+};
+// ---------------------- SAList Class Interface End ----------------------------------------------
 
 // ---------------------- SAList Class Implementation -----------------------------------------------
 template<class ItemType>

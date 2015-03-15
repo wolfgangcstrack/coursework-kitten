@@ -6,6 +6,8 @@ This file includes the implementation for:
 - BinarySearchTree class
 */
 
+#pragma once
+
 #include "Global.h"
 
 // ---------------------- BinaryTree Class Implementation -----------------------------------------
@@ -151,7 +153,7 @@ BinaryNode* BinarySearchTree::deleteNode(BinaryNode* nodePtr)
 	}
 	else
 	{
-		void* newNodeValue;
+		void* newNodeValue = 0;
 		nodePtr->setRightPtr(removeLeftmostNode(nodePtr->getRightPtr(), newNodeValue));
 		nodePtr->setItem(newNodeValue);
 		return nodePtr;
@@ -190,6 +192,6 @@ BinaryNode* BinarySearchTree::findNode(BinaryNode* nodePtr, void* target) const
 
 int BinarySearchTree::compare(void* a, void* b) const
 {
-
+	return 0;
 }
 // ---------------------- BinarySearchTree Class Implementation End -------------------------------
