@@ -57,6 +57,7 @@ public:
 	bool setMaxLambda(float lm);
 
 	void displayStatistics() const;
+	ostream& write(ostream& os);
 private:
 	void rehash();
 	int myHash(const Object & x) const;
@@ -109,6 +110,20 @@ void HashSC<Object>::displayStatistics() const
 		<< "\nNumber of collisions = " << numCollisions
 		<< "\nLongest Linked List = " << longestList
 		<< endl;
+}
+
+template<class Object>
+ostream& HashSC<Object>::write(ostream& os)
+{
+	for (int i = 0; i < mTableSize; i++)
+	{
+		if (mLists[i]->size() > 0)
+			mLists[i]->write(os);
+		else
+			os << "<EMPTY LIST>";
+		os << endl;
+	}
+	return os;
 }
 
 template<class Object>

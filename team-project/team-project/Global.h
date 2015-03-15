@@ -74,7 +74,13 @@ public:
 	void setSeller(string sell)			{ seller = sell; }
 	void setCategory(string categ)		{ category = categ; }
 
-	//ostream& write(ostream &os); // To include here or as separate static function
+	ostream& write(ostream &os)
+	{
+		os << setw(10)
+			<< (name.length() < 10 ? name : name.substr(0, 7) + "...")
+			<< ":" << productID;
+		return os;
+	}
 };
 // ---------------------- Item Class End ----------------------------------------------------------
 
@@ -232,7 +238,7 @@ class BinarySearchTree : public BinaryTree
 {
 private:
 
-	int compare(void*, void*) const;
+	int(*compare)(Item, Item);
 
 	// internal insert node: insert newNode in nodePtr subtree
 	BinaryNode* _insert(BinaryNode* nodePtr, BinaryNode* newNode);

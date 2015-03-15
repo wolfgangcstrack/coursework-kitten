@@ -22,12 +22,12 @@ int compareProductID(const ITEM_PTR &left, const ITEM_PTR &right);
 void display_menu();
 void add_new_data(vector<ITEM_PTR>*& items, HashSC<ITEM_PTR>*& pHSC);
 void delete_data(vector<ITEM_PTR>*& items, HashSC<ITEM_PTR>*& pHSC);
-void find_and_display();
-void list_HashTable();
+void find_and_display(vector<ITEM_PTR>*& items, HashSC<ITEM_PTR>*& pHSC);
+void list_HashTable(HashSC<ITEM_PTR>*& pHSC);
 void list_Key_Sequence();
 void print_indented_tree();
 void write_to_file();
-void efficiency();
+void efficiency(vector<ITEM_PTR>*& items, HashSC<ITEM_PTR>*& pHSC);
 
 // properly delete dynamically allocated data structures
 void DELETE_EVERYTHING(vector<ITEM_PTR>* items, HashSC<ITEM_PTR>* pHSC);
@@ -60,15 +60,15 @@ int main()
 
 		switch (option)
 		{
-		case 1: add_new_data(items, pHSC);	break;
-		case 2: delete_data(items, pHSC);	break;
-		case 3: find_and_display();			break;
-		case 4: list_HashTable();			break;
-		case 5: list_Key_Sequence();		break;
-		case 6: print_indented_tree();		break;
-		case 7: write_to_file();			break;
-		case 8: efficiency();				break;
-		case 0: cout << "Sayonara" << endl;	break;
+		case 1: add_new_data(items, pHSC);		break;
+		case 2: delete_data(items, pHSC);		break;
+		case 3: find_and_display(items, pHSC);	break;
+		case 4: list_HashTable(pHSC);			break;
+		case 5: list_Key_Sequence();			break;
+		case 6: print_indented_tree();			break;
+		case 7: write_to_file();				break;
+		case 8: efficiency(items, pHSC);		break;
+		case 0: cout << "Sayonara" << endl;		break;
 
 		default: cout << option << " is not an option!" << endl;
 		}
@@ -82,12 +82,17 @@ int main()
 // ---------------------- Hash and Compare Function -----------------------------------------------
 int HashProductID(const ITEM_PTR &pItem)
 {
-	unsigned int k, retVal = 0;
+	unsigned int k;
+	long retVal = 0;
 
 	string key = "";
 	key += pItem->getProductID().substr(2, 3);
 	key += pItem->getProductID().substr(6, 4);
 	key += pItem->getProductID().substr(11, 3);
+
+	retVal += strtol(pItem->getProductID().substr(2, 3).c_str(), 0, 16);
+	retVal += strtol(pItem->getProductID().substr(6, 4).c_str(), 0, 16);
+	retVal += strtol(pItem->getProductID().substr(11, 3).c_str(), 0, 16);
 
 	for (k = 0; k < key.length(); k++)
 		retVal = 37 * retVal + key[k];
@@ -144,6 +149,7 @@ void add_new_data(vector<ITEM_PTR>*& items, HashSC<ITEM_PTR>*& pHSC)
 	string fields[7];
 	double dims[3];
 
+	bool duplicates = false;
 	int i;
 
 	if (!openInputFile(ifs)) // print error and exit program if file not found
@@ -183,11 +189,19 @@ void add_new_data(vector<ITEM_PTR>*& items, HashSC<ITEM_PTR>*& pHSC)
 			items->push_back(newItem);
 		}
 		else
+		{
 			cout << "Could not insert ";
+			duplicates = true;
+		}
 		cout << setw(40)
 			<< (newItem->getName().length() < 40 ? newItem->getName() : newItem->getName().substr(0, 37) + "...")
 			<< " : " << newItem->getProductID() << endl;
 	}
+
+	if (duplicates)
+		cout << "\nREPORT: There was duplicate data in the file. Non-duplicates successfully inserted." << endl;
+	else
+		cout << "\nInsert Successful!" << endl;
 }
 
 void delete_data(vector<ITEM_PTR>*& items, HashSC<ITEM_PTR>*& pHSC)
@@ -222,14 +236,26 @@ void delete_data(vector<ITEM_PTR>*& items, HashSC<ITEM_PTR>*& pHSC)
 		cout << "Did not delete" << endl;
 }
 
-void find_and_display()
+void find_and_display(vector<ITEM_PTR>*& items, HashSC<ITEM_PTR>*& pHSC)
 {
-	cout << "MENU_OPTION_STUB3" << endl;
+	string input;
+	char choice = 'Y';
+	ITEM_PTR item;
+
+	cout << "Enter a Product ID (Format is BLLL-NNNN-NNN, L is any letter and N is any number): ";
+	getline(cin, input);
+
+	while (choice == 'Y')
+	{
+		()
+	}
 }
 
-void list_HashTable()
+void list_HashTable(HashSC<ITEM_PTR>*& pHSC)
 {
-	cout << "MENU_OPTION_STUB4" << endl;
+	cout << "Displaying Items (HashTable Format):" << endl << endl;
+	pHSC->write(cout);
+	cout << endl;
 }
 
 void list_Key_Sequence()
@@ -247,9 +273,10 @@ void write_to_file()
 	cout << "MENU_OPTION_STUB7" << endl;
 }
 
-void efficiency()
+void efficiency(vector<ITEM_PTR>*& items, HashSC<ITEM_PTR>*& pHSC)
 {
-	cout << "MENU_OPTION_STUB8" << endl;
+	cout << "HashSC Statistics:" << endl;
+	pHSC->displayStatistics();
 }
 // ---------------------- Menu Functions End ------------------------------------------------------
 

@@ -43,6 +43,8 @@ public:
 
 	// adjusts node based on how many times it was accessed
 	void adjust(int adjPosition);
+
+	ostream& write(ostream& os);
 };
 // ---------------------- SAList Class Interface End ----------------------------------------------
 
@@ -181,5 +183,19 @@ void SAList<ItemType>::adjust(int adjPosition)			// uses a variant of the counti
 		adjustPtr->setNext(newNextPtr);		// double-link adjustPtr with its new next pointer
 		newNextPtr->setPrev(adjustPtr);
 	}
+}
+
+template <class ItemType>
+ostream& SAList<ItemType>::write(ostream& os)
+{
+	Node<ItemType>* currPtr = headPtr->getNext();
+	while (currPtr != tailPtr)
+	{
+		os << "[";
+		currPtr->getItem()->write(os);
+		os << "]";
+		currPtr = currPtr->getNext();
+	}
+	return os;
 }
 // ---------------------- SAList Class Implementation End -------------------------------------------

@@ -190,8 +190,4 @@ BinaryNode* BinarySearchTree::findNode(BinaryNode* nodePtr, void* target) const
 		return nodePtr; //return ptr if found
 }
 
-int BinarySearchTree::compare(void* a, void* b) const
-{
-	return 0;
-}
 // ---------------------- BinarySearchTree Class Implementation End -------------------------------
