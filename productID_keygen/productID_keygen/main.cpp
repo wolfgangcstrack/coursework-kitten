@@ -131,7 +131,7 @@ void genKeys(ifstream &ifs, vector<string>& keys)
 	{
 		if (line.empty()) // skip empty line
 			continue;
-		key = "b";
+		key = "B";
 		temp = line;
 		size_t pos;
 		for (int i = 0; i < 5; i++)
