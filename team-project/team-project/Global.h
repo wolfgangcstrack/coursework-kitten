@@ -232,7 +232,7 @@ class BinarySearchTree : public BinaryTree
 {
 private:
 
-	int compare(void*, void*) const;
+	int (*compare)(Item, Item);
 
 	// internal insert node: insert newNode in nodePtr subtree
 	BinaryNode* _insert(BinaryNode* nodePtr, BinaryNode* newNode);
@@ -251,7 +251,7 @@ private:
 
 
 public:
-	BinarySearchTree() {}
+	BinarySearchTree(int comp(Item left, Item right)) { compare = comp; }
 
 	BinarySearchTree(const BinarySearchTree& tree);
 
