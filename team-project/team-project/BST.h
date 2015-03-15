@@ -61,7 +61,7 @@ BinaryTree& BinaryTree::operator=(const BinaryTree& sourceTree)
 // ---------------------- BinarySearchTree Class Implementation -----------------------------------
 BinarySearchTree::BinarySearchTree(const BinarySearchTree& tree)
 {
-	//this->compare = tree.compare;
+	this->compare = tree.compare;
 	this->rootPtr = copyTree(tree.rootPtr);
 }
 
@@ -94,7 +94,7 @@ bool BinarySearchTree::getEntry(void* anEntry, void* returnedItem) const
 
 BinarySearchTree& BinarySearchTree::operator=(const BinarySearchTree & sourceTree)
 {
-	//compare() = sourceTree.compare();
+	this->compare = sourceTree.compare;
 	this->BinaryTree::operator=(sourceTree);
 	return *this;
 }
