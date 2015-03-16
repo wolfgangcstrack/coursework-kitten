@@ -96,7 +96,7 @@ int main()
 	pHSC->write(ofs);
 	cout << "Deleting all dynamically allocated memory." << endl;
 	DELETE_EVERYTHING(pHSC, pTree);
-	cout << (_CrtDumpMemoryLeaks() ? "Memory Leak\n" : "No Memory Leak!\n");
+	cout << (_CrtDumpMemoryLeaks() ? "Memory Leak\n" : "No Leak!\n");
 }
 // ---------------------- Main --------------------------------------------------------------------
 
@@ -365,7 +365,7 @@ void find_and_display(HashTable<ITEM_PTR>*& pHSC)
 		cout << "Enter a Product ID (Format is BLLL-HHHH-NNN, L is any letter, H is either a number or letter from a-f, and N is any number): ";
 		getline(cin, input);
 
-		if (input.length() < 13)
+		if (input.length() < 14)
 			input += "              "; // to avoid substring errors
 
 		ITEM_PTR temp, target;
@@ -448,11 +448,11 @@ void efficiency(HashTable<ITEM_PTR>*& pHSC)
 // validates keys from input from add_new_data option
 bool validKey(const string & key)
 {
-	if (key.length() != 13)
+	if (key.length() != 14)
 		return false;
 	if (key.front() != 'B')
 		return false;
-	if (key.at(4) != '-' || key.at(9) != '-')
+	if (key.at(1) != '-' || key.at(5) != '-' || key.at(10) != '-')
 		return false;
 
 	return true;

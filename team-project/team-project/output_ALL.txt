@@ -26,7 +26,6 @@ BPZZ-0008-011:Zoo Med Terrarium Moss 30 to 40 Gallons:11.2:10.1 7.9 3.7:8.6:Zoo 
 BSWW-002f-001:Wilson Evolution Indoor Game Basketball Official:1.5:10 9.5 6.5:47.97:Wilson:Sports & Outdoors
 BCUU-00de-001:U.S. Polo Assn. Men's Slim Fit Stripe Pique Pocket Polo with Solid Yoke:1:1 1 1:222.38:U.S. Polo Assn.:Clothing, Shoes & Jewelry
 BCAA-0024-032:adidas Performance Men's Samba Classic Soccer Shoe:32:12.5 7.8 4.4:36.95:adidas:Clothing, Shoes & Jewelry
-BCHH-0020-999:PURE GOLD DIAMONZZZZZ:500:3 4 5:9000.01:The President:Food and Health
 BBHH-002a-217:Huggies Snug and Dry Diapers, Size 4, Economy Plus Pack, 192 Count:217.6:9.2 18 14.4:42:Huggies:Baby
 BGLL-0021-002:Lavazza Super Crema Espresso - Whole Bean Coffee, 2.2-Pound Bag:2.2:4 6 9:33:Lavazza:Grocery & Gourmet Food
 BESS-0072-001:Samsung 850 EVO 250GB 2.5-Inch SATA III Internal SSD (MZ-75E250B/AM):1.9:3.9 0.3 2.8:114.99:Samsung:Electronics
@@ -62,6 +61,7 @@ BPRR-0020-016:Redmon 8.7 Cu. Ft. Compost Bin:16.9:26 26 30.8:32.99:Redmon:Patio,
 BGAA-0013-008:Amazing Grass Green SuperFood Original, 30 Servings:8.5:3.5 3.5 4.5:19.99:Amazing Grass:Grocery & Gourmet Food
 BHKK-0043-007:Keurig K130/B130 Brewing System:7.2:10 7 11:67.9:Keurig:Home & Kitchen
 BMFF-0007-001:Food Network Magazine All Access:0:0 0 0:7:Food Network:Magazine Subscriptions
+B-CHH-0020-999:PURE GOLD DIAMONZZZZ:500:3 4 5:9000.01:The President:Food and Health
 BHWW-0025-017:Whitmor 6779-3044 Double Rod Closet, Silver:17.8:68 45.2 19.3:37.99:Whitmor:Home & Kitchen
 BPSS-0036-176:Solvit PupSTEP for Pets, Plus X-Large:176:28 18 25:54.99:Solvit:Pet Supplies
 BBYY-0030-009:YSL Saharienne 2.5 Eau De Toilette:9.1:2.2 5.8 1.8:48.65:YSL:Beauty
