@@ -11,13 +11,6 @@ This file includes the implementation for:
 #include "BinaryTree.h"
 
 // ---------------------- BinarySearchTree Class Interface ----------------------------------------
-// Binary Search Tree ADT
-// Created by Frank M. Carrano and Tim Henry.
-
-// Modified by: Andrew Wang
-
-// Implementation: BST.cpp
-
 template<class ItemType>
 class BinarySearchTree : public BinaryTree<ItemType>
 {
@@ -38,7 +31,6 @@ private:
 
 	// search for target node
 	BinaryNode<ItemType>* findNode(BinaryNode<ItemType>* treePtr, const ItemType & target) const;
-
 public:
 	BinarySearchTree(int compareFunction(const ItemType&, const ItemType&)) { compare = compareFunction; }
 	BinarySearchTree(const BinarySearchTree<ItemType> &bst) { compare = bst.compare; count = 0; rootPtr = copyTree(bst.rootPtr); }
@@ -49,10 +41,9 @@ public:
 	bool remove(const ItemType & anEntry);
 	// find a target node
 	bool getEntry(const ItemType & target, ItemType & returnedItem) const;
-	// NOT IN THE Tree Code Files on Catalyst, use for HW#4:
+
 	BinarySearchTree & operator=(const BinarySearchTree & sourceTree);
 };
-
 
 ///////////////////////// public function definitions ///////////////////////////
 
@@ -86,7 +77,7 @@ bool BinarySearchTree<ItemType>::getEntry(const ItemType& anEntry, ItemType & re
 		return false;
 }
 
-//NOT IN THE Tree Code Files on Catalyst, use for HW#4:
+
 template<class ItemType>
 BinarySearchTree<ItemType> & BinarySearchTree<ItemType>::operator=(const BinarySearchTree<ItemType> & sourceTree)
 {
@@ -95,10 +86,8 @@ BinarySearchTree<ItemType> & BinarySearchTree<ItemType>::operator=(const BinaryS
 	return *this;
 }
 
-
 //////////////////////////// private functions //////////////////////////////////
 
-// Done as class exercise:
 template<class ItemType>
 BinaryNode<ItemType>* BinarySearchTree<ItemType>::_insert(BinaryNode<ItemType>* nodePtr,
 	BinaryNode<ItemType>* newNodePtr)

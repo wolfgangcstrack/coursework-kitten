@@ -1,0 +1,25 @@
+BCVD-000b-001:Duets, Re-Working The Catalogue:0.0:0.0 0.0 0.0:11.88:Van Morrison:CDs & Vinyl
+BEAA-04eb-003:Acer Aspire R-371T-78GX 13.3-Inch Full HD Convertible 2 in 1 Touchscreen Laptop:3.3:13.54 9.07 0.71:1259.75:Acer:Electronics
+BGNN-0027-012:Nespresso Variety Pack Capsules, 50 Count:12.3:11.8 7.9 1.6:39.99:Nespresso:Grocery & Gourmet Food
+BGAA-0013-008:Amazing Grass Green SuperFood Original, 30 Servings:8.5:3.5 3.5 4.5:19.99:Amazing Grass:Grocery & Gourmet Food
+BGLL-0021-002:Lavazza Super Crema Espresso - Whole Bean Coffee, 2.2-Pound Bag:2.2:4.0 6.0 9.0:33.00:Lavazza:Grocery & Gourmet Food
+BANN-0059-010:Nautica Ahoy 25 Inch Hardside Spinner:10.8:29.2 20.0 13.0:89.99:Nautica:Amazon Fashion
+BASS-0052-003:Samsonite Leather Expandable Briefcase:3.0:7.0 16.8 12.2:82.82:Samsonite:Amazon Fashion
+BALL-0010-010:Lewis N. Clark Automatic Travel Umbrella:10.4:11.0 7.0 3.0:16.19:Lewis N. Clark:Amazon Fashion
+BMFF-0007-001:Food Network Magazine All Access:0.0:0.0 0.0 0.0:7.00:Food Network:Magazine Subscriptions
+BMBB-0077-003:Blue Microphones Yeti USB Microphone - Silver:3.8:5.0 5.5 10.0:119.00:Blue Microphones:Musical Instruments
+BMYY-0257-037:Yamaha P115B Digital Piano:37.7:58.2 16.1 18.8:599.99:Yamaha:Musical Instruments
+BOCC-004f-014:CANON PIXMA MG6620 WIRELESS ALL-IN-ONE COLOR CLOUD Printer:14.0:14.6 18.0 5.9:79.99:Canon:Office Products
+BONN-0006-009:Neenah Exact Vellum Bristol, 67 lb, 8.5 x 11 Inches, 250 Sheets, White, 94 Brightness:9.8:11.0 8.5 2.1:6.96:Neenah:Office Products
+BOII-000f-002:iScholar Gross Pack Pencils, #2, Yellow, Box of 144 (33144):2.0:7.5 5.5 2.5:15.99:iScholar:Office Products
+BOFF-003e-022:Flash Furniture Mid-Back Black Mesh Computer Chair:22.0:21.0 24.0 39.0:62.85:Flash Furniture:Office Products
+BPGG-000d-001:Gerber 22-41578 Gorge Folding Shovel:1.7:13.8 5.0 2.9:13.00:Gerber Blades:Patio, Lawn & Garden
+BPRR-0020-016:Redmon 8.7 Cu. Ft. Compost Bin:16.9:26.0 26.0 30.8:32.99:Redmon:Patio, Lawn & Garden
+BPTT-002e-030:Taste of the Wild Dry Dog Food, Hi Prairie Canine Formula with Roasted Bison & Venison:30.0:18.0 25.0 5.2:46.99:Taste of the Wild:Pet Supplies
+BPMM-0037-012:Midwest Interactive Guinea Habitat Plus:12.5:47.0 24.0 14.0:55.99:Midwest Homes for Pets:Pet Supplies
+BPKT-000b-006:TOM Aquarium Accessories Dip & Pour Multi-Purpose Container, Large:6.4:7.1 3.3 6.1:11.47:Koller-Craft:Pet Supplies
+BPPP-000f-040:Precious Cat Ultra Premium Clumping Cat Litter:40.0:26.0 15.0 4.0:15.57:Precious Cat:Pet Supplies
+BVNN-00a4-008:Nintendo 3DS XL Black/Black - Nintendo 3DS XL:8.2:8.6 1.9 5.3:164.99:Nintendo:Video Games
+BSWW-002f-001:Wilson Evolution Indoor Game Basketball Official:1.5:10.0 9.5 6.5:47.97:Wilson:Sports & Outdoors
+BSCC-0074-029:Curt 18115 Roof Mounted Cargo Rack:29.1:41.5 37.0 4.0:116.57:Curt:Sports & Outdoors
+BHKK-0043-007:Keurig K130/B130 Brewing System:7.2:10.0 7.0 11.0:67.90:Keurig:Home & Kitchen

@@ -1,7 +1,7 @@
 /*
 Manager: Wolfgang C. Strack
 
-This file includes the implementation for:
+This file includes the interace and implementation for:
 - SAList class
 */
 
@@ -11,18 +11,11 @@ This file includes the implementation for:
 #include "DoublyLinkedList.h"
 
 // ---------------------- SAList Class Interface --------------------------------------------------
-// Linked List ADT 
-// This list allows the user to insert and remove data at a specified position
-// By CNguyen
-
-// Modified by: Wolfgang C. Strack
 /* Modifications from List class:
 - changed all functions to work with DoublyLinkedList
 - insertions are only performed at the front of the list
 - added adjust(int) - adjusts List so that nodes with greatest accessTimes are near the front
 */
-
-// Implementation: SAList.cpp
 
 template<class ItemType>
 class SAList : public DoublyLinkedList<ItemType>  // derived from abstract DoublyLinkedList class
@@ -111,7 +104,6 @@ bool SAList<ItemType>::getEntry(int position, ItemType & anEntry)
 	return true;
 }
 
-
 template<class ItemType>
 Node<ItemType>* SAList<ItemType>::getNodeAt(int position)
 {
@@ -191,10 +183,8 @@ void SAList<ItemType>::write(ostream& os)
 	Node<ItemType>* currPtr = headPtr->getNext();
 	while (currPtr != tailPtr)
 	{
-		os << "[";
-		currPtr->getItem()->write(os);
-		os << "]";
-		currPtr = currPtr->getNext();
+		currPtr->getItem()->output(os);			// display data
+		currPtr = currPtr->getNext();			// go to next node
 	}
 }
 // ---------------------- SAList Class Implementation End -------------------------------------------

@@ -1,7 +1,7 @@
 /*
 Manager: Wolfgang C. Strack
 
-This file includes the implementation for:
+This file includes the interface and implementation for:
 - DoublyLinkedList class
 */
 
@@ -10,16 +10,10 @@ This file includes the implementation for:
 #include "Global.h"
 
 // ---------------------- DoublyLinkedList Class Interface ----------------------------------------
-// Doubly Linked List abstract base class
-// By C. Lee-Klawender
-
-// Modified by: Wolfgang C. Strack
 /* Modifications:
 - completed Destructor
 - clear() uses a while loop instead of a for loop
 */
-
-// Implementation: SAList.cpp
 
 template<class ItemType>
 class DoublyLinkedList
@@ -43,15 +37,14 @@ public:
 	// remove all entries from list
 	void clear();
 	// display list from front to end
-	void display() const;
+	void display(ostream& os) const;
 	// abstract insert function
 	virtual bool insert(const ItemType& newEntry, int newPosition = 1) = 0;
 };
 // ---------------------- DoublyLinkedList Class Interface End ------------------------------------
 
 // ---------------------- DoublyLinkedList Class Implementation -----------------------------------
-/*
-Modifications:
+/* Modifications:
 - completed Destructor
 - clear() uses a while loop instead of a for loop
 */
@@ -94,20 +87,18 @@ DoublyLinkedList<ItemType>::DoublyLinkedList(const DoublyLinkedList<ItemType>& a
 	newChainPtr->setNext(tailPtr);
 }
 
-
-
 template<class ItemType>
-void DoublyLinkedList<ItemType>::display() const
+void DoublyLinkedList<ItemType>::display(ostream& os) const
 {
 	Node<ItemType>* currPtr = headPtr->getNext();
 	while (currPtr != tailPtr)
 	{
-		cout << currPtr->getItem() << " ";		// display data
-		currPtr = currPtr->getNext();			// go to next node
+		os << "[";
+		currPtr->getItem()->write(os);
+		os << "]";
+		currPtr = currPtr->getNext();
 	}
-	cout << endl << endl;
 }
-
 
 template<class ItemType>
 void DoublyLinkedList<ItemType>::clear()

@@ -1,5 +1,5 @@
 /*
-Manager: Louis Christopher
+Manager: Louis Christopher, Wolfgang C. Strack
 
 This file includes the implementation for:
 - HashSC class
@@ -13,16 +13,12 @@ This file includes the implementation for:
 // ---------------------- HashSC Class Interface --------------------------------------------------
 // HashSC class
 // Derived class of abstract HashTable
-
-// Modified by: Louis Christopher
 /* Modifications (besides assignment specifications):
 - uses SAList (self-adjusting list) instead of List
 - mLists is now a pointer to an array of SAList pointers
 - all SALists in mLists are now dynamically allocated pointers
 - all functions change accordingly to work with pointers to SAList
 */
-
-// Implementation: HashSC.cpp
 
 template<class Object>
 class HashSC : public HashTable<Object>
@@ -48,8 +44,8 @@ public:
 	~HashSC();
 
 	bool find(const string & hashkey);
-	bool contains(const Object & x) const;						// calls SAList adjust() function
-	bool getEntry(const Object & target, Object & returnedItem) const;// calls SAList adjust() function
+	bool contains(const Object & x) const;								// calls SAList adjust() function
+	bool getEntry(const Object & target, Object & returnedItem) const;	// calls SAList adjust() function
 	void makeEmpty();
 	bool insert(const Object & x);
 	bool remove(const Object & x);
@@ -58,6 +54,7 @@ public:
 	bool setMaxLambda(float lm);
 
 	void displayStatistics() const;
+	void display(ostream& os);
 	void write(ostream& os);
 private:
 	void rehash();
@@ -86,7 +83,6 @@ bool find(const string & hashkey)
 		hashVal += mTableSize;
 
 	SAList<Object>* theList = mLists[hashVal];
-	
 }
 
 template<class Object>
@@ -118,10 +114,34 @@ HashSC<Object>::~HashSC()
 template<class Object>
 void HashSC<Object>::displayStatistics() const
 {
+	SAList<Object>* list;
+	int nonempty_lists = 0;
+
 	cout << "Load Factor = " << (double)mSize / mTableSize
-		<< "\nNumber of collisions = " << numCollisions
 		<< "\nLongest Linked List = " << longestList
-		<< endl;
+		<< "\nAverage number of nodes in each non-empty list = ";
+
+	for (int i = 0; i < mTableSize; i++)
+	{
+		list = mLists[i];
+		if (!list->isEmpty())
+			nonempty_lists++;
+	}
+
+	cout << (double)mSize / nonempty_lists << endl;
+}
+
+template<class Object>
+void HashSC<Object>::display(ostream& os)
+{
+	for (int i = 0; i < mTableSize; i++)
+	{
+		if (mLists[i]->size() > 0)
+			mLists[i]->display(os);
+		else
+			os << "<EMPTY LIST>";
+		os << endl;
+	}
 }
 
 template<class Object>
@@ -131,9 +151,6 @@ void HashSC<Object>::write(ostream& os)
 	{
 		if (mLists[i]->size() > 0)
 			mLists[i]->write(os);
-		else
-			os << "<EMPTY LIST>";
-		os << endl;
 	}
 }
 

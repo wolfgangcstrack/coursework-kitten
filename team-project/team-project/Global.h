@@ -4,7 +4,6 @@ Manager: Wolfgang C. Strack
 This file is the global header file for the project and has common includes,
 data structure prototypes/definitions, and all other code commonly shared by
 files in the project.
-
 */
 
 #pragma once
@@ -13,9 +12,7 @@ files in the project.
 #include <iomanip>
 #include <sstream>
 #include <fstream>
-#include <vector>
 #include <string>
-#include <cmath>
 using namespace std;
 
 class Item;					// Data class, implementation included
@@ -75,33 +72,36 @@ public:
 	void setSeller(string sell)			{ seller = sell; }
 	void setCategory(string categ)		{ category = categ; }
 
+	// "partial" display because Item has many fields
 	void write(ostream &os)
 	{
 		os << setw(30) << left
 			<< (name.length() <= 30 ? name : name.substr(0, 27) + "...")
 			<< right << ":" << productID;
 	}
-
+	// "full" display
 	void display(ostream &os)
 	{
 		os << "Name: " << name << endl
 			<< "Product ID: " << productID << endl
 			<< "Weight: " << weight << endl
 			<< "Dimensions: " << dimensions[0] << " x " << dimensions[1] << " x " << dimensions[2] << endl
-			<< "Price: " << price << endl
+			<< "Price: " << setprecision(2) << fixed << price << endl
 			<< "Seller: " << seller << endl
 			<< "Category: " << category << endl;
+	}
+	// for outputting to file
+	void output(ostream &os)
+	{
+		os << productID << ":" << name << ":" << weight << ":"
+			<< dimensions[0] << " " << dimensions[1] << " " << dimensions[2]
+			<< ":" << price << ":" << seller << ":" << category << endl;
 	}
 };
 // ---------------------- Item Class End ----------------------------------------------------------
 
 // ---------------------- Node Class --------------------------------------------------------------
-// Linkded List Node Class
-// Created by Frank M. Carrano and Tim Henry.
-// Modified by CNguyen
-// Doubly Linked Version
-
-// Modified by: Wolfgang C. Strack
+// Doubly Linked Version of Node
 /* Modifications:
 - added accessTimes member variable and mutator/accessor
 	function for SAList adjustment
@@ -135,8 +135,6 @@ public:
 // ---------------------- Node Class End ----------------------------------------------------------
 
 // ---------------------- HashTable Class Interface -----------------------------------------------
-// Modified by: Louis Christopher
-
 // Implementation is as Base Class of HashSC which is kept in HashSC.cpp
 
 template <class Object>
@@ -158,19 +156,12 @@ public:
 	virtual int size() const = 0;
 	virtual void displayStatistics() const = 0;
 	virtual bool getEntry(const Object & target, Object & returnedItem) const = 0;
+	virtual void write(ostream& os) = 0;
+	virtual void display(ostream& os) = 0;
 };
 // ---------------------- HashTable Class Interface End -------------------------------------------
 
 // ---------------------- BinaryNode Class --------------------------------------------------------
-// Node for a binary tree
-// Created by Frank M. Carrano and Tim Henry.
-// Modified by CNguyen
-
-// Modified by: Wolfgang C. Strack
-/* Modifications:
-
-*/
-
 template<class ItemType>
 class BinaryNode
 {

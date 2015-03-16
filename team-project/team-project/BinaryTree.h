@@ -10,13 +10,6 @@ This file includes the implementation for:
 #include "Global.h"
 
 // ---------------------- BinaryTree Class Interface ----------------------------------------------
-// Binary tree abstract base class
-// Created by Frank M. Carrano and Tim Henry.
-
-// Modified by: Andrew Wang
-
-// Implementation: BST.cpp
-
 template<class ItemType>
 class BinaryTree
 {
@@ -133,9 +126,9 @@ void BinaryTree<ItemType>::_indentorder(void visit(ItemType &, string &), Binary
 	if (nodePtr != 0)
 	{
 		ItemType item = nodePtr->getItem();
-		_indentorder(visit, nodePtr->getRightPtr(), tabs + "   ");
+		_indentorder(visit, nodePtr->getRightPtr(), tabs + "\t");
 		visit(item, tabs);
-		_indentorder(visit, nodePtr->getLeftPtr(), tabs + "   ");
+		_indentorder(visit, nodePtr->getLeftPtr(), tabs + "\t");
 	}
 }
 

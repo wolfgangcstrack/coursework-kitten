@@ -1,0 +1,40 @@
+BCHH-0013-016:High Sierra Curve Backpack:16:8.5 18.5 12.5:19.99:High Sierra:Clothing, Shoes & Jewelry
+BCSS-00b4-007:Skagen Men's SKW6076 Balder Titanium Chronograph Watch:7:4 3.1 3:180.00:Skagen:Clothing, Shoes & Jewelry
+BESS-0072-001:Samsung 850 EVO 250GB 2.5-Inch SATA III Internal SSD (MZ-75E250B/AM):1.9:3.9 0.3 2.8:114.99:Samsung:Electronics
+BCAA-0024-032:adidas Performance Men's Samba Classic Soccer Shoe:32:12.5 7.8 4.4:36.95:adidas:Clothing, Shoes & Jewelry
+BCNN-0012-016:Nautica Baby-Boys Infant 3 Piece Outerwear Set:16:1 1 1:18.95:Nautica:Clothing, Shoes & Jewelry
+BCA1-00d8-001:10k Yellow Gold, Gemstone, and Diamond Drop Earrings:0.8:4.4 3.9 0.4:216.40:Amazon Curated Collection:Clothing, Shoes & Jewelry
+BCCC-000f-004:CamelBak Podium Big Chill Water Bottle:4:10.8 3 3:15.00:CamelBak:Clothing, Shoes & Jewelry
+BCMM-0007-001:Mud Pie Dinosaur Pacifier Clip:0.8:9.9 3.1 0.5:7.27:Mud Pie:Clothing, Shoes & Jewelry
+BBMD-007b-035:Data Structures and Algorithms in Java:35.2:7.5 0.9 9.2:123.72:Michael T.Goodrich:Books
+BBVI-000d-015:Insurgent:15.2:5.3 1.3 8.0:13.81:Veronica Roth:Books
+BBMN-0006-004:Naruto Vol. 1:4.8:5.0 0.2 7.5:6.95:Masashi Kishimoto:Books
+BSGG-0023-001:Garmin City Navigator for Detailed Maps of Italy and Greece:0.48:4 4 0.1:35.98:Garmin:Software
+BSMM-0134-002:Microsoft Visual Studio Pro 2013 Upgrade:2.88:0.8 5.8 5.8:308.84:Microsoft:Software
+BEUF-0052-011:Franklin Merriam Webster Speaking Collegiate Dictionary:11.2:5 2 3:82.88:Unknown:Electronics
+BESS-006c-395:Samsung Xpress SL-M2070FW/XAA Wireless Monochrome Printer with Scanner, Copier and Fax:395.2:14.2 16 12.2:108.00:Samsung:Electronics
+BEHH-00d2-291:HP Scanjet 5590 Document Scanner:291.2:6.38 13.39 19.21:210.50:HP:Electronics
+BEAA-0820-132:Alienware 17 ANW17-6421SLV 17.3-Inch Laptop:132.8:1.35 16.93 11.49:2080.99:Alienware:Electronics
+BESS-0008-001:SanDisk Cruzer Fit CZ33 16GB USB 2.0:0.8:0.8 0.6 0.3:8.99:SanDisk:Electronics
+BESS-0895-111:Samsung UN65HU7250 Curved 65-Inch 4K Ultra HD 120Hz Smart LED TV:1115.2:57.1 11.8 34.7:2197.99:Samsung:Electronics
+BBYY-0030-009:YSL Saharienne 2.5 Eau De Toilette:9.1:2.2 5.8 1.8:48.65:YSL:Beauty
+BBJV-0034-019:Viva La Juicy by Juicy Couture 3.4oz 100ml EDP Spray:19.2:6 5 4:52.79:Juicy Couture:Beauty
+BBII-0063-024:InStyler Max 2-Way Rotating Iron, Pink:24:12 5.5 2.6:99.99:InStyler:Beauty
+BBKK-000b-001:Kyoku for Men Exfoliating Facial Scrub, 3.4 Fluid Ounce:1.6:2 2 5:11.99:Kyoku for Men:Beauty
+BBSS-000e-009:Skip Hop Hug and Hide Activity Toy, Owl:9.6:7 4 8:14.21:Skip Hop:Baby
+BBBB-0138-411:BOB Sport Utility Single Stroller, Orange:411.2:50.2 25 40:312.00:BOB:Baby
+BBHH-002a-217:Huggies Snug and Dry Diapers, Size 4, Economy Plus Pack, 192 Count:217.6:9.2 18 14.4:42.00:Huggies:Baby
+BBEE-000a-064:Evenflo Position and Lock Wood Gate, Tan:64:2.5 25.5 23.5:10.00:Evenflo:Baby
+BBGG-001d-104:Graco Affix Backless Youth Booster Seat with Latch System, Pierce:104:15.5 16.2 8.6:29.93:Graco:Baby
+BPNN-0008-004:New Life Spectrum Marine Fish Formula 1mm Sinking Pellet Fish Food:4.3:3.75 3.75 3.75:8.80:NewLife:Pet Supplies
+BPHH-001a-035:Happy Hen Treats Mealworm Frenzy:35.2:4 12 15:26.81:Happy Hen Treats:Pet Supplies
+BPZZ-0008-011:Zoo Med Terrarium Moss 30 to 40 Gallons:11.2:10.1 7.9 3.7:8.60:Zoo Med:Pet Supplies
+BPSS-0036-176:Solvit PupSTEP for Pets, Plus X-Large:176:28 18 25:54.99:Solvit:Pet Supplies
+BPBB-0034-001:Bayer Advantage II Flea Control Treatment for Cats:0.3:6.5 1 4.2:52.75:Bayer:Pet Supplies
+BPKA-0027-089:Aquarius Aq15005 Aquarius 5 Rounded 5-Gallon Aquarium Kit:89.6:14.2 11.5 10:39.99:Koller-Craft:Pet Supplies
+BIEE-0012-014:Ettore 65000 Professional Progrip Window Cleaning Kit:14.4:2 16.5 13:18.98:Ettore:Industrial & Scientific
+BIHH-0063-128:HFS Brand New Desktop Electric Centrifuge Lab (Timer 0-60min) 0-4000 Rpm Cap-20mlX6 Tube(800-1) 110v:128:8 8 8:99.99:HardwareFactoryStore.com:Industrial & Scientific
+BAPP-0011-060:Plaid PROMOABI Apple Barrel Acrylic Paint, 2-Ounce, Best Selling Colors I:60.8:13.5 9.2 2:17.82:Plaid:Arts, Craft & Sewing
+BAEE-000e-016:EK Tools Circle Punch, 2-Inch:16:6.1 3.1 1.3:14.74:EK Tools:Arts, Craft & Sewing
+BACC-0006-009:Crafty Cuts 2-Yards Cotton Fabric, White Solid:9.6:12.2 5 0.8:6.79:CRAFTY CUTS:Arts, Craft & Sewing
+BASS-0005-003:Scotch Precision Scissor, 8-Inches (1448):3.2:0.7 3.2 10.6:5.72:Scotch:Arts, Craft & Sewing
