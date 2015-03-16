@@ -26,6 +26,7 @@ class Node;
 template <class ItemType>
 class HashTable;
 
+template <class ItemType>
 class BinaryNode;
 
 // ---------------------- Item Class --------------------------------------------------------------
@@ -74,12 +75,22 @@ public:
 	void setSeller(string sell)			{ seller = sell; }
 	void setCategory(string categ)		{ category = categ; }
 
-	ostream& write(ostream &os)
+	void write(ostream &os)
 	{
-		os << setw(10)
-			<< (name.length() < 10 ? name : name.substr(0, 7) + "...")
-			<< ":" << productID;
-		return os;
+		os << setw(30) << left
+			<< (name.length() <= 30 ? name : name.substr(0, 27) + "...")
+			<< right << ":" << productID;
+	}
+
+	void display(ostream &os)
+	{
+		os << "Name: " << name << endl
+			<< "Product ID: " << productID << endl
+			<< "Weight: " << weight << endl
+			<< "Dimensions: " << dimensions[0] << " x " << dimensions[1] << " x " << dimensions[2] << endl
+			<< "Price: " << price << endl
+			<< "Seller: " << seller << endl
+			<< "Category: " << category << endl;
 	}
 };
 // ---------------------- Item Class End ----------------------------------------------------------
@@ -160,114 +171,31 @@ public:
 
 */
 
+template<class ItemType>
 class BinaryNode
 {
 private:
-	void*		item;			// Data portion
-	BinaryNode* leftPtr;		// Pointer to left child 
-	BinaryNode* rightPtr;		// Pointer to right child
+	ItemType              item;         // Data portion
+	BinaryNode<ItemType>* leftPtr;		// Pointer to left child
+	BinaryNode<ItemType>* rightPtr;		// Pointer to right child
 
 public:
 	// constructors
-	BinaryNode(void* anItem)			{ item = anItem; leftPtr = 0; rightPtr = 0; }
-	BinaryNode(void* anItem, BinaryNode* left, BinaryNode* right) { item = anItem; leftPtr = left; rightPtr = right; }
+	BinaryNode(const ItemType & anItem)			   { item = anItem; leftPtr = 0; rightPtr = 0; }
+	BinaryNode(const ItemType & anItem,
+		BinaryNode<ItemType>* left,
+		BinaryNode<ItemType>* right)		   {
+		item = anItem; leftPtr = left; rightPtr = right;
+	}
 	// accessors
-	void setItem(void* anItem)			{ item = anItem; }
-	void setLeftPtr(BinaryNode* left)	{ leftPtr = left; }
-	void setRightPtr(BinaryNode* right)	{ rightPtr = right; }
+	void setItem(const ItemType & anItem)		   { item = anItem; }
+	void setLeftPtr(BinaryNode<ItemType>* left)	   { leftPtr = left; }
+	void setRightPtr(BinaryNode<ItemType>* right)  { rightPtr = right; }
 	// mutators
-	void* getItem() const				{ return item; }
-	BinaryNode* getLeftPtr() const		{ return leftPtr; }
-	BinaryNode* getRightPtr() const		{ return rightPtr; }
+	ItemType getItem() const					   { return item; }
+	BinaryNode<ItemType>* getLeftPtr() const	   { return leftPtr; }
+	BinaryNode<ItemType>* getRightPtr() const	   { return rightPtr; }
 
-	bool isLeaf() const					{ return (leftPtr == 0 && rightPtr == 0); }
+	bool isLeaf() const							   { return (leftPtr == 0 && rightPtr == 0); }
 };
 // ---------------------- BinaryNode Class End ----------------------------------------------------
-
-// ---------------------- BinaryTree Class Interface ----------------------------------------------
-// Binary tree abstract base class
-// Created by Frank M. Carrano and Tim Henry.
-
-// Modified by: Andrew Wang
-
-// Implementation: BST.cpp
-
-class BinaryTree
-{
-protected:
-	BinaryNode* rootPtr;		// ptr to root node
-	int count;					// number of nodes in tree
-
-	// copy from the tree rooted at nodePtr and returns a pointer to the copy
-	BinaryNode* copyTree(const BinaryNode* nodePtr);
-public:
-	// "admin" functions
-	BinaryTree()							{ rootPtr = 0; count = 0; }
-	BinaryTree(const BinaryTree& tree)		{ if (this->rootPtr != 0) clear(); this->rootPtr = copyTree(tree.rootPtr); }
-	virtual ~BinaryTree()					{ clear(); }// CALL clear()
-	BinaryTree & operator=(const BinaryTree & sourceTree);
-
-	// common functions for all binary trees
-	bool isEmpty() const					{ return count == 0; }
-	int size() const						{ return count; }
-	void clear()							{ destroyTree(rootPtr); rootPtr = 0; count = 0; }
-	void inOrder(void visit(void*)) const	{ _inorder(visit, rootPtr); }
-
-	// abstract functions to be implemented by derived class
-	virtual bool insert(void* newData) = 0;
-	virtual bool remove(void* data) = 0;
-	virtual bool getEntry(void* anEntry, void* returnedItem) const = 0;
-private:
-	// delete all nodes from the tree
-	void destroyTree(BinaryNode* nodePtr);
-
-	// internal traverse
-	void _inorder(void visit(void*), BinaryNode* nodePtr) const;
-};
-// ---------------------- BinaryTree Class Interface End ------------------------------------------
-
-// ---------------------- BinarySearchTree Class Interface ----------------------------------------
-// Binary Search Tree ADT
-// Created by Frank M. Carrano and Tim Henry.
-
-// Modified by: Andrew Wang
-
-// Implementation: BST.cpp
-
-class BinarySearchTree : public BinaryTree
-{
-private:
-
-	int (*compare)(void*, void*);
-
-	// internal insert node: insert newNode in nodePtr subtree
-	BinaryNode* _insert(BinaryNode* nodePtr, BinaryNode* newNode);
-
-	// internal remove node: locate and delete target node under nodePtr subtree
-	BinaryNode* _remove(BinaryNode* nodePtr, void* target, bool& success);
-
-	// delete target node from tree, called by internal remove node
-	BinaryNode* deleteNode(BinaryNode* targetNodePtr);
-
-	// remove the leftmost node in the left subtree of nodePtr
-	BinaryNode* removeLeftmostNode(BinaryNode* nodePtr, void* successor);
-
-	// search for target node
-	BinaryNode* findNode(BinaryNode* treePtr, void* target) const;
-
-
-public:
-	BinarySearchTree(int comp(void* left, void* right)) { compare = comp; }
-
-	BinarySearchTree(const BinarySearchTree& tree);
-
-	// insert a node at the correct location
-	bool insert(void* newEntry);
-	// remove a node if found
-	bool remove(void* anEntry);
-	// find a target node
-	bool getEntry(void* target, void* returnedItem) const;
-	// NOT IN THE Tree Code Files on Catalyst, use for HW#4:
-	BinarySearchTree & operator=(const BinarySearchTree & sourceTree);
-};
-// ---------------------- BinarySearchTree Class Interface End ------------------------------------

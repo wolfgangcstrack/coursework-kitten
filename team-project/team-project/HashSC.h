@@ -47,6 +47,7 @@ public:
 	// destructor
 	~HashSC();
 
+	bool find(const string & hashkey);
 	bool contains(const Object & x) const;						// calls SAList adjust() function
 	bool getEntry(const Object & target, Object & returnedItem) const;// calls SAList adjust() function
 	void makeEmpty();
@@ -57,7 +58,7 @@ public:
 	bool setMaxLambda(float lm);
 
 	void displayStatistics() const;
-	ostream& write(ostream& os);
+	void write(ostream& os);
 private:
 	void rehash();
 	int myHash(const Object & x) const;
@@ -77,6 +78,17 @@ long HashSC<Object>::numCollisions = 0;
 // - Initialize Static Variables End ------------
 
 // - HashSC Method Definitions ------------------
+template<class Object>
+bool find(const string & hashkey)
+{
+	int hashVal = Hash(x) % mTableSize;
+	if (hashVal < 0)
+		hashVal += mTableSize;
+
+	SAList<Object>* theList = mLists[hashVal];
+	
+}
+
 template<class Object>
 HashSC<Object>::HashSC(int(*hashFcn)(const Object &obj),
 	int(*comp)(const Object &left, const Object &right),
@@ -113,7 +125,7 @@ void HashSC<Object>::displayStatistics() const
 }
 
 template<class Object>
-ostream& HashSC<Object>::write(ostream& os)
+void HashSC<Object>::write(ostream& os)
 {
 	for (int i = 0; i < mTableSize; i++)
 	{
@@ -123,7 +135,6 @@ ostream& HashSC<Object>::write(ostream& os)
 			os << "<EMPTY LIST>";
 		os << endl;
 	}
-	return os;
 }
 
 template<class Object>

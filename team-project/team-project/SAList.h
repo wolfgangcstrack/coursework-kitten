@@ -7,7 +7,7 @@ This file includes the implementation for:
 
 #pragma once
 
-#include "Global.h";
+#include "Global.h"
 #include "DoublyLinkedList.h"
 
 // ---------------------- SAList Class Interface --------------------------------------------------
@@ -44,7 +44,7 @@ public:
 	// adjusts node based on how many times it was accessed
 	void adjust(int adjPosition);
 
-	ostream& write(ostream& os);
+	void write(ostream& os);
 };
 // ---------------------- SAList Class Interface End ----------------------------------------------
 
@@ -186,7 +186,7 @@ void SAList<ItemType>::adjust(int adjPosition)			// uses a variant of the counti
 }
 
 template <class ItemType>
-ostream& SAList<ItemType>::write(ostream& os)
+void SAList<ItemType>::write(ostream& os)
 {
 	Node<ItemType>* currPtr = headPtr->getNext();
 	while (currPtr != tailPtr)
@@ -196,6 +196,5 @@ ostream& SAList<ItemType>::write(ostream& os)
 		os << "]";
 		currPtr = currPtr->getNext();
 	}
-	return os;
 }
 // ---------------------- SAList Class Implementation End -------------------------------------------

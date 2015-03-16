@@ -78,6 +78,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BinaryTree.h" />
     <ClInclude Include="DoublyLinkedList.h" />
     <ClInclude Include="Global.h" />
   </ItemGroup>
