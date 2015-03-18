@@ -1,6 +1,7 @@
 /*
 Manager: Andrew Wang
 
+This is the base class for the BinarySearchTree class.
 This file includes the implementation for:
 - BinaryTree class
 */

@@ -4,6 +4,11 @@ Manager: Wolfgang C. Strack
 This file is the global header file for the project and has common includes,
 data structure prototypes/definitions, and all other code commonly shared by
 files in the project.
+
+Note: Originally, the interfaces for the rest of the classes used were
+supposed to be in this file. However, due to linking complications,
+we decided to separate those interfaces and put them in their own
+respective header files along with their implementations.
 */
 
 #pragma once

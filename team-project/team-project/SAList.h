@@ -1,6 +1,8 @@
 /*
 Manager: Wolfgang C. Strack
 
+This is the SAList (Self-Adjusting List) class and is part of
+our solution to resolving Hash Table collisions.
 This file includes the interace and implementation for:
 - SAList class
 */

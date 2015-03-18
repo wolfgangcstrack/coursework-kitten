@@ -105,6 +105,9 @@ int main()
 
 	// Check for memory leaks
 	cout << (_CrtDumpMemoryLeaks() ? "Memory Leak\n" : "No Memory Leak!\n");
+
+	cout << "Enter to continue..."; cin.get(); // For separate .exe file
+	return 0;
 }
 // ---------------------- Main --------------------------------------------------------------------
 

@@ -1,6 +1,8 @@
 /*
 Manager: Andrew Wang
 
+This file contains the entire BinarySearchTree class,
+one of the main data structures used in the main application.
 This file includes the implementation for:
 - BinarySearchTree class
 */

@@ -1,6 +1,7 @@
 /*
 Manager: Wolfgang C. Strack
 
+This is the base class for the SAList class.
 This file includes the interface and implementation for:
 - DoublyLinkedList class
 */

@@ -1,6 +1,9 @@
 /*
 Manager: Louis Christopher
 
+This is the Separate Chaining implementation of the HashTable. It uses
+SALists for collision resolution and is one of the main data structures
+used in the application.
 This file includes the implementation for:
 - HashSC class
 */
