@@ -223,7 +223,7 @@ void add_new_data(HashTable<ITEM_PTR>*& pHSC, BinarySearchTree<ITEM_PTR>*& pTree
 		// Check if input Product ID already exists in the data
 		ITEM_PTR temp = new Item(key, "", 0, dims, 0, "", "");
 		ITEM_PTR check = 0;
-		if (pHSC->getEntry(temp, check) && compareProductID(temp, check))
+		if (pHSC->getEntry(temp, check) && compareProductID(temp, check) == 0)
 		{
 			cout << "Item with PID " << key << " already exists." << endl;
 			check->display(cout);
