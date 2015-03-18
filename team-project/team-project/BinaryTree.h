@@ -20,15 +20,15 @@ protected:
 	BinaryNode<ItemType>* copyTree(const BinaryNode<ItemType>* nodePtr);
 public:
 	// "admin" functions
-	BinaryTree()					{ rootPtr = 0; count = 0; }
-	BinaryTree(const BinaryTree<ItemType> & tree) { clear(); rootPtr = copyTree(tree.rootPtr); }
-	virtual ~BinaryTree()			{ clear(); }
+	BinaryTree()									{ rootPtr = 0; count = 0; }
+	BinaryTree(const BinaryTree<ItemType> & tree)	{ clear(); rootPtr = copyTree(tree.rootPtr); }
+	virtual ~BinaryTree()							{ clear(); }
 	BinaryTree & operator=(const BinaryTree & sourceTree);
 
 	// common functions for all binary trees
-	bool isEmpty() const				{ return count == 0; }
-	int size() const					{ return count; }
-	void clear(){ destroyTree(rootPtr); rootPtr = 0; count = 0; }
+	bool isEmpty() const							{ return count == 0; }
+	int size() const								{ return count; }
+	void clear()									{ destroyTree(rootPtr); rootPtr = 0; count = 0; }
 	void preOrder(void visit(ItemType &)) const		{ _preorder(visit, rootPtr); }
 	void inOrder(void visit(ItemType &)) const		{ _inorder(visit, rootPtr); }
 	void postOrder(void visit(ItemType &)) const	{ _postorder(visit, rootPtr); }
@@ -50,6 +50,7 @@ private:
 	void _inorder(void visit(ItemType &), BinaryNode<ItemType>* nodePtr) const;
 	void _postorder(void visit(ItemType &), BinaryNode<ItemType>* nodePtr) const;
 
+	// For printing indented tree
 	void _indentorder(void visit(ItemType &, string &), BinaryNode<ItemType>* nodePtr, string &tabs) const;
 };
 

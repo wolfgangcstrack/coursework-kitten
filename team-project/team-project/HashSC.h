@@ -1,5 +1,5 @@
 /*
-Manager: Louis Christopher, Wolfgang C. Strack
+Manager: Louis Christopher
 
 This file includes the implementation for:
 - HashSC class
@@ -18,6 +18,7 @@ This file includes the implementation for:
 - mLists is now a pointer to an array of SAList pointers
 - all SALists in mLists are now dynamically allocated pointers
 - all functions change accordingly to work with pointers to SAList
+- wrote display() and write() functions
 */
 
 template<class Object>

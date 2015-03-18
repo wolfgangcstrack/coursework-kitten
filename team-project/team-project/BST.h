@@ -77,7 +77,6 @@ bool BinarySearchTree<ItemType>::getEntry(const ItemType& anEntry, ItemType & re
 		return false;
 }
 
-
 template<class ItemType>
 BinarySearchTree<ItemType> & BinarySearchTree<ItemType>::operator=(const BinarySearchTree<ItemType> & sourceTree)
 {

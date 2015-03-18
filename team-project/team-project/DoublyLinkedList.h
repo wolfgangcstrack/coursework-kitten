@@ -13,6 +13,7 @@ This file includes the interface and implementation for:
 /* Modifications:
 - completed Destructor
 - clear() uses a while loop instead of a for loop
+- display() accepts an ostream instead of just printing to cout
 */
 
 template<class ItemType>
@@ -44,10 +45,6 @@ public:
 // ---------------------- DoublyLinkedList Class Interface End ------------------------------------
 
 // ---------------------- DoublyLinkedList Class Implementation -----------------------------------
-/* Modifications:
-- completed Destructor
-- clear() uses a while loop instead of a for loop
-*/
 template<class ItemType>
 DoublyLinkedList<ItemType>::DoublyLinkedList()
 {
@@ -94,7 +91,10 @@ void DoublyLinkedList<ItemType>::display(ostream& os) const
 	while (currPtr != tailPtr)
 	{
 		os << "[";
-		currPtr->getItem()->write(os);
+		if (is_pointer<ItemType>::value)		// Check if ItemType is a pointer to print correct value
+			os << *(currPtr->getItem());
+		else
+			os << currPtr->getItem();
 		os << "]";
 		currPtr = currPtr->getNext();
 	}

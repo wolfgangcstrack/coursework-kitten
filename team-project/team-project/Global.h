@@ -31,7 +31,7 @@ class Item
 {
 private:
 	string name;
-	string productID; // not final
+	string productID;
 
 	double weight;
 	double dimensions[3];
@@ -72,13 +72,15 @@ public:
 	void setSeller(string sell)			{ seller = sell; }
 	void setCategory(string categ)		{ category = categ; }
 
-	// "partial" display because Item has many fields
-	void write(ostream &os)
+	// "partial" display because Item has many fields, used for mass listing of Items
+	friend ostream& operator<<(ostream &os, const Item & item)
 	{
 		os << setw(30) << left
-			<< (name.length() <= 30 ? name : name.substr(0, 27) + "...")
-			<< right << ":" << productID;
+			<< (item.name.length() <= 30 ? item.name : item.name.substr(0, 27) + "...")
+			<< right << ":" << item.productID;
+		return os;
 	}
+
 	// "full" display
 	void display(ostream &os)
 	{
@@ -91,7 +93,8 @@ public:
 			<< "Category: " << category << endl;
 	}
 	// for outputting to file
-	void output(ostream &os)
+
+	void write(ostream &os)
 	{
 		os << productID << ":" << name << ":" << weight << ":"
 			<< dimensions[0] << " " << dimensions[1] << " " << dimensions[2]
@@ -130,7 +133,7 @@ public:
 	ItemType getItem() const					{ return item; }
 	Node<ItemType>* getNext() const				{ return next; }
 	Node<ItemType>* getPrev() const				{ return prev; }
-	const int& getAccessTimes() const			{ return accessTimes; }
+	const int getAccessTimes() const			{ return accessTimes; }
 };
 // ---------------------- Node Class End ----------------------------------------------------------
 
@@ -156,8 +159,6 @@ public:
 	virtual int size() const = 0;
 	virtual void displayStatistics() const = 0;
 	virtual bool getEntry(const Object & target, Object & returnedItem) const = 0;
-	virtual void write(ostream& os) = 0;
-	virtual void display(ostream& os) = 0;
 };
 // ---------------------- HashTable Class Interface End -------------------------------------------
 

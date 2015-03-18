@@ -21,8 +21,11 @@ template<class ItemType>
 class SAList : public DoublyLinkedList<ItemType>  // derived from abstract DoublyLinkedList class
 {
 private:
-	const int ACCESS_REQ = 5; // for determining if adjust() is needed
-	// adjust will only be called every ACCESS_REQ times an element is adjusted
+	const int ACCESS_REQ = 1; // for determining if adjust() is needed
+	// Note: This WAS 5 like I mentioned during our presentation
+	// since I thought that would have been a more realistic ACCESS_REQ,
+	// but it is now 1 for the simplicity of testing this project.
+	// adjust() will only be called every ACCESS_REQ times an element is adjusted
 
 	// Finds node at a specified position
 	Node<ItemType>* getNodeAt(int position);
@@ -36,6 +39,12 @@ public:
 
 	// adjusts node based on how many times it was accessed
 	void adjust(int adjPosition);
+	/* Testing Note:
+	An easy way to test this function in the program would be to display data
+	in HashTable format (option 4) and then find and display data (option 3)
+	that is part of a list with collisions. Call option 4 again to observe
+	that the accessed node has been adjusted.
+	*/
 
 	void write(ostream& os);
 };
@@ -137,27 +146,13 @@ void SAList<ItemType>::adjust(int adjPosition)			// uses a variant of the counti
 		return;
 
 	int moves = 0;
-	Node<ItemType>* newPrevPtr = 0;	// previous pointer for adjustPtr's new position IF new position is further up
-	Node<ItemType>* newNextPtr = 0;	// next pointer for adjustPtr's new position IF new position is further down
+	Node<ItemType>* newPrevPtr = adjustPtr->getPrev();
 
 	// find newPrevPtr or newNextPtr by comparing access times
-	if (accessTimes > newPrevPtr->getAccessTimes() && newPrevPtr != headPtr)
+	while (accessTimes > newPrevPtr->getAccessTimes() && newPrevPtr != headPtr)
 	{
-		newPrevPtr = adjustPtr->getPrev();
-		while (accessTimes > newPrevPtr->getAccessTimes() && newPrevPtr != headPtr)
-		{
-			newPrevPtr = newPrevPtr->getPrev();
-			moves++;
-		}
-	}
-	else if (accessTimes < newNextPtr->getAccessTimes() && newNextPtr != tailPtr)
-	{
-		newNextPtr = adjustPtr->getNext();
-		while (accessTimes < newNextPtr->getAccessTimes() && newNextPtr != tailPtr)
-		{
-			newNextPtr = newNextPtr->getNext();
-			moves++;
-		}
+		newPrevPtr = newPrevPtr->getPrev();
+		moves++;
 	}
 
 	if (moves == 0) // if adjustPtr does not need to be adjusted
@@ -166,10 +161,10 @@ void SAList<ItemType>::adjust(int adjPosition)			// uses a variant of the counti
 	{
 		Node<ItemType>* prevPtr = adjustPtr->getPrev();
 		Node<ItemType>* nextPtr = adjustPtr->getNext();
+		Node<ItemType>* newNextPtr = newPrevPtr->getNext();
 
 		prevPtr->setNext(nextPtr);			// double-link adjustPtr's old previous/next pointers
 		nextPtr->setPrev(prevPtr);
-
 		newPrevPtr->setNext(adjustPtr);		// double-link adjustPtr with its new previous pointer
 		adjustPtr->setPrev(newPrevPtr);
 		adjustPtr->setNext(newNextPtr);		// double-link adjustPtr with its new next pointer
@@ -183,7 +178,7 @@ void SAList<ItemType>::write(ostream& os)
 	Node<ItemType>* currPtr = headPtr->getNext();
 	while (currPtr != tailPtr)
 	{
-		currPtr->getItem()->output(os);			// display data
+		currPtr->getItem()->write(os);			// display data
 		currPtr = currPtr->getNext();			// go to next node
 	}
 }

@@ -17,72 +17,72 @@ This is the main application. It includes
 typedef Item* ITEM_PTR;
 
 // Hash function
-int HashProductID(const ITEM_PTR &pItem);
-int Hash(const string &key);
+int HashProductID				(const ITEM_PTR &pItem);
+int Hash						(const string &key);
 // Compare function
-int compareProductID(const ITEM_PTR &left, const ITEM_PTR &right);
+int compareProductID			(const ITEM_PTR &left, const ITEM_PTR &right);
 
 // visit functions for BST
-void displayITEM_PTR(ITEM_PTR &item);
-void displayITEM_PTR_Indented(ITEM_PTR &item, string &tabs);
-void deleteITEM_PTR(ITEM_PTR &item);
+void displayITEM_PTR			(ITEM_PTR &item);
+void displayITEM_PTR_Indented	(ITEM_PTR &item, string &tabs);
+void deleteITEM_PTR				(ITEM_PTR &item);
 
 // Menu Functions
 void display_menu();
-void add_new_data			(HashTable<ITEM_PTR>*& pHSC, BinarySearchTree<ITEM_PTR>*& pTree);
-void delete_data			(HashTable<ITEM_PTR>*& pHSC, BinarySearchTree<ITEM_PTR>*& pTree);
-void find_and_display		(HashTable<ITEM_PTR>*& pHSC);
-void list_HashTable			(HashTable<ITEM_PTR>*& pHSC);
-void list_Key_Sequence		(BinarySearchTree<ITEM_PTR>*& pTree);
-void print_indented_tree	(BinarySearchTree<ITEM_PTR>*& pTree);
-void write_to_file			(HashTable<ITEM_PTR>*& pHSC);
-void efficiency				(HashTable<ITEM_PTR>*& pHSC);
+void add_new_data				(HashTable<ITEM_PTR>*& pHSC, BinarySearchTree<ITEM_PTR>*& pTree);
+void delete_data				(HashTable<ITEM_PTR>*& pHSC, BinarySearchTree<ITEM_PTR>*& pTree);
+void find_and_display			(HashTable<ITEM_PTR>*& pHSC);
+void list_HashTable				(HashTable<ITEM_PTR>*& pHSC);
+void list_Key_Sequence			(BinarySearchTree<ITEM_PTR>*& pTree);
+void print_indented_tree		(BinarySearchTree<ITEM_PTR>*& pTree);
+void write_to_file				(HashTable<ITEM_PTR>*& pHSC);
+void efficiency					(HashTable<ITEM_PTR>*& pHSC);
 
 // validates keys from input
-bool validKey(const string& key);
+bool validKey					(const string& key);
 
 // properly delete dynamically allocated data structures
-void DELETE_EVERYTHING(HashTable<ITEM_PTR>*& pHSC, BinarySearchTree<ITEM_PTR>*& pTree);
+void DELETE_EVERYTHING			(HashTable<ITEM_PTR>*& pHSC, BinarySearchTree<ITEM_PTR>*& pTree);
 
-bool openInputFile	(ifstream &ifs);
-bool openOutputFile	(ofstream &ofs);
+// functions for opening files properly
+bool openInputFile				(ifstream &ifs);
+bool openOutputFile				(ofstream &ofs);
 
 // ---------------------- Main --------------------------------------------------------------------
 int main()
 {
-	HashTable<ITEM_PTR>* pHSC = new HashSC<ITEM_PTR>(HashProductID, compareProductID);
-	BinarySearchTree<ITEM_PTR>* pTree = new BinarySearchTree<ITEM_PTR>(compareProductID);
+	HashTable<ITEM_PTR>* pHSC			= new HashSC<ITEM_PTR>(HashProductID, compareProductID);
+	BinarySearchTree<ITEM_PTR>* pTree	= new BinarySearchTree<ITEM_PTR>(compareProductID);
 
 	int option = -1;
 
 	while (option != 0)
 	{
-		cout << endl;
 		display_menu();
-		cout << "Enter an option (1, 2, 3...0): ";
-		if (!(cin >> option)) // if input is not an integer
+		cout << endl << "Enter an option (1, 2, 3...0): ";
+		if (!(cin >> option))	// if input is not an integer
 		{
-			cout << endl << "\nInvalid option!" << endl;
-			cin.clear();	// clear error flag
+			cout << "\n\nInvalid option!" << endl;
+			cin.clear();		// clear error flag
 			cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear buffer
-			option = -1;	// reset option
-			continue;		// ask for option again
+			option = -1;		// reset option
+			continue;			// ask for option again
 		}
-
 		cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear buffer
+
 		cout << endl;
 
 		switch (option)
 		{
-		case 1: add_new_data(pHSC, pTree);				break;
-		case 2: delete_data(pHSC, pTree);				break;
-		case 3: find_and_display(pHSC);					break;
-		case 4: list_HashTable(pHSC);					break;
-		case 5: list_Key_Sequence(pTree);				break;
-		case 6: print_indented_tree(pTree);				break;
-		case 7: write_to_file(pHSC);					break;
-		case 8: efficiency(pHSC);						break;
-		case 0: cout << "Now Exiting" << endl;			break;
+		case 1: add_new_data		(pHSC, pTree);			break;
+		case 2: delete_data			(pHSC, pTree);			break;
+		case 3: find_and_display	(pHSC);					break;
+		case 4: list_HashTable		(pHSC);					break;
+		case 5: list_Key_Sequence	(pTree);				break;
+		case 6: print_indented_tree	(pTree);				break;
+		case 7: write_to_file		(pHSC);					break;
+		case 8: efficiency			(pHSC);					break;
+		case 0: cout << "Now Exiting" << endl;				break;
 
 		default: cout << option << " is not an option!" << endl;
 		}
@@ -90,12 +90,20 @@ int main()
 	}
 
 	cout << endl; 
-	cout << "Saving data to output_ALL.txt" << endl;
+	
 	ofstream ofs;
 	ofs.open("output_ALL.txt");
-	pHSC->write(ofs);
+	if (ofs.is_open()) // by default, write to a file the data that has been input
+	{
+		cout << "Saving data to output_ALL.txt" << endl;
+		(static_cast<HashSC<ITEM_PTR>*>(pHSC))->write(ofs);
+	}
+
+	// Release all dynamically allocated memory
 	cout << "Deleting all dynamically allocated memory." << endl;
 	DELETE_EVERYTHING(pHSC, pTree);
+
+	// Check for memory leaks
 	cout << (_CrtDumpMemoryLeaks() ? "Memory Leak\n" : "No Memory Leak!\n");
 }
 // ---------------------- Main --------------------------------------------------------------------
@@ -112,6 +120,7 @@ int Hash(const string &key)
 	unsigned int k;
 	long retVal = 0;
 
+	// Add hex value of each part of the Product ID
 	retVal += strtol(key.substr(2, 3).c_str(), 0, 16);
 	retVal += strtol(key.substr(6, 4).c_str(), 0, 16);
 	retVal += strtol(key.substr(11, 3).c_str(), 0, 16);
@@ -136,7 +145,7 @@ int compareProductID(const ITEM_PTR &left, const ITEM_PTR &right)
 void displayITEM_PTR(ITEM_PTR &item)
 {
 	cout << "[";
-	item->write(cout);
+	cout << *item;
 	cout << "]" << endl;
 }
 
@@ -189,13 +198,14 @@ void add_new_data(HashTable<ITEM_PTR>*& pHSC, BinarySearchTree<ITEM_PTR>*& pTree
 	cout << "(Enter 1 or 2): ";
 	if (!(cin >> option)) // if input is not an integer
 	{
-		cout << endl << "\nInvalid option!" << endl;
+		cout << "\n\nInvalid option!" << endl;
 		cin.clear();	// clear error flag
 		cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear buffer
 		return;
 	}
 	cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear buffer
 	
+	/////////////// if entering data manually
 	if (option == 2)
 	{
 		string key, name, seller, category, dimstemp;
@@ -210,6 +220,7 @@ void add_new_data(HashTable<ITEM_PTR>*& pHSC, BinarySearchTree<ITEM_PTR>*& pTree
 			return;
 		}
 
+		// Check if input Product ID already exists in the data
 		ITEM_PTR temp = new Item(key, "", 0, dims, 0, "", "");
 		ITEM_PTR check = 0;
 		if (pHSC->getEntry(temp, check) && compareProductID(temp, check))
@@ -221,6 +232,7 @@ void add_new_data(HashTable<ITEM_PTR>*& pHSC, BinarySearchTree<ITEM_PTR>*& pTree
 		}
 		delete temp;
 
+		// If the PID is unique, user now enters the rest of the fields
 		cout << "Enter product name: ";
 		getline(cin, name);
 
@@ -244,6 +256,7 @@ void add_new_data(HashTable<ITEM_PTR>*& pHSC, BinarySearchTree<ITEM_PTR>*& pTree
 		cout << "Enter product category: ";
 		getline(cin, category);
 
+		// Insert new item with input fields
 		ITEM_PTR newItem = new Item(key, name, weight, dims, price, seller, category);
 		pHSC->insert(newItem);
 		pTree->insert(newItem);
@@ -254,7 +267,14 @@ void add_new_data(HashTable<ITEM_PTR>*& pHSC, BinarySearchTree<ITEM_PTR>*& pTree
 		return;
 	}
 
+	/////////////// if entering data from file
 	ifstream ifs;
+
+	if (!openInputFile(ifs)) // print error and exit function if file not found
+	{
+		cout << "Error, file not found" << endl;
+		return;
+	}
 
 	string line;
 	string delimiter = ":";
@@ -266,18 +286,12 @@ void add_new_data(HashTable<ITEM_PTR>*& pHSC, BinarySearchTree<ITEM_PTR>*& pTree
 	bool duplicates = false;
 	int i;
 
-	if (!openInputFile(ifs)) // print error and exit program if file not found
+	while (getline(ifs, line))	// while there are still lines in the file
 	{
-		cout << "Error, file not found" << endl;
-		return;
-	}
-
-	while (getline(ifs, line)) // while there are still lines in the file
-	{
-		if (line.empty()) // skip empty line
+		if (line.empty())		// skip empty lines
 			continue;
 
-		for (i = 0; i < 6; i++) // read in fields separated by delimiter
+		for (i = 0; i < 6; i++)	// read in fields separated by delimiter
 		{
 			pos = line.find(delimiter);
 			fields[i] = line.substr(0, pos);
@@ -287,7 +301,7 @@ void add_new_data(HashTable<ITEM_PTR>*& pHSC, BinarySearchTree<ITEM_PTR>*& pTree
 
 		stringstream dimFilter(fields[3]);
 		double temp;
-		for (i = 0; i < 3; i++) // filter string to fill dimensions array
+		for (i = 0; i < 3; i++)	// filter string to fill dimensions array
 		{
 			dimFilter >> temp;
 			dims[i] = temp;
@@ -313,10 +327,11 @@ void add_new_data(HashTable<ITEM_PTR>*& pHSC, BinarySearchTree<ITEM_PTR>*& pTree
 			<< " : " << fields[0] << endl;
 	}
 
+	cout << endl;
 	if (duplicates)
-		cout << "\nREPORT: There was duplicate data in the file. Non-duplicates successfully inserted." << endl;
+		cout << "REPORT: There was duplicate data in the file. Non-duplicates successfully inserted." << endl;
 	else
-		cout << "\nInsert Successful!" << endl;
+		cout << "Insert Successful!" << endl;
 }
 
 // OPTION# 2
@@ -326,8 +341,8 @@ void delete_data(HashTable<ITEM_PTR>*& pHSC, BinarySearchTree<ITEM_PTR>*& pTree)
 
 	cout << "There are " << pHSC->size() << " items. Are you sure you want to delete?" << endl;
 	cout << "(Y/N): ";
-	choice = toupper(cin.get()); // get user input
-	while (choice != 'Y' && choice != 'N') // check for valid user input
+	choice = toupper(cin.get());							// get user input
+	while (choice != 'Y' && choice != 'N')					// check for valid user input
 	{
 		cout << "Invalid Choice, Enter Again" << endl;
 		cin.clear();
@@ -335,7 +350,7 @@ void delete_data(HashTable<ITEM_PTR>*& pHSC, BinarySearchTree<ITEM_PTR>*& pTree)
 		cout << "(Y/N): ";
 		choice = toupper(cin.get());
 	}
-	cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear buffer
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');	// clear buffer
 
 	cout << endl;
 	if (choice == 'Y')
@@ -381,7 +396,7 @@ void find_and_display(HashTable<ITEM_PTR>*& pHSC)
 		delete temp;
 		temp = 0;
 
-		cout << "\nWould you like to search for another item?" << endl;
+		cout << endl << "Would you like to search for another item?" << endl;
 		cout << "(Y/N): ";
 		choice = toupper(cin.get());
 		while (choice != 'Y' && choice != 'N')
@@ -396,21 +411,21 @@ void find_and_display(HashTable<ITEM_PTR>*& pHSC)
 		cout << endl;
 	}
 
-	cout << "\nReturning to menu" << endl;
+	cout << endl << "Returning to menu" << endl;
 }
 
 // OPTION# 4
 void list_HashTable(HashTable<ITEM_PTR>*& pHSC)
 {
 	cout << "Displaying Items (HashTable Format):" << endl << endl;
-	pHSC->display(cout);
+	(static_cast<HashSC<ITEM_PTR>*>(pHSC))->display(cout);
 	cout << endl;
 }
 
 // OPTION# 5
 void list_Key_Sequence(BinarySearchTree<ITEM_PTR>*& pTree)
 {
-	cout << "Displaying Items (Sorted Key Sequence Format:" << endl << endl;
+	cout << "Displaying Items (Sorted Key Sequence Format):" << endl << endl;
 	pTree->inOrder(displayITEM_PTR);
 	cout << endl;
 }
@@ -434,7 +449,7 @@ void write_to_file(HashTable<ITEM_PTR>*& pHSC)
 	}
 
 	cout << "Writing items to file..." << endl;
-	pHSC->write(ofs);
+	(static_cast<HashSC<ITEM_PTR>*>(pHSC))->write(ofs);
 }
 
 // OPTION# 8
