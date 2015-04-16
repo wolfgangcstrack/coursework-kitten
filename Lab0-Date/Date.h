@@ -57,6 +57,8 @@ public:
 	const Date operator-(long days);
 	bool operator==(const Date &right);
 	bool operator!=(const Date &right);
+	bool operator>(const Date &right);
+	bool operator<(const Date &right);
 	friend std::ostream & operator<<(std::ostream &os, const Date &date);
 	// static methods
 	static bool isLeapYear(int y);

@@ -115,13 +115,45 @@ Date & Date::operator++() { return (*this += 1); }
 Date & Date::operator--() { return (*this -= 1); }
 const Date Date::operator+(long days) { return (Date(*this) += days); }
 const Date Date::operator-(long days) { return (Date(*this) -= days); }
+
 bool Date::operator==(const Date &right)
 {
 	return (year == right.year && 
 		monthday->month == right.monthday->month && 
 		monthday->day == right.monthday->day);
 }
+
 bool Date::operator!=(const Date &right) { return !(*this == right); }
+
+bool Date::operator>(const Date &right)
+{
+	if (year == right.year)
+	{
+		if (monthday->month == right.monthday->month)
+		{
+			if (monthday->day == right.monthday->day)
+				return false;
+			return (monthday->day > right.monthday->day);
+		}
+		return (monthday->month > right.monthday->month);
+	}
+	return (year > right.year);
+}
+
+bool Date::operator<(const Date &right)
+{
+	if (year == right.year)
+	{
+		if (monthday->month == right.monthday->month)
+		{
+			if (monthday->day == right.monthday->day)
+				return false;
+			return (monthday->day < right.monthday->day);
+		}
+		return (monthday->month < right.monthday->month);
+	}
+	return (year < right.year);
+}
 
 std::ostream & operator<<(std::ostream &os, const Date &date)
 {
