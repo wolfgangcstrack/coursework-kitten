@@ -14,46 +14,48 @@ This is the implementation file for the Date class.
 Date::Date()
 {
 	year = 1;
-	monthday = new Month_Day();
+	month = January;
+	day = 1;
 }
 
 Date::Date(const Date &d)
 {
 	year = d.year;
-	monthday = new Month_Day(*d.monthday);
+	month = d.month;
+	day = d.day;
 }
 
 Date::Date(int y, int m, int d)
 {
 	year = ((y > 0) ? y : 1);
-	if (m < 1 || m>12) m = 1;
-	monthday = new Month_Day(m, (validDay(year, m, d) ? d : 1));
+	month = static_cast<Month>((m >= 1 && m <= 12 ? m : 1));
+	day = (validDay(year, month, d) ? d : 1);
 }
 
-Date::~Date() { delete monthday; }
+Date::~Date() {}
 
 // getters --------------------------------------
 int Date::getYear() const { return year; }
-int Date::getMonth() const { return monthday->month; }
-int Date::getDay() const { return monthday->day; }
+int Date::getMonth() const { return month; }
+int Date::getDay() const { return day; }
 // setters --------------------------------------
 void Date::setYear(int y) { year = (y > 0 ? y : 1); }
-void Date::setMonth(int m) { monthday->month = ((m > 0 && m <= 12) ? static_cast<Month>(m) : January); }
-void Date::setDay(int d) { if (validDay(year, monthday->month, d)) monthday->day = d; }
+void Date::setMonth(int m) { month = ((m > 0 && m <= 12) ? static_cast<Month>(m) : January); }
+void Date::setDay(int d) { if (validDay(year, month, d)) day = d; }
 
 // operator overloads ---------------------------
 Date & Date::operator=(const Date &d)
 {
 	year = d.year;
-	monthday->month = d.monthday->month;
-	monthday->day = d.monthday->day;
+	month = d.month;
+	day = d.day;
 	return *this;
 }
 
 Date & Date::operator+=(long days)
 {
 	if (days < 0) return (*this -= -days);
-	int currMonth = monthday->month;
+	int currMonth = month;
 	int offset = 0;
 	while (!validDay(year, currMonth, days))
 	{
@@ -65,11 +67,11 @@ Date & Date::operator+=(long days)
 			year++;
 		}
 	}
-	monthday->day += days;
-	if (!validDay(year, currMonth, monthday->day))
+	day += days;
+	if (!validDay(year, currMonth, day))
 	{
 		offset = getDaysOfMonth(year, currMonth);
-		monthday->day -= offset;
+		day -= offset;
 		if (++currMonth > December)
 		{
 			currMonth = January;
@@ -77,12 +79,12 @@ Date & Date::operator+=(long days)
 		}
 	}
 
-	monthday->month = static_cast<Month>(currMonth);
+	month = static_cast<Month>(currMonth);
 	if (year < 1)
 	{
 		year = 1;
-		monthday->month = January;
-		monthday->day = 1;
+		month = January;
+		day = 1;
 	}
 	return *this;
 }
@@ -90,7 +92,7 @@ Date & Date::operator+=(long days)
 Date & Date::operator-=(long days)
 {
 	if (days < 0) return (*this += -days);
-	int currMonth = monthday->month;
+	int currMonth = month;
 	int offset = 0;
 	while (!validDay(year, currMonth, days))
 	{
@@ -103,8 +105,8 @@ Date & Date::operator-=(long days)
 		days -= offset;
 		
 	}
-	monthday->day -= days;
-	if (monthday->day < 1)
+	day -= days;
+	if (day < 1)
 	{
 		if (--currMonth < January)
 		{
@@ -112,15 +114,15 @@ Date & Date::operator-=(long days)
 			year--;
 		}
 		offset = getDaysOfMonth(year, currMonth);
-		monthday->day += offset;
+		day += offset;
 	}
 
-	monthday->month = static_cast<Month>(currMonth);
+	month = static_cast<Month>(currMonth);
 	if (year < 1)
 	{
 		year = 1;
-		monthday->month = January;
-		monthday->day = 1;
+		month = January;
+		day = 1;
 	}
 	return *this;
 }
@@ -133,8 +135,8 @@ const Date Date::operator-(long days) { return (Date(*this) -= days); }
 bool Date::operator==(const Date &right)
 {
 	return (year == right.year && 
-		monthday->month == right.monthday->month && 
-		monthday->day == right.monthday->day);
+		month == right.month && 
+		day == right.day);
 }
 
 bool Date::operator!=(const Date &right) { return !(*this == right); }
@@ -143,13 +145,13 @@ bool Date::operator>(const Date &right)
 {
 	if (year == right.year)
 	{
-		if (monthday->month == right.monthday->month)
+		if (month == right.month)
 		{
-			if (monthday->day == right.monthday->day)
+			if (day == right.day)
 				return false;
-			return (monthday->day > right.monthday->day);
+			return (day > right.day);
 		}
-		return (monthday->month > right.monthday->month);
+		return (month > right.month);
 	}
 	return (year > right.year);
 }
@@ -158,22 +160,22 @@ bool Date::operator<(const Date &right)
 {
 	if (year == right.year)
 	{
-		if (monthday->month == right.monthday->month)
+		if (month == right.month)
 		{
-			if (monthday->day == right.monthday->day)
+			if (day == right.day)
 				return false;
-			return (monthday->day < right.monthday->day);
+			return (day < right.day);
 		}
-		return (monthday->month < right.monthday->month);
+		return (month < right.month);
 	}
 	return (year < right.year);
 }
 
 std::ostream & operator<<(std::ostream &os, const Date &date)
 {
-	os << date.year << (date.monthday->month < 10 ? "-0" : "-") 
-		<< date.monthday->month << (date.monthday->day < 10 ? "-0" : "-") 
-		<< date.monthday->day;
+	os << date.year << (date.month < 10 ? "-0" : "-") 
+		<< date.month << (date.day < 10 ? "-0" : "-") 
+		<< date.day;
 	return os;
 }
 
@@ -184,14 +186,14 @@ void Date::addYears(int y)
 	if (year < 1)
 	{
 		year = 1;
-		monthday->month = January;
-		monthday->day = 1;
+		month = January;
+		day = 1;
 	}
 }
 
 void Date::addMonths(int m)
 {
-	int currMonth = monthday->month;
+	int currMonth = month;
 	while (m > 0)
 	{
 		m--;
@@ -210,12 +212,12 @@ void Date::addMonths(int m)
 		}
 	}
 
-	monthday->month = static_cast<Month>(currMonth);
+	month = static_cast<Month>(currMonth);
 	if (year < 1)
 	{
 		year = 1;
-		monthday->month = January;
-		monthday->day = 1;
+		month = January;
+		day = 1;
 	}
 }
 

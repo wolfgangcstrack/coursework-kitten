@@ -20,19 +20,11 @@ private:
 		May=5, June=6, July=7, August=8,
 		September=9, October=10, November=11, December=12
 	};
-	struct Month_Day
-	{
-		Month month;
-		int day;
-
-		Month_Day() { month = January; day = 1; }
-		Month_Day(const Month_Day &m) { month = m.month; day = m.day; }
-		Month_Day(int m, int d) { month = static_cast<Month>(m); day = d; }
-	};
 
 	// member variables
 	int year;
-	Month_Day *monthday; // includes day
+	Month month;
+	int day;
 public:
 	// constructors and destructor
 	Date();
