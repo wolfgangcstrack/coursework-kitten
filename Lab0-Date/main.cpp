@@ -20,13 +20,13 @@ using namespace std;
 
 // opens input file for reading, returns false if file does not open correctly
 bool openInputFile(ifstream &ifs);
-// tests all overloaded operators of Date
-void testDate(ifstream &ifs, vector<long> &operands, Date &date);
+// reads from file and tests all overloaded operators of Date
+void testDate(ifstream &ifs, vector<string> &operands, Date &date);
 
 int main()
 {
 	cout << "This is a demonstration of the Date class.\n";
-	vector<long> operands;
+	vector<string> operands;
 	Date date(2015, 4, 3); // date chosen matches assignment instructions
 
 
@@ -51,11 +51,49 @@ bool openInputFile(ifstream &ifs)
 	return ifs.is_open();
 }
 
-void testDate(ifstream &ifs, vector<long> &operands, Date &date)
+void testDate(ifstream &ifs, vector<string> &operands, Date &date)
 {
-	string temp;
-	while (getline(ifs, temp))
-	{
+	string temp; // used for retrieving input and converting operands
+	int offset = 0, multiplier = 0;
+	long operand = 0;
 
+	while (getline(ifs, temp))
+		operands.push_back(temp);
+
+	cout << "\nTesting operator= overload of Date class..." << endl;
+	cout << "The date is " << date << endl;
+	cout << "Now assigning that date to a storage copy...Storage copy date is ";
+	Date copy = date;
+	cout << copy << endl;
+
+	cout << "\nTesting operator overloads += and + of Date class..." << endl;
+	cout << "Now adding to the date " << date << " and the second date (storage copy) " << copy << endl;
+	for (int i = 0; i < operands.size(); i++)
+	{
+		temp = operands[i];
+		multiplier = stoi(temp.substr(0, temp.length() - 1));
+		/*
+		switch (temp.back())
+		{
+		case 'Y':
+			for (int j = 0; j < multiplier; j++)
+			{
+				if ()
+			}
+			copy += offset;
+			break;
+		case 'M':
+			for (int j = 0; j < multiplier; j++)
+			{
+				offset = Date::getDaysOfMonth(copy.getYear(), copy.getMonth());
+				operand += offset;
+				copy += offset;
+			}
+			break;
+		case 'D':
+			operand += multiplier;
+			break;
+		}
+		*/
 	}
 }

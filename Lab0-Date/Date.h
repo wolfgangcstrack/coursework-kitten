@@ -60,8 +60,12 @@ public:
 	bool operator>(const Date &right);
 	bool operator<(const Date &right);
 	friend std::ostream & operator<<(std::ostream &os, const Date &date);
+	// other methods
+	void addYears(int y);
+	void addMonths(int m);
+	void addDays(long d);
 	// static methods
 	static bool isLeapYear(int y);
 	static bool validDay(int y, int m, int d); // checks if d is a valid number of days in mm/yyyy
-	static int getDays(int y, int m); // returns the number of days in mm/yyyy
+	static int getDaysOfMonth(int y, int m); // returns the number of days in mm/yyyy
 };

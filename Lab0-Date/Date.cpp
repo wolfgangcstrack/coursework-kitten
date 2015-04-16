@@ -57,7 +57,7 @@ Date & Date::operator+=(long days)
 	int offset = 0;
 	while (!validDay(year, currMonth, days))
 	{
-		offset = getDays(year, currMonth);
+		offset = getDaysOfMonth(year, currMonth);
 		days -= offset;
 		if (++currMonth > December)
 		{
@@ -68,7 +68,7 @@ Date & Date::operator+=(long days)
 	monthday->day += days;
 	if (!validDay(year, currMonth, monthday->day))
 	{
-		offset = getDays(year, currMonth);
+		offset = getDaysOfMonth(year, currMonth);
 		monthday->day -= offset;
 		if (++currMonth > December)
 		{
@@ -76,7 +76,14 @@ Date & Date::operator+=(long days)
 			year++;
 		}
 	}
+
 	monthday->month = static_cast<Month>(currMonth);
+	if (year < 1)
+	{
+		year = 1;
+		monthday->month = January;
+		monthday->day = 1;
+	}
 	return *this;
 }
 
@@ -92,7 +99,7 @@ Date & Date::operator-=(long days)
 			currMonth = December;
 			year--;
 		}
-		offset = getDays(year, currMonth);
+		offset = getDaysOfMonth(year, currMonth);
 		days -= offset;
 		
 	}
@@ -104,10 +111,17 @@ Date & Date::operator-=(long days)
 			currMonth = December;
 			year--;
 		}
-		offset = getDays(year, currMonth);
+		offset = getDaysOfMonth(year, currMonth);
 		monthday->day += offset;
 	}
+
 	monthday->month = static_cast<Month>(currMonth);
+	if (year < 1)
+	{
+		year = 1;
+		monthday->month = January;
+		monthday->day = 1;
+	}
 	return *this;
 }
 
@@ -163,6 +177,53 @@ std::ostream & operator<<(std::ostream &os, const Date &date)
 	return os;
 }
 
+// other methods --------------------------------
+void Date::addYears(int y)
+{
+	year += y;
+	if (year < 1)
+	{
+		year = 1;
+		monthday->month = January;
+		monthday->day = 1;
+	}
+}
+
+void Date::addMonths(int m)
+{
+	int currMonth = monthday->month;
+	while (m > 0)
+	{
+		m--;
+		if (++currMonth > December)
+		{
+			currMonth = January;
+			year++;
+		}
+	}
+	while (m < 0)
+	{
+		if (--currMonth < January)
+		{
+			currMonth = December;
+			year--;
+		}
+	}
+
+	monthday->month = static_cast<Month>(currMonth);
+	if (year < 1)
+	{
+		year = 1;
+		monthday->month = January;
+		monthday->day = 1;
+	}
+}
+
+void Date::addDays(long d) // same as using operator+= or operator-=
+{
+	*this += d;
+}
+
 // static methods -------------------------------
 bool Date::isLeapYear(int y)
 {
@@ -198,7 +259,7 @@ bool Date::validDay(int y, int m, int d)
 	return true;
 }
 
-int Date::getDays(int y, int m)
+int Date::getDaysOfMonth(int y, int m)
 {
 	switch (m)
 	{
