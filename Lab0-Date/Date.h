@@ -20,7 +20,6 @@ private:
 		May=5, June=6, July=7, August=8,
 		September=9, October=10, November=11, December=12
 	};
-
 	// member variables
 	int year;
 	Month month;
@@ -51,6 +50,8 @@ public:
 	bool operator!=(const Date &right);
 	bool operator>(const Date &right);
 	bool operator<(const Date &right);
+	bool operator>=(const Date &right);
+	bool operator<=(const Date &right);
 	friend std::ostream & operator<<(std::ostream &os, const Date &date);
 	// other methods
 	void addYears(int y);

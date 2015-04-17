@@ -5,6 +5,8 @@ Wolfgang C. Strack
 Windows 8 Visual C++ 2013
 
 This is the implementation file for the Date class.
+Methods are sorted in the same order as they are in
+the Date header file.
 */
 
 #include "Date.h"
@@ -171,10 +173,13 @@ bool Date::operator<(const Date &right)
 	return (year < right.year);
 }
 
+bool Date::operator>=(const Date &right) { return (*this == right || *this > right); }
+bool Date::operator<=(const Date &right) { return (*this == right || *this < right); }
+
 std::ostream & operator<<(std::ostream &os, const Date &date)
 {
-	os << date.year << (date.month < 10 ? "-0" : "-") 
-		<< date.month << (date.day < 10 ? "-0" : "-") 
+	os << date.year << (date.month < 10 ? "/0" : "/") 
+		<< date.month << (date.day < 10 ? "/0" : "/") 
 		<< date.day;
 	return os;
 }
@@ -210,6 +215,7 @@ void Date::addMonths(int m)
 			currMonth = December;
 			year--;
 		}
+		m++;
 	}
 
 	month = static_cast<Month>(currMonth);
