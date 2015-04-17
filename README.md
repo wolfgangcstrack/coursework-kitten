@@ -8,10 +8,8 @@ Andrew Wang
 
 Louis Christopher
 
-#### W0t?
-This short application was coded to generate Product ID's for the data used in our CIS22C Winter Quarter Project; it arguably does not have much use outside this project. 
-
-deel wit it
+#### About
+This short application was coded to generate Product ID's for the data used in our CIS22C Winter Quarter Project; it arguably does not have much use outside this project.
 
 #### Instructions
 Compile and run! The console should tell you what file to put in if you didn't change any filenames.
