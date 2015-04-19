@@ -10,7 +10,6 @@ package Util;
 import java.io.*;
 
 public class AutoIO {
-	
 	/*
 	 * The buildAutoObject method takes a filename, reads from that file,
 	 * and instantiates a new Automotive based on the information in the file.
@@ -35,9 +34,9 @@ public class AutoIO {
 	 * .
 	 */
 	public Model.Automotive buildAutoObject(String filename) {
-		try {
-			FileReader file = new FileReader(filename);
-			BufferedReader buffer = new BufferedReader(file);
+		try (FileReader file = new FileReader(filename);
+				BufferedReader buffer = new BufferedReader(file)) {
+			
 			boolean eof = false;
 			
 			// read the first two lines, which must be the Automotive name and base price
@@ -67,10 +66,44 @@ public class AutoIO {
 			buffer.close();
 			
 			return newAuto;
-		} catch (IOException e) {
-			System.out.println("Error: " + e.toString());
+		} catch (IOException ioe) {
+			System.out.println("Error: " + ioe.toString());
+			System.exit(1);
 		}
 		
 		return null;
+	}
+	
+	public void serializeAutoObject(String filename, Model.Automotive auto) {
+		try (FileOutputStream fos = new FileOutputStream(filename);
+				ObjectOutputStream out = new ObjectOutputStream(fos)) {
+			out.writeObject(auto);
+		} catch (FileNotFoundException fnfe) {
+			System.out.println("Error: " + fnfe.toString());
+			System.exit(2);
+		} catch (IOException ioe) {
+			System.out.println("Error: " + ioe.toString());
+			System.exit(3);
+		}
+	}
+	
+	public Model.Automotive deserializeAutoObject(String filename) {
+		Model.Automotive result = null;
+		
+		try (FileInputStream fos = new FileInputStream(filename);
+				ObjectInputStream in = new ObjectInputStream(fos)) {
+			result = (Model.Automotive) in.readObject();
+		} catch (FileNotFoundException fnfe) {
+			System.out.println("Error: " + fnfe.toString());
+			System.exit(5);
+		} catch (IOException ioe) {
+			System.out.println("Error: " + ioe.toString());
+			System.exit(6);
+		} catch (ClassNotFoundException cnfe) {
+			System.out.println("Error: " + cnfe.toString());
+			System.exit(7);
+		}
+		
+		return result;
 	}
 }

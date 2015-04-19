@@ -9,7 +9,7 @@
  */
 package Model;
 
-class OptionSet {
+class OptionSet implements java.io.Serializable {
 	private String name;
 	private Option options[]; // defined at end of class
 	
@@ -91,7 +91,7 @@ class OptionSet {
 	}
 	
 	// Option class definition -------------------------------------------
-	class Option {
+	class Option implements java.io.Serializable {
 		private String name;
 		private float price;
 		

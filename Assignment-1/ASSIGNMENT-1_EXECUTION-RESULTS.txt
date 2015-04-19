@@ -1,0 +1,57 @@
+Before Serialization:
+Ford Focus Wagon ZTW
+Base Price: $18445.00
+Options:
+	Color
+		Fort Knox Gold Clearcoat Metallic: $0.00
+		Liquid Grey Clearcoat Metallic: $0.00
+		Infra-Red Clearcoat: $0.00
+		Grabber Green Clearcoat Metallic: $0.00
+		Sangria Red Clearcoat Metallic: $0.00
+		French Blue Clearcoat Metallic: $0.00
+		Twilight Blue Clearcoat Metallic: $0.00
+		CD Silver Clearcoat Metallic: $0.00
+		Pitch Black Clearcoat: $0.00
+		Cloud 9 White Clearcoat: $0.00
+	Transmission
+		Automatic: $0.00
+		Manual: -$815.00
+	Brakes/Traction Control
+		Standard: $0.00
+		ABS: $400.00
+		ABS with Advance Trac: $1625.00
+	Side Impact Air Bags
+		Present: $350.00
+		Not Present: $0.00
+	Power Moonroof
+		Present: $595.00
+		Not Present: $0.00
+
+After Deserialization:
+Ford Focus Wagon ZTW
+Base Price: $18445.00
+Options:
+	Color
+		Fort Knox Gold Clearcoat Metallic: $0.00
+		Liquid Grey Clearcoat Metallic: $0.00
+		Infra-Red Clearcoat: $0.00
+		Grabber Green Clearcoat Metallic: $0.00
+		Sangria Red Clearcoat Metallic: $0.00
+		French Blue Clearcoat Metallic: $0.00
+		Twilight Blue Clearcoat Metallic: $0.00
+		CD Silver Clearcoat Metallic: $0.00
+		Pitch Black Clearcoat: $0.00
+		Cloud 9 White Clearcoat: $0.00
+	Transmission
+		Automatic: $0.00
+		Manual: -$815.00
+	Brakes/Traction Control
+		Standard: $0.00
+		ABS: $400.00
+		ABS with Advance Trac: $1625.00
+	Side Impact Air Bags
+		Present: $350.00
+		Not Present: $0.00
+	Power Moonroof
+		Present: $595.00
+		Not Present: $0.00

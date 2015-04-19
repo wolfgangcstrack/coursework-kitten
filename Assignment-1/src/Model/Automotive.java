@@ -7,7 +7,7 @@
  */
 package Model;
 
-public class Automotive {
+public class Automotive implements java.io.Serializable {
 	private String name;
 	private double baseprice;
 	private OptionSet opsets[];
