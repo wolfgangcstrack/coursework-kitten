@@ -79,6 +79,17 @@ class OptionSet {
 		return true;
 	}
 	
+	// OptionSet.toString() ----------------------------------------------
+	public String toString() {
+		StringBuilder sb = new StringBuilder(name);
+		String newline = "\n", tab = "\t";
+		for (int i = 0; i < options.length; i ++)
+			sb.append(newline)
+			.append(tab).append(tab).append(options[i].toString());
+		
+		return sb.toString();
+	}
+	
 	// Option class definition -------------------------------------------
 	class Option {
 		private String name;
@@ -100,5 +111,12 @@ class OptionSet {
 		// setters ------------------------------
 		protected void setName(String name) { this.name = name; }
 		protected void setPrice(float price) { this.price = price; }
+		
+		// Option.toString() --------------------
+		public String toString() {
+			// keep decimal precision at two for price
+			java.text.DecimalFormat two = new java.text.DecimalFormat("$0.00");
+			return (new StringBuilder(name).append(": ").append(two.format(price))).toString();
+		}
 	}
 }

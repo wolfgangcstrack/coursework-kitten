@@ -101,6 +101,8 @@ public class Automotive {
 		return -1;
 	}
 	
+	public int findOption(String opsName, String opName)
+		{ return findOption(findOptionSet(opsName), opName); }
 	public int findOption(int opsIndex, String name) {
 		if (opsIndex < 0 || opsIndex >= opsets.length)
 			return -1;
@@ -180,6 +182,7 @@ public class Automotive {
 	
 	
 	// add (OptionSet/Option to this) methods ----------------------------
+	public boolean addOptionSet(String opsName) { return addOptionSet(opsName, 0); }
 	public boolean addOptionSet(String opsName, int opsSize) {
 		if (opsSize < 0)
 			return false;
@@ -206,6 +209,7 @@ public class Automotive {
 	
 	
 	// delete (OptionSet/Option from this) methods -----------------------
+	public boolean deleteOptionSet(String opsName) { return deleteOptionSet(findOptionSet(opsName)); }
 	public boolean deleteOptionSet(int opsIndex) {
 		if (opsIndex < 0 || opsIndex >= opsets.length)
 			return false;
@@ -235,5 +239,22 @@ public class Automotive {
 			return false;
 		
 		return opsets[opsIndex].deleteOption(opIndex);
+	}
+	
+	
+	// toString() --------------------------------------------------------
+	public String toString() {
+		StringBuilder sb = new StringBuilder(name);
+		// keep decimal precision at two for price
+		java.text.DecimalFormat two = new java.text.DecimalFormat("$0.00");
+		String newline = "\n", tab = "\t";
+		sb.append(newline)
+		.append("Base Price: ").append(two.format(baseprice)).append(newline)
+		.append("Options:");
+		for (int i = 0; i < opsets.length; i++)
+			sb.append(newline)
+			.append(tab).append(opsets[i].toString());
+		
+		return sb.toString();
 	}
 }
