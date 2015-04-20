@@ -15,9 +15,10 @@ class OptionSet implements java.io.Serializable {
 	
 	// constructors ------------------------------------------------------
 	protected OptionSet() { this("", 0); }
+	
 	protected OptionSet(String name) { this(name, 0); }
-	protected OptionSet(String name, int size)
-	{
+	
+	protected OptionSet(String name, int size) {
 		this.name = name;
 		options = new Option[size];
 		for (int i = 0; i < options.length; i++)
@@ -28,7 +29,9 @@ class OptionSet implements java.io.Serializable {
 	protected String getName() { return name; }
 	
 	protected Option[] getOptions() { return options; }
+	
 	protected Option[] getOptions(int length) { return getOptions(0, length); }
+	
 	protected Option[] getOptions(int start, int length) {
 		Option result[] = new Option[length];
 		System.arraycopy(options, start, result, 0, length);
@@ -43,11 +46,16 @@ class OptionSet implements java.io.Serializable {
 	
 	// setters -----------------------------------------------------------
 	protected void setName(String name) { this.name = name; }
+	
 	protected void setOptions(Option options[]) { this.options = options; }
+	
 	protected void setOptionName(int index, String opName) { options[index].setName(opName); }
+	
 	protected void setOptionPrice(int index, float opPrice) { options[index].setPrice(opPrice); }
-	protected void setOption(int index, String opName, float opPrice)
-		{ options[index] = new Option(opName, opPrice); }
+	
+	protected void setOption(int index, String opName, float opPrice) {
+		options[index] = new Option(opName, opPrice);
+	}
 	
 	// add Option methods ------------------------------------------------
 	protected boolean addOption(String opName, float opPrice) {
@@ -97,8 +105,11 @@ class OptionSet implements java.io.Serializable {
 		
 		// constructors -------------------------
 		protected Option() { this("", 0); }
+		
 		protected Option(String name) { this(name, 0); }
+		
 		protected Option(float price) { this("", price); }
+		
 		protected Option(String name, float price) {
 			this.name = name;
 			this.price = price;
@@ -106,10 +117,12 @@ class OptionSet implements java.io.Serializable {
 		
 		// getters ------------------------------
 		protected String getName() { return this.name; }
+		
 		protected float getPrice() { return this.price; }
 		
 		// setters ------------------------------
 		protected void setName(String name) { this.name = name; }
+		
 		protected void setPrice(float price) { this.price = price; }
 		
 		// Option.toString() --------------------
