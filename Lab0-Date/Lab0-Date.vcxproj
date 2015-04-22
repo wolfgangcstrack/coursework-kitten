@@ -79,6 +79,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Date.h" />
+    <ClInclude Include="Day.h" />
+    <ClInclude Include="Month.h" />
     <ClInclude Include="Year.h" />
   </ItemGroup>
   <ItemGroup>

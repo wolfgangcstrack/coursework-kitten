@@ -21,6 +21,12 @@
     <ClInclude Include="Year.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Month.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Day.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Date.cpp">

@@ -1,12 +1,13 @@
 /*
 Lab 0 - Variant #3 (Date arithmetic)
 Wolfgang C. Strack
-16 April 2015
 Windows 8 Visual C++ 2013
 
 This is the Year header file. Implementation is included here
 instead of in a separate .cpp file.
 */
+
+#pragma once
 
 class Year
 {

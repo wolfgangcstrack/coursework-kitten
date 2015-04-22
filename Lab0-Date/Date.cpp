@@ -1,7 +1,6 @@
 /*
 Lab 0 - Variant #3 (Date arithmetic)
 Wolfgang C. Strack
-16 April 2015
 Windows 8 Visual C++ 2013
 
 This is the implementation file for the Date class.
