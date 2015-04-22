@@ -43,7 +43,7 @@ public:
 	{
 		month = m.month;
 		numdays = m.numdays;
-		delete[] days;
+
 		days = new Day[numdays];
 		for (int i = 0; i < numdays; i++)
 			days[i] = Day(m.days[i]);
@@ -54,7 +54,7 @@ public:
 		numdays = getValidDay();
 		days = new Day[numdays];
 		for (int i = 0; i < numdays; i++)
-			days[i].setDay(i + 1);
+			days[i] = Day(i + 1);
 	}
 	Month(int m, int d)
 	{
@@ -62,7 +62,7 @@ public:
 		numdays = (d > 0 ? d : 1);
 		days = new Day[numdays];
 		for (int i = 0; i < numdays; i++)
-			days[i].setDay(i + 1);
+			days[i] = Day(i + 1);
 	}
 	~Month() { delete[] days; }
 	// getter
@@ -74,10 +74,10 @@ public:
 	{
 		if (d < 1)
 			return;
-		delete[] days;
+
 		numdays = d;
 		days = new Day[numdays];
 		for (int i = 0; i < numdays; i++)
-			days[i].setDay(i + 1);
+			days[i] = Day(i + 1);
 	}
 };

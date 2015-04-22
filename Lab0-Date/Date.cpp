@@ -10,8 +10,6 @@ the Date header file.
 
 #include "Date.h"
 
-
-
 // constructors and destructor ------------------
 Date::Date() {}
 
@@ -26,6 +24,7 @@ Date::Date(int y, int m, int d)
 {
 	year = Year(((y > 0) ? y : 1));
 	month = Month(m >= 1 && m <= 12 ? m : 1);
+	month.setNumberOfDays(getDaysOfMonth(year.getYear(), month.getMonth()));
 	day = Day(validDay(year.getYear(), month.getMonth(), d) ? d : 1);
 }
 
@@ -45,88 +44,100 @@ void Date::setMonth(int m)
 		day.setDay(1);
 }
 void Date::setDay(int d) { if (validDay(year.getYear(), month.getMonth(), d)) day.setDay(d); }
-/*
+
 // operator overloads ---------------------------
 Date & Date::operator=(const Date &d)
 {
-	year = d.year;
-	month = d.month;
-	day = d.day;
+	year = Year(d.year);
+	month = Month(d.month);
+	day = Day(d.day);
 	return *this;
 }
 
 Date & Date::operator+=(long days)
 {
-	if (days < 0) return (*this -= -days);
-	int currMonth = month;
+	if (days < 0)
+		return (*this -= -days);
+
+	int currYear = year.getYear();
+	int currMonth = month.getMonth();
+	int currDay = day.getDay();
 	int offset = 0;
-	while (!validDay(year, currMonth, days))
+
+	while (!validDay(currYear, currMonth, days))
 	{
-		offset = getDaysOfMonth(year, currMonth);
+		offset = getDaysOfMonth(currYear, currMonth);
 		days -= offset;
-		if (++currMonth > December)
+		if (++currMonth > 12)
 		{
-			currMonth = January;
-			year++;
+			currMonth = 1;
+			currYear++;
 		}
 	}
-	day += days;
-	if (!validDay(year, currMonth, day))
+	currDay += days;
+	if (!validDay(currYear, currMonth, currDay))
 	{
-		offset = getDaysOfMonth(year, currMonth);
-		day -= offset;
-		if (++currMonth > December)
+		offset = getDaysOfMonth(currYear, currMonth);
+		currDay -= offset;
+		if (++currMonth > 12)
 		{
-			currMonth = January;
-			year++;
+			currMonth = 1;
+			currYear++;
 		}
 	}
 
-	month = static_cast<Month>(currMonth);
-	if (year < 1)
-	{
-		year = 1;
-		month = January;
-		day = 1;
-	}
+	if (currYear < 1)
+		currYear = currMonth = currDay = 1;
+
+	year.setYear(currYear);
+	month.setMonth(currMonth);
+	month.setNumberOfDays(getDaysOfMonth(currYear, currMonth));
+	day.setDay(currDay);
+
 	return *this;
 }
 
 Date & Date::operator-=(long days)
 {
-	if (days < 0) return (*this += -days);
-	int currMonth = month;
+	if (days < 0)
+		return (*this += -days);
+
+	int currYear = year.getYear();
+	int currMonth = month.getMonth();
+	int currDay = day.getDay();
 	int offset = 0;
-	while (!validDay(year, currMonth, days))
+
+	while (!validDay(currYear, currMonth, days))
 	{
-		if (--currMonth < January)
+		if (--currMonth < 1)
 		{
-			currMonth = December;
-			year--;
+			currMonth = 12;
+			currYear--;
 		}
-		offset = getDaysOfMonth(year, currMonth);
+		offset = getDaysOfMonth(currYear, currMonth);
 		days -= offset;
 		
 	}
-	day -= days;
-	if (day < 1)
+	currDay -= days;
+	if (currDay < 1)
 	{
-		if (--currMonth < January)
+		if (--currMonth < 1)
 		{
-			currMonth = December;
-			year--;
+			currMonth = 12;
+			currYear--;
 		}
-		offset = getDaysOfMonth(year, currMonth);
-		day += offset;
+		offset = getDaysOfMonth(currYear, currMonth);
+		currDay += offset;
 	}
 
-	month = static_cast<Month>(currMonth);
-	if (year < 1)
-	{
-		year = 1;
-		month = January;
-		day = 1;
-	}
+	if (currYear < 1)
+		currYear = currMonth = currDay = 1;
+
+	year.setYear(currYear);
+	month.setMonth(currMonth);
+	month.setNumberOfDays(getDaysOfMonth(currYear, currMonth));
+	day.setDay(currDay);
+
 	return *this;
 }
 
@@ -137,41 +148,41 @@ const Date Date::operator-(long days) { return (Date(*this) -= days); }
 
 bool Date::operator==(const Date &right)
 {
-	return (year == right.year && 
-		month == right.month && 
-		day == right.day);
+	return (getYear() == right.getYear() && 
+		getMonth() == right.getMonth() && 
+		getDay() == right.getDay());
 }
 
 bool Date::operator!=(const Date &right) { return !(*this == right); }
 
 bool Date::operator>(const Date &right)
 {
-	if (year == right.year)
+	if (getYear() == right.getYear())
 	{
-		if (month == right.month)
+		if (getMonth() == right.getMonth())
 		{
-			if (day == right.day)
+			if (getDay() == right.getDay())
 				return false;
-			return (day > right.day);
+			return (getDay() > right.getDay());
 		}
-		return (month > right.month);
+		return (getMonth() > right.getMonth());
 	}
-	return (year > right.year);
+	return (getYear() > right.getYear());
 }
 
 bool Date::operator<(const Date &right)
 {
-	if (year == right.year)
+	if (getYear() == right.getYear())
 	{
-		if (month == right.month)
+		if (getMonth() == right.getMonth())
 		{
-			if (day == right.day)
+			if (getDay() == right.getDay())
 				return false;
-			return (day < right.day);
+			return (getDay() < right.getDay());
 		}
-		return (month < right.month);
+		return (getMonth() < right.getMonth());
 	}
-	return (year < right.year);
+	return (getYear() < right.getYear());
 }
 
 bool Date::operator>=(const Date &right) { return (*this == right || *this > right); }
@@ -179,53 +190,57 @@ bool Date::operator<=(const Date &right) { return (*this == right || *this < rig
 
 std::ostream & operator<<(std::ostream &os, const Date &date)
 {
-	os << date.year << (date.month < 10 ? "/0" : "/") 
-		<< date.month << (date.day < 10 ? "/0" : "/") 
-		<< date.day;
+	os << date.getYear() << (date.getMonth() < 10 ? "/0" : "/") 
+		<< date.getMonth() << (date.getDay() < 10 ? "/0" : "/") 
+		<< date.getDay();
 	return os;
 }
 
 // other methods --------------------------------
 void Date::addYears(int y)
 {
-	year += y;
-	if (year < 1)
+	setYear(getYear() + y);
+	if (getYear() < 1)
 	{
-		year = 1;
-		month = January;
-		day = 1;
+		setYear(1);
+		setMonth(1);
+		setDay(1);
 	}
 }
 
 void Date::addMonths(int m)
 {
-	int currMonth = month;
+	int currYear = getYear();
+	int currMonth = getMonth();
+
 	while (m > 0)
 	{
 		m--;
-		if (++currMonth > December)
+		if (++currMonth > 12)
 		{
-			currMonth = January;
-			year++;
+			currMonth = 1;
+			currYear++;
 		}
 	}
 	while (m < 0)
 	{
-		if (--currMonth < January)
+		if (--currMonth < 1)
 		{
-			currMonth = December;
-			year--;
+			currMonth = 12;
+			currYear--;
 		}
 		m++;
 	}
 
-	month = static_cast<Month>(currMonth);
-	if (year < 1)
+	if (currYear < 1)
 	{
-		year = 1;
-		month = January;
-		day = 1;
+		currYear = currMonth = 1;
+		setDay(1);
 	}
+
+	year.setYear(currYear);
+	month.setMonth(currMonth);
+	month.setNumberOfDays(getDaysOfMonth(currYear, currMonth));
 }
 
 void Date::addDays(long d) // same as using operator+= or operator-=
@@ -234,17 +249,6 @@ void Date::addDays(long d) // same as using operator+= or operator-=
 }
 
 // static methods -------------------------------
-bool Date::isLeapYear(int y)
-{
-	// Algorithm to determine leap year:
-	// 1. If a year is divisible by 400, see 4 else see 2
-	// 2. If a year is divisible by 100, see 5 else see 3
-	// 3. If a year is divisible by 4, see 4 else see 5
-	// 4. The year is a leap year
-	// 5. The year is not a leap year
-	return ((y % 400 == 0) || (y % 100 != 0 && y % 4 == 0));
-}
-
 bool Date::validDay(int y, int m, int d)
 {
 	if (d < 0)
@@ -256,7 +260,7 @@ bool Date::validDay(int y, int m, int d)
 			return false;
 		break;
 	case 2:
-		if (Date::isLeapYear(y) && d > 29)
+		if (Year::isLeapYear(y) && d > 29)
 			return false;
 		else if (d > 28)
 			return false;
@@ -275,7 +279,7 @@ int Date::getDaysOfMonth(int y, int m)
 	case 4: case 6: case 9: case 11:
 		return 30;
 	case 2:
-		if (Date::isLeapYear(y))
+		if (Year::isLeapYear(y))
 			return 29;
 		else
 			return 28;
@@ -283,4 +287,3 @@ int Date::getDaysOfMonth(int y, int m)
 		return 31;
 	}
 }
-*/

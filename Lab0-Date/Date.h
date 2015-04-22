@@ -51,7 +51,6 @@ public:
 	void addMonths(int m);
 	void addDays(long d);
 	// static methods
-	static bool isLeapYear(int y);
 	static bool validDay(int y, int m, int d); // checks if d is a valid number of days in mm/yyyy
 	static int getDaysOfMonth(int y, int m); // returns the number of days in mm/yyyy
 };

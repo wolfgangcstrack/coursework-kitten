@@ -26,7 +26,7 @@ public:
 	~Year() {}
 	// getters
 	int getYear() const { return year; }
-	bool isLeap() const { return isLeap; }
+	bool isLeapYear() const { return isLeap; }
 	// setters
 	void setYear(int y) { if (y > 0) year = y; isLeap = isLeapYear(year); }
 	// other methods
