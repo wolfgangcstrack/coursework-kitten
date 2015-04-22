@@ -8,21 +8,15 @@ This is the header file for the Date class.
 
 #pragma once
 
+#include "Year.h"
 #include <iostream>
 
 class Date
 {
 private:
-	// define month member variable type
-	enum Month {
-		January=1, February=2, March=3, April=4,
-		May=5, June=6, July=7, August=8,
-		September=9, October=10, November=11, December=12
-	};
-	// member variables
-	int year;
+	Year year;
 	Month month;
-	int day;
+	Day day;
 public:
 	// constructors and destructor
 	Date();

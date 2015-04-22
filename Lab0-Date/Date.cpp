@@ -11,39 +11,41 @@ the Date header file.
 #include "Date.h"
 
 
+
 // constructors and destructor ------------------
-Date::Date()
-{
-	year = 1;
-	month = January;
-	day = 1;
-}
+Date::Date() {}
 
 Date::Date(const Date &d)
 {
-	year = d.year;
-	month = d.month;
-	day = d.day;
+	year = Year(d.year);
+	month = Month(d.month);
+	day = Day(d.day);
 }
 
 Date::Date(int y, int m, int d)
 {
-	year = ((y > 0) ? y : 1);
-	month = static_cast<Month>((m >= 1 && m <= 12 ? m : 1));
-	day = (validDay(year, month, d) ? d : 1);
+	year = Year(((y > 0) ? y : 1));
+	month = Month(m >= 1 && m <= 12 ? m : 1);
+	day = Day(validDay(year.getYear(), month.getMonth(), d) ? d : 1);
 }
 
 Date::~Date() {}
 
 // getters --------------------------------------
-int Date::getYear() const { return year; }
-int Date::getMonth() const { return month; }
-int Date::getDay() const { return day; }
+int Date::getYear() const { return year.getYear(); }
+int Date::getMonth() const { return month.getMonth(); }
+int Date::getDay() const { return day.getDay(); }
 // setters --------------------------------------
-void Date::setYear(int y) { year = (y > 0 ? y : 1); }
-void Date::setMonth(int m) { month = ((m > 0 && m <= 12) ? static_cast<Month>(m) : January); }
-void Date::setDay(int d) { if (validDay(year, month, d)) day = d; }
-
+void Date::setYear(int y) { year.setYear(y); }
+void Date::setMonth(int m)
+{
+	month.setMonth(m);
+	month.setNumberOfDays(getDaysOfMonth(year.getYear(), month.getMonth()));
+	if (day.getDay() > month.getNumberOfDays())
+		day.setDay(1);
+}
+void Date::setDay(int d) { if (validDay(year.getYear(), month.getMonth(), d)) day.setDay(d); }
+/*
 // operator overloads ---------------------------
 Date & Date::operator=(const Date &d)
 {
@@ -281,3 +283,4 @@ int Date::getDaysOfMonth(int y, int m)
 		return 31;
 	}
 }
+*/

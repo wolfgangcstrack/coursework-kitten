@@ -9,22 +9,26 @@ instead of in a separate .cpp file.
 
 #pragma once
 
+#include "Month.h"
+
 class Year
 {
 private:
 	int year;
 	bool isLeap;
+
+	Month *months;
 public:
-	// constructors
+	// constructors and destructor
 	Year() { year = 1; isLeap = isLeapYear(year); }
 	Year(const Year &y) { year = y.year; isLeap = y.isLeap; }
 	Year(int y) { year = ((y > 0) ? y : 1); isLeap = isLeapYear(year); }
 	~Year() {}
 	// getters
-	int getYear() { return year; }
-	bool isLeap() { return isLeap; }
+	int getYear() const { return year; }
+	bool isLeap() const { return isLeap; }
 	// setters
 	void setYear(int y) { if (y > 0) year = y; isLeap = isLeapYear(year); }
 	// other methods
-	static bool isLeapYear(int yr) { return ((y % 400 == 0) || (y % 100 != 0 && y % 4 == 0)); }
+	static bool isLeapYear(int yr) { return ((yr % 400 == 0) || (yr % 100 != 0 && yr % 4 == 0)); }
 };
