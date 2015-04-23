@@ -7,7 +7,7 @@
  * is used by the Model class, and the protected
  * class Option, which is used by OptionSet.
  */
-package Model;
+package model;
 
 class OptionSet implements java.io.Serializable {
 	private String name;

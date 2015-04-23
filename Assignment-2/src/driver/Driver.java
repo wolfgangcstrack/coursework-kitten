@@ -5,14 +5,16 @@
  * 
  * This is the driver class for testing this lab.
  */
+package driver;
+
 class Driver {
 	public static void main(String[] args) {
 		String filetoread = "FordZTW.txt";
 		String serFile = "fordztw.ser";
 		
 		// Build Automotive Object from the file <filetoread>
-		Util.AutoIO autoIO = new Util.AutoIO();
-		Model.Automotive FordZTW = autoIO.buildAutoObject(filetoread);
+		util.AutoIO autoIO = new util.AutoIO();
+		model.Automotive FordZTW = autoIO.buildAutoObject(filetoread);
 		
 		// Print before serialization
 		System.out.println("Before Serialization:");
@@ -22,7 +24,7 @@ class Driver {
 		// Serialize
 		autoIO.serializeAutoObject(serFile, FordZTW);
 		// Deserialize
-		Model.Automotive newFordZTW = autoIO.deserializeAutoObject(serFile);
+		model.Automotive newFordZTW = autoIO.deserializeAutoObject(serFile);
 		
 		// Print after deserialization
 		System.out.println("After Deserialization:");

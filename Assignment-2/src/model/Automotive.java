@@ -5,7 +5,7 @@
  * 
  * This class represents the Model/Automotive class.
  */
-package Model;
+package model;
 
 public class Automotive implements java.io.Serializable {
 	private String name;

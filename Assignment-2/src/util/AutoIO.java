@@ -5,7 +5,7 @@
  * 
  * This class handles file IO when working with Automotive objects.
  */
-package Util;
+package util;
 
 import java.io.*;
 
@@ -33,7 +33,7 @@ public class AutoIO {
 	 * .
 	 * .
 	 */
-	public Model.Automotive buildAutoObject(String filename) {
+	public model.Automotive buildAutoObject(String filename) {
 		try (FileReader file = new FileReader(filename);
 				BufferedReader buffer = new BufferedReader(file)) {
 			
@@ -41,8 +41,8 @@ public class AutoIO {
 			
 			// read the first two lines, which must be the Automotive name and base price
 			// and create a new Automotive based on this information
-			Model.Automotive newAuto = new 
-					Model.Automotive(buffer.readLine(), Double.parseDouble(buffer.readLine()));
+			model.Automotive newAuto = new 
+					model.Automotive(buffer.readLine(), Double.parseDouble(buffer.readLine()));
 			
 			while (!eof) {
 				String line = buffer.readLine();
@@ -74,7 +74,7 @@ public class AutoIO {
 		return null;
 	}
 	
-	public void serializeAutoObject(String filename, Model.Automotive auto) {
+	public void serializeAutoObject(String filename, model.Automotive auto) {
 		try (FileOutputStream fos = new FileOutputStream(filename);
 				ObjectOutputStream out = new ObjectOutputStream(fos)) {
 			out.writeObject(auto);
@@ -87,12 +87,12 @@ public class AutoIO {
 		}
 	}
 	
-	public Model.Automotive deserializeAutoObject(String filename) {
-		Model.Automotive result = null;
+	public model.Automotive deserializeAutoObject(String filename) {
+		model.Automotive result = null;
 		
 		try (FileInputStream fos = new FileInputStream(filename);
 				ObjectInputStream in = new ObjectInputStream(fos)) {
-			result = (Model.Automotive) in.readObject();
+			result = (model.Automotive) in.readObject();
 		} catch (FileNotFoundException fnfe) {
 			System.out.println("Error: " + fnfe.toString());
 			System.exit(5);
