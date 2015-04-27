@@ -24,5 +24,8 @@
     <ClInclude Include="MorseChar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MorseANSIConverter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
