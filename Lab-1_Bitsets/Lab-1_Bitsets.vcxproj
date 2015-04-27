@@ -80,8 +80,17 @@
   <ItemGroup>
     <ClInclude Include="ANSIChar.h" />
     <ClInclude Include="EncryptionChar.h" />
+    <ClInclude Include="Lab1Decryptor.h" />
     <ClInclude Include="MorseANSIConverter.h" />
     <ClInclude Include="MorseChar.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Lab1Decryptor.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MorseANSIConverter.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Morse.bin" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
