@@ -19,6 +19,9 @@ void readANSI(ifstream &ifs, vector<ANSIChar> &acv);
 
 int main()
 {
+	bitset<8> bs('Q');
+	cout << bs << endl;
+	
 	cout << "This is a demonstration of the Lab1Decryptor." << endl;
 	Lab1Decryptor decryptor;
 	vector<ANSIChar> acv;
@@ -36,7 +39,7 @@ int main()
 
 	cout << "The decoded string is:\n\n";
 	cout << decodedResult << endl;
-
+	
 	return 0;
 }
 

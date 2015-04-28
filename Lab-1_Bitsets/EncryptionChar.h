@@ -15,7 +15,7 @@ base class for MorseChar and ANSIChar.
 class EncryptionChar
 {
 protected:
-	const static int bitsetSize = 16;
+	const static int bitsetSize = 8;
 	std::bitset<bitsetSize> charBits;
 
 	// method for setting bits based on type of EncryptedChar

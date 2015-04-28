@@ -25,20 +25,20 @@ std::vector<MorseChar> MorseANSIConverter::convertANSIToMorse(const std::vector<
 
 	for (int i = 0; i < acv.size(); i++)
 	{
-		ansiCache = std::bitset<16>(acv[i].getANSICode());
-		for (int i = 0; i < ansiCache.size(); i += 2)
+		ansiCache = std::bitset<8>(acv[i].getANSICode());
+		for (int i = ansiCache.size() - 1; i > 0; i -= 2)
 		{
-			morseCache = std::bitset<2>(ansiCache[i] + "" + ansiCache[i + 1]);
+			morseCache = std::bitset<2>(ansiCache[i] + ansiCache[i - 1]);
+			std::cout << morseCache << " ";
 			temp = morseCodes[morseHash(morseCache)];
-			std::cout << temp;
-			if (temp == '_')
+			//std::cout << temp;
+			if (temp == ' ')
 			{
 				result.push_back(MorseChar(morseString));
-				result.push_back(MorseChar("_"));
+				result.push_back(MorseChar(" "));
 				morseString = "";
 			}
-			else if (temp == ' ')
-				; // do nothing
+			//else if (temp == ' '); // do nothing
 			else
 				morseString += temp;
 		}

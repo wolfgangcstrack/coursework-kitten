@@ -24,19 +24,19 @@ private:
 			switch (code[i])
 			{
 			case ' ':
-				charBits << 2;
+				charBits <<= 2;
 				break;
 			case '-':
-				charBits << 2;
-				charBits = std::bitset<bitsetSize>(charBits.to_ulong() + 1);
+				charBits <<= 2;
+				charBits.set(1);
 				break;
 			case '.':
-				charBits << 2;
-				charBits = std::bitset<bitsetSize>(charBits.to_ulong() + 2);
+				charBits <<= 2;
+				charBits.set(2);
 				break;
 			case '_' :
-				charBits << 2;
-				charBits = std::bitset<bitsetSize>(charBits.to_ulong() + 3);
+				charBits <<= 2;
+				charBits.set(1).set(2);
 				break;
 			default:; // do nothing
 			}

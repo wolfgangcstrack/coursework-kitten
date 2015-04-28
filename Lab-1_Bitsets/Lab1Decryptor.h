@@ -25,7 +25,7 @@ public:
 	~Lab1Decryptor() {}
 	// getters
 	const std::bitset<2> & checkMorseCache() { return mac.checkMorseCache(); }
-	const std::bitset<16> & checkANSICache() { return mac.checkANSICache(); }
+	const std::bitset<8> & checkANSICache() { return mac.checkANSICache(); }
 
 	// decryption function
 	void decrypt(const std::vector<ANSIChar> &acv, std::vector<char> &result); // stores decrypted result in vector<char>
