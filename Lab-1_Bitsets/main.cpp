@@ -4,6 +4,8 @@ Wolfgang C. Strack
 Windows 8 Visual C++ 2013
 
 This is the driver application for Lab 1.
+
+NOTE: Execution results included at the end of this file.
 */
 
 #include "Lab1Decryptor.h"
@@ -19,9 +21,6 @@ void readANSI(ifstream &ifs, vector<ANSIChar> &acv);
 
 int main()
 {
-	bitset<8> bs('Q');
-	cout << bs << endl;
-	
 	cout << "This is a demonstration of the Lab1Decryptor." << endl;
 	Lab1Decryptor decryptor;
 	vector<ANSIChar> acv;
@@ -64,3 +63,13 @@ void readANSI(ifstream &ifs, vector<ANSIChar> &acv)
 		}
 	}
 }
+
+/* EXECUTION RESULTS
+This is a demonstration of the Lab1Decryptor.
+Please enter filename to read from: Morse.bin
+The decoded string is:
+
+M O R S E   C O D E   W A S   I N V E N T E D   B Y   S A M U E L   M O R S E   I N   1 8 4 3 .   T H E   L I N E   R A N   F R O M   W A S H I N G T O N   D . C .
+T O   B A L T I M O R E ,   M A R Y L A
+Press any key to continue . . .
+*/

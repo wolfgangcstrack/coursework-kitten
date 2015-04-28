@@ -11,7 +11,6 @@ class for characters read from Morse.bin. Implementation included.
 #define ANSI_CHAR_H_
 
 #include "EncryptionChar.h"
-#include <iostream>
 
 class ANSIChar : public EncryptionChar
 {

@@ -56,7 +56,7 @@ char Lab1Decryptor::getLetter(const MorseChar &mc)
 		return 'U';
 	else if (morseLetter.compare("...-") == 0)
 		return 'V';
-	else if (morseLetter.compare("--") == 0)
+	else if (morseLetter.compare(".--") == 0)
 		return 'W';
 	else if (morseLetter.compare("-..-") == 0)
 		return 'X';

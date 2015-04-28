@@ -28,17 +28,15 @@ std::vector<MorseChar> MorseANSIConverter::convertANSIToMorse(const std::vector<
 		ansiCache = std::bitset<8>(acv[i].getANSICode());
 		for (int i = ansiCache.size() - 1; i > 0; i -= 2)
 		{
-			morseCache = std::bitset<2>(ansiCache[i] + ansiCache[i - 1]);
-			std::cout << morseCache << " ";
+			morseCache[1] = ansiCache[i];
+			morseCache[0] = ansiCache[i - 1];
 			temp = morseCodes[morseHash(morseCache)];
-			//std::cout << temp;
-			if (temp == ' ')
+			if (temp == '_' || temp == ' ')
 			{
 				result.push_back(MorseChar(morseString));
 				result.push_back(MorseChar(" "));
 				morseString = "";
 			}
-			//else if (temp == ' '); // do nothing
 			else
 				morseString += temp;
 		}
