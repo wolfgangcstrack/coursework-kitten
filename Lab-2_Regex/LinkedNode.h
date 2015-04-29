@@ -3,8 +3,8 @@ Lab 2 - Regular Expressions
 Wolfgang C. Strack
 Windows 8 Visual C++ 2013
 
-This is the header file for the abstract List class. It will serve as the
-base class for XmlNodeList and LinkedList.
+This is the header file for the LinkedNode class. This node is used in the
+Linked implementation of the abstract List class in this project.
 */
 
 #ifndef LINKED_NODE_H_
