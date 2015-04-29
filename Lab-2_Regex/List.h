@@ -4,7 +4,7 @@ Wolfgang C. Strack
 Windows 8 Visual C++ 2013
 
 This is the header file for the abstract List class. It will serve as the
-base class for XmlNodeList.
+base class for XmlNodeList and LinkedList.
 */
 
 #ifndef LIST_H_
