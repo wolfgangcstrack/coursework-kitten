@@ -83,6 +83,7 @@
     <ClInclude Include="List.h" />
     <ClInclude Include="RegexIO.h" />
     <ClInclude Include="XmlNode.h" />
+    <ClInclude Include="XmlRegexIO.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
