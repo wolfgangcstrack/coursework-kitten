@@ -81,6 +81,7 @@
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="LinkedNode.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="RegexIO.h" />
     <ClInclude Include="XmlNode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

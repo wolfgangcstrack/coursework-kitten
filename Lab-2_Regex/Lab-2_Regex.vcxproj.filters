@@ -27,5 +27,8 @@
     <ClInclude Include="XmlNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RegexIO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
