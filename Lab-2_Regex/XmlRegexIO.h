@@ -18,11 +18,11 @@ class XmlRegexIO : public RegexIO
 public:
 	// constructors and destructor
 	XmlRegexIO();
-	XmlRegexIO(const XmlRegexIO &rIO);
+	XmlRegexIO(const XmlRegexIO &xRIO);
 	XmlRegexIO(const std::string &patt);
 	~XmlRegexIO();
 	// other methods
-	XmlNode getXmlNodeFromFile(std::string filename);
+	XmlNode getXmlNodeFromFile(const std::string &filename);
 };
 
 #endif // XML_REGEX_IO_H_

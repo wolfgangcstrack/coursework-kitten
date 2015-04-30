@@ -21,6 +21,7 @@ private:
 public:
 	// constructors and destructor
 	LinkedNode() { *data = 0; next = 0; }
+	LinkedNode(const LinkedNode &copyNode);
 	LinkedNode(const T &pData) { *data = pData; next = 0; }
 	// getters
 	const T & getData() const { return (*data); }

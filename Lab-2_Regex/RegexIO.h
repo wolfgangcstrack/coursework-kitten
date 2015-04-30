@@ -29,10 +29,10 @@ public:
 	// setters
 	void setPattern(const std::string &patt);
 	// other methods
-	bool stringMatch(std::string text);
-	bool searchStringForMatch(std::string text);
-	bool searchFileForMatch(std::string filename);
-	std::string findMatchInFile(std::string filename, unsigned int matchNum);
+	bool stringMatch(const std::string &text);
+	bool searchStringForMatch(const std::string &text);
+	bool searchFileForMatch(const std::string &filename);
+	std::string findMatchInFile(const std::string &filename, unsigned int matchNum);
 };
 
 #endif // REGEX_IO_H_
