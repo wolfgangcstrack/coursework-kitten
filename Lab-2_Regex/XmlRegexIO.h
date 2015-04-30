@@ -11,6 +11,7 @@ RegexIO class and can instantiate XmlNodes.
 #define XML_REGEX_IO_H_
 
 #include "RegexIO.h"
+#include "XmlNode.h"
 
 class XmlRegexIO : public RegexIO
 {
@@ -21,7 +22,7 @@ public:
 	XmlRegexIO(const std::string &patt);
 	~XmlRegexIO();
 	// other methods
-	bool getXmlNode(std::string filename, std::string className);
+	XmlNode getXmlNodeFromFile(std::string filename);
 };
 
 #endif // XML_REGEX_IO_H_
