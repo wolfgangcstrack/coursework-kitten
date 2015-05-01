@@ -10,6 +10,8 @@
 package model;
 
 class OptionSet implements java.io.Serializable {
+	// serialVersionUID generated with serialver
+	private static final long serialVersionUID = 5537926375200316701L;
 	private String name;
 	private Option options[]; // defined at end of class
 	
@@ -100,6 +102,8 @@ class OptionSet implements java.io.Serializable {
 	
 	// Option class definition -------------------------------------------
 	class Option implements java.io.Serializable {
+		// serialVersionUID generated with serialver
+		private static final long serialVersionUID = 2716888257427982132L;
 		private String name;
 		private float price;
 		

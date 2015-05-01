@@ -8,6 +8,8 @@
 package model;
 
 public class Automobile implements java.io.Serializable {
+	// serialVersionUID generated with serialver
+	private static final long serialVersionUID = 6569130310546375757L;
 	private String name;
 	private double baseprice;
 	private OptionSet opsets[];
