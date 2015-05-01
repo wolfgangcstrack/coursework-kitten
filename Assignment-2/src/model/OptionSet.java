@@ -1,5 +1,5 @@
 /*
- * CIS 35B - Assignment 1
+ * CIS 35B
  * Author: Wolfgang C. Strack
  * OS/Compiler: Windows 8/Java 8 with Eclipse
  * 

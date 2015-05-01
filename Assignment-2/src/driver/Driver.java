@@ -1,5 +1,5 @@
 /*
- * CIS 35B - Assignment 1
+ * CIS 35B
  * Author: Wolfgang C. Strack
  * OS/Compiler: Windows 8/Java 8 with Eclipse
  * 
@@ -14,7 +14,7 @@ class Driver {
 		
 		// Build Automotive Object from the file <filetoread>
 		util.AutoIO autoIO = new util.AutoIO();
-		model.Automotive FordZTW = autoIO.buildAutoObject(filetoread);
+		model.Automobile FordZTW = autoIO.buildAutoObject(filetoread);
 		
 		// Print before serialization
 		System.out.println("Before Serialization:");
@@ -24,7 +24,7 @@ class Driver {
 		// Serialize
 		autoIO.serializeAutoObject(serFile, FordZTW);
 		// Deserialize
-		model.Automotive newFordZTW = autoIO.deserializeAutoObject(serFile);
+		model.Automobile newFordZTW = autoIO.deserializeAutoObject(serFile);
 		
 		// Print after deserialization
 		System.out.println("After Deserialization:");

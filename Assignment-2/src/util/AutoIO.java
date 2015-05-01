@@ -1,5 +1,5 @@
 /*
- * CIS 35B - Assignment 1
+ * CIS 35B
  * Author: Wolfgang C. Strack
  * OS/Compiler: Windows 8/Java 8 with Eclipse
  * 
@@ -33,7 +33,7 @@ public class AutoIO {
 	 * .
 	 * .
 	 */
-	public model.Automotive buildAutoObject(String filename) {
+	public model.Automobile buildAutoObject(String filename) {
 		try (FileReader file = new FileReader(filename);
 				BufferedReader buffer = new BufferedReader(file)) {
 			
@@ -41,8 +41,8 @@ public class AutoIO {
 			
 			// read the first two lines, which must be the Automotive name and base price
 			// and create a new Automotive based on this information
-			model.Automotive newAuto = new 
-					model.Automotive(buffer.readLine(), Double.parseDouble(buffer.readLine()));
+			model.Automobile newAuto = new 
+					model.Automobile(buffer.readLine(), Double.parseDouble(buffer.readLine()));
 			
 			while (!eof) {
 				String line = buffer.readLine();
@@ -74,7 +74,7 @@ public class AutoIO {
 		return null;
 	}
 	
-	public void serializeAutoObject(String filename, model.Automotive auto) {
+	public void serializeAutoObject(String filename, model.Automobile auto) {
 		try (FileOutputStream fos = new FileOutputStream(filename);
 				ObjectOutputStream out = new ObjectOutputStream(fos)) {
 			out.writeObject(auto);
@@ -87,12 +87,12 @@ public class AutoIO {
 		}
 	}
 	
-	public model.Automotive deserializeAutoObject(String filename) {
-		model.Automotive result = null;
+	public model.Automobile deserializeAutoObject(String filename) {
+		model.Automobile result = null;
 		
 		try (FileInputStream fos = new FileInputStream(filename);
 				ObjectInputStream in = new ObjectInputStream(fos)) {
-			result = (model.Automotive) in.readObject();
+			result = (model.Automobile) in.readObject();
 		} catch (FileNotFoundException fnfe) {
 			System.out.println("Error: " + fnfe.toString());
 			System.exit(5);

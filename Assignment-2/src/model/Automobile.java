@@ -1,5 +1,5 @@
 /*
- * CIS 35B - Assignment 1
+ * CIS 35B
  * Author: Wolfgang C. Strack
  * OS/Compiler: Windows 8/Java 8 with Eclipse
  * 
@@ -7,23 +7,23 @@
  */
 package model;
 
-public class Automotive implements java.io.Serializable {
+public class Automobile implements java.io.Serializable {
 	private String name;
 	private double baseprice;
 	private OptionSet opsets[];
 	
 	// constructors ------------------------------------------------------
-	public Automotive() { this("", 0, 0); }
+	public Automobile() { this("", 0, 0); }
 	
-	public Automotive(String name) { this(name, 0, 0); }
+	public Automobile(String name) { this(name, 0, 0); }
 	
-	public Automotive(String name, double baseprice) { this(name, baseprice, 0); }
+	public Automobile(String name, double baseprice) { this(name, baseprice, 0); }
 	
-	public Automotive(String name, int optionSetSize) {
+	public Automobile(String name, int optionSetSize) {
 		this(name, 0, (optionSetSize >= 0 ? optionSetSize : 0));
 	}
 	
-	public Automotive(String name, double baseprice, int optionSetSize) {
+	public Automobile(String name, double baseprice, int optionSetSize) {
 		this.name = name;
 		this.baseprice = baseprice;
 		opsets = new OptionSet[(optionSetSize >= 0 ? optionSetSize : 0)];
@@ -54,7 +54,7 @@ public class Automotive implements java.io.Serializable {
 		return opsets[index];
 	}
 	
-	public String getOptionSet_Name(int index) {
+	public String getOptionSetName(int index) {
 		if (index < 0 || index >= opsets.length)
 			return null;
 		return opsets[index].getName();
@@ -94,7 +94,7 @@ public class Automotive implements java.io.Serializable {
 	// ----- set individual OptionSets and their values
 	public void setOptionSet(int index, OptionSet newOps) { opsets[index] = newOps; }
 	
-	public void setOptionSet_Name(int index, String name) { opsets[index].setName(name); }
+	public void setOptionSetName(int index, String name) { opsets[index].setName(name); }
 	
 	// ----- set individual Options and their values (in context of OptionSet)
 	public void setOptionName(int opsIndex, int opIndex, String opName) {
@@ -144,7 +144,7 @@ public class Automotive implements java.io.Serializable {
 		return true;
 	}
 	
-	public boolean updateOptionSet_Name(String opsName, String newOpsName) {
+	public boolean updateOptionSetName(String opsName, String newOpsName) {
 		int opsIndex = findOptionSet(opsName);
 		if (opsIndex == -1)
 			return false;
