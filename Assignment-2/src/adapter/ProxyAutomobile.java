@@ -7,14 +7,15 @@
  */
 package adapter;
 
+import util.*;
 import model.*;
 
 public abstract class ProxyAutomobile {
 	private Automobile a1;
 	
 	// CreateAuto interface methods --------------------------------------
-	public void buildAuto(String filename) {
-		util.AutoIO autoIO = new util.AutoIO();
+	public void buildAuto(String filename) throws AutoException {
+		AutoIO autoIO = new AutoIO();
 		a1 = autoIO.buildAutoObject(filename);
 	}
 	
@@ -27,7 +28,7 @@ public abstract class ProxyAutomobile {
 			String modelName,
 			String optionSetName,
 			String newName
-		) {
+			) {
 		a1.updateOptionSetName(optionSetName, newName);
 	}
 	
@@ -36,7 +37,7 @@ public abstract class ProxyAutomobile {
 			String optionSetName,
 			String optionName,
 			String newName
-		) {
+			) {
 		a1.updateOptionName(optionSetName, optionName, newName);
 	}
 	
@@ -45,7 +46,7 @@ public abstract class ProxyAutomobile {
 			String optionSetName,
 			String optionName,
 			float newPrice
-		) {
+			) {
 		a1.updateOptionPrice(optionSetName, optionName, newPrice);
 	}
 }

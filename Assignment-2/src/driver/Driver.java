@@ -7,8 +7,10 @@
  */
 package driver;
 
+import util.*;
+
 class Driver {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws AutoException {
 		String filetoread = "FordZTW.txt";
 		String serFile = "fordztw.ser";
 		

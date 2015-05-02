@@ -10,7 +10,7 @@ package util;
 import java.io.*;
 
 public class AutoIO {
-	/*
+	/**
 	 * The buildAutoObject method takes a filename, reads from that file,
 	 * and instantiates a new Automotive based on the information in the file.
 	 * If the instantiation is successful the Automotive object is returned,
@@ -33,7 +33,7 @@ public class AutoIO {
 	 * .
 	 * .
 	 */
-	public model.Automobile buildAutoObject(String filename) {
+	public model.Automobile buildAutoObject(String filename) throws AutoException {
 		try (FileReader file = new FileReader(filename);
 				BufferedReader buffer = new BufferedReader(file)) {
 			
@@ -63,45 +63,36 @@ public class AutoIO {
 					}
 				}
 			}
-			buffer.close();
 			
 			return newAuto;
 		} catch (IOException ioe) {
-			System.out.println("Error: " + ioe.toString());
-			System.exit(1);
+			throw new AutoException("IOException from file " + filename, 1);
 		}
-		
-		return null;
 	}
 	
-	public void serializeAutoObject(String filename, model.Automobile auto) {
+	public void serializeAutoObject(String filename, model.Automobile auto) throws AutoException {
 		try (FileOutputStream fos = new FileOutputStream(filename);
 				ObjectOutputStream out = new ObjectOutputStream(fos)) {
 			out.writeObject(auto);
 		} catch (FileNotFoundException fnfe) {
-			System.out.println("Error: " + fnfe.toString());
-			System.exit(2);
+			throw new AutoException(filename + " not found", 2);
 		} catch (IOException ioe) {
-			System.out.println("Error: " + ioe.toString());
-			System.exit(3);
+			throw new AutoException("IOException in serialization file: " + filename, 3);
 		}
 	}
 	
-	public model.Automobile deserializeAutoObject(String filename) {
+	public model.Automobile deserializeAutoObject(String filename) throws AutoException {
 		model.Automobile result = null;
 		
 		try (FileInputStream fos = new FileInputStream(filename);
 				ObjectInputStream in = new ObjectInputStream(fos)) {
 			result = (model.Automobile) in.readObject();
 		} catch (FileNotFoundException fnfe) {
-			System.out.println("Error: " + fnfe.toString());
-			System.exit(5);
+			throw new AutoException(filename + " not found", 4);
 		} catch (IOException ioe) {
-			System.out.println("Error: " + ioe.toString());
-			System.exit(6);
+			throw new AutoException("IOException in deserialization file: " + filename, 5);
 		} catch (ClassNotFoundException cnfe) {
-			System.out.println("Error: " + cnfe.toString());
-			System.exit(7);
+			throw new AutoException("Automobile class not found", 6);
 		}
 		
 		return result;
