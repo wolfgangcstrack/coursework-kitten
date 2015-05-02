@@ -34,9 +34,12 @@ public class AutoIO {
 	 * .
 	 */
 	public model.Automobile buildAutoObject(String filename) throws AutoException {
+		StringBuilder errorMessage = new StringBuilder("Error in file ").append(filename);
+		String line; // for reading file
+		int lineNumber = 1;
+		
 		try (FileReader file = new FileReader(filename);
 				BufferedReader buffer = new BufferedReader(file)) {
-			
 			boolean eof = false;
 			
 			// read the first two lines, which must be the Automotive name and base price
@@ -45,28 +48,53 @@ public class AutoIO {
 					model.Automobile(buffer.readLine(), Double.parseDouble(buffer.readLine()));
 			
 			while (!eof) {
-				String line = buffer.readLine();
+				line = buffer.readLine();
+				
 				if (line == null)
 					eof = true;
 				else {
 					String opsName = line; // save for adding Options to this OptionSet name
 					newAuto.addOptionSet(opsName);
 					
-					buffer.readLine(); // next line after OptionSet name must be a "{"
 					line = buffer.readLine();
+					lineNumber++;
+					if (line.charAt(0) != '{') { // next line after OptionSet name must be a "{"
+						errorMessage.append(": missing { bracket at line ").append(lineNumber);
+						throw new AutoException(errorMessage.toString(), -3);
+					}
+					
+					line = buffer.readLine();
+					lineNumber++;
+					
 					while (line.charAt(0) != '}') { // stop reading Options at the next "}"
+						if (line.charAt(0) != '\t') {
+							errorMessage.append(": missing tab (\\t) at line ").append(lineNumber);
+							throw new AutoException(errorMessage.toString(), -4);
+						}
+						
 						// substring is called to skip the \t before the Option
 						// which is formatted as such: name|price
 						String option[] = line.substring(1).split("\\|");
 						newAuto.addOption(opsName, option[0], Float.parseFloat(option[1]));
 						line = buffer.readLine();
+						lineNumber++;
 					}
 				}
 			}
 			
 			return newAuto;
-		} catch (IOException ioe) {
-			throw new AutoException("IOException from file " + filename, 1);
+		} catch (IndexOutOfBoundsException iobE) {
+			errorMessage.append(": at line ").append(lineNumber);
+			throw new AutoException(errorMessage.toString(), -2);
+		} catch (NumberFormatException nfE) {
+			errorMessage.append(": price not parsable at line ").append(lineNumber);
+			throw new AutoException(errorMessage.toString(), -1);
+		} catch (FileNotFoundException fnfE) {
+			errorMessage.append(": file not found");
+			throw new AutoException (errorMessage.toString(), 1);
+		} catch (IOException ioE) {
+			errorMessage.append(": at line ").append(lineNumber);
+			throw new AutoException(errorMessage.toString(), 2);
 		}
 	}
 	
@@ -74,10 +102,10 @@ public class AutoIO {
 		try (FileOutputStream fos = new FileOutputStream(filename);
 				ObjectOutputStream out = new ObjectOutputStream(fos)) {
 			out.writeObject(auto);
-		} catch (FileNotFoundException fnfe) {
-			throw new AutoException(filename + " not found", 2);
-		} catch (IOException ioe) {
-			throw new AutoException("IOException in serialization file: " + filename, 3);
+		} catch (FileNotFoundException fnfE) {
+			throw new AutoException(filename + " not found", 3);
+		} catch (IOException ioE) {
+			throw new AutoException("IOException in serialization file: " + filename, 4);
 		}
 	}
 	
@@ -88,11 +116,11 @@ public class AutoIO {
 				ObjectInputStream in = new ObjectInputStream(fos)) {
 			result = (model.Automobile) in.readObject();
 		} catch (FileNotFoundException fnfe) {
-			throw new AutoException(filename + " not found", 4);
+			throw new AutoException(filename + " not found", 5);
 		} catch (IOException ioe) {
-			throw new AutoException("IOException in deserialization file: " + filename, 5);
+			throw new AutoException("IOException in deserialization file: " + filename, 6);
 		} catch (ClassNotFoundException cnfe) {
-			throw new AutoException("Automobile class not found", 6);
+			throw new AutoException("Automobile class not found", 7);
 		}
 		
 		return result;
