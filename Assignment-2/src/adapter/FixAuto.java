@@ -7,6 +7,8 @@
  */
 package adapter;
 
+import java.util.Scanner;
+
 // Essentially, these methods handle "fixing" AutoExceptions
 public interface FixAuto {
 	/* This method is called in the event that 
@@ -14,5 +16,5 @@ public interface FixAuto {
 	 * manually instead of fixing the input file.
 	 * In essence, this is the "fix" method.
 	 */
-	public model.Automobile manualBuild();
+	public void manualBuild(Scanner input) throws util.AutoException;
 }

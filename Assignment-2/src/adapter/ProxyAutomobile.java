@@ -58,26 +58,31 @@ public abstract class ProxyAutomobile {
 	 * manually instead of fixing the input file.
 	 * In essence, this is the "fix" method.
 	 */
-	public model.Automobile manualBuild() {
+	public void manualBuild(Scanner input) throws AutoException {
 		String nameHolder;
 		double priceHolder;
-		Scanner input = new Scanner(System.in);
 		
 		System.out.print("Please enter Automobile name: ");
 		nameHolder = input.nextLine();
+		
 		System.out.print("Please enter base price of " + nameHolder + ": ");
-		priceHolder = input.nextDouble();
+		try {
+			priceHolder = input.nextDouble();
+		} catch (java.util.InputMismatchException imE) {
+			throw new AutoException("Error: user entered invalid value");
+		} finally {
+			input.nextLine(); // clear scanner for next input
+		}
 		
-		model.Automobile newAuto = new model.Automobile(nameHolder, priceHolder);
+		a1 = new Automobile(nameHolder, priceHolder);
 		
-		readOptionSets(input, newAuto);
+		readOptionSets(input);
 		
 		input.close();
-		return newAuto;
 	}
 	
 	// helper methods for fix method
-	private void readOptionSets(Scanner input, model.Automobile newAuto) {
+	private void readOptionSets(Scanner input) throws AutoException {
 		String opsetNameHolder;
 		String optionNameHolder;
 		float priceHolder;
@@ -85,24 +90,32 @@ public abstract class ProxyAutomobile {
 		
 		System.out.print("Enter an option set name (or Q to quit): ");
 		choice = input.nextLine();
-		while (!choice.equals("Q")) {
+		while (!choice.toUpperCase().equals("Q")) {
 			opsetNameHolder = choice;
-			newAuto.addOptionSet(opsetNameHolder);
+			a1.addOptionSet(opsetNameHolder);
 			
 			System.out.print("Enter an option name for " + opsetNameHolder + " (or Q to quit): ");
 			choice = input.nextLine();
-			while (!choice.equals("Q")) {
+			while (!choice.toUpperCase().equals("Q")) {
 				optionNameHolder = choice;
 				System.out.print("Enter the price for the option " + optionNameHolder +": ");
-				priceHolder = input.nextFloat();
-				newAuto.addOption(opsetNameHolder, optionNameHolder, priceHolder);
+				
+				try {
+					priceHolder = input.nextFloat();
+				} catch (java.util.InputMismatchException imE) {
+					throw new AutoException("Error: user entered invalid value");
+				} finally {
+					input.nextLine(); // clear scanner for next input
+				}
+				
+				a1.addOption(opsetNameHolder, optionNameHolder, priceHolder);
 				System.out.println(optionNameHolder + " added!\n");
 				
 				System.out.print("Enter an option name for " + opsetNameHolder + " (or Q to quit): ");
 				choice = input.nextLine();
 			}
 			
-			System.out.print("Enter an option set name (or Q to quit): ");
+			System.out.print("\nEnter an option set name (or Q to quit): ");
 			choice = input.nextLine();
 		}
 	}
