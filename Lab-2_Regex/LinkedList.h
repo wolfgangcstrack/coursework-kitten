@@ -4,7 +4,7 @@ Wolfgang C. Strack
 Windows 8 Visual C++ 2013
 
 This is the header file for the LinkedList class. It will be the container
-that mainly holds XML nodes in this project.
+that mainly holds XML nodes in this project and is a circular linked list.
 */
 
 #ifndef LINKED_LIST_H_
@@ -35,5 +35,18 @@ public:
 	void pop_back();
 	void clear();
 };
+
+template<class T>
+LinkedList::LinkedList(const LinkedList<T> &list)
+{
+	/*
+	listSize = list.listSize;
+
+	headPtr = new LinkedNode<T>(*(list.headPtr)); // copy headPtr
+	std::unique_ptr<LinkedNode<T>> nodePtr = list.headPtr->getNext();
+
+	while ()
+	*/
+}
 
 #endif // LINKED_LIST_H_
