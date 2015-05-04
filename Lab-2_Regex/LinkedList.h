@@ -30,10 +30,10 @@ public:
 	bool insert(const T &newEntry, int position = 1);
 	bool remove(int position);
 	// other methods
-	void push_front(const T &newEntry);
-	void push_back(const T &newEntry);
-	void pop_front();
-	void pop_back();
+	void push_front(const T &newEntry) { this.insert(newEntry, 1); }
+	void push_back(const T &newEntry) { this.insert(newEntry, listSize + 1); }
+	void pop_front() { this.remove(1); }
+	void pop_back() { this.remove(listSize); }
 	void clear();
 };
 
@@ -121,6 +121,22 @@ bool LinkedList<T>::remove(int position)
 	return true;
 }
 
+template<class T>
+void LinkedList<T>::clear()
+{
+	std::unique_ptr<LinkedNode<T>> deletePtr;
+
+	for (int i = 0; i < listSize; i++)
+	{
+		deletePtr = headPtr;
+		headPtr = headPtr->getNext();
+		delete deletePtr;
+	}
+
+	itemCount = 0;
+}
+
+// private member function getNodeAt
 template<class T>
 std::unique_ptr<LinkedNode<T>> LinkedList<T>::getNodeAt(int position) const
 {
