@@ -56,4 +56,14 @@ XmlNode::XmlNode(const XmlNode &xmlNode)
 	children = LinkedList<XmlNode>(xmlNode.children);
 }
 
+bool XmlNode::addData(const std::string name, const std::string type, const std::string value)
+{
+	data.push_back(XmlNodeData(name, type, value));
+}
+
+bool XmlNode::addChildNode(const XmlNode &xmlNode)
+{
+	children.push_back(xmlNode);
+}
+
 #endif // XML_NODE_H_
