@@ -4,7 +4,7 @@ Wolfgang C. Strack
 Windows 8 Visual C++ 2013
 
 This is the header file for the LinkedList class. It will be the container
-that mainly holds XML nodes in this project and is a circular linked list.
+that mainly holds XML nodes in this project.
 */
 
 #ifndef LINKED_LIST_H_
@@ -54,16 +54,13 @@ LinkedList<T>::LinkedList(const LinkedList<T> &list)
 		// copy the remaining nodes
 		std::unique_ptr<LinkedNode<T>> newChainPtr = headPtr;
 		origChainPtr = origChainPtr->getNext();
-		while (origChainPtr != list.headPtr)
+		while (origChainPtr != 0)
 		{
 			std::unique_ptr<LinkedNode<T>> newNodePtr = new LinkedNode<T>(origChainPtr->getData());
 			newChainPtr->setNext(newNodePtr);
 			newChainPtr = newChainPtr->getNext();
 			origChainPtr = origChainPtr->getNext();
 		}
-
-		// set the last node's next pointer to head (circular list implementation)
-		newChainPtr->setNext(headPtr);
 	}
 }
 
@@ -71,6 +68,31 @@ template<class T>
 const T & LinkedList<T>::getItemAt(int position)
 {
 	return getNodeAt(position)->getData();
+}
+
+template<class T>
+bool LinkedList<T>::insert(const T &newEntry, int position = 1)
+{
+	// check if position is valid
+	if (position < 1 || position > listSize)
+		return false;
+
+	// create new node for new entry
+	std::unique_ptr<LinkedNode<T>> newNodePtr = new LinkedNode<T>(newEntry);
+	if (newPosition == 1)
+	{
+		newNodePtr->setNext(headPtr);
+		headPtr = newNodePtr;
+	}
+	else
+	{
+		std::unique_ptr<LinkedNode<T>> prevPtr = getNodeAt(position - 1);
+		newNodePtr->setNext(prevPtr->getNext());
+		prevPtr->setNext(newNodePtr);
+	}
+	listSize++;
+
+	return true;
 }
 
 template<class T>
