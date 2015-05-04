@@ -34,13 +34,13 @@ private:
 	LinkedList<XmlNode> children;
 public:
 	// constructors and destructor
-	XmlNode();
+	XmlNode() {}
 	XmlNode(const XmlNode &xmlNode);
-	XmlNode(const std::string &name);
-	~XmlNode();
+	XmlNode(const std::string &name) { className = name; }
+	~XmlNode() {}
 	// getters
 	const std::string & getClassName() const { return className; }
-	//const std::vector<XmlNodeData> & getAllData() const { return data; }
+	const std::vector<XmlNodeData> & getAllData() const { return data; }
 	const LinkedList<XmlNode> & getAllChildNodes() const { return children; }
 	// setters
 	void setClassName(const std::string &name) { className = name; }
@@ -48,5 +48,12 @@ public:
 	bool addData(const std::string name, const std::string type, const std::string value);
 	bool addChildNode(const XmlNode &xmlNode);
 };
+
+XmlNode::XmlNode(const XmlNode &xmlNode)
+{
+	className = std::string(xmlNode.className);
+	data = std::vector<XmlNodeData>(xmlNode.data);
+	children = LinkedList<XmlNode>(xmlNode.children);
+}
 
 #endif // XML_NODE_H_
