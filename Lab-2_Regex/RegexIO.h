@@ -20,10 +20,10 @@ protected:
 	std::regex rex;
 public:
 	// constructors and destructor
-	RegexIO();
+	RegexIO() {}
 	RegexIO(const RegexIO &rIO);
 	RegexIO(const std::string &patt);
-	~RegexIO();
+	~RegexIO() {}
 	// getters
 	const std::string & getPattern() { return pattern; }
 	// setters
@@ -34,5 +34,17 @@ public:
 	bool searchFileForMatch(const std::string &filename);
 	std::string findMatchInFile(const std::string &filename, unsigned int matchNum);
 };
+
+RegexIO::RegexIO(const RegexIO &rIO)
+{
+	pattern = rIO.pattern;
+	rex = rIO.rex;
+}
+
+RegexIO::RegexIO(const std::string &patt)
+{
+	pattern = patt;
+	rex = regex(pattern);
+}
 
 #endif // REGEX_IO_H_
