@@ -14,7 +14,7 @@ that mainly holds XML nodes in this project and is a circular linked list.
 #include "LinkedNode.h"
 
 template<class T>
-class LinkedList : public List
+class LinkedList : public List<T>
 {
 private:
 	std::unique_ptr<LinkedNode<T>> headPtr;
@@ -26,6 +26,7 @@ public:
 	LinkedList(const LinkedList<T> &list);
 	~LinkedList() { clear(); }
 	// overridden methods from List class
+	const T & getItemAt(int position);
 	bool insert(const T &newEntry, int position = 1);
 	bool remove(int position);
 	// other methods
@@ -37,16 +38,33 @@ public:
 };
 
 template<class T>
-LinkedList::LinkedList(const LinkedList<T> &list)
+LinkedList<T>::LinkedList(const LinkedList<T> &list)
 {
-	/*
 	listSize = list.listSize;
+	std::unique_ptr<LinkedNode<T>> origChainPtr = list.headPtr;
 
-	headPtr = new LinkedNode<T>(*(list.headPtr)); // copy headPtr
-	std::unique_ptr<LinkedNode<T>> nodePtr = list.headPtr->getNext();
+	if (origChainPtr == 0) // copy empty list
+		headPtr = 0;
+	else
+	{
+		// copy first node
+		headPtr = new LinkedNode<T>();
+		headPtr->setData(origChainPtr->getData());
 
-	while ()
-	*/
+		// copy the remaining nodes
+		std::unique_ptr<LinkedNode<T>> newChainPtr = headPtr;
+		origChainPtr = origChainPtr->getNext();
+		while (origChainPtr != list.headPtr)
+		{
+			std::unique_ptr<LinkedNode<T>> newNodePtr = new LinkedNode<T>(origChainPtr->getData());
+			newChainPtr->setNext(newNodePtr);
+			newChainPtr = newChainPtr->getNext();
+			origChainPtr = origChainPtr->getNext();
+		}
+
+		// set the last node's next pointer to head (circular list implementation)
+		newChainPtr->setNext(headPtr);
+	}
 }
 
 #endif // LINKED_LIST_H_
