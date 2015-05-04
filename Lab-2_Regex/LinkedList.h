@@ -74,23 +74,49 @@ template<class T>
 bool LinkedList<T>::insert(const T &newEntry, int position = 1)
 {
 	// check if position is valid
-	if (position < 1 || position > listSize)
+	if (position < 1 || position > listSize + 1)
 		return false;
 
 	// create new node for new entry
 	std::unique_ptr<LinkedNode<T>> newNodePtr = new LinkedNode<T>(newEntry);
-	if (newPosition == 1)
+	if (newPosition == 1) // insert at head
 	{
 		newNodePtr->setNext(headPtr);
 		headPtr = newNodePtr;
 	}
-	else
+	else // insert at middle or at end of list
 	{
 		std::unique_ptr<LinkedNode<T>> prevPtr = getNodeAt(position - 1);
 		newNodePtr->setNext(prevPtr->getNext());
 		prevPtr->setNext(newNodePtr);
 	}
 	listSize++;
+
+	return true;
+}
+
+template<class T>
+bool LinkedList<T>::remove(int position)
+{
+	// check if position is valid
+	if (position < 1 || position > listSize)
+		return false;
+
+	std::unique_ptr<LinkedNode<T>> deletePtr = 0;
+	if (position == 1) // remove head node
+	{
+		deletePtr = headPtr;
+		headPtr = headPtr->getNext();
+	}
+	else // remove node in middle or at end of list
+	{
+		std::unique_ptr<LinkedNode<T>> prevPtr = getNodeAt(position - 1);
+		deletePtr = prevPtr->getNext();
+		prevPtr->setNext(deletePtr->getNext());
+	}
+
+	delete deletePtr;
+	listSize--;
 
 	return true;
 }
