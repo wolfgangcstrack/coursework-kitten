@@ -21,7 +21,7 @@ public:
 	virtual ~List() {}
 	// getter
 	int size() const { return listSize; }
-	virtual const T & getItemAt(int position) = 0;
+	virtual const T & getItemAt(int position) const = 0;
 	// insertion and deletion methods
 	virtual bool insert(const T &newEntry, int position = 1) = 0;
 	virtual bool remove(int position) = 0;

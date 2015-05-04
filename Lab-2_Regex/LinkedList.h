@@ -26,7 +26,7 @@ public:
 	LinkedList(const LinkedList<T> &list);
 	~LinkedList() { clear(); }
 	// overridden methods from List class
-	const T & getItemAt(int position);
+	const T & getItemAt(int position) const;
 	bool insert(const T &newEntry, int position = 1);
 	bool remove(int position);
 	// other methods
@@ -65,6 +65,12 @@ LinkedList<T>::LinkedList(const LinkedList<T> &list)
 		// set the last node's next pointer to head (circular list implementation)
 		newChainPtr->setNext(headPtr);
 	}
+}
+
+template<class T>
+const T & LinkedList<T>::getItemAt(int position)
+{
+	return getNodeAt(position)->getData();
 }
 
 template<class T>
