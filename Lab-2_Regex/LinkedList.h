@@ -67,4 +67,14 @@ LinkedList<T>::LinkedList(const LinkedList<T> &list)
 	}
 }
 
+template<class T>
+std::unique_ptr<LinkedNode<T>> LinkedList<T>::getNodeAt(int position) const
+{
+	std::unique_ptr<LinkedNode<T>> resultPtr = headPtr;
+
+	for (int i = 1; i < position; i++) // iterate until node at position is reached
+		resultPtr = resultPtr->getNext();
+
+	return resultPtr;
+}
 #endif // LINKED_LIST_H_
