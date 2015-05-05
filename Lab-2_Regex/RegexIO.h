@@ -31,7 +31,7 @@ public:
 	// other methods
 	bool stringMatch(const std::string &text) { return std::regex_match(text, rex); }
 	bool searchStringForMatch(const std::string &text) { return std::regex_search(text, rex); }
-	bool searchFileForMatch(const std::string &filename);
+	bool fileHasMatch(const std::string &filename);
 	std::string findMatchInFile(const std::string &filename, unsigned int matchNum);
 };
 
@@ -53,7 +53,7 @@ void RegexIO::setPattern(const std::string &patt)
 	rex = regex(pattern);
 }
 
-bool RegexIO::searchFileForMatch(const std::string &filename)
+bool RegexIO::fileHasMatch(const std::string &filename)
 {
 	std::ifstream ifs;
 	
