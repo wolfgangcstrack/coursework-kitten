@@ -21,11 +21,11 @@ private:
 	struct XmlNodeData
 	{
 		std::string _name;
-		//std::string _type;
+		std::string _type;
 		std::string _value;
-		XmlNodeData(const std::string name, /*const std::string type,*/ const std::string value)
+		XmlNodeData(const std::string name, const std::string type, const std::string value)
 		{
-			_name = name; /*_type = type;*/ _value = value;
+			_name = name; _type = type; _value = value;
 		}
 	};
 
@@ -45,7 +45,7 @@ public:
 	// setters
 	void setClassName(const std::string &name) { className = name; }
 	// other methods
-	bool addData(const std::string name, /*const std::string type,*/ const std::string value);
+	bool addData(const std::string name, const std::string type, const std::string value);
 	bool addChildNode(const XmlNode &xmlNode);
 };
 
@@ -56,9 +56,9 @@ XmlNode::XmlNode(const XmlNode &xmlNode)
 	children = LinkedList<XmlNode>(xmlNode.children);
 }
 
-bool XmlNode::addData(const std::string name, /*const std::string type,*/ const std::string value)
+bool XmlNode::addData(const std::string name, const std::string type, const std::string value)
 {
-	data.push_back(XmlNodeData(name, /*type,*/ value));
+	data.push_back(XmlNodeData(name, type, value));
 }
 
 bool XmlNode::addChildNode(const XmlNode &xmlNode)

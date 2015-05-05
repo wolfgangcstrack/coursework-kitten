@@ -24,18 +24,26 @@ public:
 	~XmlRegexIO() {}
 	// other methods
 	bool getXmlNodeFromFile(const std::string &filename, XmlNode &store);
+	bool getXmlNodeDataFromFile(const std::string &dataFilename, XmlNode &store);
 };
 
-// instantiates an XmlNode whose fields are grabbed from the file <filename>
-// based on this XmlRegexIO's pattern/regex member variable
+/*
 bool XmlRegexIO::getXmlNodeFromFile(const std::string &filename, XmlNode &store)
 {
-	if (!fileHasMatch(filename))
+
+}
+*/
+
+// stores in XmlNode store whose fields are grabbed from the file <dataFilename>
+// based on this XmlRegexIO's pattern/regex member variable
+bool XmlRegexIO::getXmlNodeDataFromFile(const std::string &dataFilename, XmlNode &store)
+{
+	if (!fileHasMatch(dataFilename))
 		return false;
 
 	XmlNode result;
 	std::ifstream ifs;
-	ifs.open(filename);
+	ifs.open(dataFilename);
 
 	std::string line;
 	std::string temp = "";
@@ -79,7 +87,7 @@ bool XmlRegexIO::getXmlNodeFromFile(const std::string &filename, XmlNode &store)
 				else // if the next line is a child node
 				{
 					XmlNode child;
-					if (getXmlNodeFromFile(filename, child)) // recursive call to get child node
+					if (getXmlNodeDataFromFile(dataFilename, child)) // recursive call to get child node
 						result.addChildNode(child);
 				}
 
