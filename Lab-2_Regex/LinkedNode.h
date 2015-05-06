@@ -16,17 +16,17 @@ template<class T>
 class LinkedNode
 {
 private:
-	std::unique_ptr<T> data;
+	T data;
 	std::unique_ptr<LinkedNode<T>> next;
 public:
 	// constructors and destructor
 	LinkedNode() { *data = 0; next = 0; }
 	LinkedNode(const T &pData) { *data = pData; next = 0; }
 	// getters
-	const T & getData() const { return (*data); }
+	const T & getData() const { return data; }
 	std::unique_ptr<LinkedNode<T>> getNext() const { return next; }
 	// setters
-	void setData(const T &pData) { data = new T(pData); }
+	void setData(const T &pData) { data = pData; }
 	void setNext(std::unique_ptr<LinkedNode<T>> newNext) { next = newNext; }
 };
 

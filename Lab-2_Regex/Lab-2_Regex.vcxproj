@@ -83,6 +83,7 @@
     <ClInclude Include="List.h" />
     <ClInclude Include="RegexIO.h" />
     <ClInclude Include="XmlNode.h" />
+    <ClInclude Include="XmlNodeDataTypes.h" />
     <ClInclude Include="XmlRegexIO.h" />
   </ItemGroup>
   <ItemGroup>

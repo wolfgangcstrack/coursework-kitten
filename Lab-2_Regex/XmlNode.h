@@ -18,16 +18,7 @@ LinkedList.
 class XmlNode
 {
 private:
-	struct XmlNodeData
-	{
-		std::string _name;
-		std::string _type;
-		std::string _value;
-		XmlNodeData(const std::string name, const std::string type, const std::string value)
-		{
-			_name = name; _type = type; _value = value;
-		}
-	};
+	struct XmlNodeData;
 
 	std::string className;
 	std::vector<XmlNodeData> data;
@@ -47,14 +38,32 @@ public:
 	// other methods
 	bool addData(const std::string name, const std::string type, const std::string value);
 	bool addChildNode(const XmlNode &xmlNode);
+	// operator overloads
+	XmlNode & operator=(const XmlNode &right);
 };
 
-XmlNode::XmlNode(const XmlNode &xmlNode)
+// private struct XmlNodeData in XmlNode
+// used as a wrapper for data
+struct XmlNode::XmlNodeData
 {
-	className = std::string(xmlNode.className);
-	data = std::vector<XmlNodeData>(xmlNode.data);
-	children = LinkedList<XmlNode>(xmlNode.children);
-}
+	std::string _name;
+	std::string _type;
+	std::string _value;
+	
+	XmlNodeData(const std::string name, const std::string type, const std::string value)
+	{
+		_name = name; _type = type; _value = value;
+	}
+
+	XmlNodeData(const XmlNodeData &toCopy) { *this = toCopy; }
+
+	XmlNodeData & operator=(const XmlNodeData &right)
+	{
+		_name = right._name;
+		_type = right._type;
+		_value = right._value;
+	}
+};
 
 bool XmlNode::addData(const std::string name, const std::string type, const std::string value)
 {
@@ -64,6 +73,13 @@ bool XmlNode::addData(const std::string name, const std::string type, const std:
 bool XmlNode::addChildNode(const XmlNode &xmlNode)
 {
 	children.push_back(xmlNode);
+}
+
+XmlNode & XmlNode::operator=(const XmlNode &right)
+{
+	className = right.className;
+	data = right.data;
+	children = right.children;
 }
 
 #endif // XML_NODE_H_
