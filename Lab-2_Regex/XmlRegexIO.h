@@ -30,9 +30,54 @@ public:
 /*
 bool XmlRegexIO::getXmlNodeFromFile(const std::string &filename, XmlNode &store)
 {
+	if (!fileHasMatch(filename))
+		return false;
 
+	std::ifstream ifs;
+	ifs.open(filename);
+
+	std::string line;
+	std::string temp = "";
+	while (getline(ifs, line))
+	{
+		if (std::regex_search(line, rex))
+		{
+			// get className of XmlNode
+			for (int i = 0; i < line.length(); i++)
+			{
+				if (line[i] == '=')
+				{
+					i += 2; // skip the "
+					while (line[i] != '\"')
+					{
+						temp += line[i];
+					}
+					break; // out of for loop for getting className
+				}
+			}
+			store.setClassName(temp); // set className
+
+			// read data names/types and child nodes until closing tag of parent node
+			getline(ifs, line);
+			while (!std::regex_search(line, rex))
+			{
+				if (!std::regex_search(line, std::regex("<[/](complexType\\|all)>"))) // skip the 'complexType' and 'all' tags
+				{
+					if (std::regex_search(line, std::regex("<.* />")))
+					{
+						for (int i = 0; i < line.length(); i++)
+						{
+							if (line[i] == 'e' && line.substr(i, 14).compare("element name=\"") == 0)
+							{
+
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
-*/
 
 // stores in XmlNode store whose fields are grabbed from the file <dataFilename>
 // based on this XmlRegexIO's pattern/regex member variable
@@ -100,5 +145,6 @@ bool XmlRegexIO::getXmlNodeDataFromFile(const std::string &dataFilename, XmlNode
 
 	return true;
 }
+*/
 
 #endif // XML_REGEX_IO_H_
