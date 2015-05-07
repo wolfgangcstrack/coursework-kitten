@@ -6,7 +6,6 @@ CIS29 Spring Quarter 2015 - Lab 2, Regular Expressions
 * Design a utility class to handle RegularExpression functionality.
 * Examine the XML Schema data file and Select three of the XML nodes. 
 * The selected nodes must contain 3 or more data members.
-* One node must contain a child XML node.
 * Extract the data for the node from the XML file using your RegularExpression utility class.
 * Assign the data to your node class object based on the ScanSchemaData.xml file.
 * Store the XML node in your NodeList class.
