@@ -8,9 +8,9 @@ This is the main application for testing Lab 2.
 
 #pragma once
 
-#include "LinkedList.h"
-#include "XmlRegexIO.h"
-#include "XmlNode.h"
+//#include "LinkedList_OLD.h"
+//#include "XmlRegexIO_OLD.h"
+//#include "XmlNode_OLD.h"
 #include <iostream>
 using namespace std;
 

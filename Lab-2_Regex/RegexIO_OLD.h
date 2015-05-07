@@ -44,13 +44,13 @@ RegexIO::RegexIO(const RegexIO &rIO)
 RegexIO::RegexIO(const std::string &patt)
 {
 	pattern = patt;
-	rex = regex(pattern);
+	rex = std::regex(pattern);
 }
 
 void RegexIO::setPattern(const std::string &patt)
 {
 	pattern = patt;
-	rex = regex(pattern);
+	rex = std::regex(pattern);
 }
 
 bool RegexIO::fileHasMatch(const std::string &filename)

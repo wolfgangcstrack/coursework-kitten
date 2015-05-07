@@ -78,13 +78,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="LinkedList.h" />
-    <ClInclude Include="LinkedNode.h" />
-    <ClInclude Include="List.h" />
-    <ClInclude Include="RegexIO.h" />
-    <ClInclude Include="XmlNode.h" />
-    <ClInclude Include="XmlNodeDataTypes.h" />
-    <ClInclude Include="XmlRegexIO.h" />
+    <ClInclude Include="LinkedList_OLD.h" />
+    <ClInclude Include="LinkedNode_OLD.h" />
+    <ClInclude Include="List_OLD.h" />
+    <ClInclude Include="RegexIO_OLD.h" />
+    <ClInclude Include="XmlNode_OLD.h" />
+    <ClInclude Include="XmlNodeDataTypes_OLD.h" />
+    <ClInclude Include="XmlRegexIO_OLD.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

@@ -11,8 +11,8 @@ functionality.
 #ifndef XML_REGEX_IO_H_
 #define XML_REGEX_IO_H_
 
-#include "RegexIO.h"
-#include "XmlNode.h"
+#include "RegexIO_OLD.h"
+#include "XmlNode_OLD.h"
 
 class XmlRegexIO : public RegexIO
 {

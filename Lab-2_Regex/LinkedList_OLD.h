@@ -10,8 +10,8 @@ that mainly holds XML nodes in this project.
 #ifndef LINKED_LIST_H_
 #define LINKED_LIST_H_
 
-#include "List.h"
-#include "LinkedNode.h"
+#include "List_OLD.h"
+#include "LinkedNode_OLD.h"
 
 template<class T>
 class LinkedList : public List<T>

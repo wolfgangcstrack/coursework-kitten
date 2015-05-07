@@ -11,7 +11,7 @@ LinkedList.
 #ifndef XML_NODE_H_
 #define XML_NODE_H_
 
-#include "LinkedList.h"
+#include "LinkedList_OLD.h"
 #include <string>
 #include <vector>
 

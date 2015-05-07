@@ -15,25 +15,25 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="List.h">
+    <ClInclude Include="LinkedList_OLD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LinkedNode.h">
+    <ClInclude Include="LinkedNode_OLD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LinkedList.h">
+    <ClInclude Include="List_OLD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="XmlNode.h">
+    <ClInclude Include="RegexIO_OLD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RegexIO.h">
+    <ClInclude Include="XmlNode_OLD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="XmlRegexIO.h">
+    <ClInclude Include="XmlNodeDataTypes_OLD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="XmlNodeDataTypes.h">
+    <ClInclude Include="XmlRegexIO_OLD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
