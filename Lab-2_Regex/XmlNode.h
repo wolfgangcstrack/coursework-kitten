@@ -20,12 +20,18 @@ typedef unsigned long ulong;
 class XmlNode
 {
 protected:
-	vector<string> xmlTags;
+	string xmlTags;
 public:
+	// constructors and destructor
 	XmlNode() {}
-	const vector<string> & getXMLTags() const { return xmlTags; }
-	void setXMLTags(const vector<string> newTags) { xmlTags = newTags; }
+	XmlNode(const string &tags) { xmlTags = tags; }
 	virtual ~XmlNode() {}
+	// getter
+	const string & getXMLTags() const { return xmlTags; }
+	// setter
+	void setXMLTags(const string &newTags) { xmlTags = newTags; }
+	// other methods
+	virtual void readData(const string &unParsedData) = 0;
 };
 
 class PaperSize : public XmlNode
