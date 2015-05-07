@@ -82,6 +82,7 @@
     <ClInclude Include="LinkedNode_OLD.h" />
     <ClInclude Include="List_OLD.h" />
     <ClInclude Include="RegexIO_OLD.h" />
+    <ClInclude Include="XmlNode.h" />
     <ClInclude Include="XmlNode_OLD.h" />
     <ClInclude Include="XmlNodeDataTypes_OLD.h" />
     <ClInclude Include="XmlRegexIO_OLD.h" />
