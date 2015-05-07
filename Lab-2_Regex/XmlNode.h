@@ -21,11 +21,12 @@ typedef unsigned long ulong;
 class XmlNode
 {
 protected:
+	string className;
 	string xmlTags;
 
 	long get_ulong(const string &data, regex rx)
 	{
-		auto match = sregex_iterator(data.begin(), data.end(), regex("<UpperLeftX>[0-9]*"));
+		auto match = sregex_iterator(data.begin(), data.end(), rx);
 		string temp = match->str();
 		return stol((sregex_iterator(temp.begin(), temp.end(), regex("[0-9]+"))->str()));
 	}
@@ -35,7 +36,7 @@ protected:
 		auto match = sregex_iterator(data.begin(), data.end(), rx);
 		string temp = match->str();
 		string pTemp = "";
-		for (int i = temp.find('>'); i < temp.length(); i++)
+		for (int i = temp.find('>') + 1; i < temp.length(); i++)
 		{
 			if (temp[i] == '<')
 				break;
@@ -58,6 +59,7 @@ public:
 	virtual ~XmlNode() {}
 	// getter
 	const string & getXMLTags() const { return xmlTags; }
+	const string & getClassName() const { return className; }
 	// setter
 	void setXMLTags(const string &newTags) { xmlTags = newTags; }
 	// other methods
@@ -74,9 +76,10 @@ private:
 	ulong height;
 public:
 	// constructors and destructor
-	PaperSize() { paperSpecification = width = height = 0; } // assign default values to primitive types
+	PaperSize() { className = "PaperSize"; paperSpecification = width = height = 0; } // assign default values to primitive types
 	PaperSize(ushort pSpec, string sName, string orient, ulong w, ulong h)
 	{
+		className = "PaperSize";
 		paperSpecification = pSpec;
 		standardName = sName;
 		orientation = orient;
@@ -98,6 +101,16 @@ public:
 	void setHeight(ulong h) { height = h; }
 	// other methods
 	void readData(const string &data);
+	friend ostream & operator<<(ostream &os, const PaperSize &node)
+	{
+		os << node.className << endl
+			<< "\t" << "unsignedShort PaperSpecification = " << node.paperSpecification << endl
+			<< "\t" << "string StandardName = " << node.standardName << endl
+			<< "\t" << "string Orientation = " << node.orientation << endl
+			<< "\t" << "unsignedLong Width = " << node.width << endl
+			<< "\t" << "unsignedLong Height = " << node.height << endl;
+		return os;
+	}
 };
 
 void PaperSize::readData(const string &data)
@@ -119,9 +132,10 @@ private:
 	ulong supportedScanAreaType;
 public:
 	// constructors and destructor
-	Area() { upperLeftX = upperLeftY = width = height = supportedScanAreaType = 0; }
+	Area() { className = "Area"; upperLeftX = upperLeftY = width = height = supportedScanAreaType = 0; }
 	Area(ulong ulx, ulong uly, ulong w, ulong h, ulong sSAT)
 	{
+		className = "Area";
 		upperLeftX = ulx;
 		upperLeftY = uly;
 		width = w;
@@ -142,6 +156,16 @@ public:
 	void setSupportedScanAreaType(ulong sSAT) { supportedScanAreaType = sSAT; }
 	// other methods
 	void readData(const string &data);
+	friend ostream & operator<<(ostream &os, const Area &node)
+	{
+		os << node.className << endl
+			<< "\t" << "unsignedLong UpperLeftX = " << node.upperLeftX << endl
+			<< "\t" << "unsignedLong UpperLeftY = " << node.upperLeftY << endl
+			<< "\t" << "unsignedLong Width = " << node.width << endl
+			<< "\t" << "unsignedLong Height = " << node.height << endl
+			<< "\t" << "unsignedLong SupportedScanAreaType = " << node.supportedScanAreaType << endl;
+		return os;
+	}
 };
 
 void Area::readData(const string &data)
@@ -161,9 +185,10 @@ private:
 	ushort direction;
 public:
 	// constructors and destructor
-	PatchCodeNotification() { enable = type = direction = 0; }
+	PatchCodeNotification() { className = "PatchCodeNotification"; enable = type = direction = 0; }
 	PatchCodeNotification(bool e, ushort t, ushort dir)
 	{
+		className = "PatchCodeNotification";
 		enable = e;
 		type = t;
 		direction = dir;
@@ -179,6 +204,14 @@ public:
 	void setDirection(ushort dir) { direction = dir; }
 	// other methods
 	void readData(const string &data);
+	friend ostream & operator<<(ostream &os, const PatchCodeNotification &node)
+	{
+		os << node.className << endl
+			<< "\t" << "boolean Enable = " << (node.enable ? "true" : "false") << endl
+			<< "\t" << "unsignedShort Type = " << node.type << endl
+			<< "\t" << "unsignedShort Direction = " << node.direction << endl;
+		return os;
+	}
 };
 
 void PatchCodeNotification::readData(const string &data)

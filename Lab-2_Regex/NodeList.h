@@ -17,15 +17,15 @@ using namespace std;
 class NodeList
 {
 private:
-	vector<XmlNode> nodeList;
+	vector<XmlNode*> nodeList;
 public:
 	// constructors and destructor
 	NodeList() {}
 	~NodeList() {}
 	// wrapped methods
 	int size() const { return nodeList.size(); }
-	const XmlNode & operator[](unsigned int index) { return nodeList[index]; }
-	void push_back(const XmlNode &xmlNode) { nodeList.push_back(xmlNode); }
+	XmlNode *& operator[](unsigned int index) { return nodeList[index]; }
+	void push_back(XmlNode *&xmlNode) { nodeList.push_back(xmlNode); }
 	void pop_back() { nodeList.pop_back(); }
 };
 

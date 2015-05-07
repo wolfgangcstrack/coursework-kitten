@@ -51,4 +51,8 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="ScanParams.xml" />
+    <Xml Include="ScanParamsData.xml" />
+  </ItemGroup>
 </Project>

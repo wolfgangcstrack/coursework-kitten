@@ -29,13 +29,13 @@ private:
 public:
 	// constructors and destructor
 	XmlRegexIO() {}
-	XmlRegexIO(const string &patt) { pattern = patt; rex.assign(pattern); }
+	XmlRegexIO(const string &patt) { pattern = patt; rex = regex(pattern); }
 	~XmlRegexIO() {}
 	// getters
 	const string & getPattern() { return pattern; }
 	const regex & getRegex() { return rex; }
 	// setters
-	void setPattern(const string &patt) { pattern = patt; rex.assign(pattern); }
+	void setPattern(const string &patt) { pattern = patt; rex = regex(pattern); }
 	// other methods
 	bool getXmlTags(const string &filename, XmlNode &store);
 	bool getXmlData(const string &dataFilename, XmlNode &store);
@@ -56,7 +56,7 @@ bool XmlRegexIO::getXmlTags(const string &filename, XmlNode &store)
 	if (!regex_search(content, rex)) // check if pattern returns true
 		return false;
 
-	int positionOfOpeningTag = content.find(pattern);
+	int positionOfOpeningTag = content.find("<element name=\"" + store.getClassName());
 	if (positionOfOpeningTag < 0) // validate string position
 		return false;
 
@@ -92,7 +92,7 @@ bool XmlRegexIO::getXmlData(const string &dataFilename, XmlNode &store)
 	if (!regex_search(content, rex)) // check if pattern returns true
 		return false;
 
-	int positionOfOpeningTag = content.find(pattern);
+	int positionOfOpeningTag = content.find("<" + store.getClassName());
 	if (positionOfOpeningTag < 0) // validate string position
 		return false;
 
@@ -101,9 +101,9 @@ bool XmlRegexIO::getXmlData(const string &dataFilename, XmlNode &store)
 	{
 		if (content[i] == '<') // find closing tag of element
 		{
-			if (regex_match(content.substr(i, pattern.length()), regex("</"+pattern)))
+			if (regex_search(content.substr(i, pattern.length()), regex("</" + store.getClassName() + ">")))
 			{
-				lengthTillClosingTag = (i + 10) - positionOfOpeningTag;
+				lengthTillClosingTag = (i + store.getClassName().length() + 3) - positionOfOpeningTag;
 				store.readData(content.substr(positionOfOpeningTag, lengthTillClosingTag));
 				break; // out of loop
 			}
