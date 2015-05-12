@@ -8,11 +8,14 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 class OptionSet implements java.io.Serializable {
 	// serialVersionUID generated with serialver
 	private static final long serialVersionUID = 5537926375200316701L;
 	private String name;
-	private Option options[]; // defined at end of class
+	private ArrayList<Option> options;
+	private Option choice;
 	
 	// constructors ------------------------------------------------------
 	protected OptionSet() { this("", 0); }
@@ -21,12 +24,14 @@ class OptionSet implements java.io.Serializable {
 	
 	protected OptionSet(String name, int size) {
 		this.name = name;
-		options = new Option[size];
-		for (int i = 0; i < options.length; i++)
-			options[i] = new Option();
+		options = new ArrayList<Option>(size);
+		for (int i = 0; i < options.size(); i++) {
+			options.set(i, new Option());
+		}
 	}
 	
 	// getters -----------------------------------------------------------
+	/*
 	protected String getName() { return name; }
 	
 	protected Option[] getOptions() { return options; }
@@ -44,8 +49,9 @@ class OptionSet implements java.io.Serializable {
 			return options[index];
 		return null; // when index is not within range
 	}
-	
+	*/
 	// setters -----------------------------------------------------------
+	/*
 	protected void setName(String name) { this.name = name; }
 	
 	protected void setOptions(Option options[]) { this.options = options; }
@@ -57,8 +63,9 @@ class OptionSet implements java.io.Serializable {
 	protected void setOption(int index, String opName, float opPrice) {
 		options[index] = new Option(opName, opPrice);
 	}
-	
+	*/
 	// add Option methods ------------------------------------------------
+	/*
 	protected boolean addOption(String opName, float opPrice) {
 		// function does not return false (no parameter checking) for now
 		
@@ -98,4 +105,5 @@ class OptionSet implements java.io.Serializable {
 		
 		return sb.toString();
 	}
+	*/
 }

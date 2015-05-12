@@ -17,7 +17,6 @@ public class Automobile implements java.io.Serializable {
 	private String model;
 	private double baseprice;
 	private LinkedHashMap<String, OptionSet> optionSets;
-	private Option choice;
 	
 	// constructors ------------------------------------------------------
 	public Automobile() { this("", "", "", 0, 0);  }
@@ -34,8 +33,8 @@ public class Automobile implements java.io.Serializable {
 		this.model = model;
 		this.baseprice = baseprice;
 		optionSets = new LinkedHashMap<String, OptionSet>(optionSetsSize);
-		choice = new Option();
 	}
+	
 	// getters -----------------------------------------------------------
 	public String getName() { return name; }
 	public String getMake() { return make; }
