@@ -7,33 +7,34 @@
  */
 package model;
 
+import java.util.LinkedHashMap;
+
 public class Automobile implements java.io.Serializable {
 	// serialVersionUID generated with serialver
 	private static final long serialVersionUID = 6569130310546375757L;
 	private String name;
+	private String make;
+	private String model;
 	private double baseprice;
-	private OptionSet opsets[];
+	private LinkedHashMap<String, OptionSet> optionSets;
+	private OptionSet.Option choice;
 	
 	// constructors ------------------------------------------------------
-	public Automobile() { this("", 0, 0); }
+	public Automobile() { this("", "", "", 0);  }
+	public Automobile(String name) { this(name, "", "", 0); }
+	public Automobile(String name, String make) { this(name, make, "", 0); }
+	public Automobile(String name, String make, String model) { this(name, make, model, 0); }
 	
-	public Automobile(String name) { this(name, 0, 0); }
-	
-	public Automobile(String name, double baseprice) { this(name, baseprice, 0); }
-	
-	public Automobile(String name, int optionSetSize) {
-		this(name, 0, (optionSetSize >= 0 ? optionSetSize : 0));
-	}
-	
-	public Automobile(String name, double baseprice, int optionSetSize) {
+	public Automobile(String name, String make, String model, double baseprice) {
 		this.name = name;
+		this.make = make;
+		this.model = model;
 		this.baseprice = baseprice;
-		opsets = new OptionSet[(optionSetSize >= 0 ? optionSetSize : 0)];
 	}
-	
 	// getters -----------------------------------------------------------
 	public String getName() { return name; }
-	
+	public String getMake() { return make; }
+	public String getModel() { return model; }
 	public double getBasePrice() { return baseprice; }
 	
 	// ----- get this.opsets or a subset of this.opsets
