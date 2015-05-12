@@ -17,19 +17,24 @@ public class Automobile implements java.io.Serializable {
 	private String model;
 	private double baseprice;
 	private LinkedHashMap<String, OptionSet> optionSets;
-	private OptionSet.Option choice;
+	private Option choice;
 	
 	// constructors ------------------------------------------------------
-	public Automobile() { this("", "", "", 0);  }
-	public Automobile(String name) { this(name, "", "", 0); }
-	public Automobile(String name, String make) { this(name, make, "", 0); }
-	public Automobile(String name, String make, String model) { this(name, make, model, 0); }
-	
+	public Automobile() { this("", "", "", 0, 0);  }
+	public Automobile(String name) { this(name, "", "", 0, 0); }
+	public Automobile(String name, String make) { this(name, make, "", 0, 0); }
+	public Automobile(String name, String make, String model) { this(name, make, model, 0, 0); }
 	public Automobile(String name, String make, String model, double baseprice) {
+		this(name, make, model, baseprice, 0);
+	}
+	
+	public Automobile(String name, String make, String model, double baseprice, int optionSetsSize) {
 		this.name = name;
 		this.make = make;
 		this.model = model;
 		this.baseprice = baseprice;
+		optionSets = new LinkedHashMap<String, OptionSet>(optionSetsSize);
+		choice = new Option();
 	}
 	// getters -----------------------------------------------------------
 	public String getName() { return name; }
