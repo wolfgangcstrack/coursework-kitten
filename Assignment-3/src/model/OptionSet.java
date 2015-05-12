@@ -49,6 +49,14 @@ class OptionSet implements java.io.Serializable {
 		return null; // when index is not within range
 	}
 	
+	protected Option getOption(String optionName) {
+		for (Option option : options) {
+			if (option.getName().equals(optionName))
+				return option;
+		}
+		return null; // Option not found
+	}
+	
 	protected Option getOptionChoice() { return choice; }
 	
 	// setters -----------------------------------------------------------
@@ -57,6 +65,14 @@ class OptionSet implements java.io.Serializable {
 	//protected void setOptions(Option options[]) { this.options = options; }
 	
 	protected void setOptionName(int index, String opName) { options.get(index).setName(opName); }
+	
+	protected void setOptionName(String opName, String newName) {
+		for (Option option : options) {
+			if (option.getName().equals(opName)) {
+				option.setName(newName);
+			}
+		}
+	}
 	
 	protected void setOptionPrice(int index, float opPrice) { options.get(index).setPrice(opPrice); }
 	

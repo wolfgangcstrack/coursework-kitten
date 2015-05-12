@@ -7,11 +7,12 @@
  */
 package model;
 
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 public class Automobile implements java.io.Serializable {
 	// serialVersionUID generated with serialver
-	private static final long serialVersionUID = 6569130310546375757L;
+	// private static final long serialVersionUID = 6569130310546375757L;
 	private String name;
 	private String make;
 	private String model;
@@ -40,66 +41,82 @@ public class Automobile implements java.io.Serializable {
 	public String getMake() { return make; }
 	public String getModel() { return model; }
 	public double getBasePrice() { return baseprice; }
+	public LinkedHashMap<String, OptionSet> getOptionSets() { return optionSets; }
 	
-	// ----- get this.opsets or a subset of this.opsets
-	public OptionSet[] getOptionSets() { return opsets; }
-	
-	public OptionSet[] getOptionSets(int length) { return getOptionSets(0, length); }
-	
-	public OptionSet[] getOptionSets(int start, int length) {
-		if (start < 0 || start > opsets.length || length < 0 || length > opsets.length-1)
-			return null; // if start or length are invalid
-		OptionSet result[] = new OptionSet[length];
-		System.arraycopy(opsets, start, result, 0, length);
-		return result;
+	// ----- get OptionSet.choice's values
+	public String getOptionChoice(String optionSetName) {
+		OptionSet opset = optionSets.get(optionSetName);
+		// if optionSetName is valid, return the name of its choice, else null
+		return (opset != null ? opset.getOptionChoice().getName() : null);
 	}
 	
-	// ----- get individual OptionSets and their values
-	public OptionSet getOptionSet(int index) {
-		if (index < 0 || index >= opsets.length)
-			return null;
-		return opsets[index];
+	public float getOptionChoicePrice(String optionSetName) {
+		OptionSet opset = optionSets.get(optionSetName);
+		// if optionSetName is valid, return the price of its choice, else 0
+		return (opset != null ? opset.getOptionChoice().getPrice() : 0);
 	}
 	
-	public String getOptionSetName(int index) {
-		if (index < 0 || index >= opsets.length)
-			return null;
-		return opsets[index].getName();
+	// ----- get individual Options' values (in context of OptionSet)
+	public String getOptionName(String optionSetName, int optionIndex) {
+		OptionSet opset = optionSets.get(optionSetName);
+		// if optionSetName is valid, return the name of the choice, else null
+		return (opset != null ? opset.getOption(optionIndex).getName() : null);
 	}
 	
-	// ----- get individual Options and their values (in context of OptionSet)
-	public String getOptionName(int opsIndex, int opIndex) {
-		if (opsIndex < 0 || opsIndex >= opsets.length ||
-				opIndex < 0 || opIndex >= opsets[opsIndex].getOptions().length)
-			return null;
-		return opsets[opsIndex].getOptions()[opsIndex].getName();
+	public float getOptionPrice(String optionSetName, int optionIndex) {
+		OptionSet opset = optionSets.get(optionSetName);
+		// if optionSetName is valid, return the price of the choice, else 0
+		return (opset != null ? opset.getOption(optionIndex).getPrice() : 0);
 	}
 	
-	public String getOptionName(String opsName, int opIndex) {
-		return getOptionName(findOptionSet(opsName), opIndex);
+	public double getTotalPrice() {
+		double total = baseprice;
+		
+		Iterator<OptionSet> a = optionSets.values().iterator();
+		while (a.hasNext()) {
+			total += a.next().getOptionChoice().getPrice();
+		}
+		
+		return total;
 	}
-	
-	public float getOptionPrice(int opsIndex, int opIndex) {
-		if (opsIndex < 0 || opsIndex >= opsets.length ||
-				opIndex < 0 || opIndex >= opsets[opsIndex].getOptions().length)
-			return Float.NaN;
-		return opsets[opsIndex].getOptions()[opsIndex].getPrice();
-	}
-	
-	public float getOptionPrice(String opsName, int opIndex) {
-		return getOptionPrice(findOptionSet(opsName), opIndex);
-	}
-	
-	
+
 	// setters -----------------------------------------------------------
 	public void setName(String name) { this.name = name; }
-	
+	public void setMake(String make) { this.make = make; }
+	public void setModel(String model) { this.model = model; }
 	public void setBasePrice(double baseprice) { this.baseprice = baseprice; }
 	
-	public void setOptionSets(OptionSet newOpSets[]) { opsets = newOpSets; }
+	// ----- set the choice for an OptionSet
+	public void setOptionChoice(String optionSetName, String optionName) {
+		OptionSet opset = optionSets.get(optionSetName);
+		if (opset != null) {
+			opset.setOptionChoice(optionName);
+		}
+	}
+
+	// ----- set individual OptionSets' values
+	public void setOptionSetName(String optionSetName, String newName) {
+		optionSets.get(optionSetName).setName(newName);
+	}
+
+	// ----- set individual Options and their values (in context of OptionSet)
+	public void setOptionName(String optionSetName, int optionIndex, String newName) {
+		OptionSet opset = optionSets.get(optionSetName);
+		if (opset != null) {
+			opset.setOptionName(optionIndex, newName);
+		}
+	}
+	
+	public void setOptionName(String optionSetName, String optionName, String newName) {
+		OptionSet opset = optionSets.get(optionSetName);
+		if (opset != null) {
+			opset.se
+		}
+	}
+	/*
+	// setters -----------------------------------------------------------
 	
 	// ----- set individual OptionSets and their values
-	public void setOptionSet(int index, OptionSet newOps) { opsets[index] = newOps; }
 	
 	public void setOptionSetName(int index, String name) { opsets[index].setName(name); }
 	
@@ -115,7 +132,8 @@ public class Automobile implements java.io.Serializable {
 	public void setOption(int opsIndex, int opIndex, String opName, float opPrice) {
 		opsets[opsIndex].setOption(opIndex, opName, opPrice);
 	}
-	
+	*/
+	/*
 	// find methods ------------------------------------------------------
 	public int findOptionSet(String name) {
 		for (int i = 0; i < opsets.length; i++) {
@@ -139,7 +157,8 @@ public class Automobile implements java.io.Serializable {
 		}
 		return -1;
 	}
-	
+	*/
+	/*
 	// update (find and set) methods -------------------------------------
 	// ----- update individual OptionSets and their values
 	public boolean updateOptionSet(String opsName, OptionSet ops) {
@@ -214,8 +233,8 @@ public class Automobile implements java.io.Serializable {
 		opsets[opsIndex].setOption(opIndex, newOpName, newOpPrice);
 		return true;
 	}
-	
-	
+	*/
+	/*
 	// add (OptionSet/Option to this) methods ----------------------------
 	public boolean addOptionSet(String opsName) { return addOptionSet(opsName, 0); }
 	
@@ -244,8 +263,8 @@ public class Automobile implements java.io.Serializable {
 		
 		return opsets[opsIndex].addOption(opName, opPrice);
 	}
-	
-	
+	*/
+	/*
 	// delete (OptionSet/Option from this) methods -----------------------
 	public boolean deleteOptionSet(String opsName) {
 		return deleteOptionSet(findOptionSet(opsName));
@@ -284,8 +303,8 @@ public class Automobile implements java.io.Serializable {
 		
 		return opsets[opsIndex].deleteOption(opIndex);
 	}
-	
-	
+	*/
+	/*
 	// toString() --------------------------------------------------------
 	public String toString() {
 		StringBuilder sb = new StringBuilder(name);
@@ -301,4 +320,5 @@ public class Automobile implements java.io.Serializable {
 		
 		return sb.toString();
 	}
+	*/
 }
