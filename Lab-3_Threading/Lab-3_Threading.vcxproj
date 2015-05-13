@@ -11,10 +11,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="NodeList.h" />
     <ClInclude Include="Robot.h" />
+    <ClInclude Include="XmlNode.h" />
+    <ClInclude Include="XmlRegexIO.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="RobotData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D57FAEFE-72E7-490E-BAEB-2D71EB85AD5C}</ProjectGuid>
