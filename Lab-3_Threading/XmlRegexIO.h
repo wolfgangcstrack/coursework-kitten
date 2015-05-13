@@ -144,7 +144,29 @@ bool XmlRegexIO::getXmlDataFromString(const string &data, XmlNode &store)
 
 bool XmlRegexIO::getAllMatches(const string &dataFilename, vector<string> &store)
 {
+	// check if file exists/can be read from
+	std::ifstream ifs;
+	ifs.open(dataFilename);
+	if (!ifs.is_open())
+		return false;
 
+	// store entire file in content
+	std::string content((istreambuf_iterator<char>(ifs)),
+		(istreambuf_iterator<char>()));
+
+	sregex_iterator rIterBegin = sregex_iterator(content.begin(), content.end(), rex);
+	sregex_iterator rIterEnd = sregex_iterator();
+
+	// if there were no matches, return false
+	if (distance(rIterBegin, rIterEnd) == 0)
+		return false;
+
+	for (sregex_iterator i = rIterBegin; i != rIterEnd; ++i)
+	{
+		store.push_back((*i).str());
+	}
+
+	return true;
 }
 
 #endif // _XML_REGEX_IO_H

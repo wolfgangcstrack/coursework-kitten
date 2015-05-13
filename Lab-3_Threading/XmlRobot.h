@@ -34,4 +34,9 @@ private:
 	Command command;
 };
 
+void XmlRobot::readData(const string &data)
+{
+
+}
+
 #endif // XML_ROBOT_H_
