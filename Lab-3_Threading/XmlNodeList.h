@@ -12,20 +12,21 @@ This class is essentially a wrapper of the stl vector.
 
 #include "XmlNode.h"
 #include <vector>
+#include <memory>
 using namespace std;
 
 class XmlNodeList
 {
 private:
-	vector<XmlNode*> nodeList;
+	vector<shared_ptr<XmlNode>> nodeList;
 public:
 	// constructors and destructor
 	XmlNodeList() {}
 	~XmlNodeList() {}
 	// wrapped methods
 	int size() const { return nodeList.size(); }
-	XmlNode *& operator[](unsigned int index) { return nodeList[index]; }
-	void push_back(XmlNode *&xmlNode) { nodeList.push_back(xmlNode); }
+	shared_ptr<XmlNode> operator[](unsigned int index) { return nodeList[index]; }
+	void push_back(shared_ptr<XmlNode> &xmlNode) { nodeList.push_back(xmlNode); }
 	void pop_back() { nodeList.pop_back(); }
 };
 
