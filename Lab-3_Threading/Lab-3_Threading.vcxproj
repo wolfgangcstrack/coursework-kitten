@@ -11,7 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NodeList.h" />
+    <ClInclude Include="ConsoleColor.h" />
+    <ClInclude Include="XmlNodeList.h" />
     <ClInclude Include="Robot.h" />
     <ClInclude Include="XmlNode.h" />
     <ClInclude Include="XmlRegexIO.h" />
