@@ -22,10 +22,10 @@ void instantiateRobotCommands(XmlRegexIO &xRIO, const vector<string> &tags, XmlN
 void executeRobotCommands(const XmlNodeList &rcList);
 
 // the following methods are called from executeRobotCommands()
-void useRobotA1(const XmlRobot &robot); // use thread 1
-void useRobotA2(const XmlRobot &robot); // use thread 2
-void useRobotA3(const XmlRobot &robot); // use thread 3
-void useRobotA4(const XmlRobot &robot); // use thread 4
+void useRobotA1(const XmlRobot &robot); // use thread 1, red
+void useRobotA2(const XmlRobot &robot); // use thread 2, blue
+void useRobotA3(const XmlRobot &robot); // use thread 3, green
+void useRobotA4(const XmlRobot &robot); // use thread 4, yellow
 
 int main()
 {
@@ -79,16 +79,16 @@ void executeRobotCommands(const XmlNodeList &rcList)
 		switch (robot->getRobotNumber()[1])
 		{
 		case '1':
-			useRobotA1(*robot);
+			useRobotA1(*robot); // red console font
 			break;
 		case '2':
-			useRobotA2(*robot);
+			useRobotA2(*robot); // blue console font
 			break;
 		case '3':
-			useRobotA3(*robot);
+			useRobotA3(*robot); // green console font
 			break;
 		case '4':
-			useRobotA4(*robot);
+			useRobotA4(*robot); // yellow console font
 			break;
 		default:
 			cout << "Robot number error!\n";
