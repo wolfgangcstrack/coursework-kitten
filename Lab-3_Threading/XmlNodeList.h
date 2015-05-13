@@ -25,7 +25,9 @@ public:
 	~XmlNodeList() {}
 	// wrapped methods
 	int size() const { return nodeList.size(); }
-	shared_ptr<XmlNode> operator[](unsigned int index) { return nodeList[index]; }
+	bool empty() const { return nodeList.empty(); }
+	shared_ptr<XmlNode> operator[](unsigned int index) const { return nodeList[index]; }
+	shared_ptr<XmlNode> front() const { return nodeList[0]; }
 	void push_back(shared_ptr<XmlNode> &xmlNode) { nodeList.push_back(xmlNode); }
 	void pop_back() { nodeList.pop_back(); }
 };

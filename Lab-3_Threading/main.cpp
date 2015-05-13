@@ -17,10 +17,9 @@ This is the main application for this lab.
 using namespace std;
 
 // the following methods are called from main()
-void openDataFile(ifstream &ifs, const string &filename);
-void readTagsFromFile(const ifstream &ifs, vector<string> &tags);
-void instantiateRobotCommands(const vector<string> &tags, vector<unique_ptr<XmlNode>> &robotCommands);
-void executeRobotCommands(const vector<unique_ptr<XmlNode>> &robotCommands);
+void readTagsFromFile(XmlRegexIO &xRIO, const string &filename, vector<string> &tags);
+void instantiateRobotCommands(XmlRegexIO &xRIO, const vector<string> &tags, XmlNodeList &rcList);
+void executeRobotCommands(const XmlNodeList &rcList);
 
 // the following methods are called from executeRobotCommands()
 void useRobotA1(const XmlRobot &robot); // use thread 1
@@ -30,13 +29,70 @@ void useRobotA4(const XmlRobot &robot); // use thread 4
 
 int main()
 {
-	string filename = "RobotData.xml";
+	XmlNodeList rcList;
 	vector<string> tags;
+	string filename = "RobotData.xml";
 	vector<unique_ptr<XmlNode>> robotCommands;
-	ifstream ifs;
+	XmlRegexIO xRIO("<command>\\n.*?<robot>.*\\n.*?<offon>.*\\n.*?<speed>.*\\n.*?<horizontal>.*\\n.*?<vertical>.*\\n.*?<time>.*\\n.*?</command>");
 
-	openDataFile(ifs, filename);
-	readTagsFromFile(ifs, tags);
-	instantiateRobotCommands(tags, robotCommands);
-	executeRobotCommands(robotCommands); // calls the useRobot methods
+	cout << "This is a demonstration of Lab 3: Threading\n\n";
+
+	readTagsFromFile(xRIO, filename, tags); // uses XmlRegexIO to read tags
+
+	instantiateRobotCommands(xRIO, tags, rcList);
+
+	executeRobotCommands(rcList); // calls the useRobot methods
+
+	return 0;
+}
+
+void readTagsFromFile(XmlRegexIO &xRIO, const string &filename, vector<string> &tags)
+{
+	if (!xRIO.getAllMatches(filename, tags))
+	{
+		cout << "Error in file: " << filename << endl;
+		return;
+	}
+}
+
+void instantiateRobotCommands(XmlRegexIO &xRIO, const vector<string> &tags, XmlNodeList &rcList)
+{
+	for (int i = 0; i < tags.size(); i++)
+	{
+		shared_ptr<XmlNode> robotPtr(new XmlRobot());
+		robotPtr->setXMLTags(tags[i]);
+		if (!xRIO.getXmlDataFromString(tags[i], *robotPtr))
+		{
+			cout << "Error in instantiating Robots!\n";
+			return;
+		}
+		rcList.push_back(robotPtr);
+	}
+}
+
+void executeRobotCommands(const XmlNodeList &rcList)
+{
+	while (!rcList.empty())
+	{
+		shared_ptr<XmlRobot> robot(dynamic_pointer_cast<XmlRobot>(rcList.front()));
+
+		switch (robot->getRobotNumber()[1])
+		{
+		case '1':
+			useRobotA1(*robot);
+			break;
+		case '2':
+			useRobotA2(*robot);
+			break;
+		case '3':
+			useRobotA3(*robot);
+			break;
+		case '4':
+			useRobotA4(*robot);
+			break;
+		default:
+			cout << "Robot number error!\n";
+			return;
+		}
+	}
 }
