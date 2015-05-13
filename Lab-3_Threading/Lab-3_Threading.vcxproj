@@ -15,6 +15,7 @@
     <ClInclude Include="Robot.h" />
     <ClInclude Include="XmlNode.h" />
     <ClInclude Include="XmlRegexIO.h" />
+    <ClInclude Include="XmlRobot.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="RobotData.xml" />

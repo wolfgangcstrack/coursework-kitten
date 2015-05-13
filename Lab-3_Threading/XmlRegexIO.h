@@ -18,6 +18,7 @@ using namespace std;
 
 #include <iostream>
 #include <fstream>
+#include <vector>
 #include <string>
 using namespace std;
 
@@ -38,7 +39,9 @@ public:
 	void setPattern(const string &patt) { pattern = patt; rex = regex(pattern); }
 	// other methods
 	bool getXmlTags(const string &filename, XmlNode &store);
-	bool getXmlData(const string &dataFilename, XmlNode &store);
+	bool getXmlDataFromFile(const string &dataFilename, XmlNode &store);
+	bool getXmlDataFromString(const string &data, XmlNode &store);
+	bool getAllMatches(const string &dataFilename, vector<string> &store);
 };
 
 bool XmlRegexIO::getXmlTags(const string &filename, XmlNode &store)
@@ -77,7 +80,7 @@ bool XmlRegexIO::getXmlTags(const string &filename, XmlNode &store)
 	return true;
 }
 
-bool XmlRegexIO::getXmlData(const string &dataFilename, XmlNode &store)
+bool XmlRegexIO::getXmlDataFromFile(const string &dataFilename, XmlNode &store)
 {
 	// check if file exists/can be read from
 	std::ifstream ifs;
@@ -111,6 +114,37 @@ bool XmlRegexIO::getXmlData(const string &dataFilename, XmlNode &store)
 	}
 
 	return true;
+}
+
+bool XmlRegexIO::getXmlDataFromString(const string &data, XmlNode &store)
+{
+	if (!regex_search(data, rex)) // check if pattern returns true
+		return false;
+
+	int positionOfOpeningTag = data.find("<" + store.getClassName());
+	if (positionOfOpeningTag < 0) // validate string position
+		return false;
+
+	int lengthTillClosingTag;
+	for (int i = positionOfOpeningTag; i < data.length(); i++)
+	{
+		if (data[i] == '<') // find closing tag of element
+		{
+			if (regex_search(data.substr(i, pattern.length()), regex("</" + store.getClassName() + ">")))
+			{
+				lengthTillClosingTag = (i + store.getClassName().length() + 3) - positionOfOpeningTag;
+				store.readData(data.substr(positionOfOpeningTag, lengthTillClosingTag));
+				break; // out of loop
+			}
+		}
+	}
+
+	return true;
+}
+
+bool XmlRegexIO::getAllMatches(const string &dataFilename, vector<string> &store)
+{
+
 }
 
 #endif // _XML_REGEX_IO_H
