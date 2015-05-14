@@ -213,76 +213,50 @@ public class Automobile implements java.io.Serializable {
 		return false;
 	}
 	
-	/*
-	// add (OptionSet/Option to this) methods ----------------------------
+	// add (OptionSet/Option) methods ------------------------------------
 	public boolean addOptionSet(String opsName) { return addOptionSet(opsName, 0); }
 	
 	public boolean addOptionSet(String opsName, int opsSize) {
-		if (opsSize < 0)
+		if (opsSize < 0) {
 			return false;
-		
-		OptionSet newOpsets[] = new OptionSet[opsets.length+1];
-		// here's one good reason why this class probably
-		// should have used an ArrayList instead
-		for (int i = 0; i < opsets.length; i++)
-			newOpsets[i] = opsets[i]; // copy this.opsets to newOpsets
-		newOpsets[opsets.length] = new OptionSet(opsName, opsSize); // add new OptionSet
-		
-		opsets = newOpsets; // assign the new array to this.opsets
-		return true; // successfully added new OptionSet
-	}
-	
-	public boolean addOption(String opsName, String newOpName, float newOpPrice) {
-		return addOption(findOptionSet(opsName), newOpName, newOpPrice);
-	}
-	
-	public boolean addOption(int opsIndex, String opName, float opPrice) {
-		if (opsIndex < 0 || opsIndex >= opsets.length)
-			return false; // opsIndex out of range, Option not added
-		
-		return opsets[opsIndex].addOption(opName, opPrice);
-	}
-	*/
-	/*
-	// delete (OptionSet/Option from this) methods -----------------------
-	public boolean deleteOptionSet(String opsName) {
-		return deleteOptionSet(findOptionSet(opsName));
-	}
-	
-	public boolean deleteOptionSet(int opsIndex) {
-		if (opsIndex < 0 || opsIndex >= opsets.length)
-			return false;
-		
-		// make new array have size = this.opsets.length-1
-		OptionSet newOpsets[] = new OptionSet[opsets.length-1];
-		// copy all OptionSets besides the one at opsIndex
-		for (int i = 0; i < newOpsets.length; i++) {
-			if (i < opsIndex)
-				newOpsets[i] = opsets[i];
-			else if (i > opsIndex)
-				newOpsets[i] = opsets[i+1];
 		}
-		opsets = newOpsets; // assign the new array of OptionSets
+		
+		if (optionSets.containsKey(opsName)) {
+			return false;
+		}
+		
+		optionSets.put(opsName, new OptionSet(opsName, opsSize));
 		return true;
 	}
 	
-	public boolean deleteOption(String opsName, int opIndex) {
-		return deleteOption(findOptionSet(opsName), opIndex);
+	public boolean addOption(String opsName, String newOpName, float newOpPrice) {
+		OptionSet opset = optionSets.get(opsName);
+		
+		if (opset != null) {
+			if (!opset.containsOption(newOpName)) {
+				opset.addOption(newOpName, newOpPrice);
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	// delete (OptionSet/Option) methods ---------------------------------
+	public boolean deleteOptionSet(String opsName) {
+		// if remove was successful, return true, else return false
+		return (optionSets.remove(opsName) != null ? true : false);
 	}
 	
 	public boolean deleteOption(String opsName, String opName) {
-		int opsIndex = findOptionSet(opsName);
-		return deleteOption(opsIndex, findOption(opsIndex, opName));
-	}
-	
-	public boolean deleteOption(int opsIndex, int opIndex) {
-		if (opsIndex < 0 || opsIndex >= opsets.length ||
-				opIndex < 0 || opIndex >= opsets[opsIndex].getOptions().length)
-			return false;
+		OptionSet opset = optionSets.get(opsName);
 		
-		return opsets[opsIndex].deleteOption(opIndex);
+		if (opset != null) {
+			return opset.deleteOption(opName);
+		}
+		
+		return false;
 	}
-	*/
 	/*
 	// toString() --------------------------------------------------------
 	public String toString() {

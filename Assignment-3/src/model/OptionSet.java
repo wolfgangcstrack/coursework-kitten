@@ -168,6 +168,17 @@ class OptionSet implements java.io.Serializable {
 	}
 	
 	// delete Option methods ---------------------------------------------
+	protected boolean deleteOption(String opName) {
+		for (int i = 0; i < options.size(); i++) {
+			if (options.get(i).getName().equals(opName)) {
+				options.remove(i);
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	protected boolean deleteOption(int index) {
 		if (index < 0 || index >= options.size())
 			return false;
