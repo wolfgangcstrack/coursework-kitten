@@ -32,6 +32,7 @@ public:
 		Reset();
 		return bvalid;
 	}
+
 	friend ostream& operator << (ostream& out, ColorCommand& command)
 	{
 		out << "Command = On: " << command.offon << '\t';
@@ -41,19 +42,6 @@ public:
 		out << "Time: " << command.time.to_ulong() << endl;
 		return out;
 	}
-/*private:
-	// 0 = off 1 = on
-	bitset<1> offon;
-	// 0 = invalid 1 = ok
-	bitset<1> errorcode;
-	// 1 = low 2 = high
-	bitset<2> speed;
-	// 1 = clockwise 2 = counter-clockwise
-	bitset<2> horizontal;
-	// 1 = up 2 = down
-	bitset<2> vertical;
-	// time (maximum 255 ms)
-	bitset<8> time;*/
 };
 
 class XmlRobot : public Robot, public XmlNode
@@ -61,6 +49,7 @@ class XmlRobot : public Robot, public XmlNode
 public:
 	XmlRobot() {}
 	~XmlRobot() {}
+
 	// methods from Robot class
 	bool Execute(ostream& color(ostream &s)) { return command.Execute(color); }
 	void setOffOn(int value) { command.setOffOn(value); }
@@ -69,14 +58,17 @@ public:
 	void setHorizontal(int value) { command.setHorizontal(value); }
 	void setVertical(int value) { command.setVertical(value); }
 	void setTime(int value) { command.setTime(value); }
+
 	// methods from XmlNode class
 	void readData(const string &data);
+
 	// other methods
 	const string & getRobotNumber() const { return robotnum; }
 	void setRobotNumber(const string &rnum) { robotnum = rnum; }
 private:
 	// member variables from Robot
 	ColorCommand command;
+
 	// extra member variable for Robot number (A1, A2, A3, A4)
 	string robotnum;
 };

@@ -144,27 +144,4 @@ private:
 	Command command;
 };
 
-/*// Test Bench
-void RobotTest()
-{
-	Robot robot;
-
-	// invalid
-	cout << ((robot.Execute() == OK) ? "OK\n" : "EROR\n");
-
-	// valid
-	robot.setOffOn(ON);
-	robot.setSpeed(HIGH);
-	robot.setHorizontal(COUNTERCLOCKWISE);
-	robot.setVertical(UP);
-	robot.setTime(128);
-	cout << ((robot.Execute() == OK) ? "OK\n" : "EROR\n"); 
-}
-
-void main()
-{
-	RobotTest();
-}
-*/
-
 #endif // ROBOT_H_
