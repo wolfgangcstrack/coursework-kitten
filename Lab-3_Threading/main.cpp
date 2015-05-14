@@ -21,13 +21,8 @@ void readTagsFromFile(XmlRegexIO &xRIO, const string &filename, vector<string> &
 void instantiateRobotCommands(XmlRegexIO &xRIO, const vector<string> &tags, XmlNodeList &rcList);
 void executeRobotCommands(XmlNodeList &rcList);
 
-// the following methods are called from executeRobotCommands()
-void useRobotA1(XmlRobot &robot); // use thread 1, red
-void useRobotA2(XmlRobot &robot); // use thread 2, blue
-void useRobotA3(XmlRobot &robot); // use thread 3, green
-void useRobotA4(XmlRobot &robot); // use thread 4, yellow
-
-// the following method is called by the useRobotA# commands and is a wrapper that supports console color
+// the following method is called from executeRobotCommands()
+// In essence, it is a "wrapper" function that supports console color
 void useRobot(XmlRobot &robot);
 
 int main()
@@ -75,6 +70,11 @@ void instantiateRobotCommands(XmlRegexIO &xRIO, const vector<string> &tags, XmlN
 
 void executeRobotCommands(XmlNodeList &rcList)
 {
+	thread A1; // red console font
+	thread A2; // blue console font
+	thread A3; // green console font
+	thread A4; // yellow console font
+
 	while (!rcList.empty())
 	{
 		shared_ptr<XmlRobot> robot(dynamic_pointer_cast<XmlRobot>(rcList.front()));
@@ -88,16 +88,20 @@ void executeRobotCommands(XmlNodeList &rcList)
 		switch (robot->getRobotNumber()[1])
 		{
 		case '1':
-			useRobotA1(*robot); // red console font
+			A1 = thread(useRobot, *robot); // red console font
+			A1.join();
 			break;
 		case '2':
-			useRobotA2(*robot); // blue console font
+			A2 = thread(useRobot, *robot); // blue console font
+			A2.join();
 			break;
 		case '3':
-			useRobotA3(*robot); // green console font
+			A3 = thread(useRobot, *robot); // green console font
+			A3.join();
 			break;
 		case '4':
-			useRobotA4(*robot); // yellow console font
+			A4 = thread(useRobot, *robot); // yellow console font
+			A4.join();
 			break;
 		default:
 			cout << "Robot number error!\n";
@@ -106,31 +110,6 @@ void executeRobotCommands(XmlNodeList &rcList)
 
 		rcList.pop_front();
 	}
-}
-
-
-void useRobotA1(XmlRobot &robot) // use thread 1, red
-{
-	thread A1(useRobot, robot);
-	A1.join();
-}
-
-void useRobotA2(XmlRobot &robot) // use thread 2, blue
-{
-	thread A2(useRobot, robot);
-	A2.join();
-}
-
-void useRobotA3(XmlRobot &robot) // use thread 3, green
-{
-	thread A3(useRobot, robot);
-	A3.join();
-}
-
-void useRobotA4(XmlRobot &robot) // use thread 4, yellow
-{
-	thread A4(useRobot, robot);
-	A4.join();
 }
 
 void useRobot(XmlRobot &robot)
