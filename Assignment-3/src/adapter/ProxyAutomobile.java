@@ -162,4 +162,20 @@ public abstract class ProxyAutomobile {
 			float newOptionPrice) {
 		return a1.addOption(optionSetName, newOptionName, newOptionPrice);
 	}
+	
+	// DeleteAuto interface methods --------------------------------------
+	public boolean deleteOptionSet(
+			String autoMake,
+			String autoModel,
+			String optionSetName) {
+		return a1.deleteOptionSet(optionSetName);
+	}
+	
+	public boolean deleteOption(
+			String autoMake,
+			String autoModel,
+			String optionSetName,
+			String optionName) {
+		return a1.deleteOption(optionSetName, optionName);
+	}
 }
