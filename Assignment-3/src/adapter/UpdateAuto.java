@@ -9,20 +9,29 @@ package adapter;
 
 public interface UpdateAuto {
 	public void updateOptionSetName(
-			String modelName,
+			String autoMake,
+			String autoModel,
 			String optionSetName,
 			String newName
 			);
 	public void updateOptionName(
-			String modelName,
+			String autoMake,
+			String autoModel,
 			String optionSetName,
 			String optionName,
 			String newName
 			);
 	public void updateOptionPrice(
-			String modelName,
+			String autoMake,
+			String autoModel,
 			String optionSetName,
 			String optionName,
 			float newPrice
+			);
+	public void updateOptionChoice(
+			String autoMake,
+			String autoModel,
+			String optionSetName,
+			String optionName
 			);
 }

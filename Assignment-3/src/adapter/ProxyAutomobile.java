@@ -27,7 +27,8 @@ public abstract class ProxyAutomobile {
 	
 	// UpdateAuto interface methods --------------------------------------
 	public void updateOptionSetName(
-			String modelName,
+			String autoMake,
+			String autoModel,
 			String optionSetName,
 			String newName
 			) {
@@ -35,7 +36,8 @@ public abstract class ProxyAutomobile {
 	}
 	
 	public void updateOptionName(
-			String modelName,
+			String autoMake,
+			String autoModel,
 			String optionSetName,
 			String optionName,
 			String newName
@@ -44,12 +46,22 @@ public abstract class ProxyAutomobile {
 	}
 	
 	public void updateOptionPrice(
-			String modelName,
+			String autoMake,
+			String autoModel,
 			String optionSetName,
 			String optionName,
 			float newPrice
 			) {
 		a1.updateOptionPrice(optionSetName, optionName, newPrice);
+	}
+	
+	public void updateOptionChoice(
+			String autoMake,
+			String autoModel,
+			String optionSetName,
+			String optionName
+			) {
+		a1.updateOptionChoice(optionSetName, optionName);
 	}
 	
 	// FixAuto interface methods -----------------------------------------
