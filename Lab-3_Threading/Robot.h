@@ -4,6 +4,11 @@ Wolfgang C. Strack
 Windows 8 Visual C++ 2013
 
 This is the header file for the Robot class, implementation included.
+
+NOTE: a single change was made to the Command class - commenting out the
+"private" access specifier. In doing so, Command's member variables are
+now "protected" rather than "private" so that derived classes can access
+and use these member variables.
 */
 
 #ifndef ROBOT_H_
@@ -109,7 +114,7 @@ protected:
 		vertical = ZERO;
 		time = ZERO;
 	}
-private:
+//private:
 	// 0 = off 1 = on
 	bitset<1> offon;
 	// 0 = invalid 1 = ok

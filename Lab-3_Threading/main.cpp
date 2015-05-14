@@ -23,7 +23,7 @@ void executeRobotCommands(XmlNodeList &rcList);
 
 // the following method is called from executeRobotCommands()
 // In essence, it is a "wrapper" function that supports console color
-void useRobot(XmlRobot &robot);
+void useRobot(XmlRobot &robot, ostream& color(ostream &s));
 
 int main()
 {
@@ -34,11 +34,18 @@ int main()
 	XmlRegexIO xRIO("<command>\\n.*?<robot>.*\\n.*?<offon>.*\\n.*?<speed>.*\\n.*?<horizontal>.*\\n.*?<vertical>.*\\n.*?<time>.*\\n.*?</command>");
 
 	cout << "This is a demonstration of Lab 3: Threading\n\n";
+	cout << "Robot A1 (thread 1) will be executed with the color " << red << "red.\n" << white;
+	cout << "Robot A2 (thread 2) will be executed with the color " << blue << "blue.\n" << white;
+	cout << "Robot A3 (thread 3) will be executed with the color " << green << "green.\n" << white;
+	cout << "Robot A4 (thread 4) will be executed with the color " << yellow << "yellow.\n\n" << white;
 
+	cout << "Reading tags from file " << filename << "...\n\n" << endl;
 	readTagsFromFile(xRIO, filename, tags); // uses XmlRegexIO to read tags
 
+	cout << "Instantiating Robots...\n\n" << endl;
 	instantiateRobotCommands(xRIO, tags, rcList);
 
+	cout << "Execution started:\n\n" << endl;
 	executeRobotCommands(rcList); // calls the useRobot methods
 
 	return 0;
@@ -88,31 +95,33 @@ void executeRobotCommands(XmlNodeList &rcList)
 		switch (robot->getRobotNumber()[1])
 		{
 		case '1':
-			A1 = thread(useRobot, *robot); // red console font
+			A1 = thread(useRobot, *robot, red); // red console font
 			A1.join();
 			break;
 		case '2':
-			A2 = thread(useRobot, *robot); // blue console font
+			A2 = thread(useRobot, *robot, blue); // blue console font
 			A2.join();
 			break;
 		case '3':
-			A3 = thread(useRobot, *robot); // green console font
+			A3 = thread(useRobot, *robot, green); // green console font
 			A3.join();
 			break;
 		case '4':
-			A4 = thread(useRobot, *robot); // yellow console font
+			A4 = thread(useRobot, *robot, yellow); // yellow console font
 			A4.join();
 			break;
 		default:
-			cout << "Robot number error!\n";
+			cout << white << "Robot number error!\n";
 			return;
 		}
 
 		rcList.pop_front();
 	}
+
+	cout << white; // reset console font color
 }
 
-void useRobot(XmlRobot &robot)
+void useRobot(XmlRobot &robot, ostream& color(ostream &s))
 {
-	robot.Execute();
+	robot.Execute(color);
 }

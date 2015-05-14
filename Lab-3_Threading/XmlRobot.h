@@ -13,6 +13,48 @@ that XmlRobot nodes can be created by the XmlRegexIO class.
 
 #include "Robot.h"
 #include "XmlNode.h"
+#include "ConsoleColor.h"
+
+class ColorCommand : public Command
+{
+public:
+	ColorCommand() { Reset(); }
+
+	// overloaded methods from Command class
+	bool Execute(ostream& color(ostream &s))
+	{
+		bool bvalid = Validate();
+		if (errorcode == OK)
+		{
+			cout << color << *this;
+			this_thread::sleep_for(chrono::milliseconds(time.to_ulong()));
+		}
+		Reset();
+		return bvalid;
+	}
+	friend ostream& operator << (ostream& out, ColorCommand& command)
+	{
+		out << "Command = On: " << command.offon << '\t';
+		out << "Speed: " << command.speed << '\t';
+		out << "Horizontal: " << command.horizontal << '\t';
+		out << "Vertical: " << command.vertical << '\t';
+		out << "Time: " << command.time.to_ulong() << endl;
+		return out;
+	}
+/*private:
+	// 0 = off 1 = on
+	bitset<1> offon;
+	// 0 = invalid 1 = ok
+	bitset<1> errorcode;
+	// 1 = low 2 = high
+	bitset<2> speed;
+	// 1 = clockwise 2 = counter-clockwise
+	bitset<2> horizontal;
+	// 1 = up 2 = down
+	bitset<2> vertical;
+	// time (maximum 255 ms)
+	bitset<8> time;*/
+};
 
 class XmlRobot : public Robot, public XmlNode
 {
@@ -20,7 +62,7 @@ public:
 	XmlRobot() {}
 	~XmlRobot() {}
 	// methods from Robot class
-	bool Execute() { return command.Execute(); }
+	bool Execute(ostream& color(ostream &s)) { return command.Execute(color); }
 	void setOffOn(int value) { command.setOffOn(value); }
 	void setError(int value) { command.setError(value); }
 	void setSpeed(int value) { command.setSpeed(value); }
@@ -34,13 +76,13 @@ public:
 	void setRobotNumber(const string &rnum) { robotnum = rnum; }
 private:
 	// member variables from Robot
-	Command command;
+	ColorCommand command;
 	// extra member variable for Robot number (A1, A2, A3, A4)
 	string robotnum;
 };
 
 /*
-This method sets XmlRobot's member Command variable values instead of
+This method sets XmlRobot's member ColorCommand variable values instead of
 setting hard-coded member types like they were set in the custom classes
 for Lab 2.
 */
