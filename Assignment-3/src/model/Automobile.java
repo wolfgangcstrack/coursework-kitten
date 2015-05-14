@@ -110,29 +110,37 @@ public class Automobile implements java.io.Serializable {
 	public void setOptionName(String optionSetName, String optionName, String newName) {
 		OptionSet opset = optionSets.get(optionSetName);
 		if (opset != null) {
-			opset.se
+			opset.setOptionName(optionName, newName);
 		}
 	}
-	/*
-	// setters -----------------------------------------------------------
 	
-	// ----- set individual OptionSets and their values
-	
-	public void setOptionSetName(int index, String name) { opsets[index].setName(name); }
-	
-	// ----- set individual Options and their values (in context of OptionSet)
-	public void setOptionName(int opsIndex, int opIndex, String opName) {
-		opsets[opsIndex].setOptionName(opIndex, opName);
+	public void setOptionPrice(String optionSetName, int optionIndex, float newPrice) {
+		OptionSet opset = optionSets.get(optionSetName);
+		if (opset != null) {
+			opset.setOptionPrice(optionIndex, newPrice);
+		}
 	}
 	
-	public void setOptionPrice(int opsIndex, int opIndex, float opPrice) {
-		opsets[opsIndex].setOptionPrice(opIndex, opPrice);
+	public void setOptionPrice(String optionSetName, String optionName, float newPrice) {
+		OptionSet opset = optionSets.get(optionSetName);
+		if (opset != null) {
+			opset.setOptionPrice(optionName, newPrice);
+		}
 	}
 	
-	public void setOption(int opsIndex, int opIndex, String opName, float opPrice) {
-		opsets[opsIndex].setOption(opIndex, opName, opPrice);
+	public void setOption(String optionSetName, int optionIndex, String newName, float newPrice) {
+		OptionSet opset = optionSets.get(optionSetName);
+		if (opset != null) {
+			opset.setOption(optionIndex, newName, newPrice);
+		}
 	}
-	*/
+	
+	public void setOption(String optionSetName, String optionName, String newName, float newPrice) {
+		OptionSet opset = optionSets.get(optionSetName);
+		if (opset != null) {
+			opset.setOption(optionName, newName, newPrice);
+		}
+	}
 	/*
 	// find methods ------------------------------------------------------
 	public int findOptionSet(String name) {
