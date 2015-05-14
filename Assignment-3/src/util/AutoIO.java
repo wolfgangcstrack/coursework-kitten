@@ -42,10 +42,13 @@ public class AutoIO {
 				BufferedReader buffer = new BufferedReader(file)) {
 			boolean eof = false;
 			
-			// read the first two lines, which must be the Automotive name and base price
-			// and create a new Automotive based on this information
+			// read the first three lines, which must be the Automotive make, model,
+			// and base price and create a new Automotive based on this information
 			model.Automobile newAuto = new 
-					model.Automobile(buffer.readLine(), Double.parseDouble(buffer.readLine()));
+					model.Automobile(
+							buffer.readLine(),
+							buffer.readLine(),
+							Double.parseDouble(buffer.readLine()));
 			
 			while (!eof) {
 				line = buffer.readLine();

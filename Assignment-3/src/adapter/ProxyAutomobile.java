@@ -59,13 +59,17 @@ public abstract class ProxyAutomobile {
 	 * In essence, this is the "fix" method.
 	 */
 	public void manualBuild(Scanner input) throws AutoException {
-		String nameHolder;
+		String makeHolder;
+		String modelHolder;
 		double priceHolder;
 		
-		System.out.print("Please enter Automobile name: ");
-		nameHolder = input.nextLine();
+		System.out.print("Please enter Automobile make: ");
+		makeHolder = input.nextLine();
 		
-		System.out.print("Please enter base price of " + nameHolder + ": ");
+		System.out.print("Please enter Automobile model: ");
+		modelHolder = input.nextLine();
+		
+		System.out.print("Please enter base price of " + (makeHolder + " " + modelHolder) + ": ");
 		try {
 			priceHolder = input.nextDouble();
 		} catch (java.util.InputMismatchException imE) {
@@ -74,7 +78,7 @@ public abstract class ProxyAutomobile {
 			input.nextLine(); // clear scanner for next input
 		}
 		
-		a1 = new Automobile(nameHolder, priceHolder);
+		a1 = new Automobile(makeHolder, modelHolder, priceHolder);
 		
 		readOptionSets(input);
 		
