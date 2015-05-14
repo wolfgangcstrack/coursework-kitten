@@ -190,6 +190,11 @@ class OptionSet implements java.io.Serializable {
 	// OptionSet.toString() ----------------------------------------------
 	public String toString() {
 		StringBuilder sb = new StringBuilder(name);
+		
+		if (choice != null) {
+			sb.append("(").append(choice.getName()).append(" selected)");
+		}
+		
 		String newline = "\n", tab = "\t";
 		for (int i = 0; i < options.size(); i++)
 			sb.append(newline)

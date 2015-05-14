@@ -13,23 +13,19 @@ import java.util.LinkedHashMap;
 public class Automobile implements java.io.Serializable {
 	// serialVersionUID generated with serialver
 	// private static final long serialVersionUID = 6569130310546375757L;
-	private String name;
 	private String make;
 	private String model;
 	private double baseprice;
 	private LinkedHashMap<String, OptionSet> optionSets;
 	
 	// constructors ------------------------------------------------------
-	public Automobile() { this("", "", "", 0, 0);  }
-	public Automobile(String name) { this(name, "", "", 0, 0); }
-	public Automobile(String name, String make) { this(name, make, "", 0, 0); }
-	public Automobile(String name, String make, String model) { this(name, make, model, 0, 0); }
-	public Automobile(String name, String make, String model, double baseprice) {
-		this(name, make, model, baseprice, 0);
+	public Automobile() { this("", "", 0, 0);  }
+	public Automobile(String make) { this(make, "", 0, 0); }
+	public Automobile(String make, String model) { this(make, model, 0, 0); }
+	public Automobile(String make, String model, double baseprice) {
+		this(make, model, baseprice, 0);
 	}
-	
-	public Automobile(String name, String make, String model, double baseprice, int optionSetsSize) {
-		this.name = name;
+	public Automobile(String make, String model, double baseprice, int optionSetsSize) {
 		this.make = make;
 		this.model = model;
 		this.baseprice = baseprice;
@@ -37,7 +33,6 @@ public class Automobile implements java.io.Serializable {
 	}
 	
 	// getters -----------------------------------------------------------
-	public String getName() { return name; }
 	public String getMake() { return make; }
 	public String getModel() { return model; }
 	public double getBasePrice() { return baseprice; }
@@ -81,7 +76,6 @@ public class Automobile implements java.io.Serializable {
 	}
 
 	// setters -----------------------------------------------------------
-	public void setName(String name) { this.name = name; }
 	public void setMake(String make) { this.make = make; }
 	public void setModel(String model) { this.model = model; }
 	public void setBasePrice(double baseprice) { this.baseprice = baseprice; }
@@ -257,21 +251,21 @@ public class Automobile implements java.io.Serializable {
 		
 		return false;
 	}
-	/*
+	
 	// toString() --------------------------------------------------------
 	public String toString() {
-		StringBuilder sb = new StringBuilder(name);
+		StringBuilder sb = new StringBuilder(make).append(" ").append(model);
 		// keep decimal precision at two for price
 		java.text.DecimalFormat two = new java.text.DecimalFormat("$0.00");
 		String newline = "\n", tab = "\t";
 		sb.append(newline)
 		.append("Base Price: ").append(two.format(baseprice)).append(newline)
-		.append("Options:");
-		for (int i = 0; i < opsets.length; i++)
-			sb.append(newline)
-			.append(tab).append(opsets[i].toString());
+		.append("Options:").append(newline);
+		
+		for (OptionSet optionSet : optionSets.values()) {
+			sb.append(tab).append(optionSet.toString());
+		}
 		
 		return sb.toString();
 	}
-	*/
 }
