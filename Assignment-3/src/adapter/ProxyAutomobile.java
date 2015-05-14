@@ -145,4 +145,21 @@ public abstract class ProxyAutomobile {
 			choice = input.nextLine();
 		}
 	}
+	
+	// AddAuto interface methods -----------------------------------------
+	public boolean addOptionSet(
+			String autoMake,
+			String autoModel,
+			String newOptionSetName) {
+		return a1.addOptionSet(newOptionSetName);
+	}
+	
+	public boolean addOption(
+			String autoMake,
+			String autoModel,
+			String optionSetName,
+			String newOptionName,
+			float newOptionPrice) {
+		return a1.addOption(optionSetName, newOptionName, newOptionPrice);
+	}
 }

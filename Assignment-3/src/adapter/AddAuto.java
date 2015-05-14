@@ -16,5 +16,6 @@ public interface AddAuto {
 			String autoMake,
 			String autoModel,
 			String optionSetName,
-			String newOptionName);
+			String newOptionName,
+			float newOptionPrice);
 }
