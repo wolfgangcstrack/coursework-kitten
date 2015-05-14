@@ -116,6 +116,52 @@ class OptionSet implements java.io.Serializable {
 			choice = options.get(optionIndex);
 	}
 	
+	// contains Option methods -------------------------------------------
+	protected boolean containsOption(String optionName) {
+		for (Option option : options) {
+			if (option.getName().equals(optionName)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	// update Option methods ---------------------------------------------
+	protected boolean updateOptionName(String optionName, String newName) {
+		for (Option option : options) {
+			if (option.getName().equals(optionName)) {
+				option.setName(newName);
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	protected boolean updateOptionPrice(String optionName, float newPrice) {
+		for (Option option : options) {
+			if (option.getName().equals(optionName)) {
+				option.setPrice(newPrice);
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	protected boolean updateOption(String optionName, String newName, float newPrice) {
+		for (Option option : options) {
+			if (option.getName().equals(optionName)) {
+				option.setName(newName);
+				option.setPrice(newPrice);
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	// add Option methods ------------------------------------------------
 	protected boolean addOption(String opName, float opPrice) {
 		return options.add(new Option(opName, opPrice));

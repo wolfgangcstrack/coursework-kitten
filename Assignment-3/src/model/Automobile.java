@@ -141,107 +141,78 @@ public class Automobile implements java.io.Serializable {
 			opset.setOption(optionName, newName, newPrice);
 		}
 	}
-	/*
-	// find methods ------------------------------------------------------
-	public int findOptionSet(String name) {
-		for (int i = 0; i < opsets.length; i++) {
-			if (opsets[i].getName().equals(name))
-				return i;
-		}
-		return -1;
+	
+	// contains methods ------------------------------------------------------	
+	public boolean containsOptionSet(String optionSetName) {
+		return optionSets.containsKey(optionSetName);
 	}
 	
-	public int findOption(String opsName, String opName) {
-		return findOption(findOptionSet(opsName), opName);
-	}
-	
-	public int findOption(int opsIndex, String name) {
-		if (opsIndex < 0 || opsIndex >= opsets.length)
-			return -1;
+	public boolean containsOption(String optionSetName, String optionName) {
+		OptionSet opset = optionSets.get(optionSetName);
 		
-		for (int i = 0; i < opsets[opsIndex].getOptions().length; i++) {
-			if (opsets[opsIndex].getOptions()[i].equals(name))
-				return i;
+		if (opset != null) {
+			return opset.containsOption(optionName);
 		}
-		return -1;
+		
+		return false;
 	}
-	*/
-	/*
-	// update (find and set) methods -------------------------------------
+	
+	// update methods (like set, but returns boolean) --------------------
+	// ----- update an OptionSetChoice
+	public boolean updateOptionChoice(String optionSetName, String optionName) {
+		OptionSet opset = optionSets.get(optionSetName);
+		
+		if (opset != null) {
+			opset.setOptionChoice(optionName);
+			return true;
+		}
+		
+		return false;
+	}
+
 	// ----- update individual OptionSets and their values
-	public boolean updateOptionSet(String opsName, OptionSet ops) {
-		int opsIndex = findOptionSet(opsName);
-		if (opsIndex == -1)
-			return false;
+	public boolean updateOptionSetName(String optionSetName, String newName) {
+		OptionSet opset = optionSets.get(optionSetName);
 		
-		opsets[opsIndex] = ops;
-		return true;
-	}
-	
-	public boolean updateOptionSetName(String opsName, String newOpsName) {
-		int opsIndex = findOptionSet(opsName);
-		if (opsIndex == -1)
-			return false;
+		if (opset != null) {
+			opset.setName(newName);
+			return true;
+		}
 		
-		opsets[opsIndex].setName(name);
-		return true;
+		return false;
 	}
-	
+
 	// ----- update individual Options and their values (in context of OptionSet)
-	public boolean updateOptionName(String opsName, int opIndex, String opName) {
-		return updateOptionName(findOptionSet(opsName), opIndex, opName);
-	}
-	
-	public boolean updateOptionName(String opsName, String opName, String newOpName) {
-		int opsIndex = findOptionSet(opsName);
-		return updateOptionName(opsIndex, findOption(opsIndex, opName), newOpName);
-	}
-	
-	public boolean updateOptionName(int opsIndex, int opIndex, String opName) {
-		if (opsIndex < 0 || opsIndex >= opsets.length ||
-				opIndex < 0 || opIndex >= opsets[opsIndex].getOptions().length)
-			return false;
+	public boolean updateOptionName(String optionSetName, String optionName, String newName) {
+		OptionSet opset = optionSets.get(optionSetName);
 		
-		opsets[opsIndex].setOptionName(opIndex, opName);
-		return true;
-	}
-	
-	public boolean updateOptionPrice(String opsName, int opIndex, float opPrice) {
-		return updateOptionPrice(findOptionSet(opsName), opIndex, opPrice);
-	}
-	
-	public boolean updateOptionPrice(String opsName, String opName, float opPrice) {
-		int opsIndex = findOptionSet(opsName);
-		return updateOptionPrice(opsIndex, findOption(opsIndex, opName), opPrice);
-	}
-	
-	public boolean updateOptionPrice(int opsIndex, int opIndex, float opPrice) {
-		if (opsIndex < 0 || opsIndex >= opsets.length ||
-				opIndex < 0 || opIndex >= opsets[opsIndex].getOptions().length)
-			return false;
+		if (opset != null) {
+			return opset.updateOptionName(optionName, newName);
+		}
 		
-		opsets[opsIndex].setOptionPrice(opIndex, opPrice);
-		return true;
+		return false;
 	}
 	
-	public boolean updateOption(String opsName, int opIndex, String opName, float opPrice) {
-		return updateOption(findOptionSet(opsName), opIndex, opName, opPrice);
-	}
-	
-	public boolean updateOption(String opsName, String opName, String newOpName, float newOpPrice) {
-		int opsIndex = findOptionSet(opsName);
-		return updateOption(opsIndex, findOption(opsIndex, opName), newOpName, newOpPrice);
-	}
-	
-	public boolean updateOption(int opsIndex, int opIndex, String newOpName, float newOpPrice) {
-		if (opsIndex < 0 || opsIndex >= opsets.length ||
-				opIndex < 0 || opIndex >= opsets[opsIndex].getOptions().length)
-			return false;
+	public boolean updateOptionPrice(String optionSetName, String optionName, float newPrice) {
+		OptionSet opset = optionSets.get(optionSetName);
 		
-		opsets[opsIndex].setOption(opIndex, newOpName, newOpPrice);
-		return true;
+		if (opset != null) {
+			return opset.updateOptionPrice(optionName, newPrice);
+		}
+		
+		return false;
 	}
-	*/
+	
+	public boolean updateOption(String optionSetName, String optionName, String newName, float newPrice) {
+		OptionSet opset = optionSets.get(optionSetName);
+		
+		if (opset != null) {
+			return opset.updateOption(optionName, newName, newPrice);
+		}
+		
+		return false;
+	}
+	
 	/*
 	// add (OptionSet/Option to this) methods ----------------------------
 	public boolean addOptionSet(String opsName) { return addOptionSet(opsName, 0); }
