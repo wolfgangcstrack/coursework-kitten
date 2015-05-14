@@ -12,7 +12,7 @@ import java.util.LinkedHashMap;
 
 public class Automobile implements java.io.Serializable {
 	// serialVersionUID generated with serialver
-	// private static final long serialVersionUID = 6569130310546375757L;
+	private static final long serialVersionUID = 1537933008010191291L;
 	private String make;
 	private String model;
 	private double baseprice;

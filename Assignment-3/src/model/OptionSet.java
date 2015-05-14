@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 class OptionSet implements java.io.Serializable {
 	// serialVersionUID generated with serialver
-	// private static final long serialVersionUID = 5537926375200316701L;
+	private static final long serialVersionUID = -1363874477678052046L;
 	private String name;
 	private ArrayList<Option> options;
 	private Option choice;

@@ -10,7 +10,7 @@ package model;
 
 class Option implements java.io.Serializable {
 	// serialVersionUID generated with serialver
-	// private static final long serialVersionUID = 2716888257427982132L;
+	private static final long serialVersionUID = 1153280290212422723L;
 	private String name;
 	private float price;
 	
