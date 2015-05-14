@@ -19,10 +19,10 @@
     <ClInclude Include="XmlRobot.h" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="RobotData.xml" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <Xml Include="RobotData.xml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D57FAEFE-72E7-490E-BAEB-2D71EB85AD5C}</ProjectGuid>

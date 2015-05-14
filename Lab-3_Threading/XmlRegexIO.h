@@ -126,18 +126,7 @@ bool XmlRegexIO::getXmlDataFromString(const string &data, XmlNode &store)
 		return false;
 
 	int lengthTillClosingTag;
-	for (int i = positionOfOpeningTag; i < data.length(); i++)
-	{
-		if (data[i] == '<') // find closing tag of element
-		{
-			if (regex_search(data.substr(i, pattern.length()), regex("</" + store.getClassName() + ">")))
-			{
-				lengthTillClosingTag = (i + store.getClassName().length() + 3) - positionOfOpeningTag;
-				store.readData(data.substr(positionOfOpeningTag, lengthTillClosingTag));
-				break; // out of loop
-			}
-		}
-	}
+	store.readData(data);
 
 	return true;
 }

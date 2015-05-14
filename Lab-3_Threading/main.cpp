@@ -19,13 +19,16 @@ using namespace std;
 // the following methods are called from main()
 void readTagsFromFile(XmlRegexIO &xRIO, const string &filename, vector<string> &tags);
 void instantiateRobotCommands(XmlRegexIO &xRIO, const vector<string> &tags, XmlNodeList &rcList);
-void executeRobotCommands(const XmlNodeList &rcList);
+void executeRobotCommands(XmlNodeList &rcList);
 
 // the following methods are called from executeRobotCommands()
-void useRobotA1(const XmlRobot &robot); // use thread 1, red
-void useRobotA2(const XmlRobot &robot); // use thread 2, blue
-void useRobotA3(const XmlRobot &robot); // use thread 3, green
-void useRobotA4(const XmlRobot &robot); // use thread 4, yellow
+void useRobotA1(XmlRobot &robot); // use thread 1, red
+void useRobotA2(XmlRobot &robot); // use thread 2, blue
+void useRobotA3(XmlRobot &robot); // use thread 3, green
+void useRobotA4(XmlRobot &robot); // use thread 4, yellow
+
+// the following method is called by the useRobotA# commands and is a wrapper that supports console color
+void useRobot(XmlRobot &robot);
 
 int main()
 {
@@ -70,11 +73,17 @@ void instantiateRobotCommands(XmlRegexIO &xRIO, const vector<string> &tags, XmlN
 	}
 }
 
-void executeRobotCommands(const XmlNodeList &rcList)
+void executeRobotCommands(XmlNodeList &rcList)
 {
 	while (!rcList.empty())
 	{
 		shared_ptr<XmlRobot> robot(dynamic_pointer_cast<XmlRobot>(rcList.front()));
+
+		if (robot->getRobotNumber().length() < 2)
+		{
+			cout << "Robot error: " << robot->getXMLTags() << endl;
+			return;
+		}
 
 		switch (robot->getRobotNumber()[1])
 		{
@@ -94,5 +103,37 @@ void executeRobotCommands(const XmlNodeList &rcList)
 			cout << "Robot number error!\n";
 			return;
 		}
+
+		rcList.pop_front();
 	}
+}
+
+
+void useRobotA1(XmlRobot &robot) // use thread 1, red
+{
+	thread A1(useRobot, robot);
+	A1.join();
+}
+
+void useRobotA2(XmlRobot &robot) // use thread 2, blue
+{
+	thread A2(useRobot, robot);
+	A2.join();
+}
+
+void useRobotA3(XmlRobot &robot) // use thread 3, green
+{
+	thread A3(useRobot, robot);
+	A3.join();
+}
+
+void useRobotA4(XmlRobot &robot) // use thread 4, yellow
+{
+	thread A4(useRobot, robot);
+	A4.join();
+}
+
+void useRobot(XmlRobot &robot)
+{
+	robot.Execute();
 }

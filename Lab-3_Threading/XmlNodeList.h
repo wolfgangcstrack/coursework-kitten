@@ -28,7 +28,9 @@ public:
 	bool empty() const { return nodeList.empty(); }
 	shared_ptr<XmlNode> operator[](unsigned int index) const { return nodeList[index]; }
 	shared_ptr<XmlNode> front() const { return nodeList[0]; }
+	void push_front(shared_ptr<XmlNode> &xmlNode) { nodeList.insert(nodeList.begin(), xmlNode); }
 	void push_back(shared_ptr<XmlNode> &xmlNode) { nodeList.push_back(xmlNode); }
+	void pop_front() { nodeList.erase(nodeList.begin()); }
 	void pop_back() { nodeList.pop_back(); }
 };
 
