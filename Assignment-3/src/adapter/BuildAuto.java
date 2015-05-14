@@ -8,6 +8,6 @@
 package adapter;
 
 public class BuildAuto extends ProxyAutomobile
-implements CreateAuto, UpdateAuto, FixAuto {
+implements CreateAuto, UpdateAuto, FixAuto, AddAuto {
 	// magic
 }

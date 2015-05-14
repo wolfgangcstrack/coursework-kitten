@@ -26,42 +26,52 @@ public abstract class ProxyAutomobile {
 	}
 	
 	// UpdateAuto interface methods --------------------------------------
-	public void updateOptionSetName(
+	public boolean updateOptionSetName(
 			String autoMake,
 			String autoModel,
 			String optionSetName,
 			String newName
 			) {
-		a1.updateOptionSetName(optionSetName, newName);
+		return a1.updateOptionSetName(optionSetName, newName);
 	}
 	
-	public void updateOptionName(
+	public boolean updateOptionName(
 			String autoMake,
 			String autoModel,
 			String optionSetName,
 			String optionName,
 			String newName
 			) {
-		a1.updateOptionName(optionSetName, optionName, newName);
+		return a1.updateOptionName(optionSetName, optionName, newName);
 	}
 	
-	public void updateOptionPrice(
+	public boolean updateOptionPrice(
 			String autoMake,
 			String autoModel,
 			String optionSetName,
 			String optionName,
 			float newPrice
 			) {
-		a1.updateOptionPrice(optionSetName, optionName, newPrice);
+		return a1.updateOptionPrice(optionSetName, optionName, newPrice);
 	}
 	
-	public void updateOptionChoice(
+	public boolean updateOption(
+			String autoMake,
+			String autoModel,
+			String optionSetName,
+			String optionName,
+			String newName,
+			float newPrice) {
+		return a1.updateOption(optionSetName, optionName, newName, newPrice);
+	}
+	
+	public boolean updateOptionChoice(
 			String autoMake,
 			String autoModel,
 			String optionSetName,
 			String optionName
 			) {
-		a1.updateOptionChoice(optionSetName, optionName);
+		return a1.updateOptionChoice(optionSetName, optionName);
 	}
 	
 	// FixAuto interface methods -----------------------------------------

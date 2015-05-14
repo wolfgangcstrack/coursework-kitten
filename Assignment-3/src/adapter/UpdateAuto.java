@@ -8,27 +8,34 @@
 package adapter;
 
 public interface UpdateAuto {
-	public void updateOptionSetName(
+	public boolean updateOptionSetName(
 			String autoMake,
 			String autoModel,
 			String optionSetName,
 			String newName
 			);
-	public void updateOptionName(
+	public boolean updateOptionName(
 			String autoMake,
 			String autoModel,
 			String optionSetName,
 			String optionName,
 			String newName
 			);
-	public void updateOptionPrice(
+	public boolean updateOptionPrice(
 			String autoMake,
 			String autoModel,
 			String optionSetName,
 			String optionName,
 			float newPrice
 			);
-	public void updateOptionChoice(
+	public boolean updateOption(
+			String autoMake,
+			String autoModel,
+			String optionSetName,
+			String optionName,
+			String newName,
+			float newPrice);
+	public boolean updateOptionChoice(
 			String autoMake,
 			String autoModel,
 			String optionSetName,
