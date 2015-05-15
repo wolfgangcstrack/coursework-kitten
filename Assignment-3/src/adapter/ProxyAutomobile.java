@@ -8,21 +8,40 @@
 package adapter;
 
 import java.util.Scanner;
+import java.util.LinkedHashMap;
 
 import util.*;
 import model.*;
 
 public abstract class ProxyAutomobile {
-	private Automobile a1;
+	private static LinkedHashMap<String, Automobile> automobiles;
+	static { // initialize
+		automobiles = new LinkedHashMap<String, Automobile>();
+	}
+	
+	private Automobile getAutoWithKey(String autoMake, String autoModel) {
+		return automobiles.get(this.getKey(autoMake, autoModel));
+	}
+	
+	private String getKey(String autoMake, String autoModel) {
+		StringBuilder key = new StringBuilder(autoMake);
+		key.append(" ").append(autoModel);
+		return key.toString();
+	}
 	
 	// CreateAuto interface methods --------------------------------------
 	public void buildAuto(String filename) throws AutoException {
+		// Construct a new Automobile from filename
 		AutoIO autoIO = new AutoIO();
-		a1 = autoIO.buildAutoObject(filename);
+		Automobile newAuto = autoIO.buildAutoObject(filename);
+		// Get key for this Automobile, which is "<Make> <Model>"
+		String key = getKey(newAuto.getMake(), newAuto.getModel());
+		// Insert the key and new Automobile in the static LinkedHashMap
+		automobiles.put(key, newAuto);
 	}
 	
 	public void printAuto(String modelName) {
-		System.out.println(a1.toString());
+		System.out.println(automobiles.get(modelName).toString());
 	}
 	
 	// UpdateAuto interface methods --------------------------------------
@@ -32,7 +51,8 @@ public abstract class ProxyAutomobile {
 			String optionSetName,
 			String newName
 			) {
-		return a1.updateOptionSetName(optionSetName, newName);
+		return getAutoWithKey(autoMake, autoModel)
+				.updateOptionSetName(optionSetName, newName);
 	}
 	
 	public boolean updateOptionName(
@@ -42,7 +62,8 @@ public abstract class ProxyAutomobile {
 			String optionName,
 			String newName
 			) {
-		return a1.updateOptionName(optionSetName, optionName, newName);
+		return getAutoWithKey(autoMake, autoModel)
+				.updateOptionName(optionSetName, optionName, newName);
 	}
 	
 	public boolean updateOptionPrice(
@@ -52,7 +73,8 @@ public abstract class ProxyAutomobile {
 			String optionName,
 			float newPrice
 			) {
-		return a1.updateOptionPrice(optionSetName, optionName, newPrice);
+		return getAutoWithKey(autoMake, autoModel)
+				.updateOptionPrice(optionSetName, optionName, newPrice);
 	}
 	
 	public boolean updateOption(
@@ -62,7 +84,8 @@ public abstract class ProxyAutomobile {
 			String optionName,
 			String newName,
 			float newPrice) {
-		return a1.updateOption(optionSetName, optionName, newName, newPrice);
+		return getAutoWithKey(autoMake, autoModel)
+				.updateOption(optionSetName, optionName, newName, newPrice);
 	}
 	
 	public boolean updateOptionChoice(
@@ -71,7 +94,8 @@ public abstract class ProxyAutomobile {
 			String optionSetName,
 			String optionName
 			) {
-		return a1.updateOptionChoice(optionSetName, optionName);
+		return getAutoWithKey(autoMake, autoModel)
+				.updateOptionChoice(optionSetName, optionName);
 	}
 	
 	// FixAuto interface methods -----------------------------------------
@@ -100,15 +124,15 @@ public abstract class ProxyAutomobile {
 			input.nextLine(); // clear scanner for next input
 		}
 		
-		a1 = new Automobile(makeHolder, modelHolder, priceHolder);
+		Automobile newAuto = new Automobile(makeHolder, modelHolder, priceHolder);
 		
-		readOptionSets(input);
+		readOptionSets(input, newAuto);
 		
-		input.close();
+		automobiles.put(getKey(makeHolder, modelHolder), newAuto);
 	}
 	
 	// helper methods for fix method
-	private void readOptionSets(Scanner input) throws AutoException {
+	private void readOptionSets(Scanner input, Automobile newAuto) throws AutoException {
 		String opsetNameHolder;
 		String optionNameHolder;
 		float priceHolder;
@@ -118,7 +142,7 @@ public abstract class ProxyAutomobile {
 		choice = input.nextLine();
 		while (!choice.toUpperCase().equals("Q")) {
 			opsetNameHolder = choice;
-			a1.addOptionSet(opsetNameHolder);
+			newAuto.addOptionSet(opsetNameHolder);
 			
 			System.out.print("Enter an option name for " + opsetNameHolder + " (or Q to quit): ");
 			choice = input.nextLine();
@@ -134,7 +158,7 @@ public abstract class ProxyAutomobile {
 					input.nextLine(); // clear scanner for next input
 				}
 				
-				a1.addOption(opsetNameHolder, optionNameHolder, priceHolder);
+				newAuto.addOption(opsetNameHolder, optionNameHolder, priceHolder);
 				System.out.println(optionNameHolder + " added!\n");
 				
 				System.out.print("Enter an option name for " + opsetNameHolder + " (or Q to quit): ");
@@ -151,7 +175,8 @@ public abstract class ProxyAutomobile {
 			String autoMake,
 			String autoModel,
 			String newOptionSetName) {
-		return a1.addOptionSet(newOptionSetName);
+		return getAutoWithKey(autoMake, autoModel)
+				.addOptionSet(newOptionSetName);
 	}
 	
 	public boolean addOption(
@@ -160,7 +185,8 @@ public abstract class ProxyAutomobile {
 			String optionSetName,
 			String newOptionName,
 			float newOptionPrice) {
-		return a1.addOption(optionSetName, newOptionName, newOptionPrice);
+		return getAutoWithKey(autoMake, autoModel)
+				.addOption(optionSetName, newOptionName, newOptionPrice);
 	}
 	
 	// DeleteAuto interface methods --------------------------------------
@@ -168,7 +194,8 @@ public abstract class ProxyAutomobile {
 			String autoMake,
 			String autoModel,
 			String optionSetName) {
-		return a1.deleteOptionSet(optionSetName);
+		return getAutoWithKey(autoMake, autoModel)
+				.deleteOptionSet(optionSetName);
 	}
 	
 	public boolean deleteOption(
@@ -176,6 +203,7 @@ public abstract class ProxyAutomobile {
 			String autoModel,
 			String optionSetName,
 			String optionName) {
-		return a1.deleteOption(optionSetName, optionName);
+		return getAutoWithKey(autoMake, autoModel)
+				.deleteOption(optionSetName, optionName);
 	}
 }

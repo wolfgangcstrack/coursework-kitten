@@ -262,8 +262,8 @@ public class Automobile implements java.io.Serializable {
 		.append("Base Price: ").append(two.format(baseprice)).append(newline)
 		.append("Options:").append(newline);
 		
-		for (OptionSet optionSet : optionSets.values()) {
-			sb.append(tab).append(optionSet.toString()).append(newline);
+		for (String key : optionSets.keySet()) {
+			sb.append(tab).append(optionSets.get(key).toString()).append(newline);
 		}
 		
 		return sb.toString();
