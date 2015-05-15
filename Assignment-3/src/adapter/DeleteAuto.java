@@ -17,4 +17,7 @@ public interface DeleteAuto {
 			String autoModel,
 			String optionSetName,
 			String optionName);
+	public boolean deleteAuto(
+			String autoMake,
+			String autoModel);
 }

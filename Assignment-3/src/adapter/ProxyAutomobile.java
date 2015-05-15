@@ -44,6 +44,24 @@ public abstract class ProxyAutomobile {
 		System.out.println(automobiles.get(modelName).toString());
 	}
 	
+	public boolean addOptionSet(
+			String autoMake,
+			String autoModel,
+			String newOptionSetName) {
+		return getAutoWithKey(autoMake, autoModel)
+				.addOptionSet(newOptionSetName);
+	}
+	
+	public boolean addOption(
+			String autoMake,
+			String autoModel,
+			String optionSetName,
+			String newOptionName,
+			float newOptionPrice) {
+		return getAutoWithKey(autoMake, autoModel)
+				.addOption(optionSetName, newOptionName, newOptionPrice);
+	}
+	
 	// UpdateAuto interface methods --------------------------------------
 	public boolean updateOptionSetName(
 			String autoMake,
@@ -170,25 +188,6 @@ public abstract class ProxyAutomobile {
 		}
 	}
 	
-	// AddAuto interface methods -----------------------------------------
-	public boolean addOptionSet(
-			String autoMake,
-			String autoModel,
-			String newOptionSetName) {
-		return getAutoWithKey(autoMake, autoModel)
-				.addOptionSet(newOptionSetName);
-	}
-	
-	public boolean addOption(
-			String autoMake,
-			String autoModel,
-			String optionSetName,
-			String newOptionName,
-			float newOptionPrice) {
-		return getAutoWithKey(autoMake, autoModel)
-				.addOption(optionSetName, newOptionName, newOptionPrice);
-	}
-	
 	// DeleteAuto interface methods --------------------------------------
 	public boolean deleteOptionSet(
 			String autoMake,
@@ -205,5 +204,14 @@ public abstract class ProxyAutomobile {
 			String optionName) {
 		return getAutoWithKey(autoMake, autoModel)
 				.deleteOption(optionSetName, optionName);
+	}
+	
+	public boolean deleteAuto(
+			String autoMake,
+			String autoModel) {
+		// if remove is successful, the value returned by remove() won't be null
+		// therefore, the function would return true
+		// otherwise, if remove() returns null, function returns false
+		return (automobiles.remove(getKey(autoMake, autoModel)) != null ? true : false);
 	}
 }

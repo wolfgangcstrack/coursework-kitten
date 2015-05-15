@@ -18,8 +18,7 @@ class Driver {
 	public static void main(String[] args) throws AutoException {
 		BuildAuto testBA = new BuildAuto();
 		
-		// testBuildAutoCollectionFunctionality(testBA);
-		testAddAutoInterface(testBA);
+		testCreateAutoInterface(testBA);
 		testDeleteAutoInterface(testBA);
 		testUpdateAutoInterface(testBA);
 		
@@ -36,9 +35,9 @@ class Driver {
 	}*/
 	
 	/** This method will test out adding new Automobiles to BuildAuto object
-	 * by using adapter.AddAuto interface methods.
+	 * by using adapter.CreateAuto interface methods.
 	 */
-	public static void testAddAutoInterface(BuildAuto testBA) {
+	public static void testCreateAutoInterface(BuildAuto testBA) {
 		
 	}
 	
