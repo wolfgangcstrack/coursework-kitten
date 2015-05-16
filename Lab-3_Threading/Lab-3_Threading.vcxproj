@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleColor.h" />
+    <ClInclude Include="RobotMotor.h" />
     <ClInclude Include="XmlNodeList.h" />
     <ClInclude Include="Robot.h" />
     <ClInclude Include="XmlNode.h" />

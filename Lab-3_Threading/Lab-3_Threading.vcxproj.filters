@@ -33,6 +33,9 @@
     <ClInclude Include="ConsoleColor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RobotMotor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
