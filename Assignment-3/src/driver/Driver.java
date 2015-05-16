@@ -18,6 +18,8 @@ class Driver {
 	public static void main(String[] args) throws AutoException {
 		BuildAuto testBA = new BuildAuto();
 		
+		// the new ReadAuto interface is tested in each of these methods
+		// as they all call print methods of BuildAuto
 		testCreateAutoInterface(testBA);
 		testDeleteAutoInterface(testBA);
 		testUpdateAutoInterface(testBA);
