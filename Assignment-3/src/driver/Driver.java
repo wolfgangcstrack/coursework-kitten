@@ -47,9 +47,8 @@ class Driver {
 			}
 		}
 		
-		System.out.println("Successfully added the two automobiles:\n");
-		testBA.printAuto("Ford Focus Wagon ZTW");
-		testBA.printAuto("No-Name-Make Ugly Bus 6000");
+		System.out.println("Successfully added the two automobiles, now printing all of them:\n");
+		testBA.printAllAuto();
 		
 		System.out.println("\n");
 	}
@@ -63,6 +62,9 @@ class Driver {
 		System.out.println("Deletion of automobile from BuildAuto " + 
 		(testBA.deleteAuto("No-Name-Make", "Ugly Bus 6000") ? "successful" : "failed"));
 		
+		System.out.println("Now printing all automobiles in testBA:");
+		testBA.printAllAuto();
+		
 		System.out.println("\n");
 	}
 	
@@ -73,8 +75,8 @@ class Driver {
 		System.out.println("Now testing UpdateAuto interface to update Option choice in an automobile.");
 		
 		if (testBA.updateOptionChoice("Ford", "Focus Wagon ZTW", "Color", "French Blue Clearcoat Metallic")) {
-			System.out.println("Option Choice of Color updated:");
-			testBA.printAuto("Ford Focus Wagon ZTW");
+			System.out.println("Option Choice of Color updated, now printing Ford Focus Wagon ZTW:\n");
+			testBA.printAuto("Ford", "Focus Wagon ZTW");
 		} else {
 			System.out.println("Option choice update unsuccessful");
 		}

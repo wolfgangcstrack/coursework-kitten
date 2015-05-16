@@ -12,8 +12,6 @@ import util.AutoException;
 public interface CreateAuto {
 	public void buildAuto(String filename) throws AutoException;
 	
-	public void printAuto(String modelName);
-	
 	public boolean addOptionSet(
 			String autoMake,
 			String autoModel,
