@@ -11,6 +11,8 @@ that XmlRobot nodes can be created by the XmlRegexIO class.
 #ifndef XML_ROBOT_H_
 #define XML_ROBOT_H_
 
+#include "Global.h"
+
 #include "Robot.h"
 #include "XmlNode.h"
 #include "ConsoleColor.h"
@@ -26,7 +28,9 @@ public:
 		bool bvalid = Validate();
 		if (errorcode == OK)
 		{
-			cout << color << *this;
+			execution_guard.lock();
+			std::cout << color << *this << endl;
+			execution_guard.unlock();
 			this_thread::sleep_for(chrono::milliseconds(time.to_ulong()));
 		}
 		Reset();

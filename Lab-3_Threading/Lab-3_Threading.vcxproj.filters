@@ -36,6 +36,9 @@
     <ClInclude Include="RobotMotor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

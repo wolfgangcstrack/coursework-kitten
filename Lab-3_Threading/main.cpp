@@ -10,15 +10,13 @@ file. It is only an excerpt due to the length of the execution results and
 the fact that ConsoleColor.h is used.
 */
 
+#include "Global.h"
+
+#include "ConsoleColor.h"
 #include "XmlNodeList.h"
 #include "XmlRegexIO.h"
+#include "RobotMotor.h"
 #include "XmlRobot.h" // XmlRobot class extends the given Robot class for this lab
-#include "ConsoleColor.h"
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <string>
-using namespace std;
 
 // the following methods are called from main()
 void readTagsFromFile(XmlRegexIO &xRIO, const string &filename, vector<string> &tags);
@@ -31,26 +29,17 @@ void useRobot(XmlRobot &robot, ostream& color(ostream &s));
 
 int main()
 {
-	XmlNodeList rcList;
-	vector<string> tags;
+	RobotMotor rMotor;
 	string filename = "RobotData.xml";
-	vector<unique_ptr<XmlNode>> robotCommands;
 	XmlRegexIO xRIO("<command>\\n.*?<robot>.*\\n.*?<offon>.*\\n.*?<speed>.*\\n.*?<horizontal>.*\\n.*?<vertical>.*\\n.*?<time>.*\\n.*?</command>");
 
 	cout << "This is a demonstration of Lab 3: Threading\n\n";
-	cout << "Robot A1 (thread 1) will be executed with the color " << red << "red.\n" << white;
-	cout << "Robot A2 (thread 2) will be executed with the color " << blue << "blue.\n" << white;
-	cout << "Robot A3 (thread 3) will be executed with the color " << green << "green.\n" << white;
-	cout << "Robot A4 (thread 4) will be executed with the color " << yellow << "yellow.\n\n" << white;
 
-	cout << "Reading tags from file " << filename << "...\n\n" << endl;
-	readTagsFromFile(xRIO, filename, tags); // uses XmlRegexIO to read tags
-
-	cout << "Instantiating Robots...\n\n" << endl;
-	instantiateRobotCommands(xRIO, tags, rcList);
+	cout << "Reading data and instantiating Robots from file " << filename << "...\n\n" << endl;
+	rMotor.readCommands(filename, xRIO);
 
 	cout << "Execution started:\n\n" << endl;
-	executeRobotCommands(rcList); // calls the useRobot methods
+	rMotor.executeCommands();
 
 	return 0;
 }
@@ -128,7 +117,7 @@ void executeRobotCommands(XmlNodeList &rcList)
 
 void useRobot(XmlRobot &robot, ostream& color(ostream &s))
 {
-	robot.Execute(color);
+	//robot.Execute(color);
 }
 
 /* EXCERPT OF EXECUTION RESULTS
