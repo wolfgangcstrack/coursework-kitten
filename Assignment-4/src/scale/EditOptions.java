@@ -36,7 +36,7 @@ public class EditOptions extends ProxyAutomobile implements Runnable, ScaleThrea
 			String optionName,
 			String newName
 			) {
-		
+		return updateOptionName(autoMake, autoModel, optionSetName, optionName, newName);
 	}
 	
 	public synchronized boolean editOptionPrice(
@@ -46,6 +46,6 @@ public class EditOptions extends ProxyAutomobile implements Runnable, ScaleThrea
 			String optionName,
 			float newPrice
 			) {
-		
+		return updateOptionPrice(autoMake, autoModel, optionSetName, optionName, newPrice);
 	}
 }
