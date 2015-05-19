@@ -33,38 +33,38 @@ public class Automobile implements java.io.Serializable {
 	}
 	
 	// getters -----------------------------------------------------------
-	public String getMake() { return make; }
-	public String getModel() { return model; }
-	public double getBasePrice() { return baseprice; }
-	public LinkedHashMap<String, OptionSet> getOptionSets() { return optionSets; }
+	public synchronized String getMake() { return make; }
+	public synchronized String getModel() { return model; }
+	public synchronized double getBasePrice() { return baseprice; }
+	public synchronized LinkedHashMap<String, OptionSet> getOptionSets() { return optionSets; }
 	
 	// ----- get OptionSet.choice's values
-	public String getOptionChoice(String optionSetName) {
+	public synchronized String getOptionChoice(String optionSetName) {
 		OptionSet opset = optionSets.get(optionSetName);
 		// if optionSetName is valid, return the name of its choice, else null
 		return (opset != null ? opset.getOptionChoice().getName() : null);
 	}
 	
-	public float getOptionChoicePrice(String optionSetName) {
+	public synchronized float getOptionChoicePrice(String optionSetName) {
 		OptionSet opset = optionSets.get(optionSetName);
 		// if optionSetName is valid, return the price of its choice, else 0
 		return (opset != null ? opset.getOptionChoice().getPrice() : 0);
 	}
 	
 	// ----- get individual Options' values (in context of OptionSet)
-	public String getOptionName(String optionSetName, int optionIndex) {
+	public synchronized String getOptionName(String optionSetName, int optionIndex) {
 		OptionSet opset = optionSets.get(optionSetName);
 		// if optionSetName is valid, return the name of the choice, else null
 		return (opset != null ? opset.getOption(optionIndex).getName() : null);
 	}
 	
-	public float getOptionPrice(String optionSetName, int optionIndex) {
+	public synchronized float getOptionPrice(String optionSetName, int optionIndex) {
 		OptionSet opset = optionSets.get(optionSetName);
 		// if optionSetName is valid, return the price of the choice, else 0
 		return (opset != null ? opset.getOption(optionIndex).getPrice() : 0);
 	}
 	
-	public double getTotalPrice() {
+	public synchronized double getTotalPrice() {
 		double total = baseprice;
 		
 		Iterator<OptionSet> a = optionSets.values().iterator();
@@ -76,12 +76,12 @@ public class Automobile implements java.io.Serializable {
 	}
 
 	// setters -----------------------------------------------------------
-	public void setMake(String make) { this.make = make; }
-	public void setModel(String model) { this.model = model; }
-	public void setBasePrice(double baseprice) { this.baseprice = baseprice; }
+	public synchronized void setMake(String make) { this.make = make; }
+	public synchronized void setModel(String model) { this.model = model; }
+	public synchronized void setBasePrice(double baseprice) { this.baseprice = baseprice; }
 	
 	// ----- set the choice for an OptionSet
-	public void setOptionChoice(String optionSetName, String optionName) {
+	public synchronized void setOptionChoice(String optionSetName, String optionName) {
 		OptionSet opset = optionSets.get(optionSetName);
 		if (opset != null) {
 			opset.setOptionChoice(optionName);
@@ -89,47 +89,47 @@ public class Automobile implements java.io.Serializable {
 	}
 
 	// ----- set individual OptionSets' values
-	public void setOptionSetName(String optionSetName, String newName) {
+	public synchronized void setOptionSetName(String optionSetName, String newName) {
 		optionSets.get(optionSetName).setName(newName);
 	}
 
 	// ----- set individual Options and their values (in context of OptionSet)
-	public void setOptionName(String optionSetName, int optionIndex, String newName) {
+	public synchronized void setOptionName(String optionSetName, int optionIndex, String newName) {
 		OptionSet opset = optionSets.get(optionSetName);
 		if (opset != null) {
 			opset.setOptionName(optionIndex, newName);
 		}
 	}
 	
-	public void setOptionName(String optionSetName, String optionName, String newName) {
+	public synchronized void setOptionName(String optionSetName, String optionName, String newName) {
 		OptionSet opset = optionSets.get(optionSetName);
 		if (opset != null) {
 			opset.setOptionName(optionName, newName);
 		}
 	}
 	
-	public void setOptionPrice(String optionSetName, int optionIndex, float newPrice) {
+	public synchronized void setOptionPrice(String optionSetName, int optionIndex, float newPrice) {
 		OptionSet opset = optionSets.get(optionSetName);
 		if (opset != null) {
 			opset.setOptionPrice(optionIndex, newPrice);
 		}
 	}
 	
-	public void setOptionPrice(String optionSetName, String optionName, float newPrice) {
+	public synchronized void setOptionPrice(String optionSetName, String optionName, float newPrice) {
 		OptionSet opset = optionSets.get(optionSetName);
 		if (opset != null) {
 			opset.setOptionPrice(optionName, newPrice);
 		}
 	}
 	
-	public void setOption(String optionSetName, int optionIndex, String newName, float newPrice) {
+	public synchronized void setOption(String optionSetName, int optionIndex, String newName, float newPrice) {
 		OptionSet opset = optionSets.get(optionSetName);
 		if (opset != null) {
 			opset.setOption(optionIndex, newName, newPrice);
 		}
 	}
 	
-	public void setOption(String optionSetName, String optionName, String newName, float newPrice) {
+	public synchronized void setOption(String optionSetName, String optionName, String newName, float newPrice) {
 		OptionSet opset = optionSets.get(optionSetName);
 		if (opset != null) {
 			opset.setOption(optionName, newName, newPrice);
@@ -137,11 +137,11 @@ public class Automobile implements java.io.Serializable {
 	}
 	
 	// contains methods ------------------------------------------------------	
-	public boolean containsOptionSet(String optionSetName) {
+	public synchronized boolean containsOptionSet(String optionSetName) {
 		return optionSets.containsKey(optionSetName);
 	}
 	
-	public boolean containsOption(String optionSetName, String optionName) {
+	public synchronized boolean containsOption(String optionSetName, String optionName) {
 		OptionSet opset = optionSets.get(optionSetName);
 		
 		if (opset != null) {
@@ -153,7 +153,7 @@ public class Automobile implements java.io.Serializable {
 	
 	// update methods (like set, but returns boolean) --------------------
 	// ----- update an OptionSetChoice
-	public boolean updateOptionChoice(String optionSetName, String optionName) {
+	public synchronized boolean updateOptionChoice(String optionSetName, String optionName) {
 		OptionSet opset = optionSets.get(optionSetName);
 		
 		if (opset != null) {
@@ -165,7 +165,7 @@ public class Automobile implements java.io.Serializable {
 	}
 
 	// ----- update individual OptionSets and their values
-	public boolean updateOptionSetName(String optionSetName, String newName) {
+	public synchronized boolean updateOptionSetName(String optionSetName, String newName) {
 		OptionSet opset = optionSets.get(optionSetName);
 		
 		if (opset != null) {
@@ -177,7 +177,7 @@ public class Automobile implements java.io.Serializable {
 	}
 
 	// ----- update individual Options and their values (in context of OptionSet)
-	public boolean updateOptionName(String optionSetName, String optionName, String newName) {
+	public synchronized boolean updateOptionName(String optionSetName, String optionName, String newName) {
 		OptionSet opset = optionSets.get(optionSetName);
 		
 		if (opset != null) {
@@ -187,7 +187,7 @@ public class Automobile implements java.io.Serializable {
 		return false;
 	}
 	
-	public boolean updateOptionPrice(String optionSetName, String optionName, float newPrice) {
+	public synchronized boolean updateOptionPrice(String optionSetName, String optionName, float newPrice) {
 		OptionSet opset = optionSets.get(optionSetName);
 		
 		if (opset != null) {
@@ -197,7 +197,7 @@ public class Automobile implements java.io.Serializable {
 		return false;
 	}
 	
-	public boolean updateOption(String optionSetName, String optionName, String newName, float newPrice) {
+	public synchronized boolean updateOption(String optionSetName, String optionName, String newName, float newPrice) {
 		OptionSet opset = optionSets.get(optionSetName);
 		
 		if (opset != null) {
@@ -208,9 +208,9 @@ public class Automobile implements java.io.Serializable {
 	}
 	
 	// add (OptionSet/Option) methods ------------------------------------
-	public boolean addOptionSet(String opsName) { return addOptionSet(opsName, 0); }
+	public synchronized boolean addOptionSet(String opsName) { return addOptionSet(opsName, 0); }
 	
-	public boolean addOptionSet(String opsName, int opsSize) {
+	public synchronized boolean addOptionSet(String opsName, int opsSize) {
 		if (opsSize < 0) {
 			return false;
 		}
@@ -223,7 +223,7 @@ public class Automobile implements java.io.Serializable {
 		return true;
 	}
 	
-	public boolean addOption(String opsName, String newOpName, float newOpPrice) {
+	public synchronized boolean addOption(String opsName, String newOpName, float newOpPrice) {
 		OptionSet opset = optionSets.get(opsName);
 		
 		if (opset != null) {
@@ -237,12 +237,12 @@ public class Automobile implements java.io.Serializable {
 	}
 	
 	// delete (OptionSet/Option) methods ---------------------------------
-	public boolean deleteOptionSet(String opsName) {
+	public synchronized boolean deleteOptionSet(String opsName) {
 		// if remove was successful, return true, else return false
 		return (optionSets.remove(opsName) != null ? true : false);
 	}
 	
-	public boolean deleteOption(String opsName, String opName) {
+	public synchronized boolean deleteOption(String opsName, String opName) {
 		OptionSet opset = optionSets.get(opsName);
 		
 		if (opset != null) {
@@ -253,7 +253,7 @@ public class Automobile implements java.io.Serializable {
 	}
 	
 	// toString() --------------------------------------------------------
-	public String toString() {
+	public synchronized String toString() {
 		StringBuilder sb = new StringBuilder(make).append(" ").append(model);
 		// keep decimal precision at two for price
 		java.text.DecimalFormat two = new java.text.DecimalFormat("$0.00");
