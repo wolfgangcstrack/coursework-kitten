@@ -14,7 +14,7 @@ import util.*;
 import model.*;
 
 public abstract class ProxyAutomobile {
-	private static LinkedHashMap<String, Automobile> automobiles;
+	protected static LinkedHashMap<String, Automobile> automobiles;
 	static { // initialize the LinkedHashMap
 		automobiles = new LinkedHashMap<String, Automobile>();
 	}
