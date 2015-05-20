@@ -1288,7 +1288,7 @@ sub print_link {
 sub upload_choices {
 
 print (<<EndHTML);
-<form action="mm.cgi" method=post>
+<form action="mm_projects.cgi" method=post>
   <center><table bgcolor="powderblue" border=0 width=500>
   <tr height=50><td colspan=2><center><b><font size=+1>Upload records from text file:</font></b>
   
@@ -1328,7 +1328,7 @@ sub appendRecords {
     #print "debug: ready to upload all records\n";
     #This form will import a copy and paste quiz bank in text format
 
-    print ( '<form action="mm.cgi" method=post>'. "\n" );
+    print ( '<form action="mm_projects.cgi" method=post>'. "\n" );
   
     print ( '<center><h3>Replace all existing records by new ones</h3></center>'. "\n" );
           
@@ -1365,7 +1365,7 @@ sub uploadAllRecordsForm {
     #print "debug: ready to upload all records\n";
     #This form will import a copy and paste quiz bank in text format
 
-    print ( '<form action="mm.cgi" method=post>'. "\n" );
+    print ( '<form action="mm_projects.cgi" method=post>'. "\n" );
   
     print ( '<center><h3>Replace all existing records by new ones</h3></center>'. "\n" );
           
