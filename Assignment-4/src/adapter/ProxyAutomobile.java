@@ -19,12 +19,12 @@ public abstract class ProxyAutomobile {
 		automobiles = new LinkedHashMap<String, Automobile>();
 	}
 	
-	// private helper methods --------------------------------------------
-	private Automobile getAutoWithKey(String autoMake, String autoModel) {
+	// protected helper methods --------------------------------------------
+	protected Automobile getAutoWithKey(String autoMake, String autoModel) {
 		return automobiles.get(this.getKey(autoMake, autoModel));
 	}
 	
-	private String getKey(String autoMake, String autoModel) {
+	protected String getKey(String autoMake, String autoModel) {
 		StringBuilder key = new StringBuilder(autoMake);
 		key.append(" ").append(autoModel);
 		return key.toString();
@@ -186,7 +186,7 @@ public abstract class ProxyAutomobile {
 	}
 	
 	// helper methods for fix method
-	private void readOptionSets(Scanner input, Automobile newAuto) throws AutoException {
+	protected void readOptionSets(Scanner input, Automobile newAuto) throws AutoException {
 		String opsetNameHolder;
 		String optionNameHolder;
 		float priceHolder;
