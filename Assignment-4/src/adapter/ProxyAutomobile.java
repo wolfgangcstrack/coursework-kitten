@@ -60,11 +60,11 @@ public abstract class ProxyAutomobile {
 	}
 	
 	// ReadAuto interface methods ----------------------------------------
-	public void printAuto(String autoMake, String autoModel) {
+	public synchronized void printAuto(String autoMake, String autoModel) {
 		System.out.println(getAutoWithKey(autoMake, autoModel).toString());
 	}
 	
-	public void printAllAuto() {
+	public synchronized void printAllAuto() {
 		for (String key : automobiles.keySet()) {
 			System.out.println(automobiles.get(key));
 			System.out.println();

@@ -7,15 +7,15 @@
  */
 package scale;
 
-public interface ScaleThread {
-	public boolean updateOptionName(
+public interface ScaleThread extends Runnable {
+	public boolean editOptionName(
 			String autoMake,
 			String autoModel,
 			String optionSetName,
 			String optionName,
 			String newName
 			);
-	public boolean updateOptionPrice(
+	public boolean editOptionPrice(
 			String autoMake,
 			String autoModel,
 			String optionSetName,
