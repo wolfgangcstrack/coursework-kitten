@@ -33,7 +33,8 @@ $mailprog = "/usr/sbin/sendmail";
 
 $| = 1;   #clear buffers  
 my $url = "";
-our $menu = [     'Generic list of projects (show all)',
+our $menu = [     'Modified View',
+                        'Generic list of projects (show all)',
                         'Sort and View All Records',
                         'Simple View',
                         'View scores (show accepted only)',
@@ -95,18 +96,19 @@ else {
           my $selection = param( "selection" );
                 #print "debug: selection is $selection\n";
                 
-                view( $dbh ) if ( $selection eq $menu[0] );
-              make_sort_form( $dbh ) if ( $selection eq $menu[1] );
-              simpleView( $dbh ) if ( $selection eq $menu[2] );
-              viewScores( $dbh ) if ( $selection eq $menu[3] );
-                displayInsert( $dbh ) if ( $selection eq $menu[4] );  
-                displayDelete( $dbh ) if ( $selection eq $menu[5] );  
-                displayUpdate( $dbh ) if ( $selection eq $menu[6] );
-                make_backup_form( $dbh ) if ( $selection eq $menu[7] );
-                displayEmailForm( $dbh, "Yes" ) if ( $selection eq $menu[8] );  #accepted
-                displayEmailForm( $dbh, "No" ) if ( $selection eq $menu[9] );   #not accepted
-                displayEmailCommentsForm() if ( $selection eq $menu[10] );       #goes to all
-                displayEmailTestForm() if ( $selection eq $menu[11] );
+                modifiedView( $dbh ) if ( $selection eq $menu[0] );
+                view( $dbh ) if ( $selection eq $menu[1] );
+                make_sort_form( $dbh ) if ( $selection eq $menu[2] );
+                simpleView( $dbh ) if ( $selection eq $menu[3] );
+                viewScores( $dbh ) if ( $selection eq $menu[4] );
+                displayInsert( $dbh ) if ( $selection eq $menu[5] );  
+                displayDelete( $dbh ) if ( $selection eq $menu[6] );  
+                displayUpdate( $dbh ) if ( $selection eq $menu[7] );
+                make_backup_form( $dbh ) if ( $selection eq $menu[8] );
+                displayEmailForm( $dbh, "Yes" ) if ( $selection eq $menu[9] );  #accepted
+                displayEmailForm( $dbh, "No" ) if ( $selection eq $menu[10] );   #not accepted
+                displayEmailCommentsForm() if ( $selection eq $menu[11] );       #goes to all
+                displayEmailTestForm() if ( $selection eq $menu[12] );
         }
         elsif ( param( "LAST" ) eq "SORT_ORDER" ) {
                 view_sorted( $dbh);
