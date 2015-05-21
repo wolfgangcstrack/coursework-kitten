@@ -339,12 +339,14 @@ sub modifiedView
     }
 
     # get the sql command by adding the compiled string of fields
-    my $SQLString = "SELECT " . $strCheckedFields .
-            " FROM mm, mm_projects" .
-            " WHERE email = mm_projects.email";
+    #my $SQLString = "SELECT " . $strCheckedFields .
+    #        " FROM mm, mm_projects" .
+    #        " WHERE email = mm_projects.email";
 
     # get the records/rows with the compiled sql command
-    my $full_rows = &getRecords($dbh, $SQLString);
+    &load_all_records($dbh, "$strCheckedFields ASC", "sort_criteria_full", "$strCheckedFields" );
+    my $full_rows = @{$rows};
+    # my $full_rows = &getRecords($dbh, $SQLString);
 
     # make the top row of the table to be printed
     my $tablerows = Tr(
@@ -1518,10 +1520,10 @@ sub load_all_records {
     
     $rows = $sth->fetchall_arrayref();
     $sth->finish();
-    @test = @{$rows};
-    foreach (@test){
+    #@test = @{$rows};
+    #foreach (@test){
         #print "debug in load_all_records: rows: @{$_}\n<br>";
-    }
+    #}
 }
 
 ######################################################################
