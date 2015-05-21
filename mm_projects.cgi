@@ -2270,11 +2270,39 @@ sub make_sort_form {
 } #end make_sort_form
 
 sub make_modifiedView_form {
-    %mview_menu=(
-        f1=>'field1',
-        f2=>'field2',
-        f3=>'field3',
-        f4=>'field4');
+    my %mview_menu =(
+            first => "first name",
+            last => "last name",
+            email => "email",
+            phone => "phone number",
+            ID_number => "ID Number",
+            title => "title",
+            category => "category",
+            accepted => "accepted",
+            notes => "notes",
+            class => "class",
+            highschool => "highschool",
+            groups => "groups",
+            softwware => "software",
+            semester => "semester",
+            year => "year",
+            criteria => "criteria",
+            tech_merit => "technical merit",
+            creative => "creative",
+            group_names => "group names",
+            description => "description",
+            instructor => "instructor",
+            proj_permission => "project permission",
+            proj_url => "project url",
+            ohlone_degree => "ohlone degree",
+            proj_purpose => "project purpose",
+            proj_personal => "project personal",
+            proj_client => "project client",
+            proj_non_prof => "project non-profit",
+            proj_donate => "project donate",
+            involvement => "involvement",
+            highschool => "highschool"
+    );
 
     print <<"    EndHTML";
         <h1>MM Festival Projects Database: Modified View</h1>
