@@ -34,18 +34,18 @@ $mailprog = "/usr/sbin/sendmail";
 $| = 1;   #clear buffers  
 my $url = "";
 our $menu = [     'Modified View',
-                        'Generic list of projects (show all)',
-                        'Sort and View All Records',
-                        'Simple View',
-                        'View scores (show accepted only)',
-                        'Enter (create) a project record',
-                        'Delete a project',
-                        'Edit/Score a project (Judge)',
-                        'Make Backup',
-                        'Email to Accepted Projects',
-                        'Email to Not Accepted Projects',
-                        'Email Comments to Everyone' ,
-                        'Test Email' ];  
+                  'Generic list of projects (show all)',
+                  'Sort and View All Records',
+                  'Simple View',
+                  'View scores (show accepted only)',
+                  'Enter (create) a project record',
+                  'Delete a project',
+                  'Edit/Score a project (Judge)',
+                  'Make Backup',
+                  'Email to Accepted Projects',
+                  'Email to Not Accepted Projects',
+                  'Email Comments to Everyone' ,
+                  'Test Email' ];  
 our @menu = @$menu;
 our $weight = 2;  #weight of criteria: below average 0*weight, average 1*weight, above 2*weight
 @rubric = qw(0 1 2 3 4 5 6 7 8 9 10);
@@ -74,6 +74,40 @@ $projects_fields = "category, title, softwware, class, semester, year, notes, ac
                 "proj_personal, proj_client, proj_non_prof, proj_donate, involvement, " .
     "highschool";
 $simple_projects_fields = "category, title";
+
+%mview_menu =(
+        first => "first name",
+        last => "last name",
+        email => "email",
+        phone => "phone number",
+        ID_number => "ID Number",
+        title => "title",
+        category => "category",
+        accepted => "accepted",
+        notes => "notes",
+        class => "class",
+        highschool => "highschool",
+        groups => "groups",
+        softwware => "software",
+        semester => "semester",
+        year => "year",
+        criteria => "criteria",
+        tech_merit => "technical merit",
+        creative => "creative",
+        group_names => "group names",
+        description => "description",
+        instructor => "instructor",
+        proj_permission => "project permission",
+        proj_url => "project url",
+        ohlone_degree => "ohlone degree",
+        proj_purpose => "project purpose",
+        proj_personal => "project personal",
+        proj_client => "project client",
+        proj_non_prof => "project non-profit",
+        proj_donate => "project donate",
+        involvement => "involvement",
+        highschool => "highschool"
+);
 
 @yes_no = qw(Yes No);
 
@@ -290,54 +324,22 @@ sub simpleView
 
 sub modifiedView 
 {
-=comment
     my $dbh = shift(); 
-   
-    &load_all_records($dbh, "last, first ASC", "mm", $simple_mm_fields);      #into @rows
-    @students = @{$rows};
-    #Enter and Score Projects in view: students array: @students\n<br>";
-    
-    foreach $student (@students){
-        ($last, $first, $email) = @{$student};
-          #print "debug before calling parial_records: last: $last, email: $email, ID_number: $ID_number\n<br>";
-    #exit;
-        &load_partial_records($dbh, "mm_projects", $simple_projects_fields, $email);    #into @rows
-        foreach $row (@{$rows}) {
-          my($category, $title) = @{$row};
-            push( @{$full_rows  }, [ $category, $last, $first,  $title ] );
+    my @checked_fields = param("mviewfields");
+
+    my $strCheckedFields = ""; # will hold fields to retrieve in sql statement
+
+    for my $i (0 .. $checked_fields) {
+        if ($i != $checked_fields) {
+            $strCheckedFields .= "$checked_fields[$i], ";
+        } else {
+            $strCheckedFields .= "$checked_field";
         }
     }
-    @full_rows = @{$full_rows};
-    foreach my $row ( @full_rows ) {
-      my ($category, $last, $first,  $title) = @$row;
-      &simple_insertRecord ($dbh, $category, $last, $first, $title );
-    }
-    &load_all_records($dbh, "category, last, first, title ASC", "sort_criteria", "category, last, first, title" );      #into @rows
-    @full_rows = @{$rows};
-    
-    
-    #@full_rows = sort {(split /_/, lc $a)[0] cmp (split /_/, lc $b)[0]} @full_rows;
-    #print "debug in simple_view: full_rows array: @full_rows\n<br>";
-  #exit;
-   
-    my $tablerows = 
-        Tr( th( { -bgcolor => "#dddddd", -align=>'left' }, 
-                [ "category", "Last", "First", "title" ] ) );
-          
-    foreach my $row ( @full_rows ) {
-        $tablerows .= Tr( td( { -bgcolor => "#dddddd" }, $row ) );
-    }
-   
-    print   h1( "MM Festival Projects Database" );
-    &print_link;
-    print table( { -border => 1, -cellpadding => 5, 
-                  -cellspacing => 0 }, $tablerows ),
-                br(), br(),
-                "Database contains ", b( scalar( @$full_rows ) ), 
-                " records.",br(), br();
-    my $string = "TRUNCATE TABLE sort_criteria";
-  $dbh->do( $string);
-=cut
+
+    my $SQLString = "SELECT " . $strCheckedFields .
+            " FROM mm, mm_projects" .
+            " WHERE email = mm_projects.email";
 }
 
 ######################################################################
@@ -2270,40 +2272,6 @@ sub make_sort_form {
 } #end make_sort_form
 
 sub make_modifiedView_form {
-    my %mview_menu =(
-            first => "first name",
-            last => "last name",
-            email => "email",
-            phone => "phone number",
-            ID_number => "ID Number",
-            title => "title",
-            category => "category",
-            accepted => "accepted",
-            notes => "notes",
-            class => "class",
-            highschool => "highschool",
-            groups => "groups",
-            softwware => "software",
-            semester => "semester",
-            year => "year",
-            criteria => "criteria",
-            tech_merit => "technical merit",
-            creative => "creative",
-            group_names => "group names",
-            description => "description",
-            instructor => "instructor",
-            proj_permission => "project permission",
-            proj_url => "project url",
-            ohlone_degree => "ohlone degree",
-            proj_purpose => "project purpose",
-            proj_personal => "project personal",
-            proj_client => "project client",
-            proj_non_prof => "project non-profit",
-            proj_donate => "project donate",
-            involvement => "involvement",
-            highschool => "highschool"
-    );
-
     print <<"    EndHTML";
         <h1>MM Festival Projects Database: Modified View</h1>
         <h3>Select fields to view:</h3>
@@ -2317,7 +2285,7 @@ sub make_modifiedView_form {
     EndHTML
 
     print checkbox_group(
-        -name=>'fields',
+        -name=>'mviewfields',
         -values=>\%mview_menu,
         -labels=>\%mview_menu,
         -linebreak=>'true');
