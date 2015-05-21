@@ -96,7 +96,7 @@ else {
           my $selection = param( "selection" );
                 #print "debug: selection is $selection\n";
                 
-                modifiedView( $dbh ) if ( $selection eq $menu[0] );
+                make_modifiedView_form( $dbh ) if ( $selection eq $menu[0] );
                 view( $dbh ) if ( $selection eq $menu[1] );
                 make_sort_form( $dbh ) if ( $selection eq $menu[2] );
                 simpleView( $dbh ) if ( $selection eq $menu[3] );
@@ -171,6 +171,9 @@ else {
          elsif ( param( "LAST" ) eq "EMAIL_TEST" ) {
                 &do_mail_test($dbh);
           print "<font color=red>Email Test Done</font><br>\n";
+    }
+    elsif (param( "LAST" ) eq "MODIFIED_VIEW" ) {
+        &modifiedView($dbh);
     }
 
 
@@ -1290,7 +1293,7 @@ sub print_link {
 sub upload_choices {
 
 print (<<EndHTML);
-<form action="mm_projects.cgi" method=post>
+<form action="mm.cgi" method=post>
   <center><table bgcolor="powderblue" border=0 width=500>
   <tr height=50><td colspan=2><center><b><font size=+1>Upload records from text file:</font></b>
   
@@ -1330,7 +1333,7 @@ sub appendRecords {
     #print "debug: ready to upload all records\n";
     #This form will import a copy and paste quiz bank in text format
 
-    print ( '<form action="mm_projects.cgi" method=post>'. "\n" );
+    print ( '<form action="mm.cgi" method=post>'. "\n" );
   
     print ( '<center><h3>Replace all existing records by new ones</h3></center>'. "\n" );
           
@@ -1367,7 +1370,7 @@ sub uploadAllRecordsForm {
     #print "debug: ready to upload all records\n";
     #This form will import a copy and paste quiz bank in text format
 
-    print ( '<form action="mm_projects.cgi" method=post>'. "\n" );
+    print ( '<form action="mm.cgi" method=post>'. "\n" );
   
     print ( '<center><h3>Replace all existing records by new ones</h3></center>'. "\n" );
           
@@ -2266,6 +2269,48 @@ sub make_sort_form {
                                         
 } #end make_sort_form
 
+sub make_modifiedView_form {
+    %mview_menu=(
+        f1=>'field1',
+        f2=>'field2',
+        f3=>'field3',
+        f4=>'field4');
+
+    print <<"    EndHTML";
+        <h1>MM Festival Projects Database: Modified View</h1>
+        <h3>Select fields to view:</h3>
+                                        
+                                        
+        <form method='post' action=mm_projects.cgi>
+        <table border rules='rows' cellpadding='5'>
+        <tr>
+                <td>
+                        Fields:<br />
+    EndHTML
+
+    print checkbox_group(
+        -name=>'fields',
+        -values=>\%mview_menu,
+        -labels=>\%mview_menu,
+        -linebreak=>'true');
+
+    print <<"    EndHTML";
+                </td>
+                <td></td> <!--cries-->
+        </tr>
+        <tr>
+                <td colspan='2' align='center'>
+         <input type="hidden" name="LAST" value="MODIFIED_VIEW" />
+                        <input type='submit' value='Display Selected Fields' /> &nbsp;&nbsp;
+                        <input type='reset' type='Reset' />
+                </td>
+        </tr>
+        </table>
+        </form>
+    EndHTML
+
+    return;
+} # end make_modifiedView_form
 
 ######################################################################
 #### generic query to pull data from the database           ##########
