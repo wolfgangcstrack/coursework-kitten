@@ -325,10 +325,11 @@ sub simpleView
 sub modifiedView 
 {
     my $dbh = shift(); 
-    my @checked_fields = param("mviewfields");
+    my @checked_fields = param("mviewfields"); # get user-checked fields
 
     my $strCheckedFields = ""; # will hold fields to retrieve in sql statement
 
+    # append each checked field to the string
     for my $i (0 .. $checked_fields) {
         if ($i != $checked_fields) {
             $strCheckedFields .= "$checked_fields[$i], ";
@@ -337,9 +338,35 @@ sub modifiedView
         }
     }
 
+    # get the sql command by adding the compiled string of fields
     my $SQLString = "SELECT " . $strCheckedFields .
             " FROM mm, mm_projects" .
             " WHERE email = mm_projects.email";
+
+    # get the records/rows with the compiled sql command
+    my $full_rows = &getRecords($dbh, $SQLString);
+
+    # make the top row of the table to be printed
+    my $tablerows = Tr(
+            th(
+                { -bgcolor => "#dddddd", -align=>'left' },
+                \@checked_fields
+            )
+    );
+
+    # add the rest of the rows to the variable for the table to be printed
+    foreach my $row ( @$full_rows ) {
+        $tablerows .= Tr( td( { -bgcolor => "#dddddd" }, $row ) );
+    }
+
+    # print the results to screen
+    print "<h1>MM Festival Projects Database: Modified View</h1>"
+    print("<br /><br />");
+    print table( { -border => 1, -cellpadding => 5,
+                -cellspacing => 0 }, $tablerows ),
+              br(), br(),
+              "Database contains ", b( scalar( @$full_rows ) ),
+              " records.",br(), br();
 }
 
 ######################################################################
