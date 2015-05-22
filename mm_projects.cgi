@@ -1,11 +1,11 @@
 #!/usr/bin/perl
+#
 # Exercise for Chapter 15
 # Database: SQL and Perl Database Interface
-# 
 # Adapted for the multimedia festival
 # 
-# Author:  Jon Degallier
-# Spring  2005
+# Author: Jon Degallier
+# Spring 2005
 #
 # Modified by Wolfgang Christian Strack
 # - Perl Final Project, Winter 2015
@@ -17,22 +17,15 @@ use DBD::mysql;
 use CGI qw( :standard );
 use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 
-#BEGIN {
-# use CGI::Carp qw(carpout);
-# open(LOG, ">>final_project_error.log") or
-# die("Unable to open mycgi-log: $!\n");
-# carpout('LOG');
-#}
-
 ######################################################################
-#### initialize a few things              ####################
+#### initialize a few things                      ####################
 ######################################################################
-
 my $DSN = "DBI:mysql:mm_festival";
 $mailprog = "/usr/sbin/sendmail";
 
 $| = 1;   #clear buffers  
 my $url = "";
+
 our $menu = [     'Modified View',
                   'Generic list of projects (show all)',
                   'Sort and View All Records',
@@ -45,36 +38,48 @@ our $menu = [     'Modified View',
                   'Email to Accepted Projects',
                   'Email to Not Accepted Projects',
                   'Email Comments to Everyone' ,
-                  'Test Email' ];  
+                  'Test Email'
+];  
+
 our @menu = @$menu;
 our $weight = 2;  #weight of criteria: below average 0*weight, average 1*weight, above 2*weight
+
 @rubric = qw(0 1 2 3 4 5 6 7 8 9 10);
+
 our @classes = qw(None mm102A mm102B mm103A mm103B mm104 mm105 mm106 mm107 mm110 mm114 mm115 mm116 
 mm117 mm118 mm119 mm121A mm121B mm121C mm160 mm162 mm195 mm210);
+
 our %class_name = ();
+
 foreach (@classes) {
     $class_name{$_} = $_;
 }
+
 our @semester = qw(Fall Spring Summer);
 our %semester_name = ();
+
 foreach (@semester) {
     $semester_name{$_} = $_;
 }
+
 our @year = qw(2020 2019 2018 2017 2016 2015 2014 2013 2012 2011);
 our %year_name = ();
+
 foreach (@year) {
     $year_name{$_} = $_;
 }
+
 $mm_fields = "last, first, email, phone, ID_number";
 $simple_mm_fields = "last, first, email";
 
 $projects_fields = "category, title, softwware, class, semester, year, notes, accepted, criteria, ". 
     "tech_merit, creative, groups, group_names, description, " .
-                "instructor, proj_permission, proj_url, ohlone_degree, proj_purpose, " .
-                "proj_personal, proj_client, proj_non_prof, proj_donate, involvement, " .
+    "instructor, proj_permission, proj_url, ohlone_degree, proj_purpose, " .
+    "proj_personal, proj_client, proj_non_prof, proj_donate, involvement, " .
     "highschool";
 $simple_projects_fields = "category, title";
 
+# used in modified view form checkboxes
 %mview_menu =(
         title => "title",
         category => "category",
@@ -107,107 +112,98 @@ $simple_projects_fields = "category, title";
 @yes_no = qw(Yes No);
 
 ######################################################################
-#### main begin here                ####################
+#### main begin here                              ####################
 ######################################################################
-
 &print_header;
 
 unless ( param ) {
     print h1( "Multimedia Festival Database" );
-  &print_options;
-        &print_link;
+    &print_options;
+    &print_link;
 }
 else {
     my $dbh = DBI->connect( $DSN, "mgs_user", "pa55word", { RaiseError => 1 } );
-        #print "debug: LAST: ", param('LAST'), "\n";
         
     if ( param( "LAST" ) eq "MAIN" ) {
-          my $selection = param( "selection" );
-                #print "debug: selection is $selection\n";
-                
-                make_modifiedView_form( $dbh ) if ( $selection eq $menu[0] );
-                view( $dbh ) if ( $selection eq $menu[1] );
-                make_sort_form( $dbh ) if ( $selection eq $menu[2] );
-                simpleView( $dbh ) if ( $selection eq $menu[3] );
-                viewScores( $dbh ) if ( $selection eq $menu[4] );
-                displayInsert( $dbh ) if ( $selection eq $menu[5] );  
-                displayDelete( $dbh ) if ( $selection eq $menu[6] );  
-                displayUpdate( $dbh ) if ( $selection eq $menu[7] );
-                make_backup_form( $dbh ) if ( $selection eq $menu[8] );
-                displayEmailForm( $dbh, "Yes" ) if ( $selection eq $menu[9] );  #accepted
-                displayEmailForm( $dbh, "No" ) if ( $selection eq $menu[10] );   #not accepted
-                displayEmailCommentsForm() if ( $selection eq $menu[11] );       #goes to all
-                displayEmailTestForm() if ( $selection eq $menu[12] );
-        }
-        elsif ( param( "LAST" ) eq "SORT_ORDER" ) {
-                view_sorted( $dbh);
+        my $selection = param( "selection" );
+        make_modifiedView_form( $dbh ) if ( $selection eq $menu[0] );
+        view( $dbh ) if ( $selection eq $menu[1] );
+        make_sort_form( $dbh ) if ( $selection eq $menu[2] );
+        simpleView( $dbh ) if ( $selection eq $menu[3] );
+        viewScores( $dbh ) if ( $selection eq $menu[4] );
+        displayInsert( $dbh ) if ( $selection eq $menu[5] );  
+        displayDelete( $dbh ) if ( $selection eq $menu[6] );  
+        displayUpdate( $dbh ) if ( $selection eq $menu[7] );
+        make_backup_form( $dbh ) if ( $selection eq $menu[8] );
+        displayEmailForm( $dbh, "Yes" ) if ( $selection eq $menu[9] );  #accepted
+        displayEmailForm( $dbh, "No" ) if ( $selection eq $menu[10] );   #not accepted
+        displayEmailCommentsForm() if ( $selection eq $menu[11] );       #goes to all
+        displayEmailTestForm() if ( $selection eq $menu[12] );
+    }
+    elsif ( param( "LAST" ) eq "SORT_ORDER" ) {
+        view_sorted( $dbh);
     }
     elsif ( param( "LAST" ) eq "INSERT" ) {
-          new_and_edit( $dbh );
-          view( $dbh );
-    #print "<p><a href=\"mm_projects.cgi?LAST=MAIN&selection=Insert a Record\">Add another record</a>";
+        new_and_edit( $dbh );
+        view( $dbh );
     }
     elsif ( param( "LAST" ) eq "DELETE" ) {
-          deleteRecord( $dbh );
-          displayDelete( $dbh );
-    #print "<p><a href=\"mm_projects.cgi?LAST=MAIN&selection=Delete a Record\">Delete another record</a>";
+        deleteRecord( $dbh );
+        displayDelete( $dbh );
     }
     elsif ( param( "LAST" ) eq "UPDATE1" ) {
-                $from = param( FROM);
-    #print "debug: about to updateRecord\n";
-          updateRecordForm( $dbh );
+        $from = param( FROM);
+        updateRecordForm( $dbh );
     }
-        elsif ( param( "LAST" ) eq "UPDATE2" ) {
-          updateRecord( $dbh );
-                #print "debug after updateRecord with FROM: ", param( FROM ), "<br>\n";
-                if (param( FROM ) eq "insert"){
-                    displayInsert( $dbh );
-                }else {
-                    displayUpdate( $dbh );
-                }
-    #print "<p><a href=\"mm_projects.cgi?LAST=MAIN&selection=Edit a Record\">Edit another record</a>";
+    elsif ( param( "LAST" ) eq "UPDATE2" ) {
+        updateRecord( $dbh );
+
+        if (param( FROM ) eq "insert") {
+            displayInsert( $dbh );
+        } else {
+            displayUpdate( $dbh );
+        }
     }
-        elsif ( param( "LAST" ) eq "UPLOAD1" ) {
-          appendRecords( $dbh );
-          view( $dbh );
+    elsif ( param( "LAST" ) eq "UPLOAD1" ) {
+        appendRecords( $dbh );
+        view( $dbh );
     }
-        elsif ( param( "LAST" ) eq "UPLOAD2" ) {
-          uploadAllRecordsForm( $dbh );
+    elsif ( param( "LAST" ) eq "UPLOAD2" ) {
+        uploadAllRecordsForm( $dbh );
     }
-        elsif ( param( "LAST" ) eq "UPLOAD3" ) {
-          view( $dbh );
+    elsif ( param( "LAST" ) eq "UPLOAD3" ) {
+        view( $dbh );
     }
-        elsif ( param( "LAST" ) eq "UPLOAD4" ) {
-                &doUpload($dbh);
-          view( $dbh );
+    elsif ( param( "LAST" ) eq "UPLOAD4" ) {
+        &doUpload($dbh);
+        view( $dbh );
     }
-        elsif ( param( "LAST" ) eq "UPLOAD5" ) {
-                &doAppend($dbh);
-          view( $dbh );
+    elsif ( param( "LAST" ) eq "UPLOAD5" ) {
+        &doAppend($dbh);
+        view( $dbh );
     }
-        elsif ( param( "LAST" ) eq "BACKUP" ) {
-                &do_backup($dbh);
-          print "<font color=red>Database Saved</font><br>\n";
+    elsif ( param( "LAST" ) eq "BACKUP" ) {
+        &do_backup($dbh);
+        print "<font color=red>Database Saved</font><br>\n";
     }
-         elsif ( param( "LAST" ) eq "EMAIL" ) {
-                &do_mail($dbh);
-          print "<font color=red>Students Emailed</font><br>\n";
+    elsif ( param( "LAST" ) eq "EMAIL" ) {
+        &do_mail($dbh);
+        print "<font color=red>Students Emailed</font><br>\n";
     }
-        elsif ( param( "LAST" ) eq "EMAIL_COMMENTS" ) {
-                &do_mail_comments($dbh);
-          print "<font color=red>Group Mailing Done</font><br>\n";
+    elsif ( param( "LAST" ) eq "EMAIL_COMMENTS" ) {
+        &do_mail_comments($dbh);
+        print "<font color=red>Group Mailing Done</font><br>\n";
     }
-         elsif ( param( "LAST" ) eq "EMAIL_TEST" ) {
-                &do_mail_test($dbh);
-          print "<font color=red>Email Test Done</font><br>\n";
+    elsif ( param( "LAST" ) eq "EMAIL_TEST" ) {
+        &do_mail_test($dbh);
+        print "<font color=red>Email Test Done</font><br>\n";
     }
     elsif (param( "LAST" ) eq "MODIFIED_VIEW" ) {
         &modifiedView($dbh);
     }
 
-
     $dbh->disconnect();
-  &print_link;
+    &print_link;
 }
 
 print end_html();
@@ -215,7 +211,6 @@ print end_html();
 ######################################################################
 #### view      display the database               ####################
 ######################################################################
-
 sub view 
 {
     my $dbh = shift(); 
@@ -260,9 +255,8 @@ sub view
 }
 
 ######################################################################
-#### simpleView      display the database in a few fields      #####
+#### simpleView      display the database in a few fields        #####
 ######################################################################
-
 sub simpleView 
 {
     my $dbh = shift(); 
@@ -316,12 +310,12 @@ sub simpleView
 ######################################################################
 #### modifiedView      display selected fields in the database   #####
 ######################################################################
-
 sub modifiedView 
 {
     my $dbh = shift(); 
-    my @checked_fields = param("mviewfields"); # get user-checked fields
+    my @checked_fields = param("mviewfields"); # retrieve user-checked fields
 
+    # check if at least one field was chosen
     if (scalar(@checked_fields) == 0) {
         print h1( "MM Festival Projects Database: Modified View" );
         print("<h3>No options were selected!</h3>\n");
@@ -331,56 +325,39 @@ sub modifiedView
     my $strCheckedFields = ""; # will hold fields to retrieve in sql statement
 
     # append each checked field to the string
-    #if ($checked_fields[0] eq "email") {
-    #    $checked_fields[0] = "mm_projects.email";
-    #}
     $strCheckedFields .= $checked_fields[0];
     for (my $i = 1; $i < scalar(@checked_fields); $i++) {
-    #    if ($checked_fields[$i] eq "email") {
-    #        $checked_fields[$i] = "mm_projects.email";
-    #    }
         $strCheckedFields .= ", $checked_fields[$i]";
     }
 
-    &load_all_records($dbh, "last, first ASC", "mm", "*");      #into @rows
-    @students = @{$rows};
+    # load id records
+    &load_all_records($dbh, "last, first ASC", "mm", "*"); # into @rows
+    @students = @{$rows}; # store id records
 
     foreach $student (@students){
+        # process id record
         my ($first, $last, $email, $phone, $id) = @{$student};
-        &load_partial_records($dbh, "mm_projects", $strCheckedFields, $email);    #into @rows
+        # load data
+        &load_partial_records($dbh, "mm_projects", $strCheckedFields, $email); # into @rows
 
+        # store data
         foreach $row (@{$rows}) {
             push( @{$full_rows}, [@{$row}] );
         }
     }
 
+    # store data for insertion into sort_criteria_full and printing in tables
     @full_rows = @{$full_rows};
 
     foreach my $row ( @full_rows ) {
-        #my $string = "INSERT INTO sort_criteria_full ($strCheckedFields) VALUES ( " .
-        #  ("?, " x (scalar(@$row)-1)) . "? );";
-        #print h1($string);
-        #  $sth = $dbh->prepare($string) or die("Can't prepare string $mySQLString: ", $dbh->errstr);
-
-        #$sth->execute(@$row) || 
-        #  die "Could not execute query to insert data.<br>";
-        #my ($category, $last, $first,  $title) = @$row;
+        # insert data into sort_criteria_full
         &modified_insertRecord($dbh, $strCheckedFields, $row);
     }
 
-    &load_all_records($dbh, "$strCheckedFields ASC", "sort_criteria_full", "$strCheckedFields" );      #into @rows
+    # load data
+    &load_all_records($dbh, "$strCheckedFields ASC", "sort_criteria_full", "$strCheckedFields" ); # into @rows
+    # store data
     @full_rows = @{$rows};
-
-=comment
-    # get the sql command by adding the compiled string of fields
-    my $SQLString = "SELECT " . $strCheckedFields .
-            " FROM mm, mm_projects";
-
-    # get the records/rows with the compiled sql command
-    #&load_all_records($dbh, "$strCheckedFields ASC", "mm, mm_projects", "$strCheckedFields" );
-    #my $full_rows = @{$rows};
-    my $full_rows = &getRecords($dbh, $SQLString);
-=cut
 
     # make the top row of the table to be printed
     my $tablerows = Tr(
@@ -404,14 +381,14 @@ sub modifiedView
               "Database contains ", b( scalar( @$full_rows ) ),
               " records.",br(), br();
 
+    # empty sort_criteria_full
     my $string = "TRUNCATE TABLE sort_criteria_full";
-    $dbh->do( $string); 
+    $dbh->do($string); 
 }
 
 ######################################################################
 #### display sorted dataset                                 ##########
 ######################################################################
-                        
 sub view_sorted {
         my $dbh = shift();
                         
@@ -503,15 +480,10 @@ sub view_sorted {
         } # end if testing for sort1 thru sort3
             
 } # end view_sorted routine
-                  
-
-
-
 
 ######################################################################
-#### viewScores                       ####################
+#### viewScores                                   ####################
 ######################################################################
-
 sub viewScores {
 
     my $dbh = shift(); 
@@ -628,10 +600,10 @@ sub byscore {
 sub bycategory {
     ${$b}[1] cmp ${$a}[1];
 }
-######################################################################
-#### displayInsert                      ####################
-######################################################################
 
+######################################################################
+#### displayInsert                                ####################
+######################################################################
 sub displayInsert
 {
     my $dbh = shift();
@@ -686,9 +658,8 @@ sub displayInsert
 }
 
 ######################################################################
-#### new_and_edit               ####################
+#### new_and_edit                                 ####################
 ######################################################################
-
 sub new_and_edit {
    my $dbh = shift();
     
@@ -731,10 +702,8 @@ sub new_and_edit {
 
 
 ######################################################################
-#### displayDelete                    ####################
+#### displayDelete                                ####################
 ######################################################################
-
-
 sub displayDelete
 {
    my $dbh = shift();
@@ -768,10 +737,8 @@ sub displayDelete
             "This action removes the record permanently." );
 }
 ######################################################################
-#### displayUpdate                    ####################
+#### displayUpdate                                ####################
 ######################################################################
-
-
 sub displayUpdate
 {
    my $dbh = shift();
@@ -805,11 +772,10 @@ sub displayUpdate
          submit( -value => "Edit the Record" ), br(), br(),
       end_form();
 }
-######################################################################
-#### updateRecordForm                     ####################
-######################################################################
 
-
+######################################################################
+#### updateRecordForm                             ####################
+######################################################################
 sub updateRecordForm 
 {
     my $dbh = shift();
@@ -1147,9 +1113,8 @@ sub updateRecordForm
 }
 
 ######################################################################
-#### insertRecord                     ####################
+#### insertRecord                                 ####################
 ######################################################################
-
 sub insertRecord
 {
   my $dbh = shift;
@@ -1166,9 +1131,8 @@ sub insertRecord
 }
 
 ######################################################################
-#### simple_insertRecord                    ####################
+#### simple_insertRecord                          ####################
 ######################################################################
-
 sub simple_insertRecord
 {
   my $dbh = shift;
@@ -1189,27 +1153,25 @@ sub simple_insertRecord
 }
 
 ######################################################################
-#### modified_insertRecord                    ####################
+#### modified_insertRecord                        ####################
 ######################################################################
-
 sub modified_insertRecord
 {
     my $dbh = shift;
     my $fields = shift;
-    my @row = @{+shift};
-        
+    my @row = @{+shift}; # shift array reference into array
+
+    # the ("?, " x ($row-1)) prints the question marks that will be replaced by the values in @row
     my $string = "INSERT INTO sort_criteria_full ($fields) VALUES ( " . ("?, " x (scalar(@row)-1)) . "? );";
     $sth = $dbh->prepare($string) or die("Can't prepare string $mySQLString: ", $dbh->errstr);
-
-    $sth->execute(@fieldsarr) || 
+    # execute the sql statement and replace the (?, ?, .. ?) with respective values
+    $sth->execute(@row) || 
           die "Could not execute query to insert data.<br>";
 }
 
 ######################################################################
-#### deleteRecord                     ####################
+#### deleteRecord                                 ####################
 ######################################################################
-
-
 sub deleteRecord 
 {
     my $dbh = shift();
@@ -1224,11 +1186,10 @@ sub deleteRecord
     print "Record <font color=red>", param( 'DELETE_ID' ), 
           " </font>deleted.",  br();
 }
-######################################################################
-#### updateRecord                     ####################
-######################################################################
 
-
+######################################################################
+#### updateRecord                                 ####################
+######################################################################
 sub updateRecord
 {
     my $dbh = shift();
@@ -1314,12 +1275,11 @@ sub updateRecord
   $proj_personal, $proj_client, $proj_non_prof, $proj_donate, $involvement, $highschool,
   $key, $title2) || 
       die "Could not execute query to insert data.<br>";
-  
 }                   
-################################################################
-###     print_header          ####
-################################################################
 
+################################################################
+###     print_header                               #############
+################################################################
 sub print_header {
   print header();
   print <<end; 
@@ -1343,10 +1303,8 @@ end
 }
 
 ######################################################################
-#### print_options                 #######
+#### print_options                                       #############
 ######################################################################
-
-
 sub print_options {
   print 
          start_form(),
@@ -1359,9 +1317,8 @@ sub print_options {
 }
 
 ######################################################################
-#### print_link                  #######
+#### print_link                                          #############
 ######################################################################
-
 sub print_link {
   print p(),
                 a( { -href => "mm_projects.cgi" }, 
@@ -1375,7 +1332,6 @@ sub print_link {
 ######################################################################
 #### upload_choices       menu for uploading from spreadsheet  #######
 ######################################################################
-
 sub upload_choices {
 
 print (<<EndHTML);
@@ -1408,13 +1364,11 @@ print (<<EndHTML);
   
 </form>
 EndHTML
-
 }
 
 ######################################################################
 #### appendRecords       add recoreds to exsiting database  ##########
 ######################################################################
-
 sub appendRecords {
     #print "debug: ready to upload all records\n";
     #This form will import a copy and paste quiz bank in text format
@@ -1449,9 +1403,8 @@ sub appendRecords {
 }
 
 ######################################################################
-#### uploadAllRecordsForm       replace exsiting records with new  #######
+#### uploadAllRecordsForm   replace exsiting records with new  #######
 ######################################################################
-
 sub uploadAllRecordsForm {
     #print "debug: ready to upload all records\n";
     #This form will import a copy and paste quiz bank in text format
@@ -1488,7 +1441,6 @@ sub uploadAllRecordsForm {
 ######################################################################
 #### doUpload       do the replace existing records with new  ########
 ######################################################################
-
 sub doUpload {
     $dbh = shift();
     my $data = param('DATA');
@@ -1503,9 +1455,8 @@ sub doUpload {
 }
 
 ######################################################################
-#### doAppend       do the appends records with new         ########
+#### doAppend       do the appends records with new           ########
 ######################################################################
-
 sub doAppend {
     $dbh = shift();
     my $data = param('DATA');
@@ -1521,7 +1472,6 @@ sub doAppend {
 ######################################################################
 #### add_record       add a new record from upload option  ###########
 ######################################################################
-
 sub add_record {
     ($dbh, @db_line) = @_;
     ($last, $first, $category, $title, $email, $accepted, $notes) = @db_line;
@@ -1539,7 +1489,6 @@ sub add_record {
 ######################################################################
 #### delete_all      delete all records from upload option  ##########
 ######################################################################
-
 sub delete_all 
 {
     my $dbh = shift();
@@ -1548,11 +1497,9 @@ sub delete_all
     $dbh->do( $string );
 }
 
-
 ######################################################################
-#### load_all_records             ##########
+#### load_all_records                                       ##########
 ######################################################################
-
 sub load_all_records {
     my($dbh, $sort, $table, $field_names, $accept_flag) = @_;
     #print "debug in load_all_records: sort: $sort, table: $table, field_names: $field_names", " accept_flag: $accept_flag\n<br>";
@@ -1582,9 +1529,8 @@ sub load_all_records {
 }
 
 ######################################################################
-#### load_accepted_records            ##########
+#### load_accepted_records                                  ##########
 ######################################################################
-
 sub load_accepted_records {
     my($dbh, $sort, $table, $field_names, $accept_flag) = @_;
     #print "debug in load_all_records: sort: $sort, table: $table, field_names: $field_names", " accept_flag: $accept_flag\n<br>";
@@ -1613,9 +1559,8 @@ sub load_accepted_records {
     }
 }
 ######################################################################
-#### load_partial_records           ##########
+#### load_partial_records                                   ##########
 ######################################################################
-
 sub load_partial_records {
     my($dbh, $table, $field_names, $where) = @_;
     #print "\n<br>debug in load_partial_records: table: $table, field_names: $field_names, where: $where\n<br>";
@@ -1636,9 +1581,8 @@ sub load_partial_records {
 }
 
 ######################################################################
-#### make_backup_form                     ####################
+#### make_backup_form                             ####################
 ######################################################################
-
 sub make_backup_form 
 {
     print "<center><h2>Back up the students and projects database</h2></center>",
@@ -1664,9 +1608,8 @@ sub make_backup_form
 }
 
 ######################################################################
-#### do_backup                          ####################
+#### do_backup                                    ####################
 ######################################################################
-
 sub do_backup 
 {
     my $dbh = shift(); 
@@ -1704,11 +1647,10 @@ sub do_backup
     }
 }
 
-
 ######################################################################
-#### do_mail                ##########
+#### do_mail                                                ##########
 ######################################################################
-# this routine no complete
+# not complete
 sub do_mail {
     my $subject = param('subject');
     my $message = param('message');
@@ -1765,11 +1707,10 @@ sub do_mail {
     
 }
 
-
 ######################################################################
-#### displayEmailForm             ##########
+#### displayEmailForm                                       ##########
 ######################################################################
-# this routine no complete
+# not complete
 sub displayEmailForm  {
     my($dbh, $accepted) = (shift, shift);
     
@@ -1946,7 +1887,7 @@ end_html
 }
 
 ######################################################################
-#### do_mail_comments             ##########
+#### do_mail_comments                                       ##########
 ######################################################################
 sub do_mail_comments  
 {
@@ -2078,9 +2019,9 @@ sub do_mail_comments
 }
 
 ######################################################################
-#### displayEmailCommentsForm           ##########
+#### displayEmailCommentsForm                               ##########
 ######################################################################
-# this routine no complete
+# not complete
 sub displayEmailCommentsForm  {
         $message = "Dear |first| |last|\n\n" .
 
@@ -2146,7 +2087,7 @@ end_html
 }
 
 ######################################################################
-#### do_mail_test                       ##########
+#### do_mail_test                                           ##########
 ######################################################################
 sub do_mail_test  
 {
@@ -2172,12 +2113,9 @@ sub do_mail_test
   #}  #end of if statement to test one project
 }
 
-
-
 ######################################################################
-#### displayEmailTestForm                   ##########
+#### displayEmailTestForm                                   ##########
 ######################################################################
-#
 sub displayEmailTestForm  {
     $message = "if you receive this message, mm email must be working";
         $subject = "Multimedia program email test";
@@ -2223,13 +2161,11 @@ sub displayEmailTestForm  {
  </form>
   
 end_html
-
 }
 
 ######################################################################
-#### create form to obtain sort up to three fields                 ##########
+#### create form to obtain sort up to three fields          ##########
 ######################################################################
-                        
 sub make_sort_form {
         
         # populate the values in the dropdown menu for sort form
@@ -2354,6 +2290,9 @@ sub make_sort_form {
                                         
 } #end make_sort_form
 
+######################################################################
+#### create form to obtain fields to be displayed           ##########
+######################################################################
 sub make_modifiedView_form {
     print <<"    EndHTML";
         <h1>MM Festival Projects Database: Modified View</h1>
@@ -2367,6 +2306,7 @@ sub make_modifiedView_form {
                         Fields:<br />
     EndHTML
 
+    # print the checkboxes for the fields
     print checkbox_group(
         -name=>'mviewfields',
         -values=>\%mview_menu,
@@ -2375,7 +2315,7 @@ sub make_modifiedView_form {
 
     print <<"    EndHTML";
                 </td>
-                <td></td> <!--cries-->
+                <td></td> <!--empty td for filling border-->
         </tr>
         <tr>
                 <td colspan='2' align='center'>
@@ -2394,7 +2334,6 @@ sub make_modifiedView_form {
 ######################################################################
 #### generic query to pull data from the database           ##########
 ######################################################################
-        
 sub getRecords{
         my ($dbh, $mySQLString) =  @_;
     #print("<p>Here in getRecords value of SQL string is $mySQLString</p>\n");
@@ -2407,4 +2346,3 @@ sub getRecords{
         $sth->finish();
     return $rows;
 } # end getRecords
-        
