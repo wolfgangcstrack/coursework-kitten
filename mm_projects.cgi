@@ -76,17 +76,11 @@ $projects_fields = "category, title, softwware, class, semester, year, notes, ac
 $simple_projects_fields = "category, title";
 
 %mview_menu =(
-        first => "first name",
-        last => "last name",
-        email => "email",
-        phone => "phone number",
-        ID_number => "ID Number",
         title => "title",
         category => "category",
         accepted => "accepted",
         notes => "notes",
         class => "class",
-        highschool => "highschool",
         groups => "groups",
         softwware => "software",
         semester => "semester",
@@ -94,6 +88,7 @@ $simple_projects_fields = "category, title";
         criteria => "criteria",
         tech_merit => "technical merit",
         creative => "creative",
+        email => "email",
         group_names => "group names",
         description => "description",
         instructor => "instructor",
@@ -327,26 +322,65 @@ sub modifiedView
     my $dbh = shift(); 
     my @checked_fields = param("mviewfields"); # get user-checked fields
 
+    if (scalar(@checked_fields) == 0) {
+        print h1( "MM Festival Projects Database: Modified View" );
+        print("<h3>No options were selected!</h3>\n");
+        return;
+    }
+
     my $strCheckedFields = ""; # will hold fields to retrieve in sql statement
 
     # append each checked field to the string
-    for my $i (0 .. $checked_fields) {
-        if ($i != $checked_fields) {
-            $strCheckedFields .= "$checked_fields[$i], ";
-        } else {
-            $strCheckedFields .= "$checked_field";
+    #if ($checked_fields[0] eq "email") {
+    #    $checked_fields[0] = "mm_projects.email";
+    #}
+    $strCheckedFields .= $checked_fields[0];
+    for (my $i = 1; $i < scalar(@checked_fields); $i++) {
+    #    if ($checked_fields[$i] eq "email") {
+    #        $checked_fields[$i] = "mm_projects.email";
+    #    }
+        $strCheckedFields .= ", $checked_fields[$i]";
+    }
+
+    &load_all_records($dbh, "last, first ASC", "mm", "*");      #into @rows
+    @students = @{$rows};
+
+    foreach $student (@students){
+        my ($first, $last, $email, $phone, $id) = @{$student};
+        &load_partial_records($dbh, "mm_projects", $strCheckedFields, $email);    #into @rows
+
+        foreach $row (@{$rows}) {
+            push( @{$full_rows}, [@{$row}] );
         }
     }
 
+    @full_rows = @{$full_rows};
+
+    foreach my $row ( @full_rows ) {
+        #my $string = "INSERT INTO sort_criteria_full ($strCheckedFields) VALUES ( " .
+        #  ("?, " x (scalar(@$row)-1)) . "? );";
+        #print h1($string);
+        #  $sth = $dbh->prepare($string) or die("Can't prepare string $mySQLString: ", $dbh->errstr);
+
+        #$sth->execute(@$row) || 
+        #  die "Could not execute query to insert data.<br>";
+        #my ($category, $last, $first,  $title) = @$row;
+        &modified_insertRecord($dbh, $strCheckedFields, $row);
+    }
+
+    &load_all_records($dbh, "$strCheckedFields ASC", "sort_criteria_full", "$strCheckedFields" );      #into @rows
+    @full_rows = @{$rows};
+
+=comment
     # get the sql command by adding the compiled string of fields
-    #my $SQLString = "SELECT " . $strCheckedFields .
-    #        " FROM mm, mm_projects" .
-    #        " WHERE email = mm_projects.email";
+    my $SQLString = "SELECT " . $strCheckedFields .
+            " FROM mm, mm_projects";
 
     # get the records/rows with the compiled sql command
-    &load_all_records($dbh, "$strCheckedFields ASC", "sort_criteria_full", "$strCheckedFields" );
-    my $full_rows = @{$rows};
-    # my $full_rows = &getRecords($dbh, $SQLString);
+    #&load_all_records($dbh, "$strCheckedFields ASC", "mm, mm_projects", "$strCheckedFields" );
+    #my $full_rows = @{$rows};
+    my $full_rows = &getRecords($dbh, $SQLString);
+=cut
 
     # make the top row of the table to be printed
     my $tablerows = Tr(
@@ -362,13 +396,16 @@ sub modifiedView
     }
 
     # print the results to screen
-    print "<h1>MM Festival Projects Database: Modified View</h1>"
+    print "<h1>MM Festival Projects Database: Modified View</h1>";
     print("<br /><br />");
     print table( { -border => 1, -cellpadding => 5,
                 -cellspacing => 0 }, $tablerows ),
               br(), br(),
               "Database contains ", b( scalar( @$full_rows ) ),
               " records.",br(), br();
+
+    my $string = "TRUNCATE TABLE sort_criteria_full";
+    $dbh->do( $string); 
 }
 
 ######################################################################
@@ -1150,6 +1187,24 @@ sub simple_insertRecord
     $sth->execute( $category, $last, $first, $title) || 
           die "Could not execute query to insert data.<br>";
 }
+
+######################################################################
+#### modified_insertRecord                    ####################
+######################################################################
+
+sub modified_insertRecord
+{
+    my $dbh = shift;
+    my $fields = shift;
+    my @row = @{+shift};
+        
+    my $string = "INSERT INTO sort_criteria_full ($fields) VALUES ( " . ("?, " x (scalar(@row)-1)) . "? );";
+    $sth = $dbh->prepare($string) or die("Can't prepare string $mySQLString: ", $dbh->errstr);
+
+    $sth->execute(@fieldsarr) || 
+          die "Could not execute query to insert data.<br>";
+}
+
 ######################################################################
 #### deleteRecord                     ####################
 ######################################################################
@@ -1566,8 +1621,7 @@ sub load_partial_records {
     #print "\n<br>debug in load_partial_records: table: $table, field_names: $field_names, where: $where\n<br>";
     #print "debug in load_partial_records with field_names: $fieldnames<br>\n";
     
-    my $sth = $dbh->prepare( 
-  "SELECT $field_names FROM $table WHERE email='$where'" );
+    my $sth = $dbh->prepare("SELECT $field_names FROM $table WHERE email='$where'");
         
     $sth->execute();
     #print "debug in partial_records: done executing\n<br>";
@@ -1575,10 +1629,10 @@ sub load_partial_records {
     $rows = $sth->fetchall_arrayref();
     #@rows_values = $sth->fetchrow_array;
     $sth->finish();
-    @test = @{$rows};
-    foreach (@test){
+    #@test = @{$rows};
+    #foreach (@test){
         #print "debug in load_partial_records: rows: @{$_}\n<br>";
-    }
+    #}
 }
 
 ######################################################################
