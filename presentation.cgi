@@ -40,7 +40,12 @@ With that said, I will now explain the program and code, both of which I've prov
 <a href="http://projects.cs.ohlone.edu/~gen57/final_project/mm_projects.cgi">Multimedia Festival Database</a><br>
 <br>
 <a href="http://projects.cs.ohlone.edu/~gen57/final_project/mm_projects.cgi.txt">Link to code</a><br>
-<br>
+</p>
+
+
+
+<p>
+<h2>Code Analysis</h2>
 <h3>sub make_modifiedView_form</h3>
 <blockquote><font face="courier" size="2">
 See code with link above. Use Ctrl-F to search for "sub make_modifiedView_form"
@@ -98,6 +103,65 @@ Finally, in the same if statement, I added a subsequent elsif statement to check
 "Modified View" and, if it does, call &modifiedView. In other words, param("LAST") can only equal<br>
 "Modified View" when the user is currently on the menu for "Modified View", created by<br>
 make_modifiedView_form.<br>
+</p>
+
+
+
+<p>
+<h2>Challenges and Lessons Learned</h2>
+<h3>First attempt at &modifiedView</h3>
+While the instructions specified that the new subroutine for modifiedView must be based off of &simpleView, I<br>
+found the existing code to be a little hard to understand due to the fact that &simpleView first reads from<br>
+the tables "mm" and "mm_projects" and then inserts the retrieved records into "sort_criteria" AND THEN <br>
+reads/prints out those records from "sort_criteria". I thought that the main point of the new module was to<br>
+just read the records and print them out, directly from the "mm" and "mm_projects" tables.<br>
+<br>
+Since I thought that, I found that it was easier to base (my first attempt at) &modifiedView off of the<br>
+existing subroutine &view_sorted, which can be found in the code right under &modifiedView. The first part<br>
+remained the same: I used param("mviewfields") to retrieve an array for the checked_fields. I then concatenated<br>
+a string strCheckedFields with the values from the array of checked_fields. From there on, what differs from<br>
+my current approach is that I concatenated my own SQLString to execute instead of calling any of the existing<br>
+load_records subroutines. I printed the retrieved records in a way also similar to &view_sorted.<br>
+<br>
+This approach worked just fine functionally and printed records from "mm" and "mm_projects", but I felt I was<br>
+not solving the problem since I wasn't following the instructions. With that said, I kept this approach as a<br>
+backup plan in the case that I was not able to get my program to the current version it is now by the due date.<br>
+However, I did come through after taking the time to understand what was going on in &simpleView and thinking<br>
+all the reasons "why" for any part of the code.<br>
+<h3>New syntax</h3>
+Put briefly, the existing code I built upon occasionally used syntax unfamiliar to me. Notable new syntax I<br>
+learned from the existing code mostly involves different ways to access array/hash references that I don't<br>
+recall were gone over in the references unit.<br>
+<br>
+The most interesting one-liner I learned, though, was something I had to look up. It involves shifting a<br>
+parameter of an array reference, and then getting the array value from that reference like so:<br>
+<br>
+<font face="courier" size="2">my \@row = \@{+shift};</font><br>
+<br>
+What I read about what's going on in this statement is that the "+" forces the shifted parameter to be<br>
+evaluated as a scalar (in other words, the reference to the array), and then the \@{} gets the entire array<br>
+from that reference. The \@{} syntax is actually used in the existing code in this project and is one of the<br>
+new syntaxes I was talking about previously.<br>
+<br>
+Other specific examples of syntax I learned involve SQL statements. Most of the SQL statements in the existing<br>
+code were already familiar to me, but they were still a good refresh to my memory. I had to try them all out<br>
+on the command line again anyway for testing purposes and now I can say I've definitely got a good feel of the<br>
+basics. Also, I believe the "TRUNCATE" statement, which is in the existing code, was not something covered in<br>
+the SQL unit, so that was new to me as well.<br>
+</p>
+
+
+
+<p>
+<h2>Wrapping Up</h2>
+To be honest, after reading of everyone else's project ideas, I did get a few inspirations of my own that I<br>
+considered pursuing in place of the given class project. However, I didn't want to risk not finishing in time<br>
+considering my inspirations came a little late in this finals week so I played it safe and stuck with the<br>
+class project.<br>
+<br>
+Even so, after this semester, I do feel I have become knowledgeable enough in perl to try out my ideas outside<br>
+of class, and so I will indeed. With that said, thanks, Professor Degallier, and thanks, my fellow classmates, for the<br>
+semester!<br>
 </p>
 
 endBody
