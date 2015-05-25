@@ -1,5 +1,4 @@
-// Lab2.cpp : Calculate distances using the Haversine formula
-//
+#pragma once
 
 //#include "stdafx.h"
 #include <math.h>
