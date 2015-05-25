@@ -24,6 +24,9 @@
     <ClInclude Include="XmlRegexIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CoordinatePair.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Coordinates.xml" />

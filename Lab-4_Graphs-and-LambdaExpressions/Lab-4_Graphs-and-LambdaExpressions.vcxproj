@@ -78,6 +78,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CoordinatePair.h" />
     <ClInclude Include="XmlNode.h" />
     <ClInclude Include="XmlNodeList.h" />
     <ClInclude Include="XmlRegexIO.h" />
