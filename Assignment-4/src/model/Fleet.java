@@ -7,6 +7,7 @@
  */
 package model;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 import java.util.LinkedHashMap;
@@ -82,6 +83,10 @@ public class Fleet {
 	// Read methods ------------------------------------------------------
 	public Automobile getAuto(String autoMake, String autoModel) {
 		return fleet.get(getKey(autoMake, autoModel));
+	}
+	
+	public Collection<Automobile> getAllAuto() {
+		return fleet.values();
 	}
 	
 	// Update methods ----------------------------------------------------

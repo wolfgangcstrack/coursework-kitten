@@ -7,46 +7,29 @@
  */
 package adapter;
 
+import java.util.Collection;
 import java.util.Scanner;
-import java.util.LinkedHashMap;
 
 import util.*;
 import model.*;
 
 public abstract class ProxyAutomobile {
-	protected static LinkedHashMap<String, Automobile> automobiles;
-	static { // initialize the LinkedHashMap
-		automobiles = new LinkedHashMap<String, Automobile>();
-	}
-	
-	// protected helper methods --------------------------------------------
-	protected Automobile getAutoWithKey(String autoMake, String autoModel) {
-		return automobiles.get(this.getKey(autoMake, autoModel));
-	}
-	
-	protected String getKey(String autoMake, String autoModel) {
-		StringBuilder key = new StringBuilder(autoMake);
-		key.append(" ").append(autoModel);
-		return key.toString();
-	}
+	protected static Fleet fleet = Fleet.getInstance(); // holds LinkedHashMap of automobiles
 	
 	// CreateAuto interface methods --------------------------------------
 	public void buildAuto(String filename) throws AutoException {
 		// Construct a new Automobile from filename
 		AutoIO autoIO = new AutoIO();
 		Automobile newAuto = autoIO.buildAutoObject(filename);
-		// Get key for this Automobile, which is "<Make> <Model>"
-		String key = getKey(newAuto.getMake(), newAuto.getModel());
-		// Insert the key and new Automobile in the static LinkedHashMap
-		automobiles.put(key, newAuto);
+		
+		fleet.addAutomobile(newAuto);
 	}
 	
 	public boolean addOptionSet(
 			String autoMake,
 			String autoModel,
 			String newOptionSetName) {
-		return getAutoWithKey(autoMake, autoModel)
-				.addOptionSet(newOptionSetName);
+		return fleet.addOptionSet(autoMake, autoModel, newOptionSetName);
 	}
 	
 	public boolean addOption(
@@ -55,19 +38,23 @@ public abstract class ProxyAutomobile {
 			String optionSetName,
 			String newOptionName,
 			float newOptionPrice) {
-		return getAutoWithKey(autoMake, autoModel)
-				.addOption(optionSetName, newOptionName, newOptionPrice);
+		return fleet.addOption(autoMake, autoModel, optionSetName, newOptionName, newOptionPrice);
 	}
 	
 	// ReadAuto interface methods ----------------------------------------
-	public synchronized void printAuto(String autoMake, String autoModel) {
-		System.out.println(getAutoWithKey(autoMake, autoModel).toString());
+	public void printAuto(String autoMake, String autoModel) {
+		synchronized (System.out) {
+			System.out.println(fleet.getAuto(autoMake, autoModel).toString());
+		}
 	}
 	
-	public synchronized void printAllAuto() {
-		for (String key : automobiles.keySet()) {
-			System.out.println(automobiles.get(key));
-			System.out.println();
+	public void printAllAuto() {
+		synchronized (System.out) {
+			Collection<Automobile> allAutos = fleet.getAllAuto();
+			
+			for (Automobile auto : allAutos) {
+				System.out.println(auto.toString());
+			}
 		}
 	}
 	
@@ -78,8 +65,7 @@ public abstract class ProxyAutomobile {
 			String optionSetName,
 			String newName
 			) {
-		return getAutoWithKey(autoMake, autoModel)
-				.updateOptionSetName(optionSetName, newName);
+		return fleet.updateOptionSetName(autoMake, autoModel, optionSetName, newName);
 	}
 	
 	public boolean updateOptionName(
@@ -89,8 +75,7 @@ public abstract class ProxyAutomobile {
 			String optionName,
 			String newName
 			) {
-		return getAutoWithKey(autoMake, autoModel)
-				.updateOptionName(optionSetName, optionName, newName);
+		return fleet.updateOptionName(autoMake, autoModel, optionSetName, optionName, newName);
 	}
 	
 	public boolean updateOptionPrice(
@@ -100,8 +85,7 @@ public abstract class ProxyAutomobile {
 			String optionName,
 			float newPrice
 			) {
-		return getAutoWithKey(autoMake, autoModel)
-				.updateOptionPrice(optionSetName, optionName, newPrice);
+		return fleet.updateOptionPrice(autoMake, autoModel, optionSetName, optionName, newPrice);
 	}
 	
 	public boolean updateOption(
@@ -111,8 +95,7 @@ public abstract class ProxyAutomobile {
 			String optionName,
 			String newName,
 			float newPrice) {
-		return getAutoWithKey(autoMake, autoModel)
-				.updateOption(optionSetName, optionName, newName, newPrice);
+		return fleet.updateOption(autoMake, autoModel, optionSetName, optionName, newName, newPrice);
 	}
 	
 	public boolean updateOptionChoice(
@@ -121,8 +104,7 @@ public abstract class ProxyAutomobile {
 			String optionSetName,
 			String optionName
 			) {
-		return getAutoWithKey(autoMake, autoModel)
-				.updateOptionChoice(optionSetName, optionName);
+		return fleet.updateOptionChoice(autoMake, autoModel, optionSetName, optionName);
 	}
 	
 	// DeleteAuto interface methods --------------------------------------
@@ -130,8 +112,7 @@ public abstract class ProxyAutomobile {
 			String autoMake,
 			String autoModel,
 			String optionSetName) {
-		return getAutoWithKey(autoMake, autoModel)
-				.deleteOptionSet(optionSetName);
+		return fleet.deleteOptionSet(autoMake, autoModel, optionSetName);
 	}
 	
 	public boolean deleteOption(
@@ -139,17 +120,13 @@ public abstract class ProxyAutomobile {
 			String autoModel,
 			String optionSetName,
 			String optionName) {
-		return getAutoWithKey(autoMake, autoModel)
-				.deleteOption(optionSetName, optionName);
+		return fleet.deleteOption(autoMake, autoModel, optionSetName, optionName);
 	}
 	
 	public boolean deleteAuto(
 			String autoMake,
 			String autoModel) {
-		// if remove is successful, the value returned by remove() won't be null
-		// therefore, the function would return true
-		// otherwise, if remove() returns null, function returns false
-		return (automobiles.remove(getKey(autoMake, autoModel)) != null ? true : false);
+		return fleet.deleteAuto(autoMake, autoModel);
 	}
 	
 	// FixAuto interface methods -----------------------------------------
@@ -182,7 +159,7 @@ public abstract class ProxyAutomobile {
 		
 		readOptionSets(input, newAuto);
 		
-		automobiles.put(getKey(makeHolder, modelHolder), newAuto);
+		fleet.addAutomobile(newAuto);
 	}
 	
 	// helper methods for fix method
