@@ -40,7 +40,7 @@ public class EditOptions extends ProxyAutomobile implements ScaleThread {
 			) {
 		// The locked object is the automobile in the LinkedHashMap with
 		// String key "autoMake autoModel"
-		synchronized (getAutoWithKey(autoMake, autoModel)) {
+		synchronized (fleet.getAuto(autoMake, autoModel)) {
 			/* This if statement is only here for printing debug statements in driver.Driver.
 			 * Otherwise, this statement should normally just return the result of updateOptionName()
 			 * without printing debug statements.
@@ -63,7 +63,7 @@ public class EditOptions extends ProxyAutomobile implements ScaleThread {
 			String optionName,
 			float newPrice
 			) {
-		synchronized (getAutoWithKey(autoMake, autoModel)) {
+		synchronized (fleet.getAuto(autoMake, autoModel)) {
 			return updateOptionPrice(autoMake, autoModel, optionSetName, optionName, newPrice);
 		}
 	}
