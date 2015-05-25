@@ -24,6 +24,10 @@ protected:
 	string className;
 	string xmlTags;
 
+	long get_ulong(const string &data, const string &tagName) 
+	{
+		return get_ulong(data, regex("<" + tagName + ">[0-9]*"));
+	}
 	long get_ulong(const string &data, regex rx)
 	{
 		auto match = sregex_iterator(data.begin(), data.end(), rx);
@@ -31,6 +35,10 @@ protected:
 		return stol((sregex_iterator(temp.begin(), temp.end(), regex("[0-9]+"))->str()));
 	}
 
+	string getString(const string &data, const string &tagName)
+	{
+		return getString(data, regex("<" + tagName + ">.*?<" + tagName + ">"));
+	}
 	string getString(const string &data, regex rx)
 	{
 		auto match = sregex_iterator(data.begin(), data.end(), rx);
