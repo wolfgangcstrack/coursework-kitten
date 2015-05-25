@@ -140,23 +140,26 @@ public abstract class ProxyAutomobile {
 		String modelHolder;
 		double priceHolder;
 		
-		System.out.print("Please enter Automobile make: ");
-		makeHolder = input.nextLine();
-		
-		System.out.print("Please enter Automobile model: ");
-		modelHolder = input.nextLine();
-		
-		System.out.print("Please enter base price of " + (makeHolder + " " + modelHolder) + ": ");
-		try {
-			priceHolder = input.nextDouble();
-		} catch (java.util.InputMismatchException imE) {
-			throw new AutoException("Error: user entered invalid value");
-		} finally {
-			input.nextLine(); // clear scanner for next input
+		synchronized (System.out) {
+			synchronized (input) {
+				System.out.print("Please enter Automobile make: ");
+				makeHolder = input.nextLine();
+				
+				System.out.print("Please enter Automobile model: ");
+				modelHolder = input.nextLine();
+				
+				System.out.print("Please enter base price of " + (makeHolder + " " + modelHolder) + ": ");
+				try {
+					priceHolder = input.nextDouble();
+				} catch (java.util.InputMismatchException imE) {
+					throw new AutoException("Error: user entered invalid value");
+				} finally {
+					input.nextLine(); // clear scanner for next input
+				}
+			}
 		}
 		
 		Automobile newAuto = new Automobile(makeHolder, modelHolder, priceHolder);
-		
 		readOptionSets(input, newAuto);
 		
 		fleet.addAutomobile(newAuto);
@@ -169,36 +172,40 @@ public abstract class ProxyAutomobile {
 		float priceHolder;
 		String choice;
 		
-		System.out.print("Enter an option set name (or Q to quit): ");
-		choice = input.nextLine();
-		while (!choice.toUpperCase().equals("Q")) {
-			opsetNameHolder = choice;
-			newAuto.addOptionSet(opsetNameHolder);
-			
-			System.out.print("Enter an option name for " + opsetNameHolder + " (or Q to quit): ");
-			choice = input.nextLine();
-			while (!choice.toUpperCase().equals("Q")) {
-				optionNameHolder = choice;
-				System.out.print("Enter the price for the option " + optionNameHolder +": ");
-				
-				try {
-					priceHolder = input.nextFloat();
-				} catch (java.util.InputMismatchException imE) {
-					throw new AutoException("Error: user entered invalid value");
-				} finally {
-					input.nextLine(); // clear scanner for next input
-				}
-				
-				newAuto.addOption(opsetNameHolder, optionNameHolder, priceHolder);
-				System.out.println(optionNameHolder + " added!\n");
-				
-				System.out.print("Enter an option name for " + opsetNameHolder + " (or Q to quit): ");
+		synchronized (System.out) {
+			synchronized (input) {
+				System.out.print("Enter an option set name (or Q to quit): ");
 				choice = input.nextLine();
-			}
-			
-			System.out.print("\nEnter an option set name (or Q to quit): ");
-			choice = input.nextLine();
-		}
+				while (!choice.toUpperCase().equals("Q")) {
+					opsetNameHolder = choice;
+					newAuto.addOptionSet(opsetNameHolder);
+					
+					System.out.print("Enter an option name for " + opsetNameHolder + " (or Q to quit): ");
+					choice = input.nextLine();
+					while (!choice.toUpperCase().equals("Q")) {
+						optionNameHolder = choice;
+						System.out.print("Enter the price for the option " + optionNameHolder +": ");
+						
+						try {
+							priceHolder = input.nextFloat();
+						} catch (java.util.InputMismatchException imE) {
+							throw new AutoException("Error: user entered invalid value");
+						} finally {
+							input.nextLine(); // clear scanner for next input
+						}
+						
+						newAuto.addOption(opsetNameHolder, optionNameHolder, priceHolder);
+						System.out.println(optionNameHolder + " added!\n");
+						
+						System.out.print("Enter an option name for " + opsetNameHolder + " (or Q to quit): ");
+						choice = input.nextLine();
+					} // end while
+					
+					System.out.print("\nEnter an option set name (or Q to quit): ");
+					choice = input.nextLine();
+				} // end while
+			} // end synchronized (input)
+		} // end synchronized (System.out)
 	}
 	
 	
