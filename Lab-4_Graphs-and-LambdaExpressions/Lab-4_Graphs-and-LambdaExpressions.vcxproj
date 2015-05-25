@@ -82,6 +82,15 @@
     <ClInclude Include="XmlNodeList.h" />
     <ClInclude Include="XmlRegexIO.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Coordinates.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Dykstra.cpp" />
+    <ClCompile Include="Haversine.cpp" />
+    <ClCompile Include="Kruskal.cpp" />
+    <ClCompile Include="Prim.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

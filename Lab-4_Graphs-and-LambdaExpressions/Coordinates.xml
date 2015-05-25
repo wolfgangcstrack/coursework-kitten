@@ -1,0 +1,155 @@
+<?xml version="1.0" standalone="yes"?>
+<LosPollosHermanos>
+  <Location>
+    <Address>2235 Wyoming NE</Address>
+    <City>Albuquerque</City>
+    <State>NM</State>
+    <Phone>(505)292-3865</Phone>
+	<Latitude>35.10</Latitude>
+	<Longitude>-106.55</Longitude>
+  </Location>
+  <Location>
+    <Address>3240 Coors NW</Address>
+    <City>Albuquerque</City>
+    <State>NM</State>
+    <Phone>(505)839-6966</Phone>
+	<Latitude>35.11</Latitude>
+	<Longitude>-106.70</Longitude>
+  </Location>
+  <Location>
+    <Address>9358 Eagle Ranch Rd. NW</Address>
+    <City>Albuquerque</City>
+    <State>NM</State>
+	<Latitude>35.18</Latitude>
+	<Longitude>-106.66</Longitude>
+    <Phone>(505)890-5229</Phone>
+  </Location>
+  <Location>
+    <Address>425 Eubank NE. Albuquerque</Address>
+    <City>Albuquerque</City>
+    <State>NM</State>
+    <Phone>(505)323-5552</Phone>
+	<Latitude>35.07</Latitude>
+	<Longitude>-106.53</Longitude>
+  </Location>
+  <Location>
+    <Address>4257 Isleta Blvd. SW</Address>
+    <City>Albuquerque</City>
+    <State>NM</State>
+    <Phone>(505)877-2727</Phone>
+	<Latitude>35.01</Latitude>
+	<Longitude>-106.68</Longitude>
+  </Location>
+  <Location>
+    <Address>7600 Jefferson NE</Address>
+    <City>Albuquerque</City>
+    <State>NM</State>
+    <Phone>(505)821-6184</Phone>
+	<Latitude>35.16</Latitude>
+	<Longitude>-106.59</Longitude>
+  </Location>
+  <Location>
+    <Address>2301 Menaul Blvd. NE</Address>
+    <City>Albuquerque</City>
+    <State>NM</State>
+    <Phone>(505)884-1828</Phone>
+	<Latitude>35.19</Latitude>
+	<Longitude>-106.61</Longitude>
+  </Location>
+  <Location>
+    <Address>2435 Southern Blvd</Address>
+    <City>Rio Rancho</City>
+    <State>NM</State>
+    <Phone>(505)892-4121</Phone>
+	<Latitude>35.06</Latitude>
+	<Longitude>-106.64</Longitude>
+  </Location>
+  <Location>
+    <Address>4101 Ridge Rock Rd. SE</Address>
+    <City>Rio Rancho</City>
+    <State>NM</State>
+    <Phone>(505)892-6384</Phone>
+	<Latitude>35.25</Latitude>
+	<Longitude>-106.65</Longitude>
+  </Location>
+  <Location>
+    <Address>130 Hwy. 550</Address>
+	<City>East Bernalillo</City>
+    <State>NM</State>
+    <Phone>(505)867-9110</Phone>
+	<Latitude>35.31</Latitude>
+	<Longitude>-106.54</Longitude>
+  </Location>
+  <Location>
+    <Address>740 Juan Tabo Blvd. NE</Address>
+    <City>Albuquerque</City>
+    <State>NM</State>
+    <Phone>(505)237-1611</Phone>
+	<Latitude>35.08</Latitude>
+	<Longitude>-106.51</Longitude>
+  </Location>
+  <Location>
+    <Address>301 Coors Blvd. NW</Address>
+    <City>Albuquerque</City>
+    <State>NM</State>
+    <Phone>(505)839-2999</Phone>
+	<Latitude>35.08</Latitude>
+	<Longitude>-106.71</Longitude>
+  </Location>
+  <Location>
+    <Address>5210 Gibson SE</Address>
+    <City> Albuquerque</City>
+    <State>NM</State>
+    <Phone>(505)232-6866</Phone>
+	<Latitude>35.05</Latitude>
+	<Longitude>-106.58</Longitude>
+  </Location>
+  <Location>
+    <Address>8111 Wyoming NE</Address>
+    <City> Albuquerque</City>
+    <State>NM</State>
+    <Phone>(505)856-2162</Phone>
+	<Latitude>35.17</Latitude>
+	<Longitude>-106.56</Longitude>
+  </Location>
+  <Location>
+    <Address>2809 Juan Tabo Blvd. NE</Address>
+    <City> Albuquerque</City>
+    <State>NM</State>
+    <Phone>(505)296-1575</Phone>
+	<Latitude>35.11</Latitude>
+	<Longitude>-106.51</Longitude>
+  </Location>
+  <Location>
+    <Address>10555 S. Parker Rd</Address>
+    <City> Parker</City>
+    <State>CO</State>
+    <Phone>(303)840-3445</Phone>
+	<Latitude>39.52</Latitude>
+	<Longitude>-104.76</Longitude>
+  </Location>
+  <Location>
+    <Address>11355 West Colfax Ave.</Address>
+    <City> Lakewood</City>
+    <State>CO</State>
+    <Phone>(303)238-1836</Phone>
+	<Latitude>39.74</Latitude>
+	<Longitude>-105.12</Longitude>
+  </Location>
+  <Location>
+    <Address>1750 S Buckley Rd</Address>
+    <City> Aurora</City>
+    <State>CO</State>
+    <Phone>(303)369-7690</Phone>
+	<Latitude>39.68</Latitude>
+	<Longitude>-104.79</Longitude>
+  </Location>
+  <Location>
+    <Address>1535 East Evans Ave.</Address>
+    <City>Denver</City>
+    <State>CO</State>
+	<Phone>(303)722-2175</Phone>
+	<Latitude>39.67</Latitude>
+	<Longitude>-104.96</Longitude>
+  </Location>
+</LosPollosHermanos>
