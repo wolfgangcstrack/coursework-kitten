@@ -157,4 +157,38 @@ public class Fleet {
 		} // else
 		return false;
 	}
+	
+	// Delete methods ----------------------------------------------------
+	public boolean deleteOptionSet(
+			String autoMake,
+			String autoModel,
+			String optionSetName) {
+		String key = getKey(autoMake, autoModel);
+		
+		if (fleet.containsKey(key)) {
+			return fleet.get(key).deleteOptionSet(optionSetName);
+		} // else
+		return false;
+	}
+	
+	public boolean deleteOption(
+			String autoMake,
+			String autoModel,
+			String optionSetName,
+			String optionName) {
+		String key = getKey(autoMake, autoModel);
+		
+		if (fleet.containsKey(key)) {
+			return fleet.get(key).deleteOption(optionSetName, optionName);
+		} // else
+		return false;
+	}
+	
+	public boolean deleteAuto(
+			String autoMake,
+			String autoModel) {
+		String key = getKey(autoMake, autoModel);
+		// if remove was successful, return true; else, return false
+		return (fleet.remove(key) != null ? true : false);
+	}
 }
