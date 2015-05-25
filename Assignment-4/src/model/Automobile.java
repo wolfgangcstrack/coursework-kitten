@@ -7,16 +7,18 @@
  */
 package model;
 
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.LinkedHashMap;
 
 public class Automobile implements java.io.Serializable {
 	// serialVersionUID generated with serialver
-	private static final long serialVersionUID = 1537933008010191291L;
+	// private static final long serialVersionUID = 1537933008010191291L;
 	private String make;
 	private String model;
 	private double baseprice;
-	private LinkedHashMap<String, OptionSet> optionSets;
+	private Map<String, OptionSet> optionSets; // instantiated as LinkedHashMap
 	
 	// constructors ------------------------------------------------------
 	public Automobile() { this("", "", 0, 0);  }
@@ -29,14 +31,14 @@ public class Automobile implements java.io.Serializable {
 		this.make = make;
 		this.model = model;
 		this.baseprice = baseprice;
-		optionSets = new LinkedHashMap<String, OptionSet>(optionSetsSize);
+		optionSets = Collections.synchronizedMap(new LinkedHashMap<String, OptionSet>(optionSetsSize));
 	}
 	
 	// getters -----------------------------------------------------------
 	public synchronized String getMake() { return make; }
 	public synchronized String getModel() { return model; }
 	public synchronized double getBasePrice() { return baseprice; }
-	public synchronized LinkedHashMap<String, OptionSet> getOptionSets() { return optionSets; }
+	public synchronized Map<String, OptionSet> getOptionSets() { return optionSets; }
 	
 	// ----- get OptionSet.choice's values
 	public synchronized String getOptionChoice(String optionSetName) {
