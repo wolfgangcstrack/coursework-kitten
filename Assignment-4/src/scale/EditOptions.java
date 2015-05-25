@@ -9,6 +9,7 @@ package scale;
 
 import adapter.ProxyAutomobile;
 
+/**Deprecated */
 public class EditOptions extends ProxyAutomobile implements ScaleThread {
 	// ScaleThread extends the Runnable interface
 	
