@@ -17,10 +17,10 @@ public abstract class ProxyAutomobile {
 	protected static Fleet fleet = Fleet.getInstance(); // holds LinkedHashMap of automobiles
 	
 	// CreateAuto interface methods --------------------------------------
-	public void buildAuto(String filename) throws AutoException {
+	public void buildAuto(String filename, boolean isPropertiesFile) throws AutoException {
 		// Construct a new Automobile from filename
 		AutoIO autoIO = new AutoIO();
-		Automobile newAuto = autoIO.buildAutoObject(filename);
+		Automobile newAuto = autoIO.buildAutoObject(filename, isPropertiesFile);
 		
 		fleet.addAutomobile(newAuto);
 	}

@@ -8,6 +8,9 @@
 package util;
 
 import java.io.*;
+import java.util.Properties;
+
+import model.Automobile;
 
 public class AutoIO {
 	/**
@@ -16,7 +19,7 @@ public class AutoIO {
 	 * If the instantiation is successful the Automotive object is returned,
 	 * otherwise null is returned
 	 * 
-	 * File format of <filename> is assumed to be formatted as follows:
+	 * File format of filename is assumed to be formatted as follows:
 	 * 
 	 * Automotive name // must be first line of file
 	 * base price // must be second line of file
@@ -33,7 +36,11 @@ public class AutoIO {
 	 * .
 	 * .
 	 */
-	public model.Automobile buildAutoObject(String filename) throws AutoException {
+	public Automobile buildAutoObject(String filename, boolean isPropertiesFile) throws AutoException {
+		if (isPropertiesFile) {
+			return buildAutoObject(filename);
+		}
+		
 		StringBuilder errorMessage = new StringBuilder("Error in file ").append(filename);
 		String line; // for reading file
 		int lineNumber = 1;
@@ -44,8 +51,8 @@ public class AutoIO {
 			
 			// read the first three lines, which must be the Automotive make, model,
 			// and base price and create a new Automotive based on this information
-			model.Automobile newAuto = new 
-					model.Automobile(
+			Automobile newAuto = new 
+					Automobile(
 							buffer.readLine(),
 							buffer.readLine(),
 							Double.parseDouble(buffer.readLine()));
@@ -101,7 +108,59 @@ public class AutoIO {
 		}
 	}
 	
-	public void serializeAutoObject(String filename, model.Automobile auto) throws AutoException {
+	private Automobile buildAutoObject(String propertiesFileName) throws AutoException {
+		StringBuilder errorMessage = new StringBuilder("Error in file ");
+		errorMessage.append(propertiesFileName);
+		Properties properties = new Properties();
+		
+		try (FileInputStream in = new FileInputStream(propertiesFileName)) {
+			properties.load(in);
+			
+			String key;
+			String make, model;
+			double baseprice;
+			
+			// get base properties of new auto
+			key = "Make";
+			make = properties.getProperty(key);
+			properties.remove(key);
+			key = "Model";
+			model = properties.getProperty(key);
+			properties.remove(key);
+			key = "Baseprice";
+			baseprice = Double.parseDouble(properties.getProperty(key));
+			properties.remove(key);
+			
+			// get Option Sets and Options of new auto
+			String optionSetName = "", optionName = "";
+			float optionPrice;
+			
+			for (Object setKey : properties.keySet()) {
+				key = (String) setKey;
+				if (key.substring(0, 8) == "OptionSet") {
+					optionSetName = properties.getProperty(key);
+					
+				} else if (key.substring(0, 5) == "Option") {
+					optionName = properties.getProperty(key);
+				} else {
+					continue; // skip over keys that don't follow pattern
+				}
+			}
+			
+			Automobile newAuto = new Automobile();
+			return newAuto;
+		} catch (NumberFormatException nfE) {
+			errorMessage.append(": Baseprice property not parsable or missing");
+			throw new AutoException(errorMessage.toString(), -1);
+		} catch (FileNotFoundException fnfE) {
+			errorMessage.append(": file not found");
+			throw new AutoException (errorMessage.toString(), 1);
+		} catch (IOException ioE) {
+			throw new AutoException(errorMessage.toString(), 2);
+		}
+	}
+	
+	public void serializeAutoObject(String filename, Automobile auto) throws AutoException {
 		try (FileOutputStream fos = new FileOutputStream(filename);
 				ObjectOutputStream out = new ObjectOutputStream(fos)) {
 			out.writeObject(auto);
@@ -112,12 +171,12 @@ public class AutoIO {
 		}
 	}
 	
-	public model.Automobile deserializeAutoObject(String filename) throws AutoException {
-		model.Automobile result = null;
+	public Automobile deserializeAutoObject(String filename) throws AutoException {
+		Automobile result = null;
 		
 		try (FileInputStream fos = new FileInputStream(filename);
 				ObjectInputStream in = new ObjectInputStream(fos)) {
-			result = (model.Automobile) in.readObject();
+			result = (Automobile) in.readObject();
 		} catch (FileNotFoundException fnfe) {
 			throw new AutoException(filename + " not found", 5);
 		} catch (IOException ioe) {
