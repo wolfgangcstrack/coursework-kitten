@@ -142,9 +142,9 @@ public class AutoIO {
 			// parse the option sets and semi-parse the options
 			for (Object setKey : properties.keySet()) {
 				key = (String) setKey;
-				if (key.substring(0, 9) == "OptionSet") {
+				if (key.length() >= 9 && key.substring(0, 9).equals("OptionSet")) {
 					optionSets.put(key.charAt(9), properties.getProperty(key));
-				} else if (key.substring(0, 6) == "Option") {
+				} else if (key.substring(0, 6).equals("Option")) {
 					char optionSetLetter = key.charAt(6);
 					
 					// if key doesn't exist, instantiate a new list with the key

@@ -15,6 +15,16 @@ class Driver {
 	private static Scanner input = new Scanner(System.in);
 	
 	public static void main(String[] args) throws AutoException {
+		String propertiesFileName = "FordZTW.properties";
+		AutoIO aio = new AutoIO();
+		
+		try {
+			model.Automobile testAuto = aio.buildAutoObject(propertiesFileName, true);
+			System.out.println(testAuto.toString());
+		} catch (StringIndexOutOfBoundsException ioobe) {
+			ioobe.printStackTrace();
+		}
+		
 		input.close();
 	}
 }
