@@ -8,6 +8,10 @@
 package util;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import model.Automobile;
@@ -131,23 +135,42 @@ public class AutoIO {
 			baseprice = Double.parseDouble(properties.getProperty(key));
 			properties.remove(key);
 			
-			// get Option Sets and Options of new auto
-			String optionSetName = "", optionName = "";
-			float optionPrice;
+			Automobile newAuto = new Automobile(make, model, baseprice);
 			
+			Map<Character, String> optionSets = new HashMap<Character, String>();
+			Map<Character, ArrayList<String>> options = new HashMap<Character, ArrayList<String>>();
+			
+			// parse the option sets and semi-parse the options
 			for (Object setKey : properties.keySet()) {
 				key = (String) setKey;
-				if (key.substring(0, 8) == "OptionSet") {
-					optionSetName = properties.getProperty(key);
+				if (key.substring(0, 9) == "OptionSet") {
+					optionSets.put(key.charAt(9), properties.getProperty(key));
+				} else if (key.substring(0, 6) == "Option") {
+					char optionSetLetter = key.charAt(6);
 					
-				} else if (key.substring(0, 5) == "Option") {
-					optionName = properties.getProperty(key);
-				} else {
-					continue; // skip over keys that don't follow pattern
+					// if key doesn't exist, instantiate a new list with the key
+					if (!options.containsKey(optionSetLetter)) {
+						options.put(optionSetLetter, new ArrayList<String>());
+					}
+					
+					options.get(optionSetLetter).add(properties.getProperty(key));
+				} else { // skip any keys that don't follow pattern
+					continue;
 				}
 			}
 			
-			Automobile newAuto = new Automobile();
+			// complete parsing of options and add option sets and options to newAuto
+			for (Character optionSetKey : options.keySet()) {
+				String optionSet = optionSets.get(optionSetKey);
+				newAuto.addOptionSet(optionSet);
+				
+				String[] parsedOption;
+				for (String unparsedOption : options.get(optionSetKey)) {
+					parsedOption = unparsedOption.split("\\|");
+					newAuto.addOption(optionSet, parsedOption[0], Float.parseFloat(parsedOption[1]));
+				}
+			}
+			
 			return newAuto;
 		} catch (NumberFormatException nfE) {
 			errorMessage.append(": Baseprice property not parsable or missing");

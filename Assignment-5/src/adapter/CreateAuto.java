@@ -10,7 +10,7 @@ package adapter;
 import util.AutoException;
 
 public interface CreateAuto {
-	public void buildAuto(String filename) throws AutoException;
+	public void buildAuto(String filename, boolean isPropertiesFile) throws AutoException;
 	
 	public boolean addOptionSet(
 			String autoMake,

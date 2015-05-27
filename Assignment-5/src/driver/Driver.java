@@ -22,8 +22,8 @@ class Driver {
 		
 		BuildAuto testBA = new BuildAuto();
 		
-		testBA.buildAuto(filename1);
-		testBA.buildAuto(filename2);
+		testBA.buildAuto(filename1, false);
+		testBA.buildAuto(filename2, false);
 		
 		testScaleThreadInterface(testBA);
 		
