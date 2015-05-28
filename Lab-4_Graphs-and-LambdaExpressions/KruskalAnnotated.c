@@ -1,8 +1,6 @@
-#pragma once
-
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <iostream>
 using namespace std;
 // a structure to represent a weighted edge in graph
@@ -27,11 +25,11 @@ struct Graph
 // Creates a graph with V vertices and E edges
 struct Graph* createGraph(int V, int E)
 {
-    struct Graph* graph = new Graph;
+    struct Graph* graph = (struct Graph*) malloc(sizeof(struct Graph));
     graph->V = V;
     graph->E = E;
  
-    graph->edge = new Edge[graph->E];
+    graph->edge = (struct Edge*) malloc(graph->E * sizeof(struct Edge));
  
     return graph;
 }
@@ -90,7 +88,7 @@ int myComp(const void* a, const void* b)
 void KruskalMST(struct Graph* graph)
 {
     int V = graph->V;
-    struct Edge* result = new Edge[V]; // Tnis will store the resultant MST
+    struct Edge result[V]; // Tnis will store the resultant MST
     int e = 0; // An index variable, used for result[]
     int i = 0; // An index variable, used for sorted edges
  
@@ -135,7 +133,7 @@ void KruskalMST(struct Graph* graph)
                 result[i].weight);
     return;
 }
-/*
+ 
 // Driver program to test above functions
 int main()
 {
@@ -146,7 +144,7 @@ int main()
     6|   \5   |15
      |      \ |
      2--------3
-     4       
+     4       */
     int V = 4; // Number of vertices in graph
     int E = 5; // Number of edges in graph
     struct Graph* graph = createGraph(V, E);
@@ -180,4 +178,3 @@ int main()
  
     return 0;
 }
-*/

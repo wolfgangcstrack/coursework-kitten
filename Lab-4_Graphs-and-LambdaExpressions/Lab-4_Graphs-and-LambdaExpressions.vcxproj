@@ -87,10 +87,10 @@
     <Xml Include="Coordinates.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Dykstra.cpp" />
-    <ClCompile Include="Haversine.cpp" />
-    <ClCompile Include="Kruskal.cpp" />
-    <ClCompile Include="Prim.cpp" />
+    <ClCompile Include="DykstraAnnotated.c" />
+    <ClCompile Include="HaversineAnnotated.cpp" />
+    <ClCompile Include="KruskalAnnotated.c" />
+    <ClCompile Include="PrimAnnotated.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

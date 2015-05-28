@@ -1,16 +1,16 @@
-#pragma once
-
-//#include "stdafx.h"
 #include <math.h>
 
+// member variable
 const double PI = 3.14159;
 
+// can replace as functor or lambda function
 double Radians(double value)
 {
 	double radians = value * PI / 180.0;
 	return radians;
 }
 
+// instead of lots of variables, pass latitude/longitude pairs
 double Haversine( double dlatitude1, double dlongitude1, double dlatitude2, double dlongitude2, double radius, double* distance )
 {
     double dLatitude = Radians(dlatitude2-dlatitude1);
@@ -20,7 +20,7 @@ double Haversine( double dlatitude1, double dlongitude1, double dlatitude2, doub
     *distance = radius * nC;
     return *distance; 
 }
-/*
+
 void main()
 {
 	double sflat = 37.75;

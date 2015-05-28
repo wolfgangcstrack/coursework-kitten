@@ -32,16 +32,16 @@
     <Xml Include="Coordinates.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Dykstra.cpp">
+    <ClCompile Include="DykstraAnnotated.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Haversine.cpp">
+    <ClCompile Include="HaversineAnnotated.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Kruskal.cpp">
+    <ClCompile Include="KruskalAnnotated.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Prim.cpp">
+    <ClCompile Include="PrimAnnotated.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

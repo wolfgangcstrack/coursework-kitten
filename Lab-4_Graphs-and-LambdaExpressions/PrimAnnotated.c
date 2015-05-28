@@ -1,7 +1,5 @@
-#pragma once
-
-#include <cstdio>
-#include <climits>
+#include <stdio.h>
+#include <limits.h>
 #include <iostream>
  
 using namespace std;
@@ -24,7 +22,7 @@ int minKey(int key[], bool mstSet[])
 }
  
 // A utility function to print the constructed MST stored in parent[]
-void printMST(int parent[], int n, int graph[V][V])
+int printMST(int parent[], int n, int graph[V][V])
 {
     cout<<"Edge   Weight\n";
     for (int i = 1; i < V; i++)
@@ -72,19 +70,18 @@ void primMST(int graph[V][V])
     // print the constructed MST
     printMST(parent, V, graph);
 }
-
-/*
+ 
 // driver program to test above function
 int main()
 {
-    // Let us create the following graph
+    /* Let us create the following graph
      2    3
      (0)--(1)--(2)
      |   / \   |
      6| 8/   \5 |7
      | /     \ |
      (3)-------(4)
-     9          
+     9          */
     int graph[V][V] = { { 0, 2, 0, 6, 0 }, { 2, 0, 3, 8, 5 },
             { 0, 3, 0, 0, 7 }, { 6, 8, 0, 0, 9 }, { 0, 5, 7, 9, 0 }, };
  
@@ -93,4 +90,3 @@ int main()
  
     return 0;
 }
-*/

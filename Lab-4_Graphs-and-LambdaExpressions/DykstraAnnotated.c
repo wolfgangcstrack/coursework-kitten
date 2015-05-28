@@ -1,5 +1,3 @@
-#pragma once
-
 #include <cstdio>
 #include <queue>
 #include <vector>
@@ -22,7 +20,7 @@ priority_queue<pii, vector<pii > , comp> Q;
 vector<pii > G[MAX];
 int D[MAX];
 bool F[MAX];
-/*
+ 
 int main()
 {
     int i, u, v, w, sz, nodes, edges, starting;
