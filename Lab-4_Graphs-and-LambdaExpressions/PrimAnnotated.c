@@ -1,3 +1,5 @@
+#pragma once
+
 #include <stdio.h>
 #include <limits.h>
 #include <iostream>
@@ -70,7 +72,7 @@ void primMST(int graph[V][V])
     // print the constructed MST
     printMST(parent, V, graph);
 }
- 
+/*
 // driver program to test above function
 int main()
 {
@@ -81,7 +83,7 @@ int main()
      6| 8/   \5 |7
      | /     \ |
      (3)-------(4)
-     9          */
+     9          
     int graph[V][V] = { { 0, 2, 0, 6, 0 }, { 2, 0, 3, 8, 5 },
             { 0, 3, 0, 0, 7 }, { 6, 8, 0, 0, 9 }, { 0, 5, 7, 9, 0 }, };
  
@@ -90,3 +92,4 @@ int main()
  
     return 0;
 }
+*/

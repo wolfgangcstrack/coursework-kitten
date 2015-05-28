@@ -1,3 +1,5 @@
+#pragma once
+
 #include <math.h>
 
 // member variable
@@ -20,7 +22,7 @@ double Haversine( double dlatitude1, double dlongitude1, double dlatitude2, doub
     *distance = radius * nC;
     return *distance; 
 }
-
+/*
 void main()
 {
 	double sflat = 37.75;

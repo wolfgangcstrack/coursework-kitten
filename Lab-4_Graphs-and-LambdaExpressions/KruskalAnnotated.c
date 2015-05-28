@@ -1,3 +1,5 @@
+#pragma once
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -133,7 +135,7 @@ void KruskalMST(struct Graph* graph)
                 result[i].weight);
     return;
 }
- 
+/*
 // Driver program to test above functions
 int main()
 {
@@ -144,7 +146,7 @@ int main()
     6|   \5   |15
      |      \ |
      2--------3
-     4       */
+     4       
     int V = 4; // Number of vertices in graph
     int E = 5; // Number of edges in graph
     struct Graph* graph = createGraph(V, E);
@@ -177,4 +179,4 @@ int main()
     KruskalMST(graph);
  
     return 0;
-}
+}*/
