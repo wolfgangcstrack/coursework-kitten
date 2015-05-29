@@ -23,14 +23,22 @@ protected:
 	double weight;
 public:
 	// constructors and destructor
-	Edge();
+	Edge() { start = 0; end = 0; weight = 0; }
 	Edge(const Vertex<T> &s, const Vertex<T> &e, double w);
-	~Edge();
+	~Edge() {}
 	// getters/setters
 	const Vertex<T> & getStartVertex() const { return *start; }
 	const Vertex<T> & getEndVertex() const   { return *end; }
 	double getWeight() const                 { return weight; }
 	void setWeight(double w)                 { weight = w; }
 };
+
+template<class T>
+Edge::Edge(const Vertex<T> &s, const Vertex<T> &e, double w)
+{
+	*start = s;
+	*end = e;
+	weight = w;
+}
 
 #endif // EDGE_H_
