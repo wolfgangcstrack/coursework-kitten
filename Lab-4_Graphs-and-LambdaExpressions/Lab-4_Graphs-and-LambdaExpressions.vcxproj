@@ -94,6 +94,7 @@
     <ClCompile Include="DykstraAnnotated.c" />
     <ClCompile Include="HaversineAnnotated.cpp" />
     <ClCompile Include="KruskalAnnotated.c" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="PrimAnnotated.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

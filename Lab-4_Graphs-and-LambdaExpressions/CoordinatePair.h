@@ -50,6 +50,8 @@ public:
 	void setLongitude(double longitude)                 { coordinates.second = longitude; }
 	// overridden methods from XmlNode
 	void readData(const string &data);
+	// other methods
+	bool operator==(const CoordinatePair &right)        { return (coordinates == right.coordinates); }
 };
 
 CoordinatePair::CoordinatePair(const CoordinatePair &cp)
