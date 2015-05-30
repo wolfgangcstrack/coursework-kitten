@@ -15,7 +15,7 @@ class Graph
 public:
 	virtual int getNumberOfVertices() const = 0;
 	virtual int getNumberOfEdges() const = 0;
-	virtual bool add(T &start, T &end, double edgeWeight) = 0;
+	virtual bool add(T &start, T &end) = 0;
 	virtual bool remove(T &start, T &end) = 0;
 	virtual double getEdgeWeight(T &start, T &end) = 0;
 };

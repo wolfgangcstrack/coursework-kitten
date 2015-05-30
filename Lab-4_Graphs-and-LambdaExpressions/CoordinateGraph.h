@@ -26,17 +26,25 @@ private:
 	typedef pair<double, double> coordinates;
 	typedef Vertex<CoordinatePair> Location;
 
-	map<pair<double, double>, Vertex<CoordinatePair>> graph;
+	map<coordinates, Location> graph;
 
-	double degToRad(double degrees) { return (degrees * (PI / 180)); }
+	// define functor
+	struct degreesToRadians
+	{
+		degreesToRadians() {}
+		double operator()(double degrees) { return (degrees * (PI / 180)); }
+	};
+
 	double haversine(pair<double, double> cp1, pair<double, double> cp2)
 	{
-		double dlat = degToRad(cp2.first - cp1.first);
-		double dlon = degToRad(cp2.second - cp1.second);
-		double a = pow(sin(dlat / 2), 2) +
-				cos(degToRad(cp1.first)) * cos(degToRad(cp2.first)) *
-				pow(sin(dlon / 2), 2);
-		double c = 2 * atan2(sqrt(a), sqrt(1 - a));
+		degreesToRadians d2r; // functor
+
+		double dlat = d2r(cp2.first - cp1.first);
+		double dlon = d2r(cp2.second - cp1.second);
+		double a = pow(sin(dlat / 2.), 2.) +
+				cos(d2r(cp1.first)) * cos(d2r(cp2.first)) *
+				pow(sin(dlon / 2.), 2.);
+		double c = 2. * atan2(sqrt(a), sqrt(1. - a));
 		double distance = ERADIUS * c;
 
 		return distance;
