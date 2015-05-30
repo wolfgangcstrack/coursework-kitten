@@ -4,7 +4,8 @@ Wolfgang C. Strack
 Windows 8 Visual C++ 2013
 
 This header file has the class definition of Edge. In this implementation,
-Edge is weighted and undirected.
+Edge is weighted; it is also directed, but CoordinateGraph's implementation
+doubly links vertices to emulate an undirected graph.
 */
 
 #ifndef EDGE_H_

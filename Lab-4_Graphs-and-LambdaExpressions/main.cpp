@@ -4,6 +4,8 @@ Wolfgang C. Strack
 Windows 8 Visual C++ 2013
 
 This file has the main application for this lab.
+
+NOTE: Execution results for this lab have been appended to the end of this file.
 */
 
 #include "CoordinateGraph.h"
@@ -113,3 +115,67 @@ void testCoordinateGraph(CoordinateGraph &cgraph)
 	cout << "Kruskal MST has been generated. Printing the adjacency list for the Kruskal MST:\n\n";
 	kruskalMST.printAdjacencyList(cout);
 }
+
+/* EXECUTION RESULTS
+Now reading tags from file...
+
+
+Now instantiating Location XML nodes...
+
+
+Now creating the Coordinate Graph...
+
+
+Now testing the Coordinate Graph:
+
+
+Printing Coordinate Graph adjacency list (currently has no edges):
+
+4257 Isleta Blvd. SW, Albuquerque, NM: (35.01, -106.68)
+5210 Gibson SE,  Albuquerque, NM: (35.05, -106.58)
+2435 Southern Blvd, Rio Rancho, NM: (35.06, -106.64)
+425 Eubank NE. Albuquerque, Albuquerque, NM: (35.07, -106.53)
+301 Coors Blvd. NW, Albuquerque, NM: (35.08, -106.71)
+740 Juan Tabo Blvd. NE, Albuquerque, NM: (35.08, -106.51)
+2235 Wyoming NE, Albuquerque, NM: (35.1, -106.55)
+3240 Coors NW, Albuquerque, NM: (35.11, -106.7)
+2809 Juan Tabo Blvd. NE,  Albuquerque, NM: (35.11, -106.51)
+7600 Jefferson NE, Albuquerque, NM: (35.16, -106.59)
+8111 Wyoming NE,  Albuquerque, NM: (35.17, -106.56)
+9358 Eagle Ranch Rd. NW, Albuquerque, NM: (35.18, -106.66)
+2301 Menaul Blvd. NE, Albuquerque, NM: (35.19, -106.61)
+4101 Ridge Rock Rd. SE, Rio Rancho, NM: (35.25, -106.65)
+130 Hwy. 550, East Bernalillo, NM: (35.31, -106.54)
+10555 S. Parker Rd,  Parker, CO: (39.52, -104.76)
+1535 East Evans Ave., Denver, CO: (39.67, -104.96)
+1750 S Buckley Rd,  Aurora, CO: (39.68, -104.79)
+11355 West Colfax Ave.,  Lakewood, CO: (39.74, -105.12)
+
+
+Connecting all vertices in graph...
+All vertices have been connected. This is done in preparation for the Kruskal MST algorithm.
+
+
+Now generating minimal spanning tree using Kruskal's algorithm...
+Kruskal MST has been generated. Printing the adjacency list for the Kruskal MST:
+
+5210 Gibson SE,  Albuquerque, NM: (35.05, -106.58)
+2435 Southern Blvd, Rio Rancho, NM: (35.06, -106.64)
+425 Eubank NE. Albuquerque, Albuquerque, NM: (35.07, -106.53)
+301 Coors Blvd. NW, Albuquerque, NM: (35.08, -106.71)
+740 Juan Tabo Blvd. NE, Albuquerque, NM: (35.08, -106.51)
+2235 Wyoming NE, Albuquerque, NM: (35.1, -106.55)
+3240 Coors NW, Albuquerque, NM: (35.11, -106.7)
+2809 Juan Tabo Blvd. NE,  Albuquerque, NM: (35.11, -106.51)
+7600 Jefferson NE, Albuquerque, NM: (35.16, -106.59)
+8111 Wyoming NE,  Albuquerque, NM: (35.17, -106.56)
+9358 Eagle Ranch Rd. NW, Albuquerque, NM: (35.18, -106.66)
+2301 Menaul Blvd. NE, Albuquerque, NM: (35.19, -106.61)
+4101 Ridge Rock Rd. SE, Rio Rancho, NM: (35.25, -106.65)
+130 Hwy. 550, East Bernalillo, NM: (35.31, -106.54)
+10555 S. Parker Rd,  Parker, CO: (39.52, -104.76)
+1535 East Evans Ave., Denver, CO: (39.67, -104.96)
+1750 S Buckley Rd,  Aurora, CO: (39.68, -104.79)
+11355 West Colfax Ave.,  Lakewood, CO: (39.74, -105.12)
+Press any key to continue . . .
+*/

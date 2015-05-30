@@ -3,7 +3,9 @@ Lab 4 - Graphs and Lambda Expressions
 Wolfgang C. Strack
 Windows 8 Visual C++ 2013
 
-This header file has the virtual class definition of Graph.
+This header file has the virtual class definition of Graph. It is
+essentially an interface from which derived classes must override as
+implemented Graphs.
 */
 
 #ifndef GRAPH_H_

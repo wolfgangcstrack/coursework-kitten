@@ -3,7 +3,9 @@ Lab 4 - Graphs and Lambda Expressions
 Wolfgang C. Strack
 Windows 8 Visual C++ 2013
 
-This header file has the class definition of Vertex.
+This header file has the class definition of Vertex. Vertex contains a
+pointer to its data, a flag for if it has been visited during an MST
+generation, and an adjacency list represented by a vector of its edges.
 */
 
 #ifndef VERTEX_H_

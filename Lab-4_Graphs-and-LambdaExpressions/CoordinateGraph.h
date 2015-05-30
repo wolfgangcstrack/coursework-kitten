@@ -3,7 +3,13 @@ Lab 4 - Graphs and Lambda Expressions
 Wolfgang C. Strack
 Windows 8 Visual C++ 2013
 
-This header file has the class definition of CoordinateGraph.
+This header file has the class definition of CoordinateGraph. This graph
+implementation is weighted and undirected. The single minimal spanning tree
+algorithm it uses for now is Kruskal's algorithm.
+
+Note: the Edge class this graph implementation uses is directed, but the
+implementation doubly links connected vertices to emulate an undirected
+graph.
 */
 
 #ifndef COORDINATE_GRAPH_H_
