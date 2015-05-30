@@ -26,7 +26,7 @@ int main()
 {
 	// pattern matches everything (including newline)
 	// between opening and closing <Location> tags
-	XmlRegexIO xrio("(?s)<Location>.*?</Location>");
+	XmlRegexIO xrio("<Location>[\\s\\S]*?</Location>");
 	string filename = "Coordinates.xml";
 	vector<string> tags;
 	XmlNodeList cpairs;

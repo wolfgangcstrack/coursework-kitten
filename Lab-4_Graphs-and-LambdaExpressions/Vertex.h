@@ -28,7 +28,7 @@ public:
 	Vertex(const T &d);
 	~Vertex() {}
 	// getters/setters
-	const T & getData() const                { return *data; }
+	T & getData() const                      { return *data; }
 	bool isVisited() const                   { return visited; }
 	const vector<Edge<T>> & getEdges() const { return edges; }
 	void visit()                             { visited = true; }

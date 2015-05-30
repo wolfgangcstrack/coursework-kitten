@@ -213,6 +213,25 @@ bool CoordinateGraph::connect(Location &cp1, Location &cp2)
 	return true;
 }
 
+void CoordinateGraph::connectAllVertices()
+{
+	for (auto iter = graph.begin(); iter != graph.end(); ++iter)
+	{
+		auto tempIter = iter;
+
+		// loop through all other vertices besides the current one pointed to by iter
+		while (++tempIter != iter)
+		{
+			if (tempIter == graph.end())
+			{
+				tempIter = graph.begin();
+			}
+
+			this->connect(iter->second.getData(), tempIter->second.getData());
+		}
+	}
+}
+
 ostream & operator<<(ostream &os, const CoordinateGraph &cgraph)
 {
 	for (auto iter = cgraph.graph.begin(); iter != cgraph.graph.end(); iter++)
