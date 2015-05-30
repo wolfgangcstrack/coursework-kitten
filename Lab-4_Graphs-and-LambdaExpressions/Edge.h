@@ -33,6 +33,9 @@ public:
 	Vertex<T> & getEndVertex() const         { return *end; }
 	double getWeight() const                 { return weight; }
 	void setWeight(double w)                 { weight = w; }
+	// other methods
+	bool operator==(const Edge &right);
+	bool operator!=(const Edge &right);
 };
 
 template<class T>
@@ -40,9 +43,21 @@ Edge<T>::Edge(Vertex<T> &s, Vertex<T> &e, double w)
 {
 	start = shared_ptr<Vertex<T>>(new Vertex<T>(s));
 	end = shared_ptr<Vertex<T>>(new Vertex<T>(e));
-	//*start = s;
-	//*end = e;
 	weight = w;
+}
+
+template<class T>
+bool Edge<T>::operator==(const Edge &right)
+{
+	return (((start == right.start && end == right.end) ||
+		(start == right.end && end == right.start))
+		&& weight == right.weight);
+}
+
+template<class T>
+bool Edge<T>::operator!=(const Edge &right)
+{
+	return !(*this == right);
 }
 
 #endif // EDGE_H_

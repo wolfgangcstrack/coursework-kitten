@@ -13,6 +13,7 @@ This header file has the class definition of CoordinateGraph.
 #include "Vertex.h"
 #include "Edge.h"
 #include "Location.h"
+#include <vector>
 #include <cmath>
 #include <map>
 using namespace std;
@@ -66,7 +67,7 @@ public:
 	bool remove(Location &cpair);
 	bool connect(Location &cp1, Location &cp2);
 	void connectAllVertices();
-	// CoordinateGraph getKruskalMST();
+	CoordinateGraph getKruskalMST();
 	void printAdjacencyList(ostream &os);
 };
 
@@ -94,9 +95,7 @@ bool CoordinateGraph::add(Location &cp1, Location &cp2)
 	// calculate edge weight
 	auto edgeweight = haversine(coord1, coord2);
 
-	// connect the two vertices "undirectedly"
-	loc1.connect(loc2, edgeweight);
-	loc2.connect(loc1, edgeweight);
+	connect(cp1, cp2);
 
 	// insert the two vertices into the graph
 	graph[coord1] = loc1;
@@ -230,6 +229,29 @@ void CoordinateGraph::connectAllVertices()
 			this->connect(iter->second.getData(), toEndIter->second.getData());
 		}
 	}
+}
+
+CoordinateGraph CoordinateGraph::getKruskalMST()
+{
+	CoordinateGraph ncgraph;
+	vector<Edge<Location>> edges;
+
+	for (auto iter = graph.begin(); iter != graph.end(); ++iter)
+	{
+		vector<Edge<Location>> *toAppend = &(iter->second.getEdges());
+		edges.insert(edges.end(), toAppend->begin(), toAppend->end());
+	}
+
+	sort(edges.begin(), edges.end(), [](Edge<Location> a, Edge<Location> b) {return (a.getWeight() < b.getWeight()); });
+	edges.erase(unique(edges.begin(), edges.end()), edges.end());
+
+	for (int i = 0; i < edges.size(); i++)
+	{
+		ncgraph.add(edges[i].getStartVertex().getData(),
+			edges[i].getEndVertex().getData());
+	}
+
+	return ncgraph;
 }
 
 void CoordinateGraph::printAdjacencyList(ostream &os)

@@ -53,7 +53,7 @@ int main()
 		return 3;
 	}
 
-	cout << "Now testing the Coordinate Graph\n\n\n";
+	cout << "Now testing the Coordinate Graph:\n\n\n";
 	testCoordinateGraph(cgraph);
 
 	return 0;
@@ -100,5 +100,16 @@ bool createCoordinateGraph(XmlNodeList &cpairs, CoordinateGraph &cgraph)
 
 void testCoordinateGraph(CoordinateGraph &cgraph)
 {
+	cout << "Printing Coordinate Graph adjacency list (currently has no edges):\n\n";
 	cgraph.printAdjacencyList(cout);
+
+	cout << "\n\nConnecting all vertices in graph...\n";
+	cgraph.connectAllVertices();
+	cout << "All vertices have been connected. This is done in preparation for the Kruskal MST algorithm.\n\n\n";
+
+	cout << "Now generating minimal spanning tree using Kruskal's algorithm...\n";
+	CoordinateGraph kruskalMST = cgraph.getKruskalMST();
+	
+	cout << "Kruskal MST has been generated. Printing the adjacency list for the Kruskal MST:\n\n";
+	kruskalMST.printAdjacencyList(cout);
 }

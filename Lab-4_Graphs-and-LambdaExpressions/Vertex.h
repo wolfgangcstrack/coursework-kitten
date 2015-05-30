@@ -31,7 +31,7 @@ public:
 	// getters/setters
 	T & getData() const                      { return *data; }
 	bool isVisited() const                   { return visited; }
-	const vector<Edge<T>> & getEdges() const { return edges; }
+	vector<Edge<T>> & getEdges()             { return edges; }
 	void visit()                             { visited = true; }
 	void unvisit()                           { visited = false; }
 	void setData(const T &d)                 { *data = d; }
@@ -68,7 +68,6 @@ template<class T>
 Vertex<T>::Vertex(T &d)
 {
 	data = shared_ptr<T>(new T(d));
-	//*data = T(d);
 	visited = false;
 }
 
