@@ -3,7 +3,7 @@ Lab 4 - Graphs and Lambda Expressions
 Wolfgang C. Strack
 Windows 8 Visual C++ 2013
 
-This header file has the class definition of CoordinatePair, which extends
+This header file has the class definition of Location, which extends
 the XmlNode class.
 */
 
@@ -14,7 +14,7 @@ the XmlNode class.
 #include <string>
 using namespace std;
 
-class CoordinatePair : XmlNode
+class Location : XmlNode
 {
 private:
 	string address;
@@ -24,15 +24,15 @@ private:
 	pair<double, double> coordinates;
 public:
 	// constructors and destructor
-	CoordinatePair() { coordinates = make_pair(0., 0.); }
-	CoordinatePair(const CoordinatePair &cp);
-	CoordinatePair(
+	Location() { coordinates = make_pair(0., 0.); }
+	Location(const Location &cp);
+	Location(
 			const string &adr,
 			const string &c,
 			const string &pnum,
 			const string &s,
 			const pair<double, double> &cs);
-	~CoordinatePair() {}
+	~Location() {}
 	// getters/setters
 	const string & getAddress() const                   { return address; }
 	const string & getCity() const                      { return city; }
@@ -51,11 +51,11 @@ public:
 	// overridden methods from XmlNode
 	void readData(const string &data);
 	// other methods
-	bool operator==(const CoordinatePair &right)        { return (coordinates == right.coordinates); }
-	friend ostream & operator<<(ostream &os, const CoordinatePair &cpair);
+	bool operator==(const Location &right)        { return (coordinates == right.coordinates); }
+	friend ostream & operator<<(ostream &os, const Location &cpair);
 };
 
-CoordinatePair::CoordinatePair(const CoordinatePair &cp)
+Location::Location(const Location &cp)
 {
 	address = cp.address;
 	city = cp.city;
@@ -64,7 +64,7 @@ CoordinatePair::CoordinatePair(const CoordinatePair &cp)
 	coordinates = cp.coordinates;
 }
 
-CoordinatePair::CoordinatePair(
+Location::Location(
 		const string &adr,
 		const string &c,
 		const string &pnum,
@@ -78,7 +78,7 @@ CoordinatePair::CoordinatePair(
 	coordinates = cs;
 }
 
-void CoordinatePair::readData(const string &data)
+void Location::readData(const string &data)
 {
 	address = this->getString(data, "Address");
 	city = this->getString(data, "City");
@@ -88,7 +88,7 @@ void CoordinatePair::readData(const string &data)
 	coordinates.second = stod(this->getString(data, "Longitude"));
 }
 
-ostream & operator<<(ostream &os, const CoordinatePair &cpair)
+ostream & operator<<(ostream &os, const Location &cpair)
 {
 	os << cpair.address << ", " << cpair.city << ", " << cpair.state
 		<< ": (" << cpair.coordinates.first << ", " << cpair.coordinates.second << ")";

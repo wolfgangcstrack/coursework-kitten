@@ -12,7 +12,7 @@ This header file has the class definition of CoordinateGraph.
 #include "Graph.h"
 #include "Vertex.h"
 #include "Edge.h"
-#include "CoordinatePair.h"
+#include "Location.h"
 #include <cmath>
 #include <map>
 using namespace std;
@@ -20,13 +20,13 @@ using namespace std;
 static const int ERADIUS = 6371; // Earth's radius in km
 static const double PI = 3.141592653589;
 
-class CoordinateGraph : Graph <CoordinatePair>
+class CoordinateGraph : Graph <Location>
 {
 private:
 	typedef pair<double, double> coordinates;
-	typedef Vertex<CoordinatePair> Location;
+	typedef Vertex<Location> VLocation;
 
-	map<coordinates, Location> graph;
+	map<coordinates, VLocation> graph;
 
 	// define functor
 	struct degreesToRadians
@@ -54,36 +54,36 @@ public:
 	CoordinateGraph()  {}
 	~CoordinateGraph() {}
 	// getters/setters
-	const CoordinatePair & getLocation(const pair<double, double> &latitudeAndLongitude);
+	const Location & getLocation(const pair<double, double> &latitudeAndLongitude);
 	// overloaded methods from Graph class
-	bool add(CoordinatePair &cp1, CoordinatePair &cp2);
-	bool remove(CoordinatePair &cp1, CoordinatePair &cp2);
+	bool add(Location &cp1, Location &cp2);
+	bool remove(Location &cp1, Location &cp2);
 	int getNumberOfVertices() const;
 	int getNumberOfEdges() const;
-	double getEdgeWeight(CoordinatePair &cp1, CoordinatePair &cp2);
+	double getEdgeWeight(Location &cp1, Location &cp2);
 	// other methods
-	bool add(CoordinatePair &cpair);
-	bool remove(CoordinatePair &cpair);
+	bool add(Location &cpair);
+	bool remove(Location &cpair);
 	// CoordinateGraph getKruskalMST();
 	friend ostream & operator<<(ostream &os, const CoordinateGraph &cgraph);
 };
 
-const CoordinatePair & CoordinateGraph::getLocation(const pair<double, double> &latitudeAndLongitude)
+const Location & CoordinateGraph::getLocation(const pair<double, double> &latitudeAndLongitude)
 {
 	return graph[latitudeAndLongitude].getData();
 }
 
-bool CoordinateGraph::add(CoordinatePair &cp1, CoordinatePair &cp2)
+bool CoordinateGraph::add(Location &cp1, Location &cp2)
 {
 	// Construct the vertices
-	Location loc1(cp1);
-	Location loc2(cp2);
+	VLocation loc1(cp1);
+	VLocation loc2(cp2);
 
 	// get the map keys to insert the vertices
 	auto coord1 = cp1.getCoordinates();
 	auto coord2 = cp2.getCoordinates();
 
-	// if any of the CoordinatePairs are already in the graph, return false
+	// if any of the Locations are already in the graph, return false
 	if (graph.find(coord1) == graph.end() || graph.find(coord2) == graph.end())
 	{
 		return false;
@@ -103,7 +103,7 @@ bool CoordinateGraph::add(CoordinatePair &cp1, CoordinatePair &cp2)
 	return true;
 }
 
-bool CoordinateGraph::remove(CoordinatePair &cp1, CoordinatePair &cp2)
+bool CoordinateGraph::remove(Location &cp1, Location &cp2)
 {
 	// get the coordinate pairs and vertices
 	auto coord1 = cp1.getCoordinates();
@@ -150,17 +150,17 @@ int CoordinateGraph::getNumberOfEdges() const
 	return (doubleEdges / 2);
 }
 
-double CoordinateGraph::getEdgeWeight(CoordinatePair &cp1, CoordinatePair &cp2)
+double CoordinateGraph::getEdgeWeight(Location &cp1, Location &cp2)
 {
 	return graph[cp1.getCoordinates()].getEdgeWeight(graph[cp2.getCoordinates()]);
 }
 
-bool CoordinateGraph::add(CoordinatePair &cpair)
+bool CoordinateGraph::add(Location &cpair)
 {
-	Location loc(cpair);
+	VLocation loc(cpair);
 	auto coord = cpair.getCoordinates();
 
-	// if the CoordinatePair is already in the graph, return false
+	// if the Location is already in the graph, return false
 	if (graph.find(coord) == graph.end())
 	{
 		return false;
@@ -170,12 +170,12 @@ bool CoordinateGraph::add(CoordinatePair &cpair)
 	return true;
 }
 
-bool CoordinateGraph::remove(CoordinatePair &cpair)
+bool CoordinateGraph::remove(Location &cpair)
 {
 	auto coord = cpair.getCoordinates();
 	auto iter = graph.find(coord);
 
-	// if CoordinatePair is not in the graph, return false
+	// if Location is not in the graph, return false
 	if (iter == graph.end())
 	{
 		return false;

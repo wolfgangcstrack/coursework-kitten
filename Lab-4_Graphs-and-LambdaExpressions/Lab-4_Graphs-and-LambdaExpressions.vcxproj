@@ -79,7 +79,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CoordinateGraph.h" />
-    <ClInclude Include="CoordinatePair.h" />
+    <ClInclude Include="Location.h" />
     <ClInclude Include="Edge.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="Vertex.h" />

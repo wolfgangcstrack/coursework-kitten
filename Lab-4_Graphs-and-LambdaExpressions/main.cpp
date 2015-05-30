@@ -7,7 +7,8 @@ This file has the main application for this lab.
 */
 
 #include "CoordinateGraph.h"
-#include "CoordinatePair.h"
+#include "Location.h"
+#include "XmlNodeList.h"
 #include "XmlRegexIO.h"
 #include "XmlNode.h"
 #include <iostream>
@@ -16,26 +17,30 @@ This file has the main application for this lab.
 #include <vector>
 using namespace std;
 
-bool openInputfile(ifstream &ifs);
-bool readCoords(ifstream &ifs, vector<XmlNode> &cpairs);
-bool createCoordinateGraph(vector<XmlNode> &cpairs, CoordinateGraph &cgraph);
+bool readTagsFromFile(XmlRegexIO &xrio, const string &filename, vector<string> &tags);
+bool instantiateLocationNodes(XmlRegexIO &xrio, const vector<string> &tags, XmlNodeList &cpairs);
+bool createCoordinateGraph(XmlNodeList &cpairs, CoordinateGraph &cgraph);
 void testCoordinateGraph(CoordinateGraph &cgraph);
 
 int main()
 {
-	ifstream ifs;
-	vector<XmlNode> cpairs;
+	// pattern matches everything (including newline)
+	// between opening and closing <Location> tags
+	XmlRegexIO xrio("(?s)<Location>.*?</Location>");
+	string filename = "Coordinates.xml";
+	vector<string> tags;
+	XmlNodeList cpairs;
 	CoordinateGraph cgraph;
-	
-	if (!openInputfile(ifs))
+
+	if (!readTagsFromFile(xrio, filename, tags))
 	{
-		cout << "Error: something went wrong when opening the input file!\n";
+		cout << "Error: something went wrong when reading the tags from the file!\n";
 		return 1;
 	}
 
-	if (!readCoords(ifs, cpairs))
+	if (!instantiateLocationNodes(xrio, tags, cpairs))
 	{
-		cout << "Error: something went wrong when reading the Coordinate Nodes!\n";
+		cout << "Error: something went wrong when instantiating the Location Nodes!\n";
 		return 2;
 	}
 
@@ -50,16 +55,25 @@ int main()
 	return 0;
 }
 
-bool openInputfile(ifstream &ifs)
+bool readTagsFromFile(XmlRegexIO &xrio, const string &filename, vector<string> &tags)
 {
-	string filename;
-	cout << "Please enter filename to read from: ";
-	getline(cin, filename);
-	ifs.open(filename);
-	return ifs.is_open();
+	return xrio.getAllMatches(filename, tags);
 }
 
-bool readCoords(ifstream &ifs, vector<XmlNode> &cpairs)
+bool instantiateLocationNodes(XmlRegexIO &xrio, const vector<string> &tags, XmlNodeList &cpairs)
 {
+	for (int i = 0; i < tags.size(); i++)
+	{
+		shared_ptr<XmlNode> cpairPtr(new Location());
+		cpairPtr->setXMLTags(tags[i]);
 
+		if (!xrio.getXmlDataFromString(tags[i], *cpairPtr))
+		{
+			return false;
+		}
+
+		cpairs.push_back(cpairPtr);
+	}
+
+	return true;
 }
