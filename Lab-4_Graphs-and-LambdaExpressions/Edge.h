@@ -10,9 +10,11 @@ Edge is weighted and undirected.
 #ifndef EDGE_H_
 #define EDGE_H_
 
-#include "Vertex.h"
 #include <memory>
 using namespace std;
+
+template<class T>
+class Vertex;
 
 template<class T>
 class Edge
@@ -27,14 +29,14 @@ public:
 	Edge(const Vertex<T> &s, const Vertex<T> &e, double w);
 	~Edge() {}
 	// getters/setters
-	const Vertex<T> & getStartVertex() const { return *start; }
-	const Vertex<T> & getEndVertex() const   { return *end; }
+	Vertex<T> & getStartVertex() const       { return *start; }
+	Vertex<T> & getEndVertex() const         { return *end; }
 	double getWeight() const                 { return weight; }
 	void setWeight(double w)                 { weight = w; }
 };
 
 template<class T>
-Edge::Edge(const Vertex<T> &s, const Vertex<T> &e, double w)
+Edge<T>::Edge(const Vertex<T> &s, const Vertex<T> &e, double w)
 {
 	*start = s;
 	*end = e;

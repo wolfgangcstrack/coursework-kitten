@@ -52,6 +52,7 @@ public:
 	void readData(const string &data);
 	// other methods
 	bool operator==(const CoordinatePair &right)        { return (coordinates == right.coordinates); }
+	friend ostream & operator<<(ostream &os, const CoordinatePair &cpair);
 };
 
 CoordinatePair::CoordinatePair(const CoordinatePair &cp)
@@ -82,8 +83,17 @@ void CoordinatePair::readData(const string &data)
 	address = this->getString(data, "Address");
 	city = this->getString(data, "City");
 	phone = this->getString(data, "Phone");
+	state = this->getString(data, "State");
 	coordinates.first = stod(this->getString(data, "Latitude"));
 	coordinates.second = stod(this->getString(data, "Longitude"));
+}
+
+ostream & operator<<(ostream &os, const CoordinatePair &cpair)
+{
+	os << cpair.address << ", " << cpair.city << ", " << cpair.state
+		<< ": (" << cpair.coordinates.first << ", " << cpair.coordinates.second << ")";
+
+	return os;
 }
 
 #endif // COORDINATE_PAIR_H_
