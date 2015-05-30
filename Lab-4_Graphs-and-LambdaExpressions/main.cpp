@@ -77,3 +77,8 @@ bool instantiateLocationNodes(XmlRegexIO &xrio, const vector<string> &tags, XmlN
 
 	return true;
 }
+
+bool createCoordinateGraph(XmlNodeList &cpairs, CoordinateGraph &cgraph)
+{
+
+}

@@ -37,8 +37,8 @@ public:
 	// other methods
 	bool connect(Vertex<T> &end, double w);
 	bool disconnect(const Vertex<T> &end);
-	//bool disconnect(const Edge<T> &edge);
-	bool disconnectAll();
+	void disconnectAll();
+	bool isConnectedTo(const Vertex<T> &end);
 	int getNumberOfEdges() const             { return edges.size(); }
 	bool operator==(const Vertex<T> &right)  { return (*data == *right.data); }
 	double getEdgeWeight(const Vertex<T> &end) const;
@@ -89,7 +89,7 @@ bool Vertex<T>::disconnect(const Vertex<T> &end)
 }
 
 template<class T>
-bool Vertex<T>::disconnectAll()
+void Vertex<T>::disconnectAll()
 {
 	bool result = true;
 
@@ -100,6 +100,20 @@ bool Vertex<T>::disconnectAll()
 	}
 
 	return result;
+}
+
+template<class T>
+bool Vertex<T>::isConnectedTo(const Vertex<T> &end)
+{
+	for (int index = 0; index < edges.size(); index++)
+	{
+		if (edges[index].getEndVertex() == end)
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
 template<class T>

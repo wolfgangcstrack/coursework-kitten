@@ -64,6 +64,8 @@ public:
 	// other methods
 	bool add(Location &cpair);
 	bool remove(Location &cpair);
+	bool connect(Location &cp1, Location &cp2);
+	void connectAllVertices();
 	// CoordinateGraph getKruskalMST();
 	friend ostream & operator<<(ostream &os, const CoordinateGraph &cgraph);
 };
@@ -84,7 +86,7 @@ bool CoordinateGraph::add(Location &cp1, Location &cp2)
 	auto coord2 = cp2.getCoordinates();
 
 	// if any of the Locations are already in the graph, return false
-	if (graph.find(coord1) == graph.end() || graph.find(coord2) == graph.end())
+	if (graph.find(coord1) != graph.end() || graph.find(coord2) != graph.end())
 	{
 		return false;
 	}
@@ -161,7 +163,7 @@ bool CoordinateGraph::add(Location &cpair)
 	auto coord = cpair.getCoordinates();
 
 	// if the Location is already in the graph, return false
-	if (graph.find(coord) == graph.end())
+	if (graph.find(coord) != graph.end())
 	{
 		return false;
 	}
@@ -185,6 +187,28 @@ bool CoordinateGraph::remove(Location &cpair)
 	iter->second.disconnectAll();
 	// remove vertex from graph
 	graph.erase(iter);
+
+	return true;
+}
+
+bool CoordinateGraph::connect(Location &cp1, Location &cp2)
+{
+	// get the map keys of the vertices that hold the locations
+	auto coord1 = cp1.getCoordinates();
+	auto coord2 = cp2.getCoordinates();
+
+	// if any of the Locations are not in the graph, return false
+	if (graph.find(coord1) == graph.end() || graph.find(coord2) == graph.end())
+	{
+		return false;
+	}
+
+	// calculate edge weight
+	auto edgeweight = haversine(coord1, coord2);
+
+	// connect the two vertices "undirectedly"
+	graph[coord1].connect(graph[coord2], edgeweight);
+	graph[coord2].connect(graph[coord2], edgeweight);
 
 	return true;
 }
