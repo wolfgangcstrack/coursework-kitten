@@ -37,7 +37,7 @@ protected:
 
 	string getString(const string &data, const string &tagName)
 	{
-		return getString(data, regex("<" + tagName + ">.*?<" + tagName + ">"));
+		return getString(data, regex("<" + tagName + ">.*?</" + tagName + ">"));
 	}
 	string getString(const string &data, regex rx)
 	{

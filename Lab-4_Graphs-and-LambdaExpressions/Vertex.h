@@ -25,7 +25,8 @@ protected:
 public:
 	// constructors and destructor
 	Vertex() { data = 0; visited = 0; }
-	Vertex(const T &d);
+	Vertex(const Vertex<T> &copy);
+	Vertex(T &d);
 	~Vertex() {}
 	// getters/setters
 	T & getData() const                      { return *data; }
@@ -44,7 +45,7 @@ public:
 	double getEdgeWeight(const Vertex<T> &end) const;
 	friend ostream & operator<<(ostream &os, const Vertex<T> &vert)
 	{
-		os << vert.data;
+		os << vert.getData();
 
 		for (auto iter = vert.edges.begin(); iter != vert.edges.end(); iter++)
 		{
@@ -56,9 +57,18 @@ public:
 };
 
 template<class T>
-Vertex<T>::Vertex(const T &d)
+Vertex<T>::Vertex(const Vertex<T> &copy)
 {
-	*data = d;
+	data = copy.data;
+	visited = copy.visited;
+	edges = copy.edges;
+}
+
+template<class T>
+Vertex<T>::Vertex(T &d)
+{
+	data = shared_ptr<T>(new T(d));
+	//*data = T(d);
 	visited = false;
 }
 
@@ -91,15 +101,11 @@ bool Vertex<T>::disconnect(const Vertex<T> &end)
 template<class T>
 void Vertex<T>::disconnectAll()
 {
-	bool result = true;
-
 	for (int index = 0; index < edges.size(); index++)
 	{
 		edges[index].getEndVertex().disconnect(*this);
 		edges.erase(edges.begin() + index);
 	}
-
-	return result;
 }
 
 template<class T>

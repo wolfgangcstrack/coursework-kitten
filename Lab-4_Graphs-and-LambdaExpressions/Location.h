@@ -14,7 +14,7 @@ the XmlNode class.
 #include <string>
 using namespace std;
 
-class Location : XmlNode
+class Location : public XmlNode
 {
 private:
 	string address;

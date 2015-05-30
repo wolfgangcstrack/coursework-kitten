@@ -20,7 +20,7 @@ using namespace std;
 static const int ERADIUS = 6371; // Earth's radius in km
 static const double PI = 3.141592653589;
 
-class CoordinateGraph : Graph <Location>
+class CoordinateGraph : public Graph <Location>
 {
 private:
 	typedef pair<double, double> coordinates;
@@ -67,7 +67,7 @@ public:
 	bool connect(Location &cp1, Location &cp2);
 	void connectAllVertices();
 	// CoordinateGraph getKruskalMST();
-	friend ostream & operator<<(ostream &os, const CoordinateGraph &cgraph);
+	void printAdjacencyList(ostream &os);
 };
 
 const Location & CoordinateGraph::getLocation(const pair<double, double> &latitudeAndLongitude)
@@ -217,29 +217,27 @@ void CoordinateGraph::connectAllVertices()
 {
 	for (auto iter = graph.begin(); iter != graph.end(); ++iter)
 	{
-		auto tempIter = iter;
+		auto toBeginIter = iter;
+		auto toEndIter = iter;
 
 		// loop through all other vertices besides the current one pointed to by iter
-		while (++tempIter != iter)
+		while (toBeginIter != graph.begin() && --toBeginIter != graph.begin())
 		{
-			if (tempIter == graph.end())
-			{
-				tempIter = graph.begin();
-			}
-
-			this->connect(iter->second.getData(), tempIter->second.getData());
+			this->connect(iter->second.getData(), toBeginIter->second.getData());
+		}
+		while (toEndIter != graph.end() && ++toEndIter != graph.end())
+		{
+			this->connect(iter->second.getData(), toEndIter->second.getData());
 		}
 	}
 }
 
-ostream & operator<<(ostream &os, const CoordinateGraph &cgraph)
+void CoordinateGraph::printAdjacencyList(ostream &os)
 {
-	for (auto iter = cgraph.graph.begin(); iter != cgraph.graph.end(); iter++)
+	for (auto iter = graph.begin(); iter != graph.end(); iter++)
 	{
 		os << iter->second << endl;
 	}
-
-	return os;
 }
 
 #endif // COORDINATE_GRAPH_H_

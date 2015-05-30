@@ -26,7 +26,7 @@ protected:
 public:
 	// constructors and destructor
 	Edge() { start = 0; end = 0; weight = 0; }
-	Edge(const Vertex<T> &s, const Vertex<T> &e, double w);
+	Edge(Vertex<T> &s, Vertex<T> &e, double w);
 	~Edge() {}
 	// getters/setters
 	Vertex<T> & getStartVertex() const       { return *start; }
@@ -36,10 +36,12 @@ public:
 };
 
 template<class T>
-Edge<T>::Edge(const Vertex<T> &s, const Vertex<T> &e, double w)
+Edge<T>::Edge(Vertex<T> &s, Vertex<T> &e, double w)
 {
-	*start = s;
-	*end = e;
+	start = shared_ptr<Vertex<T>>(new Vertex<T>(s));
+	end = shared_ptr<Vertex<T>>(new Vertex<T>(e));
+	//*start = s;
+	//*end = e;
 	weight = w;
 }
 
