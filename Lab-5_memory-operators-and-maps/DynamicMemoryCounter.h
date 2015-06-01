@@ -10,6 +10,8 @@ monitor dynamic memory allocation in the project.
 #ifndef DYNAMIC_MEMORY_COUNTER_H_
 #define DYNAMIC_MEMORY_COUNTER_H_
 
+#include "Global.h"
+
 class DynamicMemoryCounter
 {
 private:
@@ -24,5 +26,7 @@ public:
 	int getAllocationCount() const  { return allocationCounter; }
 	void incrementAllocationCount() { ++allocationCounter; }
 };
+
+using namespace Lab5Global;
 
 #endif // DYNAMIC_MEMORY_COUNTER_H_

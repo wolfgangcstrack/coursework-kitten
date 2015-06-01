@@ -21,5 +21,8 @@
     <ClInclude Include="DynamicMemoryCounter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Falsegrind.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
