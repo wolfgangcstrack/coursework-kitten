@@ -12,7 +12,6 @@ tool for memory debugging, leak detection, and profiling.
 #ifndef FALSEGRIND_H_
 #define FALSEGRIND_H_
 
-#include "Global.h"
 #include "DynamicMemoryCounter.h"
 #include <memory>
 #include <map>
@@ -39,7 +38,5 @@ public:
 	bool removeAddressBytePairFromMemoryMap(void *address);
 	void incrementAllocationCount();
 };
-
-using namespace Lab5Global;
 
 #endif // FALSEGRIND_H_

@@ -16,12 +16,54 @@ operator overloads.
 #ifndef GLOBAL_DEFS_H_
 #define GLOBAL_DEFS_H_
 
+#include "DynamicMemoryCounter.h"
+#include "Falsegrind.h"
+#include <iostream>
+#include <memory>
+
 namespace Lab5Global
 {
-	void * operator new(size_t);
-	void * operator new[](size_t);
-	void operator delete(void *);
-	void operator delete[](void *);
+	std::shared_ptr<DynamicMemoryCounter> dmc = DynamicMemoryCounter::instance();
+}
+
+void * operator new(size_t size)
+{
+	if (Lab5Global::dmc) // increment only if dmc exists
+	{
+		Lab5Global::dmc->incrementAllocationCount();
+	}
+
+	return malloc(size);
+}
+
+void * operator new[](size_t size)
+{
+	if (Lab5Global::dmc) // increment only if dmc exists
+	{
+		Lab5Global::dmc->incrementAllocationCount();
+	}
+
+	return malloc(size);
+}
+
+void operator delete(void *ptr)
+{
+	if (Lab5Global::dmc) // decrement only if dmc exists
+	{
+		Lab5Global::dmc->decrementAllocationCount();
+	}
+
+	free(ptr);
+}
+
+void operator delete[](void *ptr)
+{
+	if (Lab5Global::dmc) // decrement only if dmc exists
+	{
+		Lab5Global::dmc->decrementAllocationCount();
+	}
+
+	free(ptr);
 }
 
 #endif // GLOBAL_DEFS_H_

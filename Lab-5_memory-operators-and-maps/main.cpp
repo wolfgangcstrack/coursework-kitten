@@ -5,3 +5,13 @@ Windows 8 Visual C++ 2013
 
 This file contains the main application for this lab.
 */
+
+#include "Global.h"
+#include "DynamicMemoryCounter.h"
+#include "Falsegrind.h"
+#include <iostream>
+
+int main()
+{
+	return 0;
+}
