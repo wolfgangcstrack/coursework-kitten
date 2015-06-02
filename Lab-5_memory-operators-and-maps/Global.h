@@ -17,6 +17,7 @@ operator overloads.
 #define GLOBAL_DEFS_H_
 
 #include "DynamicMemoryCounter.h"
+#include "DynamicMemoryMap.h"
 #include "Falsegrind.h"
 #include <iostream>
 #include <memory>

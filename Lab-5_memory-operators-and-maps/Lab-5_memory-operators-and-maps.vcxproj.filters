@@ -24,7 +24,7 @@
     <ClInclude Include="Falsegrind.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MemoryMap.h">
+    <ClInclude Include="DynamicMemoryMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

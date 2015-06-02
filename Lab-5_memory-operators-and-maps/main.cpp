@@ -7,7 +7,6 @@ This file contains the main application for this lab.
 */
 
 #include "Global.h"
-#include "DynamicMemoryCounter.h"
 #include "Falsegrind.h"
 #include <iostream>
 
