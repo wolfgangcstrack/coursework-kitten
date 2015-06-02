@@ -14,21 +14,24 @@ monitor dynamic memory allocation in the project.
 
 class DynamicMemoryCounter
 {
+private:
+	static std::shared_ptr<DynamicMemoryCounter> dmcInstance;
 protected:
 	int allocationCounter;
-
-	static std::shared_ptr<DynamicMemoryCounter> dmcInstance;
 
 	// protected constructor because this is a singleton class
 	DynamicMemoryCounter()                  { allocationCounter = 0; }
 public:
+	// get instance and check if instance exists methods
 	static std::shared_ptr<DynamicMemoryCounter> instance();
 	static bool exists()                    { return (dmcInstance != 0); }
+	// get/set instance data
 	virtual int getAllocationCount() const  { return allocationCounter; }
 	virtual void incrementAllocationCount() { ++allocationCounter; }
 	virtual void decrementAllocationCount() { --allocationCounter; }
 };
 
+// initialize static member instance later in instance()
 std::shared_ptr<DynamicMemoryCounter> DynamicMemoryCounter::dmcInstance = 0;
 
 std::shared_ptr<DynamicMemoryCounter> DynamicMemoryCounter::instance()
