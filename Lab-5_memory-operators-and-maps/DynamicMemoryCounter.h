@@ -11,21 +11,25 @@ monitor dynamic memory allocation in the project.
 #define DYNAMIC_MEMORY_COUNTER_H_
 
 #include "Global.h"
+#include <memory>
 
 class DynamicMemoryCounter
 {
 private:
 	int allocationCounter;
 protected:
-	DynamicMemoryCounter();
-	virtual ~DynamicMemoryCounter();
-	static DynamicMemoryCounter *dmcInstance;
+	DynamicMemoryCounter()          { allocationCounter = 0; }
+	virtual ~DynamicMemoryCounter() {}
+	static std::shared_ptr<DynamicMemoryCounter> dmcInstance;
+	//static DynamicMemoryCounter *dmcInstance;
 public:
-	static DynamicMemoryCounter * instance();
-	static bool exists();
+	static std::shared_ptr<DynamicMemoryCounter> instance();
+	static bool exists()            { return (dmcInstance != 0); }
 	int getAllocationCount() const  { return allocationCounter; }
 	void incrementAllocationCount() { ++allocationCounter; }
 };
+
+std::shared_ptr<DynamicMemoryCounter> DynamicMemoryCounter::dmcInstance = 0;
 
 using namespace Lab5Global;
 

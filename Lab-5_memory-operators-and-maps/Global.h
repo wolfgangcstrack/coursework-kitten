@@ -7,6 +7,12 @@ This header file has global project definitions for the dynamic memory
 operator overloads.
 */
 
+/* NOTES
+- have at least 10 new/delete statements
+- report number of bytes leaking
+- delete map nodes after program to avoid rebalancing inefficiency
+*/
+
 #ifndef GLOBAL_DEFS_H_
 #define GLOBAL_DEFS_H_
 
