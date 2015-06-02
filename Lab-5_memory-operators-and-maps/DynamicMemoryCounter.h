@@ -31,6 +31,16 @@ public:
 
 std::shared_ptr<DynamicMemoryCounter> DynamicMemoryCounter::dmcInstance = 0;
 
+std::shared_ptr<DynamicMemoryCounter> DynamicMemoryCounter::instance()
+{
+	if (dmcInstance == 0)
+	{
+		dmcInstance = std::shared_ptr<DynamicMemoryCounter>(new DynamicMemoryCounter());
+	}
+
+	return dmcInstance;
+}
+
 using namespace Lab5Global;
 
 #endif // DYNAMIC_MEMORY_COUNTER_H_
