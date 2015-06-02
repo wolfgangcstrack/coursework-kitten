@@ -16,24 +16,20 @@ tool for memory debugging, leak detection, and profiling.
 #include <memory>
 #include <map>
 
-class Falsegrind
+class Falsegrind : public DynamicMemoryCounter
 {
-private:
-	typedef DynamicMemoryCounter DMcount;
-
-	std::map<void *, size_t> memory_map;
-	std::shared_ptr<DMcount> dmcount;
-	//DMcount *dmcount;
 protected:
-	Falsegrind();
-	virtual ~Falsegrind();
+	std::map<void *, size_t> memory_map;
+
 	static std::shared_ptr<Falsegrind> fgInstance;
+
+	// protected constructor because this is a singleton class
+	Falsegrind();
 public:
 	static std::shared_ptr<Falsegrind> instance();
-	static bool exists();
+	static bool exists() { return (fgInstance != 0); }
 	// getters/setters
 	const std::map<void *, size_t> & get_memory_map() const { return memory_map; }
-	int getAllocationCount() const;
 	bool insertAddressBytePairToMemoryMap(std::pair<void *, size_t> abPair);
 	bool removeAddressBytePairFromMemoryMap(void *address);
 	void incrementAllocationCount();
