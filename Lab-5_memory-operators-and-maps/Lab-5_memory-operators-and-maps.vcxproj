@@ -81,6 +81,7 @@
     <ClInclude Include="DynamicMemoryCounter.h" />
     <ClInclude Include="Falsegrind.h" />
     <ClInclude Include="Global.h" />
+    <ClInclude Include="MemoryMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
