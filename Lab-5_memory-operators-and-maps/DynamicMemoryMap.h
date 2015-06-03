@@ -14,7 +14,7 @@ the global, overrided dynamic memory operators in Global.h.
 #include <memory>
 #include <map>
 
-class DynamicMemoryMap : std::map < void *, size_t >
+class DynamicMemoryMap : public std::map < void *, size_t >
 {
 private:
 	static std::shared_ptr<DynamicMemoryMap> mmInstance;

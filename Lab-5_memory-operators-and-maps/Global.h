@@ -24,14 +24,15 @@ operator overloads.
 
 namespace Lab5Global
 {
-	std::shared_ptr<DynamicMemoryCounter> dmc = DynamicMemoryCounter::instance();
+	std::shared_ptr<Falsegrind> fgrind = Falsegrind::instance();
+	//std::shared_ptr<DynamicMemoryCounter> dmc = DynamicMemoryCounter::instance();
 }
 
 void * operator new(size_t size)
 {
-	if (Lab5Global::dmc) // increment only if dmc exists
+	if (Lab5Global::fgrind) // increment only if fgrind exists
 	{
-		Lab5Global::dmc->incrementAllocationCount();
+		Lab5Global::fgrind->dm_count->incrementAllocationCount();
 	}
 
 	return malloc(size);
@@ -39,9 +40,9 @@ void * operator new(size_t size)
 
 void * operator new[](size_t size)
 {
-	if (Lab5Global::dmc) // increment only if dmc exists
+	if (Lab5Global::fgrind) // increment only if fgrind exists
 	{
-		Lab5Global::dmc->incrementAllocationCount();
+		Lab5Global::fgrind->dm_count->incrementAllocationCount();
 	}
 
 	return malloc(size);
@@ -49,9 +50,9 @@ void * operator new[](size_t size)
 
 void operator delete(void *ptr)
 {
-	if (Lab5Global::dmc) // decrement only if dmc exists
+	if (Lab5Global::fgrind) // decrement only if fgrind exists
 	{
-		Lab5Global::dmc->decrementAllocationCount();
+		Lab5Global::fgrind->dm_count->decrementAllocationCount();
 	}
 
 	free(ptr);
@@ -59,9 +60,9 @@ void operator delete(void *ptr)
 
 void operator delete[](void *ptr)
 {
-	if (Lab5Global::dmc) // decrement only if dmc exists
+	if (Lab5Global::fgrind) // decrement only if fgrind exists
 	{
-		Lab5Global::dmc->decrementAllocationCount();
+		Lab5Global::fgrind->dm_count->decrementAllocationCount();
 	}
 
 	free(ptr);
