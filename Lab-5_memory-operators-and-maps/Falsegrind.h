@@ -20,6 +20,8 @@ class Falsegrind
 {
 private:
 	static std::shared_ptr<Falsegrind> fgInstance;
+
+	inline std::pair<bool, size_t> * tryAccess(void *address);
 protected:
 	std::shared_ptr<DynamicMemoryCounter> dm_count;
 	std::shared_ptr<DynamicMemoryMap> dm_map;
@@ -30,19 +32,36 @@ public:
 	// get instance and check if instance exists methods
 	static std::shared_ptr<Falsegrind> instance();
 	static bool exists()                                          { return (fgInstance != 0); }
+	bool componentsExist()                                        { return (DynamicMemoryMap::exists() && DynamicMemoryCounter::exists()); }
 	// DynamicMemoryCounter methods
 	virtual int getAllocationCount() const                        { return dm_count->getAllocationCount(); }
 	virtual void incrementAllocationCount()                       { dm_count->incrementAllocationCount(); }
 	virtual void decrementAllocationCount()                       { dm_count->decrementAllocationCount(); }
 	// DynamicMemoryMap methods
-	virtual size_t & getByteSize(void *address)                   { return (*dm_map)[address].second; }
-	virtual void addMemoryMapping(void *address, size_t byteSize) { (*dm_map)[address] = std::pair<bool, size_t>(true, byteSize); }
-	virtual void markMappingForDelete(void *address)              { (*dm_map)[address].first = false; }
-	virtual void deleteMemoryMapping(void *address)               { dm_map->erase(address); }
+	virtual const size_t & getByteSize(void *address);
+	virtual void addMemoryMapping(void *address, size_t byteSize);
+	virtual void markMappingForDelete(void *address);
+	virtual void deleteMemoryMapping(void *address);
 };
 
 // initialize static member instance later in instance()
 std::shared_ptr<Falsegrind> Falsegrind::fgInstance = 0;
+
+inline std::pair<bool, size_t> * Falsegrind::tryAccess(void *address)
+{
+	std::pair<bool, size_t> *value;
+
+	try
+	{
+		value = &(dm_map->at(address));
+	}
+	catch (const std::out_of_range &exception)
+	{
+		value = 0;
+	}
+
+	return value;
+}
 
 Falsegrind::Falsegrind()
 {
@@ -58,6 +77,41 @@ std::shared_ptr<Falsegrind> Falsegrind::instance()
 	}
 
 	return fgInstance;
+}
+
+const size_t & Falsegrind::getByteSize(void *address)
+{
+	// get map node if it exists, otherwise assign 0
+	std::pair<bool, size_t> *value = this->tryAccess(address);
+
+	// if the value exists and is active, return the size_t
+	// else return 0
+	return (value && value->first ? value->second : 0);
+}
+
+void Falsegrind::addMemoryMapping(void *address, size_t byteSize)
+{
+	(*dm_map)[address] = std::pair<bool, size_t>(true, byteSize);
+}
+
+void Falsegrind::markMappingForDelete(void *address)
+{
+	// get map node if it exists, otherwise assign 0
+	std::pair<bool, size_t> *value = this->tryAccess(address);
+
+	if (value) // if value exists, mark the node as inactive
+	{
+		value->first = false; 
+	}
+}
+
+void Falsegrind::deleteMemoryMapping(void *address)
+{
+	// if key exists, delete from the map
+	if (dm_map->find(address) != dm_map->end())
+	{
+		dm_map->erase(address);
+	}
 }
 
 #endif // FALSEGRIND_H_

@@ -31,7 +31,7 @@ void * operator new(size_t size)
 {
 	void *newPtr = malloc(size);
 
-	if (Lab5Global::fgrind) // increment only if fgrind exists
+	if (Lab5Global::fgrind && Lab5Global::fgrind->componentsExist()) // increment only if fgrind exists
 	{
 		Lab5Global::fgrind->incrementAllocationCount();
 		Lab5Global::fgrind->addMemoryMapping(newPtr, size);
@@ -44,7 +44,7 @@ void * operator new[](size_t size)
 {
 	void *newPtr = malloc(size);
 
-	if (Lab5Global::fgrind) // increment only if fgrind exists
+	if (Lab5Global::fgrind && Lab5Global::fgrind->componentsExist()) // increment only if fgrind exists
 	{
 		Lab5Global::fgrind->incrementAllocationCount();
 		Lab5Global::fgrind->addMemoryMapping(newPtr, size);
@@ -55,7 +55,7 @@ void * operator new[](size_t size)
 
 void operator delete(void *ptr)
 {
-	if (Lab5Global::fgrind) // decrement only if fgrind exists
+	if (Lab5Global::fgrind && Lab5Global::fgrind->componentsExist()) // decrement only if fgrind exists
 	{
 		Lab5Global::fgrind->decrementAllocationCount();
 		Lab5Global::fgrind->markMappingForDelete(ptr);
@@ -66,7 +66,7 @@ void operator delete(void *ptr)
 
 void operator delete[](void *ptr)
 {
-	if (Lab5Global::fgrind) // decrement only if fgrind exists
+	if (Lab5Global::fgrind && Lab5Global::fgrind->componentsExist()) // decrement only if fgrind exists
 	{
 		Lab5Global::fgrind->decrementAllocationCount();
 		Lab5Global::fgrind->markMappingForDelete(ptr);
