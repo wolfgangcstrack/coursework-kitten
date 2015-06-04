@@ -25,34 +25,40 @@ operator overloads.
 namespace Lab5Global
 {
 	std::shared_ptr<Falsegrind> fgrind = Falsegrind::instance();
-	//std::shared_ptr<DynamicMemoryCounter> dmc = DynamicMemoryCounter::instance();
 }
 
 void * operator new(size_t size)
 {
+	void *newPtr = malloc(size);
+
 	if (Lab5Global::fgrind) // increment only if fgrind exists
 	{
-		Lab5Global::fgrind->dm_count->incrementAllocationCount();
+		Lab5Global::fgrind->incrementAllocationCount();
+		Lab5Global::fgrind->addMemoryMapping(newPtr, size);
 	}
 
-	return malloc(size);
+	return newPtr;
 }
 
 void * operator new[](size_t size)
 {
+	void *newPtr = malloc(size);
+
 	if (Lab5Global::fgrind) // increment only if fgrind exists
 	{
-		Lab5Global::fgrind->dm_count->incrementAllocationCount();
+		Lab5Global::fgrind->incrementAllocationCount();
+		Lab5Global::fgrind->addMemoryMapping(newPtr, size);
 	}
 
-	return malloc(size);
+	return newPtr;
 }
 
 void operator delete(void *ptr)
 {
 	if (Lab5Global::fgrind) // decrement only if fgrind exists
 	{
-		Lab5Global::fgrind->dm_count->decrementAllocationCount();
+		Lab5Global::fgrind->decrementAllocationCount();
+		Lab5Global::fgrind->markMappingForDelete(ptr);
 	}
 
 	free(ptr);
@@ -62,7 +68,8 @@ void operator delete[](void *ptr)
 {
 	if (Lab5Global::fgrind) // decrement only if fgrind exists
 	{
-		Lab5Global::fgrind->dm_count->decrementAllocationCount();
+		Lab5Global::fgrind->decrementAllocationCount();
+		Lab5Global::fgrind->markMappingForDelete(ptr);
 	}
 
 	free(ptr);

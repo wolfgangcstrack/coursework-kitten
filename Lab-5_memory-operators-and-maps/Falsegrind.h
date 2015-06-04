@@ -29,25 +29,16 @@ protected:
 public:
 	// get instance and check if instance exists methods
 	static std::shared_ptr<Falsegrind> instance();
-	static bool exists() { return (fgInstance != 0); }
+	static bool exists()                                          { return (fgInstance != 0); }
 	// DynamicMemoryCounter methods
-	virtual int getAllocationCount() const  { return dm_count->getAllocationCount(); }
-	virtual void incrementAllocationCount() { dm_count->incrementAllocationCount(); }
-	virtual void decrementAllocationCount() { dm_count->decrementAllocationCount(); }
+	virtual int getAllocationCount() const                        { return dm_count->getAllocationCount(); }
+	virtual void incrementAllocationCount()                       { dm_count->incrementAllocationCount(); }
+	virtual void decrementAllocationCount()                       { dm_count->decrementAllocationCount(); }
 	// DynamicMemoryMap methods
-	virtual size_t & getByteSize(void *address) { return (*dm_map)[address]; }
-	virtual void addMemoryMapping(void *address, size_t byteSize);
-	virtual void deleteMemoryMapping(void *address);
-
-	//// friend methods
-	//friend void * operator new(size_t);
-	//friend void * operator new[](size_t);
-	//friend void operator delete(void *);
-	//friend void operator delete[](void *);
-	// get/set instance data
-	/*const std::map<void *, size_t> & get_memory_map() const { return memory_map; }
-	bool insertAddressBytePairToMemoryMap(std::pair<void *, size_t> abPair);
-	bool removeAddressBytePairFromMemoryMap(void *address);*/
+	virtual size_t & getByteSize(void *address)                   { return (*dm_map)[address].second; }
+	virtual void addMemoryMapping(void *address, size_t byteSize) { (*dm_map)[address] = std::pair<bool, size_t>(true, byteSize); }
+	virtual void markMappingForDelete(void *address)              { (*dm_map)[address].first = false; }
+	virtual void deleteMemoryMapping(void *address)               { dm_map->erase(address); }
 };
 
 // initialize static member instance later in instance()
