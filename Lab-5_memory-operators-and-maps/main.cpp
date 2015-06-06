@@ -6,7 +6,6 @@ Windows 8 Visual C++ 2013
 This file contains the main application for this lab.
 */
 
-#include "Global.h"
 #include "Falsegrind.h"
 #include <iostream>
 #include <cstdlib>
@@ -18,13 +17,14 @@ using namespace std;
 
 int main()
 {
+	Falsegrind::startFalsegrind();
 	cout << "Initializing vector...\n\n";
 	vector<pair<long, long>> *randomLongs = new vector<pair<long, long>>();
-	cout << "Allocation count: " << fgrind->getAllocationCount() << "\n\n";
+	Falsegrind::printAllocationCount(cout);
 
 	cout << "Seeding random number generator...\n\n";
 	srand(time(0));
-	cout << "Allocation count: " << fgrind->getAllocationCount() << "\n\n";
+	Falsegrind::printAllocationCount(cout);
 
 	cout << "Inserting 100 pair pointers of random longs to the vector...\n\n";
 	for (int i = 0; i < 100; i++)
@@ -32,14 +32,14 @@ int main()
 		pair<long, long> randPair(rand() % aReallyBigNumber + 1, rand() % aReallyBigNumber + 1);
 		cout << "Inserting " << randPair.first << " and " << randPair.second << endl;
 		randomLongs->push_back(randPair);
-		cout << "Allocation count: " << fgrind->getAllocationCount() << endl;
+		Falsegrind::printAllocationCount(cout);
 	}
 
-	cout << "\nTotal allocation count: " << fgrind->getAllocationCount() << "\n\n";
+	Falsegrind::printAllocationCount(cout);
 
 	randomLongs->clear();
 	delete randomLongs;
-	cout << "\nTotal allocation count: " << fgrind->getAllocationCount() << "\n\n";
-
+	Falsegrind::printAllocationCount(cout);
+	Falsegrind::closeFalsegrind();
 	return 0;
 }

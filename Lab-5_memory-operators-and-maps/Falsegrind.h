@@ -3,10 +3,15 @@ Lab 5 - Overloading dynamic memory operators and using STL maps
 Wolfgang C. Strack
 Windows 8 Visual C++ 2013
 
-This header file contains the class definition of Falsegrind, the complete
-dynamic memory manager for this lab. The name "Falsegrind" was chosen as a
-play on the name "Valgrind," which is a legitimate, well-known programming
-tool for memory debugging, leak detection, and profiling.
+This header file is a pseudo-application of Falsegrind and has an instance
+of Falsegrind, an API for accessing that instance, and finally the global
+project definitions for the dynamic memory operator overloads.
+*/
+
+/* NOTES
+- have at least 10 new/delete statements
+- report number of bytes leaking
+- delete map nodes after program to avoid rebalancing inefficiency
 */
 
 #ifndef FALSEGRIND_H_
@@ -14,127 +19,74 @@ tool for memory debugging, leak detection, and profiling.
 
 #include "DynamicMemoryCounter.h"
 #include "DynamicMemoryMap.h"
+#include "FalsegrindClass.h"
+#include <iostream>
+#include <string>
 #include <memory>
 
-class Falsegrind
+namespace Falsegrind
 {
-private:
-	bool modifyLock;
+	FalsegrindClass *fgrind = 0;
 
-	static Falsegrind * fgInstance;
+	void startFalsegrind()                      { fgrind = FalsegrindClass::instance(); }
+	void closeFalsegrind()                      { delete fgrind; }
+	void printAllocationCount(std::ostream &os) { os << "Allocation count: " << fgrind->getAllocationCount() << std::endl; }
+}
 
-	inline std::pair<bool, size_t> * tryAccess(void *address);
-protected:
-	DynamicMemoryCounter *dm_count;
-	DynamicMemoryMap *dm_map;
-
-	// protected constructor because this is a singleton class
-	Falsegrind();
-public:
-	// get instance and check if instance exists methods
-	static Falsegrind * instance();
-	static bool exists()                                          { return (fgInstance != 0); }
-	bool componentsExist()                                        { return (DynamicMemoryMap::exists() && DynamicMemoryCounter::exists()); }
-
-	// getters/setters
-	bool isLockedForModification() const                          { return modifyLock; }
-	/* Note that there is no setter for the modifyLock because this variable can only be changed
-	inside this class. Changing the lock from outside (i.e. in the dynamic memory overload
-	operators) could easily cause bugs.*/
-
-	// DynamicMemoryCounter methods
-	virtual int getAllocationCount() const                        { return dm_count->getAllocationCount(); }
-	virtual void incrementAllocationCount()                       { dm_count->incrementAllocationCount(); }
-	virtual void decrementAllocationCount()                       { dm_count->decrementAllocationCount(); }
-
-	// DynamicMemoryMap methods
-	virtual const size_t & getByteSize(void *address);
-	virtual void addMemoryMapping(void *address, size_t byteSize);
-	virtual void markMappingForDelete(void *address);
-	virtual void deleteMemoryMapping(void *address);
-};
-
-// initialize static member instance later in instance()
-Falsegrind * Falsegrind::fgInstance = 0;
-
-inline std::pair<bool, size_t> * Falsegrind::tryAccess(void *address)
+void * operator new(size_t size)
 {
-	std::pair<bool, size_t> *value;
+	void *newPtr = malloc(size);
 
-	try
+	if (Falsegrind::fgrind &&                           // check if fgrind instance exists
+		Falsegrind::fgrind->componentsExist() &&        // check if fgrind components exist
+		!Falsegrind::fgrind->isLockedForModification()) // check if fgrind is not locked
 	{
-		value = &(dm_map->at(address));
-	}
-	catch (const std::out_of_range &exception)
-	{
-		value = 0;
+		Falsegrind::fgrind->incrementAllocationCount();
+		Falsegrind::fgrind->addMemoryMapping(newPtr, size);
 	}
 
-	return value;
+	return newPtr;
 }
 
-Falsegrind::Falsegrind()
+void * operator new[](size_t size)
 {
-	modifyLock = false;
-	dm_count = DynamicMemoryCounter::instance();
-	dm_map = DynamicMemoryMap::instance();
-}
+	void *newPtr = malloc(size);
 
-Falsegrind * Falsegrind::instance()
-{
-	if (!fgInstance)
+	if (Falsegrind::fgrind &&                           // check if fgrind instance exists
+		Falsegrind::fgrind->componentsExist() &&        // check if fgrind components exist
+		!Falsegrind::fgrind->isLockedForModification()) // check if fgrind is not locked
 	{
-		fgInstance = new Falsegrind();
+		Falsegrind::fgrind->incrementAllocationCount();
+		Falsegrind::fgrind->addMemoryMapping(newPtr, size);
 	}
 
-	return fgInstance;
+	return newPtr;
 }
 
-const size_t & Falsegrind::getByteSize(void *address)
+void operator delete(void *ptr)
 {
-	// get map node if it exists, otherwise assign 0
-	std::pair<bool, size_t> *value = this->tryAccess(address);
-
-	// if the value exists and is active, return the size_t
-	// else return 0
-	return (value && value->first ? value->second : 0);
-}
-
-void Falsegrind::addMemoryMapping(void *address, size_t byteSize)
-{
-	modifyLock = true;
-
-	(*dm_map)[address] = std::pair<bool, size_t>(true, byteSize);
-
-	modifyLock = false;
-}
-
-void Falsegrind::markMappingForDelete(void *address)
-{
-	// get map node if it exists, otherwise assign 0
-	std::pair<bool, size_t> *value = this->tryAccess(address);
-
-	modifyLock = true;
-
-	if (value) // if value exists, mark the node as inactive
+	if (Falsegrind::fgrind &&                           // check if fgrind instance exists
+		Falsegrind::fgrind->componentsExist() &&        // check if fgrind components exist
+		!Falsegrind::fgrind->isLockedForModification()) // check if fgrind is not locked
 	{
-		value->first = false; 
+		Falsegrind::fgrind->decrementAllocationCount();
+		Falsegrind::fgrind->markMappingForDelete(ptr);
 	}
 
-	modifyLock = false;
+	free(ptr);
 }
 
-void Falsegrind::deleteMemoryMapping(void *address)
+void operator delete[](void *ptr)
 {
-	modifyLock = true;
-
-	// if key exists, delete from the map
-	if (dm_map->find(address) != dm_map->end())
+	if (Falsegrind::fgrind &&                           // check if fgrind instance exists
+		Falsegrind::fgrind->componentsExist() &&        // check if fgrind components exist
+		!Falsegrind::fgrind->isLockedForModification()) // check if fgrind is not locked
 	{
-		dm_map->erase(address);
+		Falsegrind::fgrind->decrementAllocationCount();
+		Falsegrind::fgrind->markMappingForDelete(ptr);
 	}
 
-	modifyLock = false;
+	free(ptr);
 }
 
 #endif // FALSEGRIND_H_

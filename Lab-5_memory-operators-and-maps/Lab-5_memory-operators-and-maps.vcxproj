@@ -79,8 +79,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="DynamicMemoryCounter.h" />
+    <ClInclude Include="FalsegrindClass.h" />
     <ClInclude Include="Falsegrind.h" />
-    <ClInclude Include="Global.h" />
     <ClInclude Include="DynamicMemoryMap.h" />
   </ItemGroup>
   <ItemGroup>
