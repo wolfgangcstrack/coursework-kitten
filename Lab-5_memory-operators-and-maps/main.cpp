@@ -14,27 +14,31 @@ This file contains the main application for this lab.
 #include <ctime>
 using namespace std;
 
-#define aReallyBigNumber 1 << 20
+#define aReallyBigNumber long(1 << 20)
 
 int main()
 {
 	cout << "Initializing vector...\n\n";
-	vector<pair<int, int> *> randomInts;
+	vector<pair<long, long>> *randomLongs = new vector<pair<long, long>>();
 	cout << "Allocation count: " << fgrind->getAllocationCount() << "\n\n";
 
 	cout << "Seeding random number generator...\n\n";
 	srand(time(0));
 	cout << "Allocation count: " << fgrind->getAllocationCount() << "\n\n";
 
-	cout << "Inserting 100 pair pointers of random ints to the vector...\n\n";
+	cout << "Inserting 100 pair pointers of random longs to the vector...\n\n";
 	for (int i = 0; i < 100; i++)
 	{
-		pair<int, int> *randPair = new pair<int, int>(rand() % aReallyBigNumber + 1, rand() % aReallyBigNumber + 1);
-		cout << "Inserting " << randPair->first << " and " << randPair->second << endl;
-		randomInts.push_back(randPair);
+		pair<long, long> randPair(rand() % aReallyBigNumber + 1, rand() % aReallyBigNumber + 1);
+		cout << "Inserting " << randPair.first << " and " << randPair.second << endl;
+		randomLongs->push_back(randPair);
 		cout << "Allocation count: " << fgrind->getAllocationCount() << endl;
 	}
 
+	cout << "\nTotal allocation count: " << fgrind->getAllocationCount() << "\n\n";
+
+	randomLongs->clear();
+	delete randomLongs;
 	cout << "\nTotal allocation count: " << fgrind->getAllocationCount() << "\n\n";
 
 	return 0;

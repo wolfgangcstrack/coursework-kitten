@@ -28,7 +28,7 @@ void * operator new(size_t size)
 {
 	void *newPtr = malloc(size);
 
-	if (fgrind && fgrind->componentsExist()) // increment only if fgrind exists
+	if (fgrind && fgrind->componentsExist() && !fgrind->isLockedForModification()) // increment only if fgrind exists
 	{
 		fgrind->incrementAllocationCount();
 		fgrind->addMemoryMapping(newPtr, size);
@@ -41,7 +41,7 @@ void * operator new[](size_t size)
 {
 	void *newPtr = malloc(size);
 
-	if (fgrind && fgrind->componentsExist()) // increment only if fgrind exists
+	if (fgrind && fgrind->componentsExist() && !fgrind->isLockedForModification()) // increment only if fgrind exists
 	{
 		fgrind->incrementAllocationCount();
 		fgrind->addMemoryMapping(newPtr, size);
@@ -52,7 +52,7 @@ void * operator new[](size_t size)
 
 void operator delete(void *ptr)
 {
-	if (fgrind && fgrind->componentsExist()) // decrement only if fgrind exists
+	if (fgrind && fgrind->componentsExist() && !fgrind->isLockedForModification()) // decrement only if fgrind exists
 	{
 		fgrind->decrementAllocationCount();
 		fgrind->markMappingForDelete(ptr);
@@ -63,7 +63,7 @@ void operator delete(void *ptr)
 
 void operator delete[](void *ptr)
 {
-	if (fgrind && fgrind->componentsExist()) // decrement only if fgrind exists
+	if (fgrind && fgrind->componentsExist() && !fgrind->isLockedForModification()) // decrement only if fgrind exists
 	{
 		fgrind->decrementAllocationCount();
 		fgrind->markMappingForDelete(ptr);
