@@ -19,6 +19,8 @@ tool for memory debugging, leak detection, and profiling.
 class Falsegrind
 {
 private:
+	bool modifyLock;
+
 	static Falsegrind * fgInstance;
 
 	inline std::pair<bool, size_t> * tryAccess(void *address);
@@ -33,10 +35,18 @@ public:
 	static Falsegrind * instance();
 	static bool exists()                                          { return (fgInstance != 0); }
 	bool componentsExist()                                        { return (DynamicMemoryMap::exists() && DynamicMemoryCounter::exists()); }
+
+	// getters/setters
+	bool isLockedForModification() const                          { return modifyLock; }
+	/* Note that there is no setter for the modifyLock because this variable can only be changed
+	inside this class. Changing the lock from outside (i.e. in the dynamic memory overload
+	operators) could easily cause bugs.*/
+
 	// DynamicMemoryCounter methods
 	virtual int getAllocationCount() const                        { return dm_count->getAllocationCount(); }
 	virtual void incrementAllocationCount()                       { dm_count->incrementAllocationCount(); }
 	virtual void decrementAllocationCount()                       { dm_count->decrementAllocationCount(); }
+
 	// DynamicMemoryMap methods
 	virtual const size_t & getByteSize(void *address);
 	virtual void addMemoryMapping(void *address, size_t byteSize);
@@ -65,6 +75,7 @@ inline std::pair<bool, size_t> * Falsegrind::tryAccess(void *address)
 
 Falsegrind::Falsegrind()
 {
+	modifyLock = false;
 	dm_count = DynamicMemoryCounter::instance();
 	dm_map = DynamicMemoryMap::instance();
 }
@@ -91,7 +102,11 @@ const size_t & Falsegrind::getByteSize(void *address)
 
 void Falsegrind::addMemoryMapping(void *address, size_t byteSize)
 {
+	modifyLock = true;
+
 	(*dm_map)[address] = std::pair<bool, size_t>(true, byteSize);
+
+	modifyLock = false;
 }
 
 void Falsegrind::markMappingForDelete(void *address)
@@ -99,19 +114,27 @@ void Falsegrind::markMappingForDelete(void *address)
 	// get map node if it exists, otherwise assign 0
 	std::pair<bool, size_t> *value = this->tryAccess(address);
 
+	modifyLock = true;
+
 	if (value) // if value exists, mark the node as inactive
 	{
 		value->first = false; 
 	}
+
+	modifyLock = false;
 }
 
 void Falsegrind::deleteMemoryMapping(void *address)
 {
+	modifyLock = true;
+
 	// if key exists, delete from the map
 	if (dm_map->find(address) != dm_map->end())
 	{
 		dm_map->erase(address);
 	}
+
+	modifyLock = false;
 }
 
 #endif // FALSEGRIND_H_
