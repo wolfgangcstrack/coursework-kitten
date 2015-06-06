@@ -19,18 +19,18 @@ tool for memory debugging, leak detection, and profiling.
 class Falsegrind
 {
 private:
-	static std::shared_ptr<Falsegrind> fgInstance;
+	static Falsegrind * fgInstance;
 
 	inline std::pair<bool, size_t> * tryAccess(void *address);
 protected:
-	std::shared_ptr<DynamicMemoryCounter> dm_count;
-	std::shared_ptr<DynamicMemoryMap> dm_map;
+	DynamicMemoryCounter *dm_count;
+	DynamicMemoryMap *dm_map;
 
 	// protected constructor because this is a singleton class
 	Falsegrind();
 public:
 	// get instance and check if instance exists methods
-	static std::shared_ptr<Falsegrind> instance();
+	static Falsegrind * instance();
 	static bool exists()                                          { return (fgInstance != 0); }
 	bool componentsExist()                                        { return (DynamicMemoryMap::exists() && DynamicMemoryCounter::exists()); }
 	// DynamicMemoryCounter methods
@@ -45,7 +45,7 @@ public:
 };
 
 // initialize static member instance later in instance()
-std::shared_ptr<Falsegrind> Falsegrind::fgInstance = 0;
+Falsegrind * Falsegrind::fgInstance = 0;
 
 inline std::pair<bool, size_t> * Falsegrind::tryAccess(void *address)
 {
@@ -69,11 +69,11 @@ Falsegrind::Falsegrind()
 	dm_map = DynamicMemoryMap::instance();
 }
 
-std::shared_ptr<Falsegrind> Falsegrind::instance()
+Falsegrind * Falsegrind::instance()
 {
 	if (!fgInstance)
 	{
-		fgInstance = std::shared_ptr<Falsegrind>(new Falsegrind());
+		fgInstance = new Falsegrind();
 	}
 
 	return fgInstance;

@@ -18,14 +18,13 @@ using namespace std;
 
 int main()
 {
-
-	/*cout << "Initializing vector...\n\n";
+	cout << "Initializing vector...\n\n";
 	vector<pair<int, int> *> randomInts;
-	cout << "Allocation count: " << Lab5Global::fgrind->getAllocationCount() << "\n\n";
+	cout << "Allocation count: " << fgrind->getAllocationCount() << "\n\n";
 
 	cout << "Seeding random number generator...\n\n";
 	srand(time(0));
-	cout << "Allocation count: " << Lab5Global::fgrind->getAllocationCount() << "\n\n";
+	cout << "Allocation count: " << fgrind->getAllocationCount() << "\n\n";
 
 	cout << "Inserting 100 pair pointers of random ints to the vector...\n\n";
 	for (int i = 0; i < 100; i++)
@@ -33,10 +32,10 @@ int main()
 		pair<int, int> *randPair = new pair<int, int>(rand() % aReallyBigNumber + 1, rand() % aReallyBigNumber + 1);
 		cout << "Inserting " << randPair->first << " and " << randPair->second << endl;
 		randomInts.push_back(randPair);
-		cout << "Allocation count: " << Lab5Global::fgrind->getAllocationCount() << endl;
+		cout << "Allocation count: " << fgrind->getAllocationCount() << endl;
 	}
 
-	cout << "\nTotal allocation count: " << Lab5Global::fgrind->getAllocationCount() << "\n\n";*/
+	cout << "\nTotal allocation count: " << fgrind->getAllocationCount() << "\n\n";
 
 	return 0;
 }

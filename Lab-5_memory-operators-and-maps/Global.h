@@ -22,19 +22,16 @@ operator overloads.
 #include <iostream>
 #include <memory>
 
-namespace Lab5Global
-{
-	std::shared_ptr<Falsegrind> fgrind = Falsegrind::instance();
-}
+Falsegrind *fgrind = Falsegrind::instance();
 
 void * operator new(size_t size)
 {
 	void *newPtr = malloc(size);
 
-	if (Lab5Global::fgrind && Lab5Global::fgrind->componentsExist()) // increment only if fgrind exists
+	if (fgrind && fgrind->componentsExist()) // increment only if fgrind exists
 	{
-		Lab5Global::fgrind->incrementAllocationCount();
-		Lab5Global::fgrind->addMemoryMapping(newPtr, size);
+		fgrind->incrementAllocationCount();
+		fgrind->addMemoryMapping(newPtr, size);
 	}
 
 	return newPtr;
@@ -44,10 +41,10 @@ void * operator new[](size_t size)
 {
 	void *newPtr = malloc(size);
 
-	if (Lab5Global::fgrind && Lab5Global::fgrind->componentsExist()) // increment only if fgrind exists
+	if (fgrind && fgrind->componentsExist()) // increment only if fgrind exists
 	{
-		Lab5Global::fgrind->incrementAllocationCount();
-		Lab5Global::fgrind->addMemoryMapping(newPtr, size);
+		fgrind->incrementAllocationCount();
+		fgrind->addMemoryMapping(newPtr, size);
 	}
 
 	return newPtr;
@@ -55,10 +52,10 @@ void * operator new[](size_t size)
 
 void operator delete(void *ptr)
 {
-	if (Lab5Global::fgrind && Lab5Global::fgrind->componentsExist()) // decrement only if fgrind exists
+	if (fgrind && fgrind->componentsExist()) // decrement only if fgrind exists
 	{
-		Lab5Global::fgrind->decrementAllocationCount();
-		Lab5Global::fgrind->markMappingForDelete(ptr);
+		fgrind->decrementAllocationCount();
+		fgrind->markMappingForDelete(ptr);
 	}
 
 	free(ptr);
@@ -66,10 +63,10 @@ void operator delete(void *ptr)
 
 void operator delete[](void *ptr)
 {
-	if (Lab5Global::fgrind && Lab5Global::fgrind->componentsExist()) // decrement only if fgrind exists
+	if (fgrind && fgrind->componentsExist()) // decrement only if fgrind exists
 	{
-		Lab5Global::fgrind->decrementAllocationCount();
-		Lab5Global::fgrind->markMappingForDelete(ptr);
+		fgrind->decrementAllocationCount();
+		fgrind->markMappingForDelete(ptr);
 	}
 
 	free(ptr);

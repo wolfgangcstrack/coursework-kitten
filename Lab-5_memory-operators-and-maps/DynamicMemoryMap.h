@@ -23,24 +23,24 @@ is the address returned by malloc(). The pair<bool, size_t> is as follows:
 class DynamicMemoryMap : public std::map < void *, std::pair< bool, size_t > >
 {
 private:
-	static std::shared_ptr<DynamicMemoryMap> mmInstance;
+	static DynamicMemoryMap *mmInstance;
 protected:
 	// protected constructor because this is a singleton class
 	DynamicMemoryMap() {}
 public:
 	// get instance and check if instance exists methods
-	static std::shared_ptr<DynamicMemoryMap> instance();
+	static DynamicMemoryMap * instance();
 	static bool exists() { return (mmInstance != 0); }
 };
 
 // initialize static member instance later in instance()
-std::shared_ptr<DynamicMemoryMap> DynamicMemoryMap::mmInstance = 0;
+DynamicMemoryMap * DynamicMemoryMap::mmInstance = 0;
 
-std::shared_ptr<DynamicMemoryMap> DynamicMemoryMap::instance()
+DynamicMemoryMap * DynamicMemoryMap::instance()
 {
 	if (!mmInstance)
 	{
-		mmInstance = std::shared_ptr<DynamicMemoryMap>(new DynamicMemoryMap());
+		mmInstance = new DynamicMemoryMap();
 	}
 
 	return mmInstance;
