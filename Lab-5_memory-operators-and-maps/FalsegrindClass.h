@@ -31,6 +31,8 @@ protected:
 	// protected constructor because this is a singleton class
 	FalsegrindClass();
 public:
+	// destructor
+	~FalsegrindClass()                                            { delete dm_count; delete dm_map; }
 	// get instance and check if instance exists methods
 	static FalsegrindClass * instance();
 	static bool exists()                                          { return (fgInstance != 0); }

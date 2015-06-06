@@ -37,9 +37,9 @@ void * operator new(size_t size)
 {
 	void *newPtr = malloc(size);
 
-	if (Falsegrind::fgrind &&                           // check if fgrind instance exists
-		Falsegrind::fgrind->componentsExist() &&        // check if fgrind components exist
-		!Falsegrind::fgrind->isLockedForModification()) // check if fgrind is not locked
+	if (FalsegrindClass::exists() &&                                      // check if fgrind instance exists
+		(DynamicMemoryCounter::exists() && DynamicMemoryMap::exists()) && // check if fgrind components exist
+		!Falsegrind::fgrind->isLockedForModification())                   // check if fgrind is not locked
 	{
 		Falsegrind::fgrind->incrementAllocationCount();
 		Falsegrind::fgrind->addMemoryMapping(newPtr, size);
@@ -52,9 +52,9 @@ void * operator new[](size_t size)
 {
 	void *newPtr = malloc(size);
 
-	if (Falsegrind::fgrind &&                           // check if fgrind instance exists
-		Falsegrind::fgrind->componentsExist() &&        // check if fgrind components exist
-		!Falsegrind::fgrind->isLockedForModification()) // check if fgrind is not locked
+	if (FalsegrindClass::exists() &&                                      // check if fgrind instance exists
+		(DynamicMemoryCounter::exists() && DynamicMemoryMap::exists()) && // check if fgrind components exist
+		!Falsegrind::fgrind->isLockedForModification())                   // check if fgrind is not locked
 	{
 		Falsegrind::fgrind->incrementAllocationCount();
 		Falsegrind::fgrind->addMemoryMapping(newPtr, size);
@@ -65,28 +65,28 @@ void * operator new[](size_t size)
 
 void operator delete(void *ptr)
 {
-	if (Falsegrind::fgrind &&                           // check if fgrind instance exists
-		Falsegrind::fgrind->componentsExist() &&        // check if fgrind components exist
-		!Falsegrind::fgrind->isLockedForModification()) // check if fgrind is not locked
+	free(ptr);
+
+	if (FalsegrindClass::exists() &&                                      // check if fgrind instance exists
+		(DynamicMemoryCounter::exists() && DynamicMemoryMap::exists()) && // check if fgrind components exist
+		!Falsegrind::fgrind->isLockedForModification())                   // check if fgrind is not locked
 	{
 		Falsegrind::fgrind->decrementAllocationCount();
 		Falsegrind::fgrind->markMappingForDelete(ptr);
 	}
-
-	free(ptr);
 }
 
 void operator delete[](void *ptr)
 {
-	if (Falsegrind::fgrind &&                           // check if fgrind instance exists
-		Falsegrind::fgrind->componentsExist() &&        // check if fgrind components exist
-		!Falsegrind::fgrind->isLockedForModification()) // check if fgrind is not locked
+	free(ptr);
+
+	if (FalsegrindClass::exists() &&                                      // check if fgrind instance exists
+		(DynamicMemoryCounter::exists() && DynamicMemoryMap::exists()) && // check if fgrind components exist
+		!Falsegrind::fgrind->isLockedForModification())                   // check if fgrind is not locked
 	{
 		Falsegrind::fgrind->decrementAllocationCount();
 		Falsegrind::fgrind->markMappingForDelete(ptr);
 	}
-
-	free(ptr);
 }
 
 #endif // FALSEGRIND_H_
