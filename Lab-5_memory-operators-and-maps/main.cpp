@@ -23,12 +23,20 @@ void useDeleteAtLeastTenTimes(list <pair<long, long>**> &reallyLongList);
 
 int main()
 {
-	list <pair<long, long>**> reallyLongList;
-
 	Falsegrind::startFalsegrind();            // start memory monitor application
 
-	useNewAtLeastTenTimes(reallyLongList);
-	useDeleteAtLeastTenTimes(reallyLongList);
+	cout << "Creating a new list of type <pair<long, long>**>... ";
+	list <pair<long, long>**> *reallyLongList = new list<pair<long, long>**>();
+	cout << "Total dynamic memory allocations: " << Falsegrind::getTotalAllocationCount() << endl;
+
+	useNewAtLeastTenTimes(*reallyLongList);
+	useDeleteAtLeastTenTimes(*reallyLongList);
+
+	cout << "Deleting list of type <pair<long, long>**>... ";
+	delete reallyLongList;
+	cout << "Total dynamic memory allocations: " << Falsegrind::getTotalAllocationCount() << endl << endl;
+
+	cout << "Checking for memory leaks... " << (Falsegrind::getTotalAllocationCount() == 0 ? "No leak!" : "Memory leak.") << endl << endl;
 
 	Falsegrind::closeFalsegrind();            // close memory monitor application
 
@@ -37,9 +45,10 @@ int main()
 
 void useNewAtLeastTenTimes(list<pair<long, long>**> &reallyLongList)
 {
-	cout << "Total number of dynamic memory allocations: " << Falsegrind::getTotalAllocationCount() << "\n\n";
+	cout << "Total number of dynamic memory allocations: " << Falsegrind::getTotalAllocationCount() << endl;
+	cout << "Now starting test method for use of overloaded new/new[] operators ten or more times.\n\n";
 
-	srand(time(0));
+	srand(time(0)); // seed RNG for random pairs of longs
 
 	cout << "Inserting " << aNumber << " pair arrays of " << aBigNumber << " random pair<long, long> pointers each.\n\n";
 	for (int i = 0; i < aNumber; i++)
@@ -51,10 +60,33 @@ void useNewAtLeastTenTimes(list<pair<long, long>**> &reallyLongList)
 		{
 			long rlong1, rlong2;
 			cout << "Creating new random pair<long, long> pointer that holds " << (rlong1 = RANDOM_LONG) << " and " << (rlong2 = RANDOM_LONG);
-			newPair[j] = new pair<long, long>(rlong1, rlong2);
+			newPair[j] = new pair<long, long>(rlong1, rlong2);          // uses operator new
 			cout << "... Total dynamic memory allocations: " << Falsegrind::getTotalAllocationCount() << endl;
 		}
 		reallyLongList.push_back(newPair);
 		cout << endl;
 	}
+
+	cout << "\n\n\n\n";
+}
+
+void useDeleteAtLeastTenTimes(list <pair<long, long>**> &reallyLongList)
+{
+	cout << "Total number of dynamic memory allocations: " << Falsegrind::getTotalAllocationCount() << endl;
+	cout << "Now starting test method for use of overloaded delete/delete[] operators ten or more times.\n\n";
+
+	cout << "Deleting " << aNumber << " pair arrays of " << aBigNumber << " random pair<long, long> pointers each.\n\n";
+	for (auto i = reallyLongList.begin(); i != reallyLongList.end(); i++)
+	{
+		cout << "Deleting individual pair<long, long> pointers in pair array...\n";
+		for (int j = 0; j < aBigNumber; j++)
+		{
+			delete (*i)[j]; // uses operator delete
+			cout << "Deleted a pair<long, long> pointer. Total dynamic memory allocations: " << Falsegrind::getTotalAllocationCount() << endl;
+		}
+		delete[] (*i);      // uses operator delete[]
+		cout << "Deleted a pair array from the list. Total dynamic memory allocations: " << Falsegrind::getTotalAllocationCount() << endl << endl;
+	}
+
+	cout << "\n\n\n\n";
 }
