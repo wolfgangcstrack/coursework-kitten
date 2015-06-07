@@ -17,7 +17,7 @@ class DynamicMemoryCounter
 private:
 	static DynamicMemoryCounter *dmcInstance;
 protected:
-	int allocationCounter;
+	long allocationCounter;
 
 	// protected constructor because this is a singleton class
 	DynamicMemoryCounter()                  { allocationCounter = 0; }
@@ -30,7 +30,7 @@ public:
 	static void resetInstance()             { delete dmcInstance; dmcInstance = 0; }
 	static bool exists()                    { return (dmcInstance != 0); }
 	// get/set instance data
-	virtual int getAllocationCount() const  { return allocationCounter; }
+	virtual long getAllocationCount() const { return allocationCounter; }
 	virtual void incrementAllocationCount() { ++allocationCounter; }
 	virtual void decrementAllocationCount() { --allocationCounter; }
 };

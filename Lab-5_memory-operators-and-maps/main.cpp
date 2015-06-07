@@ -9,20 +9,34 @@ This file contains the main application for this lab.
 #include "Falsegrind.h"
 #include <iostream>
 #include <cstdlib>
-#include <vector>
 #include <ctime>
+#include <list>
 using namespace std;
 
+#define aNumber int(1 << 5)
+#define aBigNumber int(1 << 10)
 #define aReallyBigNumber long(1 << 20)
+
+//void useNewAtLeastTenTimes(list<list<pair<long, long>*>*> &reallyLongList);
+//void useDeleteAtLeastTenTimes(list<list<pair<long, long>*>*> &reallyLongList);
 
 int main()
 {
-	Falsegrind::startFalsegrind();
-	Falsegrind::printAllocationCount(cout);
-	int *doge = new int(7);
-	Falsegrind::printAllocationCount(cout);
-	delete doge;
-	Falsegrind::printAllocationCount(cout);
-	Falsegrind::closeFalsegrind();
-	return 0;
+	//list <list<pair<long, long>*>*> reallyLongList;
+
+	//Falsegrind::startFalsegrind();            // start memory monitor application
+
+	//useNewAtLeastTenTimes(reallyLongList);
+	//useDeleteAtLeastTenTimes(reallyLongList);
+
+	//Falsegrind::closeFalsegrind();            // close memory monitor application
+
+	//return 0;
+}
+
+void useNewAtLeastTenTimes(list<list<pair<long, long>>> &reallyLongList)
+{
+	/*Falsegrind::printAllocationCount(cout);
+	cout << "Inserting " << aNumber << " list pointers of " << aBigNumber << " random pair<long, long> pointers each.\n\n"
+	for (int i = 0; i < )*/
 }
