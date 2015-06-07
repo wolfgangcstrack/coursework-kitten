@@ -43,6 +43,10 @@ int main()
 	return 0;
 }
 
+/* This method involves an unnecessarily complicated setup that eventually
+ results in the new operator being used (aNumber * aBigNumber) times (see
+ macros defined above). Why is the setup unnescessarily complicated, one
+ might ask? Because I was bored, of course! */
 void useNewAtLeastTenTimes(list<pair<long, long>**> &reallyLongList)
 {
 	cout << "Total number of dynamic memory allocations: " << Falsegrind::getTotalAllocationCount() << endl;
@@ -70,6 +74,8 @@ void useNewAtLeastTenTimes(list<pair<long, long>**> &reallyLongList)
 	cout << "\n\n\n\n";
 }
 
+/* See method description for useNewAtLeastTenTimes()
+ but replace "new" with "delete". */
 void useDeleteAtLeastTenTimes(list <pair<long, long>**> &reallyLongList)
 {
 	cout << "Total number of dynamic memory allocations: " << Falsegrind::getTotalAllocationCount() << endl;
