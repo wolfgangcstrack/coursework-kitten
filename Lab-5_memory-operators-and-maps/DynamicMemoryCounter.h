@@ -21,9 +21,13 @@ protected:
 
 	// protected constructor because this is a singleton class
 	DynamicMemoryCounter()                  { allocationCounter = 0; }
+	// protected destructor forces user to call resetInstance(),
+	// the proper way of deleting this class
+	~DynamicMemoryCounter()                 {}
 public:
-	// get instance and check if instance exists methods
+	// get/reset instance and check if instance exists methods
 	static DynamicMemoryCounter * instance();
+	static void resetInstance()             { delete dmcInstance; dmcInstance = 0; }
 	static bool exists()                    { return (dmcInstance != 0); }
 	// get/set instance data
 	virtual int getAllocationCount() const  { return allocationCounter; }

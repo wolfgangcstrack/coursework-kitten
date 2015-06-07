@@ -26,11 +26,15 @@ private:
 	static DynamicMemoryMap *mmInstance;
 protected:
 	// protected constructor because this is a singleton class
-	DynamicMemoryMap() {}
+	DynamicMemoryMap()  {}
+	// protected destructor forces user to call resetInstance(),
+	// the proper way of deleting this class
+	// ~DynamicMemoryMap() {}
 public:
-	// get instance and check if instance exists methods
+	// get/reset instance and check if instance exists methods
 	static DynamicMemoryMap * instance();
-	static bool exists() { return (mmInstance != 0); }
+	static void resetInstance() { delete mmInstance; mmInstance = 0; }
+	static bool exists()        { return (mmInstance != 0); }
 };
 
 // initialize static member instance later in instance()

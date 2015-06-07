@@ -17,5 +17,12 @@ using namespace std;
 
 int main()
 {
+	Falsegrind::startFalsegrind();
+	Falsegrind::printAllocationCount(cout);
+	int *doge = new int(7);
+	Falsegrind::printAllocationCount(cout);
+	delete doge;
+	Falsegrind::printAllocationCount(cout);
+	Falsegrind::closeFalsegrind();
 	return 0;
 }

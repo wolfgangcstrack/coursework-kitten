@@ -29,7 +29,7 @@ namespace Falsegrind
 	FalsegrindClass *fgrind = 0;
 
 	void startFalsegrind()                      { fgrind = FalsegrindClass::instance(); }
-	void closeFalsegrind()                      { delete fgrind; }
+	void closeFalsegrind()                      { FalsegrindClass::resetInstance(); }
 	void printAllocationCount(std::ostream &os) { os << "Allocation count: " << fgrind->getAllocationCount() << std::endl; }
 }
 

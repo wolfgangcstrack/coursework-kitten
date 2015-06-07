@@ -19,7 +19,7 @@ tool for memory debugging, leak detection, and profiling.
 class FalsegrindClass
 {
 private:
-	bool modifyLock;
+	static bool modifyLock;
 
 	static FalsegrindClass * fgInstance;
 
@@ -30,11 +30,13 @@ protected:
 
 	// protected constructor because this is a singleton class
 	FalsegrindClass();
+	// protected destructor forces user to call resetInstance(),
+	// the proper way of deleting this class
+	~FalsegrindClass()                                            { DynamicMemoryCounter::resetInstance(); DynamicMemoryMap::resetInstance(); }
 public:
-	// destructor
-	~FalsegrindClass()                                            { delete dm_count; delete dm_map; }
-	// get instance and check if instance exists methods
+	// get/reset instance and check if instance exists methods
 	static FalsegrindClass * instance();
+	static void resetInstance()                                   { modifyLock = true; delete fgInstance; fgInstance = 0; modifyLock = false; }
 	static bool exists()                                          { return (fgInstance != 0); }
 	bool componentsExist()                                        { return (DynamicMemoryMap::exists() && DynamicMemoryCounter::exists()); }
 
@@ -55,6 +57,9 @@ public:
 	virtual void markMappingForDelete(void *address);
 	virtual void deleteMemoryMapping(void *address);
 };
+
+// initialize static members
+bool FalsegrindClass::modifyLock = false;
 
 // initialize static member instance later in instance()
 FalsegrindClass * FalsegrindClass::fgInstance = 0;
@@ -77,7 +82,6 @@ inline std::pair<bool, size_t> * FalsegrindClass::tryAccess(void *address)
 
 FalsegrindClass::FalsegrindClass()
 {
-	modifyLock = false;
 	dm_count = DynamicMemoryCounter::instance();
 	dm_map = DynamicMemoryMap::instance();
 }
