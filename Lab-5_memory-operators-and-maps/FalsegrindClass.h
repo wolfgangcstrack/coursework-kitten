@@ -19,6 +19,8 @@ tool for memory debugging, leak detection, and profiling.
 class FalsegrindClass
 {
 private:
+	unsigned long totalBytesMapped;
+
 	static bool modifyLock;
 
 	static FalsegrindClass * fgInstance;
@@ -41,10 +43,12 @@ public:
 	bool componentsExist()                                        { return (DynamicMemoryMap::exists() && DynamicMemoryCounter::exists()); }
 
 	// getters/setters
+	unsigned long getTotalBytesMapped() const                     { return totalBytesMapped; }
 	bool isLockedForModification() const                          { return modifyLock; }
-	/* Note that there is no setter for the modifyLock because this variable can only be changed
-	inside this class. Changing the lock from outside (i.e. in the dynamic memory overload
-	operators) could easily cause bugs.*/
+	/* Note that there is no setter for totalBytesMapped and the modifyLock
+	because this variable can only be changed inside this class. Changing
+	the lock from outside (i.e. in the dynamic memory overload operators)
+	could easily cause bugs.*/
 
 	// DynamicMemoryCounter methods
 	virtual long getAllocationCount() const                       { return dm_count->getAllocationCount(); }
@@ -54,8 +58,13 @@ public:
 	// DynamicMemoryMap methods
 	virtual const size_t & getByteSize(void *address);
 	virtual void addMemoryMapping(void *address, size_t byteSize);
-	virtual void markMappingForDelete(void *address);
+	virtual void markMemoryMappingForDelete(void *address);
 	virtual void deleteMemoryMapping(void *address);
+
+	// FalsegrindClass methods
+	virtual void addMappingAndIncrementAllocationCount(void *address, size_t byteSize);
+	virtual void markMappingForDeleteAndDecrementAllocationCount(void *address);
+	virtual void deleteMappingAndDecrementAllocationCount(void *address);
 };
 
 // initialize static members
@@ -82,6 +91,7 @@ inline std::pair<bool, size_t> * FalsegrindClass::tryAccess(void *address)
 
 FalsegrindClass::FalsegrindClass()
 {
+	totalBytesMapped = 0;
 	dm_count = DynamicMemoryCounter::instance();
 	dm_map = DynamicMemoryMap::instance();
 }
@@ -111,11 +121,12 @@ void FalsegrindClass::addMemoryMapping(void *address, size_t byteSize)
 	modifyLock = true;
 
 	(*dm_map)[address] = std::pair<bool, size_t>(true, byteSize);
+	totalBytesMapped += byteSize;
 
 	modifyLock = false;
 }
 
-void FalsegrindClass::markMappingForDelete(void *address)
+void FalsegrindClass::markMemoryMappingForDelete(void *address)
 {
 	// get map node if it exists, otherwise assign 0
 	std::pair<bool, size_t> *value = this->tryAccess(address);
@@ -124,7 +135,8 @@ void FalsegrindClass::markMappingForDelete(void *address)
 
 	if (value) // if value exists, mark the node as inactive
 	{
-		value->first = false; 
+		value->first = false;
+		totalBytesMapped -= value->second;
 	}
 
 	modifyLock = false;
@@ -132,15 +144,39 @@ void FalsegrindClass::markMappingForDelete(void *address)
 
 void FalsegrindClass::deleteMemoryMapping(void *address)
 {
+	std::pair<bool, size_t> *value = this->tryAccess(address);
+
 	modifyLock = true;
 
-	// if key exists, delete from the map
-	if (dm_map->find(address) != dm_map->end())
+	// if value exists, delete from map
+	if (value)
 	{
+		if (value->first) // if mapping is marked active, decrement byte count
+		{
+			totalBytesMapped -= value->second;
+		}
 		dm_map->erase(address);
 	}
 
 	modifyLock = false;
+}
+
+void FalsegrindClass::addMappingAndIncrementAllocationCount(void *address, size_t byteSize)
+{
+	this->addMemoryMapping(address, byteSize);
+	this->incrementAllocationCount();
+}
+
+void FalsegrindClass::markMappingForDeleteAndDecrementAllocationCount(void *address)
+{
+	this->markMemoryMappingForDelete(address);
+	this->decrementAllocationCount();
+}
+
+void FalsegrindClass::deleteMappingAndDecrementAllocationCount(void *address)
+{
+	this->deleteMemoryMapping(address);
+	this->decrementAllocationCount();
 }
 
 #endif // FALSEGRIND_CLASS_H
