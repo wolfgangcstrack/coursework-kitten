@@ -42,8 +42,7 @@ void * operator new(size_t size)
 		(DynamicMemoryCounter::exists() && DynamicMemoryMap::exists()) && // check if fgrind components exist
 		!Falsegrind::fgrind->isLockedForModification())                   // check if fgrind is not locked
 	{
-		Falsegrind::fgrind->incrementAllocationCount();
-		Falsegrind::fgrind->addMemoryMapping(newPtr, size);
+		Falsegrind::fgrind->addMappingAndIncrementAllocationCount(newPtr, size);
 	}
 
 	return newPtr;
@@ -57,8 +56,7 @@ void * operator new[](size_t size)
 		(DynamicMemoryCounter::exists() && DynamicMemoryMap::exists()) && // check if fgrind components exist
 		!Falsegrind::fgrind->isLockedForModification())                   // check if fgrind is not locked
 	{
-		Falsegrind::fgrind->incrementAllocationCount();
-		Falsegrind::fgrind->addMemoryMapping(newPtr, size);
+		Falsegrind::fgrind->addMappingAndIncrementAllocationCount(newPtr, size);
 	}
 
 	return newPtr;
@@ -72,8 +70,7 @@ void operator delete(void *ptr)
 		(DynamicMemoryCounter::exists() && DynamicMemoryMap::exists()) && // check if fgrind components exist
 		!Falsegrind::fgrind->isLockedForModification())                   // check if fgrind is not locked
 	{
-		Falsegrind::fgrind->decrementAllocationCount();
-		Falsegrind::fgrind->markMappingForDelete(ptr);
+		Falsegrind::fgrind->markMappingForDeleteAndDecrementAllocationCount(ptr);
 	}
 }
 
@@ -85,8 +82,7 @@ void operator delete[](void *ptr)
 		(DynamicMemoryCounter::exists() && DynamicMemoryMap::exists()) && // check if fgrind components exist
 		!Falsegrind::fgrind->isLockedForModification())                   // check if fgrind is not locked
 	{
-		Falsegrind::fgrind->decrementAllocationCount();
-		Falsegrind::fgrind->markMappingForDelete(ptr);
+		Falsegrind::fgrind->markMappingForDeleteAndDecrementAllocationCount(ptr);
 	}
 }
 

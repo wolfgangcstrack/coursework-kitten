@@ -27,9 +27,6 @@ private:
 protected:
 	// protected constructor because this is a singleton class
 	DynamicMemoryMap()  {}
-	// protected destructor forces user to call resetInstance(),
-	// the proper way of deleting this class
-	// ~DynamicMemoryMap() {}
 public:
 	// get/reset instance and check if instance exists methods
 	static DynamicMemoryMap * instance();
