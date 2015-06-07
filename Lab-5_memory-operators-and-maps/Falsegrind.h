@@ -8,12 +8,6 @@ of Falsegrind, an API for accessing that instance, and finally the global
 project definitions for the dynamic memory operator overloads.
 */
 
-/* NOTES
-- have at least 10 new/delete statements
-- report number of bytes leaking
-- delete map nodes after program to avoid rebalancing inefficiency
-*/
-
 #ifndef FALSEGRIND_H_
 #define FALSEGRIND_H_
 
@@ -31,7 +25,7 @@ namespace Falsegrind
 	void startFalsegrind()                      { fgrind = FalsegrindClass::instance(); }
 	void closeFalsegrind()                      { FalsegrindClass::resetInstance(); }
 	unsigned long getTotalAllocationCount()     { return fgrind->getAllocationCount(); }
-	unsigned long getTotalBytesMapped()         { return fgrind->getTotalBytesMapped(); }
+	size_t getTotalBytesMapped()                { return fgrind->getTotalBytesMapped(); }
 }
 
 void * operator new(size_t size)

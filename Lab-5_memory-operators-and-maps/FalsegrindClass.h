@@ -19,7 +19,7 @@ tool for memory debugging, leak detection, and profiling.
 class FalsegrindClass
 {
 private:
-	unsigned long totalBytesMapped;
+	size_t totalBytesMapped;
 
 	static bool modifyLock;
 
@@ -43,7 +43,7 @@ public:
 	bool componentsExist()                                        { return (DynamicMemoryMap::exists() && DynamicMemoryCounter::exists()); }
 
 	// getters/setters
-	unsigned long getTotalBytesMapped() const                     { return totalBytesMapped; }
+	size_t getTotalBytesMapped() const                            { return totalBytesMapped; }
 	bool isLockedForModification() const                          { return modifyLock; }
 	/* Note that there is no setter for totalBytesMapped and the modifyLock
 	because this variable can only be changed inside this class. Changing
