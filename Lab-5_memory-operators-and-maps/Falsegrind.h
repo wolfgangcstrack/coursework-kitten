@@ -30,7 +30,8 @@ namespace Falsegrind
 
 	void startFalsegrind()                      { fgrind = FalsegrindClass::instance(); }
 	void closeFalsegrind()                      { FalsegrindClass::resetInstance(); }
-	long getTotalAllocationCount()              { return fgrind->getAllocationCount(); }
+	unsigned long getTotalAllocationCount()     { return fgrind->getAllocationCount(); }
+	unsigned long getTotalBytesMapped()         { return fgrind->getTotalBytesMapped(); }
 }
 
 void * operator new(size_t size)

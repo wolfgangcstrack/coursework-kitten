@@ -51,7 +51,7 @@ public:
 	could easily cause bugs.*/
 
 	// DynamicMemoryCounter methods
-	virtual long getAllocationCount() const                       { return dm_count->getAllocationCount(); }
+	virtual unsigned long getAllocationCount() const              { return dm_count->getAllocationCount(); }
 	virtual void incrementAllocationCount()                       { dm_count->incrementAllocationCount(); }
 	virtual void decrementAllocationCount()                       { dm_count->decrementAllocationCount(); }
 
