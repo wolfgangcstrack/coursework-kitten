@@ -23,18 +23,22 @@ class Falsegrind
 {
 private:
 	static FalsegrindClass *fgrind;
-	
-	friend void * operator new(size_t);
-	friend void * operator new[](size_t);
-	friend void operator delete(void*);
+
+	Falsegrind()  {} // private constructor/destructor because
+	~Falsegrind() {} // this class only functions as an API
+
+	friend void * operator new(size_t);   // these overloads are declared friends so that they can
+	friend void * operator new[](size_t); // access the FalsegrindClass instance in this class
+	friend void operator delete(void*);   // since no getter method is provided due to encapsulation
 	friend void operator delete[](void*);
 public:
-	static void startFalsegrind()                      { fgrind = FalsegrindClass::instance(); }
-	static void closeFalsegrind()                      { FalsegrindClass::resetInstance(); }
-	static unsigned long getTotalAllocationCount()     { return fgrind->getAllocationCount(); }
-	static size_t getTotalBytesMapped()                { return fgrind->getTotalBytesMapped(); }
+	static void startFalsegrind()                  { fgrind = FalsegrindClass::instance(); }
+	static void closeFalsegrind()                  { FalsegrindClass::resetInstance(); }
+	static unsigned long getTotalAllocationCount() { return fgrind->getAllocationCount(); }
+	static size_t getTotalBytesMapped()            { return fgrind->getTotalBytesMapped(); }
 };
 
+// static FalsegrindClass * instance is initialized only when startFalsegrind() is called
 FalsegrindClass * Falsegrind::fgrind = 0;
 
 void * operator new(size_t size)
