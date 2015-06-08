@@ -14,19 +14,28 @@ project definitions for the dynamic memory operator overloads.
 #include "DynamicMemoryCounter.h"
 #include "DynamicMemoryMap.h"
 #include "FalsegrindClass.h"
-#include <iostream>
-#include <string>
-#include <memory>
 
-namespace Falsegrind
+/* This class serves as a basic API for the FalsegrindClass application,
+encapsulating the FalsegrindClass so that it is used properly. Only the
+dynamic memory operator overloads should have access to the FalsegrindClass
+methods due to the nature of the application. */
+class Falsegrind
 {
-	FalsegrindClass *fgrind = 0;
+private:
+	static FalsegrindClass *fgrind;
+	
+	friend void * operator new(size_t);
+	friend void * operator new[](size_t);
+	friend void operator delete(void*);
+	friend void operator delete[](void*);
+public:
+	static void startFalsegrind()                      { fgrind = FalsegrindClass::instance(); }
+	static void closeFalsegrind()                      { FalsegrindClass::resetInstance(); }
+	static unsigned long getTotalAllocationCount()     { return fgrind->getAllocationCount(); }
+	static size_t getTotalBytesMapped()                { return fgrind->getTotalBytesMapped(); }
+};
 
-	void startFalsegrind()                      { fgrind = FalsegrindClass::instance(); }
-	void closeFalsegrind()                      { FalsegrindClass::resetInstance(); }
-	unsigned long getTotalAllocationCount()     { return fgrind->getAllocationCount(); }
-	size_t getTotalBytesMapped()                { return fgrind->getTotalBytesMapped(); }
-}
+FalsegrindClass * Falsegrind::fgrind = 0;
 
 void * operator new(size_t size)
 {

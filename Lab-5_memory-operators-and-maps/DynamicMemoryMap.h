@@ -17,7 +17,6 @@ is the address returned by malloc(). The pair<bool, size_t> is as follows:
 #ifndef MEMORY_MAP_H_
 #define MEMORY_MAP_H_
 
-#include <memory>
 #include <map>
 
 class DynamicMemoryMap : public std::map < void *, std::pair< bool, size_t > >

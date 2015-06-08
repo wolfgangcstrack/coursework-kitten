@@ -10,8 +10,6 @@ monitor dynamic memory allocation in the project.
 #ifndef DYNAMIC_MEMORY_COUNTER_H_
 #define DYNAMIC_MEMORY_COUNTER_H_
 
-#include <memory>
-
 class DynamicMemoryCounter
 {
 private:

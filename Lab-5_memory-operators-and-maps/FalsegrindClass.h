@@ -14,7 +14,6 @@ tool for memory debugging, leak detection, and profiling.
 
 #include "DynamicMemoryCounter.h"
 #include "DynamicMemoryMap.h"
-#include <memory>
 
 class FalsegrindClass
 {
