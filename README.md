@@ -39,10 +39,10 @@ The Simulated Barcode data is encrypted Binary Data and the Encrypted Barcode is
 000100011111010 = 2298<br>
 
 #### Part 1
-Select the appropriate container to hold the patent xml date.  Note that the patient data is not in exact xml.  Each xml node is separated by an Encrypted Barcode.  
+Select the appropriate container to hold the patient xml date.  Note that the patient data is not in exact xml.  Each xml node is separated by an Encrypted Barcode.  
 
 #### Part 2
-The barcode text is a list of Binary barcodes.  Use the barcodes in this list to lookup the patient data in the container defined in part #1.  The binary barcode requires conversion to decimal to do the lookup the patient data.
+The barcode text is a list of Binary barcodes.  Use the barcodes in this list to lookup the patient data in the container defined in part #1. The binary barcode requires conversion to decimal to do the lookup of the patient data.
 
 #### Part 3
-Put timer's in your solution.  The best lookup time in the class will receive special recognition.
+Put timer's in your solution. The best lookup time in the class will receive special recognition.
