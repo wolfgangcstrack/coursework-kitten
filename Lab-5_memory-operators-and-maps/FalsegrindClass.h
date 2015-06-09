@@ -33,26 +33,26 @@ protected:
 	FalsegrindClass();
 	// protected destructor forces user to call resetInstance(),
 	// the proper way of deleting this class
-	~FalsegrindClass()                                            { DynamicMemoryCounter::resetInstance(); DynamicMemoryMap::resetInstance(); }
+	~FalsegrindClass()                               { DynamicMemoryCounter::resetInstance(); DynamicMemoryMap::resetInstance(); }
 public:
 	// get/reset instance and check if instance exists methods
 	static FalsegrindClass * instance();
-	static void resetInstance()                                   { modifyLock = true; delete fgInstance; fgInstance = 0; modifyLock = false; }
-	static bool exists()                                          { return (fgInstance != 0); }
-	bool componentsExist()                                        { return (DynamicMemoryMap::exists() && DynamicMemoryCounter::exists()); }
+	static void resetInstance()                      { modifyLock = true; delete fgInstance; fgInstance = 0; modifyLock = false; }
+	static bool exists()                             { return (fgInstance != 0); }
+	bool componentsExist()                           { return (DynamicMemoryMap::exists() && DynamicMemoryCounter::exists()); }
 
 	// getters/setters
-	size_t getTotalBytesMapped() const                            { return totalBytesMapped; }
-	bool isLockedForModification() const                          { return modifyLock; }
+	size_t getTotalBytesMapped() const               { return totalBytesMapped; }
+	bool isLockedForModification() const             { return modifyLock; }
 	/* Note that there is no setter for totalBytesMapped and the modifyLock
 	because this variable can only be changed inside this class. Changing
 	the lock from outside (i.e. in the dynamic memory overload operators)
 	could easily cause bugs.*/
 
 	// DynamicMemoryCounter methods
-	virtual unsigned long getAllocationCount() const              { return dm_count->getAllocationCount(); }
-	virtual void incrementAllocationCount()                       { dm_count->incrementAllocationCount(); }
-	virtual void decrementAllocationCount()                       { dm_count->decrementAllocationCount(); }
+	virtual unsigned long getAllocationCount() const { return dm_count->getAllocationCount(); }
+	virtual void incrementAllocationCount()          { dm_count->incrementAllocationCount(); }
+	virtual void decrementAllocationCount()          { dm_count->decrementAllocationCount(); }
 
 	// DynamicMemoryMap methods
 	virtual const size_t & getByteSize(void *address);

@@ -71,15 +71,77 @@ void useNewAtLeastTenTimes(list<pair<long, long>**> &reallyLongList)
 		cout << "Creating new pair array... ";
 		pair<long, long> **newPair = new pair<long, long>*[aBigNumber]; // uses operator new[]
 		printStatistics();
-		for (int j = 0; j < aBigNumber; j++)
+		for (int j = 0; j < aBigNumber - 10; j++)
 		{
 			long rlong1, rlong2;
 			cout << "Creating new random pair<long, long> pointer that holds "
 				<< (rlong1 = RANDOM_LONG) << " and " << (rlong2 = RANDOM_LONG)
 				<< "... ";
-			newPair[j] = new pair<long, long>(rlong1, rlong2);          // uses operator new
+			newPair[j] = new pair<long, long>(rlong1, rlong2); // uses operator new
 			printStatistics();
 		}
+
+		long rlong1, rlong2;
+		cout << "Creating new random pair<long, long> pointer that holds "
+			<< (rlong1 = RANDOM_LONG) << " and " << (rlong2 = RANDOM_LONG)
+			<< "... ";
+		newPair[aBigNumber - 10] = new pair<long, long>(rlong1, rlong2); // uses operator new
+		printStatistics();
+		
+		cout << "Creating new random pair<long, long> pointer that holds "
+			<< (rlong1 = RANDOM_LONG) << " and " << (rlong2 = RANDOM_LONG)
+			<< "... ";
+		newPair[aBigNumber - 9] = new pair<long, long>(rlong1, rlong2); // uses operator new
+		printStatistics();
+
+		cout << "Creating new random pair<long, long> pointer that holds "
+			<< (rlong1 = RANDOM_LONG) << " and " << (rlong2 = RANDOM_LONG)
+			<< "... ";
+		newPair[aBigNumber - 8] = new pair<long, long>(rlong1, rlong2); // uses operator new
+		printStatistics();
+
+		cout << "Creating new random pair<long, long> pointer that holds "
+			<< (rlong1 = RANDOM_LONG) << " and " << (rlong2 = RANDOM_LONG)
+			<< "... ";
+		newPair[aBigNumber - 7] = new pair<long, long>(rlong1, rlong2); // uses operator new
+		printStatistics();
+
+		cout << "Creating new random pair<long, long> pointer that holds "
+			<< (rlong1 = RANDOM_LONG) << " and " << (rlong2 = RANDOM_LONG)
+			<< "... ";
+		newPair[aBigNumber - 6] = new pair<long, long>(rlong1, rlong2); // uses operator new
+		printStatistics();
+
+		cout << "Creating new random pair<long, long> pointer that holds "
+			<< (rlong1 = RANDOM_LONG) << " and " << (rlong2 = RANDOM_LONG)
+			<< "... ";
+		newPair[aBigNumber - 5] = new pair<long, long>(rlong1, rlong2); // uses operator new
+		printStatistics();
+
+		cout << "Creating new random pair<long, long> pointer that holds "
+			<< (rlong1 = RANDOM_LONG) << " and " << (rlong2 = RANDOM_LONG)
+			<< "... ";
+		newPair[aBigNumber - 4] = new pair<long, long>(rlong1, rlong2); // uses operator new
+		printStatistics();
+
+		cout << "Creating new random pair<long, long> pointer that holds "
+			<< (rlong1 = RANDOM_LONG) << " and " << (rlong2 = RANDOM_LONG)
+			<< "... ";
+		newPair[aBigNumber - 3] = new pair<long, long>(rlong1, rlong2); // uses operator new
+		printStatistics();
+
+		cout << "Creating new random pair<long, long> pointer that holds "
+			<< (rlong1 = RANDOM_LONG) << " and " << (rlong2 = RANDOM_LONG)
+			<< "... ";
+		newPair[aBigNumber - 2] = new pair<long, long>(rlong1, rlong2); // uses operator new
+		printStatistics();
+
+		cout << "Creating new random pair<long, long> pointer that holds "
+			<< (rlong1 = RANDOM_LONG) << " and " << (rlong2 = RANDOM_LONG)
+			<< "... ";
+		newPair[aBigNumber - 1] = new pair<long, long>(rlong1, rlong2); // uses operator new
+		printStatistics();
+
 		reallyLongList.push_back(newPair);
 		cout << endl;
 	}
@@ -98,13 +160,54 @@ void useDeleteAtLeastTenTimes(list <pair<long, long>**> &reallyLongList)
 	for (auto i = reallyLongList.begin(); i != reallyLongList.end(); i++)
 	{
 		cout << "Deleting individual pair<long, long> pointers in pair array...\n";
-		for (int j = 0; j < aBigNumber; j++)
+		for (int j = 0; j < aBigNumber - 10; j++)
 		{
 			delete (*i)[j]; // uses operator delete
 			cout << "Deleted a pair<long, long> pointer. ";
 			printStatistics();
 		}
-		delete[] (*i);      // uses operator delete[]
+
+		delete (*i)[aBigNumber - 10]; // uses operator delete
+		cout << "Deleted a pair<long, long> pointer. ";
+		printStatistics();
+
+		delete (*i)[aBigNumber - 9]; // uses operator delete
+		cout << "Deleted a pair<long, long> pointer. ";
+		printStatistics();
+
+		delete (*i)[aBigNumber - 8]; // uses operator delete
+		cout << "Deleted a pair<long, long> pointer. ";
+		printStatistics();
+
+		delete (*i)[aBigNumber - 7]; // uses operator delete
+		cout << "Deleted a pair<long, long> pointer. ";
+		printStatistics();
+
+		delete (*i)[aBigNumber - 6]; // uses operator delete
+		cout << "Deleted a pair<long, long> pointer. ";
+		printStatistics();
+
+		delete (*i)[aBigNumber - 5]; // uses operator delete
+		cout << "Deleted a pair<long, long> pointer. ";
+		printStatistics();
+
+		delete (*i)[aBigNumber - 4]; // uses operator delete
+		cout << "Deleted a pair<long, long> pointer. ";
+		printStatistics();
+
+		delete (*i)[aBigNumber - 3]; // uses operator delete
+		cout << "Deleted a pair<long, long> pointer. ";
+		printStatistics();
+
+		delete (*i)[aBigNumber - 2]; // uses operator delete
+		cout << "Deleted a pair<long, long> pointer. ";
+		printStatistics();
+
+		delete (*i)[aBigNumber - 1]; // uses operator delete
+		cout << "Deleted a pair<long, long> pointer. ";
+		printStatistics();
+
+		delete[] (*i); // uses operator delete[]
 		cout << "Deleted a pair array from the list. ";
 		printStatistics(); cout << endl;
 	}
@@ -121,276 +224,276 @@ Now starting test method for use of overloaded new/new[] operators ten or more t
 Inserting 8 pair arrays of 32 random pair<long, long> pointers each.
 
 Creating new pair array... Total number of dynamic memory allocations: 4. Total number of bytes allocated: 160
-Creating new random pair<long, long> pointer that holds 18030 and 1736... Total number of dynamic memory allocations: 5. Total number of bytes allocated: 168
-Creating new random pair<long, long> pointer that holds 16097 and 29212... Total number of dynamic memory allocations: 6. Total number of bytes allocated: 176
-Creating new random pair<long, long> pointer that holds 28964 and 31253... Total number of dynamic memory allocations: 7. Total number of bytes allocated: 184
-Creating new random pair<long, long> pointer that holds 6665 and 10853... Total number of dynamic memory allocations: 8. Total number of bytes allocated: 192
-Creating new random pair<long, long> pointer that holds 13149 and 21722... Total number of dynamic memory allocations: 9. Total number of bytes allocated: 200
-Creating new random pair<long, long> pointer that holds 12151 and 9820... Total number of dynamic memory allocations: 10. Total number of bytes allocated: 208
-Creating new random pair<long, long> pointer that holds 11792 and 1228... Total number of dynamic memory allocations: 11. Total number of bytes allocated: 216
-Creating new random pair<long, long> pointer that holds 23797 and 1265... Total number of dynamic memory allocations: 12. Total number of bytes allocated: 224
-Creating new random pair<long, long> pointer that holds 2914 and 225... Total number of dynamic memory allocations: 13. Total number of bytes allocated: 232
-Creating new random pair<long, long> pointer that holds 27900 and 23167... Total number of dynamic memory allocations: 14. Total number of bytes allocated: 240
-Creating new random pair<long, long> pointer that holds 12735 and 4861... Total number of dynamic memory allocations: 15. Total number of bytes allocated: 248
-Creating new random pair<long, long> pointer that holds 620 and 26518... Total number of dynamic memory allocations: 16. Total number of bytes allocated: 256
-Creating new random pair<long, long> pointer that holds 11562 and 25806... Total number of dynamic memory allocations: 17. Total number of bytes allocated: 264
-Creating new random pair<long, long> pointer that holds 27775 and 11517... Total number of dynamic memory allocations: 18. Total number of bytes allocated: 272
-Creating new random pair<long, long> pointer that holds 17105 and 21492... Total number of dynamic memory allocations: 19. Total number of bytes allocated: 280
-Creating new random pair<long, long> pointer that holds 30464 and 247... Total number of dynamic memory allocations: 20. Total number of bytes allocated: 288
-Creating new random pair<long, long> pointer that holds 25317 and 20838... Total number of dynamic memory allocations: 21. Total number of bytes allocated: 296
-Creating new random pair<long, long> pointer that holds 2744 and 2502... Total number of dynamic memory allocations: 22. Total number of bytes allocated: 304
-Creating new random pair<long, long> pointer that holds 27816 and 20497... Total number of dynamic memory allocations: 23. Total number of bytes allocated: 312
-Creating new random pair<long, long> pointer that holds 12842 and 16750... Total number of dynamic memory allocations: 24. Total number of bytes allocated: 320
-Creating new random pair<long, long> pointer that holds 30920 and 1730... Total number of dynamic memory allocations: 25. Total number of bytes allocated: 328
-Creating new random pair<long, long> pointer that holds 22144 and 26299... Total number of dynamic memory allocations: 26. Total number of bytes allocated: 336
-Creating new random pair<long, long> pointer that holds 7659 and 2373... Total number of dynamic memory allocations: 27. Total number of bytes allocated: 344
-Creating new random pair<long, long> pointer that holds 18628 and 32645... Total number of dynamic memory allocations: 28. Total number of bytes allocated: 352
-Creating new random pair<long, long> pointer that holds 25483 and 31951... Total number of dynamic memory allocations: 29. Total number of bytes allocated: 360
-Creating new random pair<long, long> pointer that holds 27475 and 20531... Total number of dynamic memory allocations: 30. Total number of bytes allocated: 368
-Creating new random pair<long, long> pointer that holds 22276 and 27545... Total number of dynamic memory allocations: 31. Total number of bytes allocated: 376
-Creating new random pair<long, long> pointer that holds 3983 and 27774... Total number of dynamic memory allocations: 32. Total number of bytes allocated: 384
-Creating new random pair<long, long> pointer that holds 30443 and 31694... Total number of dynamic memory allocations: 33. Total number of bytes allocated: 392
-Creating new random pair<long, long> pointer that holds 23509 and 17784... Total number of dynamic memory allocations: 34. Total number of bytes allocated: 400
-Creating new random pair<long, long> pointer that holds 26786 and 3495... Total number of dynamic memory allocations: 35. Total number of bytes allocated: 408
-Creating new random pair<long, long> pointer that holds 19887 and 22732... Total number of dynamic memory allocations: 36. Total number of bytes allocated: 416
+Creating new random pair<long, long> pointer that holds 19234 and 15596... Total number of dynamic memory allocations: 5. Total number of bytes allocated: 168
+Creating new random pair<long, long> pointer that holds 27572 and 20973... Total number of dynamic memory allocations: 6. Total number of bytes allocated: 176
+Creating new random pair<long, long> pointer that holds 13595 and 3229... Total number of dynamic memory allocations: 7. Total number of bytes allocated: 184
+Creating new random pair<long, long> pointer that holds 7926 and 22562... Total number of dynamic memory allocations: 8. Total number of bytes allocated: 192
+Creating new random pair<long, long> pointer that holds 22794 and 27249... Total number of dynamic memory allocations: 9. Total number of bytes allocated: 200
+Creating new random pair<long, long> pointer that holds 1713 and 18258... Total number of dynamic memory allocations: 10. Total number of bytes allocated: 208
+Creating new random pair<long, long> pointer that holds 9881 and 16544... Total number of dynamic memory allocations: 11. Total number of bytes allocated: 216
+Creating new random pair<long, long> pointer that holds 4480 and 1422... Total number of dynamic memory allocations: 12. Total number of bytes allocated: 224
+Creating new random pair<long, long> pointer that holds 4052 and 8428... Total number of dynamic memory allocations: 13. Total number of bytes allocated: 232
+Creating new random pair<long, long> pointer that holds 17766 and 1733... Total number of dynamic memory allocations: 14. Total number of bytes allocated: 240
+Creating new random pair<long, long> pointer that holds 27530 and 5076... Total number of dynamic memory allocations: 15. Total number of bytes allocated: 248
+Creating new random pair<long, long> pointer that holds 21849 and 13718... Total number of dynamic memory allocations: 16. Total number of bytes allocated: 256
+Creating new random pair<long, long> pointer that holds 22262 and 26635... Total number of dynamic memory allocations: 17. Total number of bytes allocated: 264
+Creating new random pair<long, long> pointer that holds 12289 and 24163... Total number of dynamic memory allocations: 18. Total number of bytes allocated: 272
+Creating new random pair<long, long> pointer that holds 23198 and 5672... Total number of dynamic memory allocations: 19. Total number of bytes allocated: 280
+Creating new random pair<long, long> pointer that holds 27581 and 20647... Total number of dynamic memory allocations: 20. Total number of bytes allocated: 288
+Creating new random pair<long, long> pointer that holds 22140 and 3231... Total number of dynamic memory allocations: 21. Total number of bytes allocated: 296
+Creating new random pair<long, long> pointer that holds 13287 and 10889... Total number of dynamic memory allocations: 22. Total number of bytes allocated: 304
+Creating new random pair<long, long> pointer that holds 31068 and 30704... Total number of dynamic memory allocations: 23. Total number of bytes allocated: 312
+Creating new random pair<long, long> pointer that holds 7001 and 689... Total number of dynamic memory allocations: 24. Total number of bytes allocated: 320
+Creating new random pair<long, long> pointer that holds 18309 and 23326... Total number of dynamic memory allocations: 25. Total number of bytes allocated: 328
+Creating new random pair<long, long> pointer that holds 30767 and 25690... Total number of dynamic memory allocations: 26. Total number of bytes allocated: 336
+Creating new random pair<long, long> pointer that holds 29851 and 3171... Total number of dynamic memory allocations: 27. Total number of bytes allocated: 344
+Creating new random pair<long, long> pointer that holds 11471 and 20904... Total number of dynamic memory allocations: 28. Total number of bytes allocated: 352
+Creating new random pair<long, long> pointer that holds 5316 and 27170... Total number of dynamic memory allocations: 29. Total number of bytes allocated: 360
+Creating new random pair<long, long> pointer that holds 551 and 16444... Total number of dynamic memory allocations: 30. Total number of bytes allocated: 368
+Creating new random pair<long, long> pointer that holds 26890 and 23581... Total number of dynamic memory allocations: 31. Total number of bytes allocated: 376
+Creating new random pair<long, long> pointer that holds 30518 and 17415... Total number of dynamic memory allocations: 32. Total number of bytes allocated: 384
+Creating new random pair<long, long> pointer that holds 19201 and 29928... Total number of dynamic memory allocations: 33. Total number of bytes allocated: 392
+Creating new random pair<long, long> pointer that holds 10702 and 23643... Total number of dynamic memory allocations: 34. Total number of bytes allocated: 400
+Creating new random pair<long, long> pointer that holds 31657 and 18334... Total number of dynamic memory allocations: 35. Total number of bytes allocated: 408
+Creating new random pair<long, long> pointer that holds 15512 and 5960... Total number of dynamic memory allocations: 36. Total number of bytes allocated: 416
 
 Creating new pair array... Total number of dynamic memory allocations: 38. Total number of bytes allocated: 556
-Creating new random pair<long, long> pointer that holds 11305 and 1236... Total number of dynamic memory allocations: 39. Total number of bytes allocated: 564
-Creating new random pair<long, long> pointer that holds 11338 and 25927... Total number of dynamic memory allocations: 40. Total number of bytes allocated: 572
-Creating new random pair<long, long> pointer that holds 16951 and 16671... Total number of dynamic memory allocations: 41. Total number of bytes allocated: 580
-Creating new random pair<long, long> pointer that holds 32554 and 18583... Total number of dynamic memory allocations: 42. Total number of bytes allocated: 588
-Creating new random pair<long, long> pointer that holds 30858 and 2636... Total number of dynamic memory allocations: 43. Total number of bytes allocated: 596
-Creating new random pair<long, long> pointer that holds 23836 and 27219... Total number of dynamic memory allocations: 44. Total number of bytes allocated: 604
-Creating new random pair<long, long> pointer that holds 20603 and 29507... Total number of dynamic memory allocations: 45. Total number of bytes allocated: 612
-Creating new random pair<long, long> pointer that holds 10092 and 22588... Total number of dynamic memory allocations: 46. Total number of bytes allocated: 620
-Creating new random pair<long, long> pointer that holds 13269 and 30833... Total number of dynamic memory allocations: 47. Total number of bytes allocated: 628
-Creating new random pair<long, long> pointer that holds 1369 and 30659... Total number of dynamic memory allocations: 48. Total number of bytes allocated: 636
-Creating new random pair<long, long> pointer that holds 27623 and 23915... Total number of dynamic memory allocations: 49. Total number of bytes allocated: 644
-Creating new random pair<long, long> pointer that holds 13254 and 28875... Total number of dynamic memory allocations: 50. Total number of bytes allocated: 652
-Creating new random pair<long, long> pointer that holds 3800 and 3540... Total number of dynamic memory allocations: 51. Total number of bytes allocated: 660
-Creating new random pair<long, long> pointer that holds 32050 and 13743... Total number of dynamic memory allocations: 52. Total number of bytes allocated: 668
-Creating new random pair<long, long> pointer that holds 22331 and 1410... Total number of dynamic memory allocations: 53. Total number of bytes allocated: 676
-Creating new random pair<long, long> pointer that holds 28138 and 19591... Total number of dynamic memory allocations: 54. Total number of bytes allocated: 684
-Creating new random pair<long, long> pointer that holds 6627 and 988... Total number of dynamic memory allocations: 55. Total number of bytes allocated: 692
-Creating new random pair<long, long> pointer that holds 6269 and 15783... Total number of dynamic memory allocations: 56. Total number of bytes allocated: 700
-Creating new random pair<long, long> pointer that holds 19961 and 3718... Total number of dynamic memory allocations: 57. Total number of bytes allocated: 708
-Creating new random pair<long, long> pointer that holds 32369 and 19305... Total number of dynamic memory allocations: 58. Total number of bytes allocated: 716
-Creating new random pair<long, long> pointer that holds 23371 and 1857... Total number of dynamic memory allocations: 59. Total number of bytes allocated: 724
-Creating new random pair<long, long> pointer that holds 28980 and 22317... Total number of dynamic memory allocations: 60. Total number of bytes allocated: 732
-Creating new random pair<long, long> pointer that holds 8935 and 22796... Total number of dynamic memory allocations: 61. Total number of bytes allocated: 740
-Creating new random pair<long, long> pointer that holds 32597 and 6045... Total number of dynamic memory allocations: 62. Total number of bytes allocated: 748
-Creating new random pair<long, long> pointer that holds 30185 and 143... Total number of dynamic memory allocations: 63. Total number of bytes allocated: 756
-Creating new random pair<long, long> pointer that holds 16884 and 1078... Total number of dynamic memory allocations: 64. Total number of bytes allocated: 764
-Creating new random pair<long, long> pointer that holds 28305 and 29626... Total number of dynamic memory allocations: 65. Total number of bytes allocated: 772
-Creating new random pair<long, long> pointer that holds 7800 and 6660... Total number of dynamic memory allocations: 66. Total number of bytes allocated: 780
-Creating new random pair<long, long> pointer that holds 24473 and 11434... Total number of dynamic memory allocations: 67. Total number of bytes allocated: 788
-Creating new random pair<long, long> pointer that holds 20608 and 23980... Total number of dynamic memory allocations: 68. Total number of bytes allocated: 796
-Creating new random pair<long, long> pointer that holds 19909 and 23500... Total number of dynamic memory allocations: 69. Total number of bytes allocated: 804
-Creating new random pair<long, long> pointer that holds 20507 and 16048... Total number of dynamic memory allocations: 70. Total number of bytes allocated: 812
+Creating new random pair<long, long> pointer that holds 22933 and 17874... Total number of dynamic memory allocations: 39. Total number of bytes allocated: 564
+Creating new random pair<long, long> pointer that holds 24152 and 32549... Total number of dynamic memory allocations: 40. Total number of bytes allocated: 572
+Creating new random pair<long, long> pointer that holds 16973 and 14792... Total number of dynamic memory allocations: 41. Total number of bytes allocated: 580
+Creating new random pair<long, long> pointer that holds 22130 and 1645... Total number of dynamic memory allocations: 42. Total number of bytes allocated: 588
+Creating new random pair<long, long> pointer that holds 8946 and 12517... Total number of dynamic memory allocations: 43. Total number of bytes allocated: 596
+Creating new random pair<long, long> pointer that holds 15022 and 26061... Total number of dynamic memory allocations: 44. Total number of bytes allocated: 604
+Creating new random pair<long, long> pointer that holds 31776 and 27237... Total number of dynamic memory allocations: 45. Total number of bytes allocated: 612
+Creating new random pair<long, long> pointer that holds 12856 and 8314... Total number of dynamic memory allocations: 46. Total number of bytes allocated: 620
+Creating new random pair<long, long> pointer that holds 23832 and 7756... Total number of dynamic memory allocations: 47. Total number of bytes allocated: 628
+Creating new random pair<long, long> pointer that holds 27115 and 8904... Total number of dynamic memory allocations: 48. Total number of bytes allocated: 636
+Creating new random pair<long, long> pointer that holds 6687 and 12447... Total number of dynamic memory allocations: 49. Total number of bytes allocated: 644
+Creating new random pair<long, long> pointer that holds 7630 and 12025... Total number of dynamic memory allocations: 50. Total number of bytes allocated: 652
+Creating new random pair<long, long> pointer that holds 16929 and 9427... Total number of dynamic memory allocations: 51. Total number of bytes allocated: 660
+Creating new random pair<long, long> pointer that holds 23519 and 3154... Total number of dynamic memory allocations: 52. Total number of bytes allocated: 668
+Creating new random pair<long, long> pointer that holds 6042 and 25990... Total number of dynamic memory allocations: 53. Total number of bytes allocated: 676
+Creating new random pair<long, long> pointer that holds 25616 and 11381... Total number of dynamic memory allocations: 54. Total number of bytes allocated: 684
+Creating new random pair<long, long> pointer that holds 4279 and 13421... Total number of dynamic memory allocations: 55. Total number of bytes allocated: 692
+Creating new random pair<long, long> pointer that holds 18832 and 15082... Total number of dynamic memory allocations: 56. Total number of bytes allocated: 700
+Creating new random pair<long, long> pointer that holds 8888 and 22158... Total number of dynamic memory allocations: 57. Total number of bytes allocated: 708
+Creating new random pair<long, long> pointer that holds 14667 and 19199... Total number of dynamic memory allocations: 58. Total number of bytes allocated: 716
+Creating new random pair<long, long> pointer that holds 23704 and 20655... Total number of dynamic memory allocations: 59. Total number of bytes allocated: 724
+Creating new random pair<long, long> pointer that holds 2484 and 6098... Total number of dynamic memory allocations: 60. Total number of bytes allocated: 732
+Creating new random pair<long, long> pointer that holds 5360 and 18446... Total number of dynamic memory allocations: 61. Total number of bytes allocated: 740
+Creating new random pair<long, long> pointer that holds 30658 and 2732... Total number of dynamic memory allocations: 62. Total number of bytes allocated: 748
+Creating new random pair<long, long> pointer that holds 12057 and 23378... Total number of dynamic memory allocations: 63. Total number of bytes allocated: 756
+Creating new random pair<long, long> pointer that holds 13624 and 31632... Total number of dynamic memory allocations: 64. Total number of bytes allocated: 764
+Creating new random pair<long, long> pointer that holds 15248 and 1986... Total number of dynamic memory allocations: 65. Total number of bytes allocated: 772
+Creating new random pair<long, long> pointer that holds 11306 and 24596... Total number of dynamic memory allocations: 66. Total number of bytes allocated: 780
+Creating new random pair<long, long> pointer that holds 30623 and 28341... Total number of dynamic memory allocations: 67. Total number of bytes allocated: 788
+Creating new random pair<long, long> pointer that holds 7101 and 23664... Total number of dynamic memory allocations: 68. Total number of bytes allocated: 796
+Creating new random pair<long, long> pointer that holds 28730 and 3913... Total number of dynamic memory allocations: 69. Total number of bytes allocated: 804
+Creating new random pair<long, long> pointer that holds 29230 and 27349... Total number of dynamic memory allocations: 70. Total number of bytes allocated: 812
 
 Creating new pair array... Total number of dynamic memory allocations: 72. Total number of bytes allocated: 952
-Creating new random pair<long, long> pointer that holds 10171 and 1348... Total number of dynamic memory allocations: 73. Total number of bytes allocated: 960
-Creating new random pair<long, long> pointer that holds 26683 and 16367... Total number of dynamic memory allocations: 74. Total number of bytes allocated: 968
-Creating new random pair<long, long> pointer that holds 12309 and 3472... Total number of dynamic memory allocations: 75. Total number of bytes allocated: 976
-Creating new random pair<long, long> pointer that holds 4455 and 2411... Total number of dynamic memory allocations: 76. Total number of bytes allocated: 984
-Creating new random pair<long, long> pointer that holds 19893 and 31080... Total number of dynamic memory allocations: 77. Total number of bytes allocated: 992
-Creating new random pair<long, long> pointer that holds 25777 and 18255... Total number of dynamic memory allocations: 78. Total number of bytes allocated: 1000
-Creating new random pair<long, long> pointer that holds 13912 and 25833... Total number of dynamic memory allocations: 79. Total number of bytes allocated: 1008
-Creating new random pair<long, long> pointer that holds 15080 and 31281... Total number of dynamic memory allocations: 80. Total number of bytes allocated: 1016
-Creating new random pair<long, long> pointer that holds 10094 and 30195... Total number of dynamic memory allocations: 81. Total number of bytes allocated: 1024
-Creating new random pair<long, long> pointer that holds 19470 and 7316... Total number of dynamic memory allocations: 82. Total number of bytes allocated: 1032
-Creating new random pair<long, long> pointer that holds 8490 and 19920... Total number of dynamic memory allocations: 83. Total number of bytes allocated: 1040
-Creating new random pair<long, long> pointer that holds 25356 and 16817... Total number of dynamic memory allocations: 84. Total number of bytes allocated: 1048
-Creating new random pair<long, long> pointer that holds 22485 and 15894... Total number of dynamic memory allocations: 85. Total number of bytes allocated: 1056
-Creating new random pair<long, long> pointer that holds 31141 and 4471... Total number of dynamic memory allocations: 86. Total number of bytes allocated: 1064
-Creating new random pair<long, long> pointer that holds 20327 and 17614... Total number of dynamic memory allocations: 87. Total number of bytes allocated: 1072
-Creating new random pair<long, long> pointer that holds 20649 and 17872... Total number of dynamic memory allocations: 88. Total number of bytes allocated: 1080
-Creating new random pair<long, long> pointer that holds 21848 and 5077... Total number of dynamic memory allocations: 89. Total number of bytes allocated: 1088
-Creating new random pair<long, long> pointer that holds 22635 and 3366... Total number of dynamic memory allocations: 90. Total number of bytes allocated: 1096
-Creating new random pair<long, long> pointer that holds 19636 and 10115... Total number of dynamic memory allocations: 91. Total number of bytes allocated: 1104
-Creating new random pair<long, long> pointer that holds 32116 and 30246... Total number of dynamic memory allocations: 92. Total number of bytes allocated: 1112
-Creating new random pair<long, long> pointer that holds 110 and 12427... Total number of dynamic memory allocations: 93. Total number of bytes allocated: 1120
-Creating new random pair<long, long> pointer that holds 11641 and 18627... Total number of dynamic memory allocations: 94. Total number of bytes allocated: 1128
-Creating new random pair<long, long> pointer that holds 28662 and 21794... Total number of dynamic memory allocations: 95. Total number of bytes allocated: 1136
-Creating new random pair<long, long> pointer that holds 10379 and 28798... Total number of dynamic memory allocations: 96. Total number of bytes allocated: 1144
-Creating new random pair<long, long> pointer that holds 18957 and 3428... Total number of dynamic memory allocations: 97. Total number of bytes allocated: 1152
-Creating new random pair<long, long> pointer that holds 29326 and 23525... Total number of dynamic memory allocations: 98. Total number of bytes allocated: 1160
-Creating new random pair<long, long> pointer that holds 2521 and 7923... Total number of dynamic memory allocations: 99. Total number of bytes allocated: 1168
-Creating new random pair<long, long> pointer that holds 30956 and 30042... Total number of dynamic memory allocations: 100. Total number of bytes allocated: 1176
-Creating new random pair<long, long> pointer that holds 27188 and 31713... Total number of dynamic memory allocations: 101. Total number of bytes allocated: 1184
-Creating new random pair<long, long> pointer that holds 16523 and 6422... Total number of dynamic memory allocations: 102. Total number of bytes allocated: 1192
-Creating new random pair<long, long> pointer that holds 9034 and 2256... Total number of dynamic memory allocations: 103. Total number of bytes allocated: 1200
-Creating new random pair<long, long> pointer that holds 12284 and 11374... Total number of dynamic memory allocations: 104. Total number of bytes allocated: 1208
+Creating new random pair<long, long> pointer that holds 19496 and 18520... Total number of dynamic memory allocations: 73. Total number of bytes allocated: 960
+Creating new random pair<long, long> pointer that holds 2070 and 3328... Total number of dynamic memory allocations: 74. Total number of bytes allocated: 968
+Creating new random pair<long, long> pointer that holds 355 and 13992... Total number of dynamic memory allocations: 75. Total number of bytes allocated: 976
+Creating new random pair<long, long> pointer that holds 8428 and 15374... Total number of dynamic memory allocations: 76. Total number of bytes allocated: 984
+Creating new random pair<long, long> pointer that holds 31168 and 17250... Total number of dynamic memory allocations: 77. Total number of bytes allocated: 992
+Creating new random pair<long, long> pointer that holds 21707 and 2706... Total number of dynamic memory allocations: 78. Total number of bytes allocated: 1000
+Creating new random pair<long, long> pointer that holds 27346 and 30406... Total number of dynamic memory allocations: 79. Total number of bytes allocated: 1008
+Creating new random pair<long, long> pointer that holds 18293 and 11493... Total number of dynamic memory allocations: 80. Total number of bytes allocated: 1016
+Creating new random pair<long, long> pointer that holds 25868 and 25372... Total number of dynamic memory allocations: 81. Total number of bytes allocated: 1024
+Creating new random pair<long, long> pointer that holds 20633 and 23485... Total number of dynamic memory allocations: 82. Total number of bytes allocated: 1032
+Creating new random pair<long, long> pointer that holds 24103 and 15342... Total number of dynamic memory allocations: 83. Total number of bytes allocated: 1040
+Creating new random pair<long, long> pointer that holds 31057 and 17665... Total number of dynamic memory allocations: 84. Total number of bytes allocated: 1048
+Creating new random pair<long, long> pointer that holds 15043 and 28020... Total number of dynamic memory allocations: 85. Total number of bytes allocated: 1056
+Creating new random pair<long, long> pointer that holds 29423 and 32476... Total number of dynamic memory allocations: 86. Total number of bytes allocated: 1064
+Creating new random pair<long, long> pointer that holds 6993 and 18512... Total number of dynamic memory allocations: 87. Total number of bytes allocated: 1072
+Creating new random pair<long, long> pointer that holds 27385 and 12561... Total number of dynamic memory allocations: 88. Total number of bytes allocated: 1080
+Creating new random pair<long, long> pointer that holds 28720 and 5500... Total number of dynamic memory allocations: 89. Total number of bytes allocated: 1088
+Creating new random pair<long, long> pointer that holds 24690 and 26766... Total number of dynamic memory allocations: 90. Total number of bytes allocated: 1096
+Creating new random pair<long, long> pointer that holds 6422 and 9856... Total number of dynamic memory allocations: 91. Total number of bytes allocated: 1104
+Creating new random pair<long, long> pointer that holds 24155 and 18755... Total number of dynamic memory allocations: 92. Total number of bytes allocated: 1112
+Creating new random pair<long, long> pointer that holds 5042 and 13800... Total number of dynamic memory allocations: 93. Total number of bytes allocated: 1120
+Creating new random pair<long, long> pointer that holds 16250 and 4660... Total number of dynamic memory allocations: 94. Total number of bytes allocated: 1128
+Creating new random pair<long, long> pointer that holds 32144 and 11253... Total number of dynamic memory allocations: 95. Total number of bytes allocated: 1136
+Creating new random pair<long, long> pointer that holds 24410 and 10189... Total number of dynamic memory allocations: 96. Total number of bytes allocated: 1144
+Creating new random pair<long, long> pointer that holds 27964 and 7059... Total number of dynamic memory allocations: 97. Total number of bytes allocated: 1152
+Creating new random pair<long, long> pointer that holds 23699 and 6262... Total number of dynamic memory allocations: 98. Total number of bytes allocated: 1160
+Creating new random pair<long, long> pointer that holds 26282 and 2955... Total number of dynamic memory allocations: 99. Total number of bytes allocated: 1168
+Creating new random pair<long, long> pointer that holds 20555 and 20328... Total number of dynamic memory allocations: 100. Total number of bytes allocated: 1176
+Creating new random pair<long, long> pointer that holds 28373 and 24570... Total number of dynamic memory allocations: 101. Total number of bytes allocated: 1184
+Creating new random pair<long, long> pointer that holds 7933 and 27071... Total number of dynamic memory allocations: 102. Total number of bytes allocated: 1192
+Creating new random pair<long, long> pointer that holds 679 and 30722... Total number of dynamic memory allocations: 103. Total number of bytes allocated: 1200
+Creating new random pair<long, long> pointer that holds 18042 and 25040... Total number of dynamic memory allocations: 104. Total number of bytes allocated: 1208
 
 Creating new pair array... Total number of dynamic memory allocations: 106. Total number of bytes allocated: 1348
-Creating new random pair<long, long> pointer that holds 9827 and 3671... Total number of dynamic memory allocations: 107. Total number of bytes allocated: 1356
-Creating new random pair<long, long> pointer that holds 18933 and 14932... Total number of dynamic memory allocations: 108. Total number of bytes allocated: 1364
-Creating new random pair<long, long> pointer that holds 19453 and 22952... Total number of dynamic memory allocations: 109. Total number of bytes allocated: 1372
-Creating new random pair<long, long> pointer that holds 27649 and 14624... Total number of dynamic memory allocations: 110. Total number of bytes allocated: 1380
-Creating new random pair<long, long> pointer that holds 10270 and 20592... Total number of dynamic memory allocations: 111. Total number of bytes allocated: 1388
-Creating new random pair<long, long> pointer that holds 25974 and 23953... Total number of dynamic memory allocations: 112. Total number of bytes allocated: 1396
-Creating new random pair<long, long> pointer that holds 30952 and 31743... Total number of dynamic memory allocations: 113. Total number of bytes allocated: 1404
-Creating new random pair<long, long> pointer that holds 31399 and 7950... Total number of dynamic memory allocations: 114. Total number of bytes allocated: 1412
-Creating new random pair<long, long> pointer that holds 25454 and 20393... Total number of dynamic memory allocations: 115. Total number of bytes allocated: 1420
-Creating new random pair<long, long> pointer that holds 10332 and 20786... Total number of dynamic memory allocations: 116. Total number of bytes allocated: 1428
-Creating new random pair<long, long> pointer that holds 29382 and 11884... Total number of dynamic memory allocations: 117. Total number of bytes allocated: 1436
-Creating new random pair<long, long> pointer that holds 15231 and 30344... Total number of dynamic memory allocations: 118. Total number of bytes allocated: 1444
-Creating new random pair<long, long> pointer that holds 3424 and 29651... Total number of dynamic memory allocations: 119. Total number of bytes allocated: 1452
-Creating new random pair<long, long> pointer that holds 4376 and 12435... Total number of dynamic memory allocations: 120. Total number of bytes allocated: 1460
-Creating new random pair<long, long> pointer that holds 21653 and 1049... Total number of dynamic memory allocations: 121. Total number of bytes allocated: 1468
-Creating new random pair<long, long> pointer that holds 4732 and 28946... Total number of dynamic memory allocations: 122. Total number of bytes allocated: 1476
-Creating new random pair<long, long> pointer that holds 8835 and 10130... Total number of dynamic memory allocations: 123. Total number of bytes allocated: 1484
-Creating new random pair<long, long> pointer that holds 16832 and 20609... Total number of dynamic memory allocations: 124. Total number of bytes allocated: 1492
-Creating new random pair<long, long> pointer that holds 6681 and 13639... Total number of dynamic memory allocations: 125. Total number of bytes allocated: 1500
-Creating new random pair<long, long> pointer that holds 27252 and 11747... Total number of dynamic memory allocations: 126. Total number of bytes allocated: 1508
-Creating new random pair<long, long> pointer that holds 32110 and 20704... Total number of dynamic memory allocations: 127. Total number of bytes allocated: 1516
-Creating new random pair<long, long> pointer that holds 19086 and 31679... Total number of dynamic memory allocations: 128. Total number of bytes allocated: 1524
-Creating new random pair<long, long> pointer that holds 15959 and 16328... Total number of dynamic memory allocations: 129. Total number of bytes allocated: 1532
-Creating new random pair<long, long> pointer that holds 18341 and 24169... Total number of dynamic memory allocations: 130. Total number of bytes allocated: 1540
-Creating new random pair<long, long> pointer that holds 32056 and 6539... Total number of dynamic memory allocations: 131. Total number of bytes allocated: 1548
-Creating new random pair<long, long> pointer that holds 1120 and 32642... Total number of dynamic memory allocations: 132. Total number of bytes allocated: 1556
-Creating new random pair<long, long> pointer that holds 27162 and 22403... Total number of dynamic memory allocations: 133. Total number of bytes allocated: 1564
-Creating new random pair<long, long> pointer that holds 27181 and 15042... Total number of dynamic memory allocations: 134. Total number of bytes allocated: 1572
-Creating new random pair<long, long> pointer that holds 15358 and 1971... Total number of dynamic memory allocations: 135. Total number of bytes allocated: 1580
-Creating new random pair<long, long> pointer that holds 31542 and 2037... Total number of dynamic memory allocations: 136. Total number of bytes allocated: 1588
-Creating new random pair<long, long> pointer that holds 12913 and 9971... Total number of dynamic memory allocations: 137. Total number of bytes allocated: 1596
-Creating new random pair<long, long> pointer that holds 145 and 17988... Total number of dynamic memory allocations: 138. Total number of bytes allocated: 1604
+Creating new random pair<long, long> pointer that holds 29977 and 21439... Total number of dynamic memory allocations: 107. Total number of bytes allocated: 1356
+Creating new random pair<long, long> pointer that holds 19757 and 1212... Total number of dynamic memory allocations: 108. Total number of bytes allocated: 1364
+Creating new random pair<long, long> pointer that holds 30875 and 22140... Total number of dynamic memory allocations: 109. Total number of bytes allocated: 1372
+Creating new random pair<long, long> pointer that holds 13986 and 26182... Total number of dynamic memory allocations: 110. Total number of bytes allocated: 1380
+Creating new random pair<long, long> pointer that holds 22454 and 31015... Total number of dynamic memory allocations: 111. Total number of bytes allocated: 1388
+Creating new random pair<long, long> pointer that holds 8522 and 18145... Total number of dynamic memory allocations: 112. Total number of bytes allocated: 1396
+Creating new random pair<long, long> pointer that holds 8432 and 259... Total number of dynamic memory allocations: 113. Total number of bytes allocated: 1404
+Creating new random pair<long, long> pointer that holds 29048 and 8205... Total number of dynamic memory allocations: 114. Total number of bytes allocated: 1412
+Creating new random pair<long, long> pointer that holds 18928 and 3741... Total number of dynamic memory allocations: 115. Total number of bytes allocated: 1420
+Creating new random pair<long, long> pointer that holds 11696 and 19172... Total number of dynamic memory allocations: 116. Total number of bytes allocated: 1428
+Creating new random pair<long, long> pointer that holds 3554 and 6401... Total number of dynamic memory allocations: 117. Total number of bytes allocated: 1436
+Creating new random pair<long, long> pointer that holds 28705 and 29936... Total number of dynamic memory allocations: 118. Total number of bytes allocated: 1444
+Creating new random pair<long, long> pointer that holds 2845 and 10541... Total number of dynamic memory allocations: 119. Total number of bytes allocated: 1452
+Creating new random pair<long, long> pointer that holds 4464 and 22336... Total number of dynamic memory allocations: 120. Total number of bytes allocated: 1460
+Creating new random pair<long, long> pointer that holds 25603 and 27078... Total number of dynamic memory allocations: 121. Total number of bytes allocated: 1468
+Creating new random pair<long, long> pointer that holds 28855 and 25531... Total number of dynamic memory allocations: 122. Total number of bytes allocated: 1476
+Creating new random pair<long, long> pointer that holds 26409 and 24330... Total number of dynamic memory allocations: 123. Total number of bytes allocated: 1484
+Creating new random pair<long, long> pointer that holds 31950 and 23732... Total number of dynamic memory allocations: 124. Total number of bytes allocated: 1492
+Creating new random pair<long, long> pointer that holds 697 and 23302... Total number of dynamic memory allocations: 125. Total number of bytes allocated: 1500
+Creating new random pair<long, long> pointer that holds 25289 and 2750... Total number of dynamic memory allocations: 126. Total number of bytes allocated: 1508
+Creating new random pair<long, long> pointer that holds 1812 and 521... Total number of dynamic memory allocations: 127. Total number of bytes allocated: 1516
+Creating new random pair<long, long> pointer that holds 1473 and 1217... Total number of dynamic memory allocations: 128. Total number of bytes allocated: 1524
+Creating new random pair<long, long> pointer that holds 31931 and 29528... Total number of dynamic memory allocations: 129. Total number of bytes allocated: 1532
+Creating new random pair<long, long> pointer that holds 9176 and 15949... Total number of dynamic memory allocations: 130. Total number of bytes allocated: 1540
+Creating new random pair<long, long> pointer that holds 4463 and 27171... Total number of dynamic memory allocations: 131. Total number of bytes allocated: 1548
+Creating new random pair<long, long> pointer that holds 19575 and 20527... Total number of dynamic memory allocations: 132. Total number of bytes allocated: 1556
+Creating new random pair<long, long> pointer that holds 24727 and 27320... Total number of dynamic memory allocations: 133. Total number of bytes allocated: 1564
+Creating new random pair<long, long> pointer that holds 3034 and 12098... Total number of dynamic memory allocations: 134. Total number of bytes allocated: 1572
+Creating new random pair<long, long> pointer that holds 6883 and 20471... Total number of dynamic memory allocations: 135. Total number of bytes allocated: 1580
+Creating new random pair<long, long> pointer that holds 28623 and 17800... Total number of dynamic memory allocations: 136. Total number of bytes allocated: 1588
+Creating new random pair<long, long> pointer that holds 20783 and 19718... Total number of dynamic memory allocations: 137. Total number of bytes allocated: 1596
+Creating new random pair<long, long> pointer that holds 18874 and 8569... Total number of dynamic memory allocations: 138. Total number of bytes allocated: 1604
 
 Creating new pair array... Total number of dynamic memory allocations: 140. Total number of bytes allocated: 1744
-Creating new random pair<long, long> pointer that holds 21857 and 26190... Total number of dynamic memory allocations: 141. Total number of bytes allocated: 1752
-Creating new random pair<long, long> pointer that holds 26806 and 19638... Total number of dynamic memory allocations: 142. Total number of bytes allocated: 1760
-Creating new random pair<long, long> pointer that holds 26415 and 24488... Total number of dynamic memory allocations: 143. Total number of bytes allocated: 1768
-Creating new random pair<long, long> pointer that holds 27191 and 25591... Total number of dynamic memory allocations: 144. Total number of bytes allocated: 1776
-Creating new random pair<long, long> pointer that holds 15621 and 32163... Total number of dynamic memory allocations: 145. Total number of bytes allocated: 1784
-Creating new random pair<long, long> pointer that holds 16043 and 3415... Total number of dynamic memory allocations: 146. Total number of bytes allocated: 1792
-Creating new random pair<long, long> pointer that holds 29034 and 6852... Total number of dynamic memory allocations: 147. Total number of bytes allocated: 1800
-Creating new random pair<long, long> pointer that holds 2539 and 15125... Total number of dynamic memory allocations: 148. Total number of bytes allocated: 1808
-Creating new random pair<long, long> pointer that holds 9492 and 7122... Total number of dynamic memory allocations: 149. Total number of bytes allocated: 1816
-Creating new random pair<long, long> pointer that holds 16770 and 24030... Total number of dynamic memory allocations: 150. Total number of bytes allocated: 1824
-Creating new random pair<long, long> pointer that holds 16893 and 2431... Total number of dynamic memory allocations: 151. Total number of bytes allocated: 1832
-Creating new random pair<long, long> pointer that holds 10334 and 27537... Total number of dynamic memory allocations: 152. Total number of bytes allocated: 1840
-Creating new random pair<long, long> pointer that holds 29881 and 27979... Total number of dynamic memory allocations: 153. Total number of bytes allocated: 1848
-Creating new random pair<long, long> pointer that holds 13004 and 17221... Total number of dynamic memory allocations: 154. Total number of bytes allocated: 1856
-Creating new random pair<long, long> pointer that holds 20486 and 30116... Total number of dynamic memory allocations: 155. Total number of bytes allocated: 1864
-Creating new random pair<long, long> pointer that holds 26275 and 4749... Total number of dynamic memory allocations: 156. Total number of bytes allocated: 1872
-Creating new random pair<long, long> pointer that holds 20133 and 9554... Total number of dynamic memory allocations: 157. Total number of bytes allocated: 1880
-Creating new random pair<long, long> pointer that holds 3006 and 8187... Total number of dynamic memory allocations: 158. Total number of bytes allocated: 1888
-Creating new random pair<long, long> pointer that holds 10088 and 4626... Total number of dynamic memory allocations: 159. Total number of bytes allocated: 1896
-Creating new random pair<long, long> pointer that holds 16560 and 7906... Total number of dynamic memory allocations: 160. Total number of bytes allocated: 1904
-Creating new random pair<long, long> pointer that holds 10125 and 30337... Total number of dynamic memory allocations: 161. Total number of bytes allocated: 1912
-Creating new random pair<long, long> pointer that holds 18356 and 28768... Total number of dynamic memory allocations: 162. Total number of bytes allocated: 1920
-Creating new random pair<long, long> pointer that holds 1866 and 6972... Total number of dynamic memory allocations: 163. Total number of bytes allocated: 1928
-Creating new random pair<long, long> pointer that holds 8163 and 30108... Total number of dynamic memory allocations: 164. Total number of bytes allocated: 1936
-Creating new random pair<long, long> pointer that holds 27817 and 23366... Total number of dynamic memory allocations: 165. Total number of bytes allocated: 1944
-Creating new random pair<long, long> pointer that holds 16042 and 22349... Total number of dynamic memory allocations: 166. Total number of bytes allocated: 1952
-Creating new random pair<long, long> pointer that holds 4246 and 18346... Total number of dynamic memory allocations: 167. Total number of bytes allocated: 1960
-Creating new random pair<long, long> pointer that holds 32122 and 26236... Total number of dynamic memory allocations: 168. Total number of bytes allocated: 1968
-Creating new random pair<long, long> pointer that holds 14902 and 11873... Total number of dynamic memory allocations: 169. Total number of bytes allocated: 1976
-Creating new random pair<long, long> pointer that holds 4033 and 31370... Total number of dynamic memory allocations: 170. Total number of bytes allocated: 1984
-Creating new random pair<long, long> pointer that holds 1147 and 2165... Total number of dynamic memory allocations: 171. Total number of bytes allocated: 1992
-Creating new random pair<long, long> pointer that holds 5402 and 28788... Total number of dynamic memory allocations: 172. Total number of bytes allocated: 2000
+Creating new random pair<long, long> pointer that holds 26282 and 14150... Total number of dynamic memory allocations: 141. Total number of bytes allocated: 1752
+Creating new random pair<long, long> pointer that holds 20957 and 12187... Total number of dynamic memory allocations: 142. Total number of bytes allocated: 1760
+Creating new random pair<long, long> pointer that holds 28215 and 11397... Total number of dynamic memory allocations: 143. Total number of bytes allocated: 1768
+Creating new random pair<long, long> pointer that holds 4054 and 12883... Total number of dynamic memory allocations: 144. Total number of bytes allocated: 1776
+Creating new random pair<long, long> pointer that holds 30483 and 26997... Total number of dynamic memory allocations: 145. Total number of bytes allocated: 1784
+Creating new random pair<long, long> pointer that holds 11369 and 27643... Total number of dynamic memory allocations: 146. Total number of bytes allocated: 1792
+Creating new random pair<long, long> pointer that holds 3256 and 25692... Total number of dynamic memory allocations: 147. Total number of bytes allocated: 1800
+Creating new random pair<long, long> pointer that holds 4224 and 12084... Total number of dynamic memory allocations: 148. Total number of bytes allocated: 1808
+Creating new random pair<long, long> pointer that holds 28162 and 14... Total number of dynamic memory allocations: 149. Total number of bytes allocated: 1816
+Creating new random pair<long, long> pointer that holds 30064 and 18814... Total number of dynamic memory allocations: 150. Total number of bytes allocated: 1824
+Creating new random pair<long, long> pointer that holds 16273 and 27417... Total number of dynamic memory allocations: 151. Total number of bytes allocated: 1832
+Creating new random pair<long, long> pointer that holds 19070 and 31750... Total number of dynamic memory allocations: 152. Total number of bytes allocated: 1840
+Creating new random pair<long, long> pointer that holds 15726 and 32575... Total number of dynamic memory allocations: 153. Total number of bytes allocated: 1848
+Creating new random pair<long, long> pointer that holds 5026 and 30398... Total number of dynamic memory allocations: 154. Total number of bytes allocated: 1856
+Creating new random pair<long, long> pointer that holds 12273 and 13609... Total number of dynamic memory allocations: 155. Total number of bytes allocated: 1864
+Creating new random pair<long, long> pointer that holds 9611 and 2483... Total number of dynamic memory allocations: 156. Total number of bytes allocated: 1872
+Creating new random pair<long, long> pointer that holds 10210 and 89... Total number of dynamic memory allocations: 157. Total number of bytes allocated: 1880
+Creating new random pair<long, long> pointer that holds 25314 and 156... Total number of dynamic memory allocations: 158. Total number of bytes allocated: 1888
+Creating new random pair<long, long> pointer that holds 17886 and 10081... Total number of dynamic memory allocations: 159. Total number of bytes allocated: 1896
+Creating new random pair<long, long> pointer that holds 24275 and 23726... Total number of dynamic memory allocations: 160. Total number of bytes allocated: 1904
+Creating new random pair<long, long> pointer that holds 4348 and 27730... Total number of dynamic memory allocations: 161. Total number of bytes allocated: 1912
+Creating new random pair<long, long> pointer that holds 2250 and 24760... Total number of dynamic memory allocations: 162. Total number of bytes allocated: 1920
+Creating new random pair<long, long> pointer that holds 8369 and 6520... Total number of dynamic memory allocations: 163. Total number of bytes allocated: 1928
+Creating new random pair<long, long> pointer that holds 17786 and 9067... Total number of dynamic memory allocations: 164. Total number of bytes allocated: 1936
+Creating new random pair<long, long> pointer that holds 7665 and 17988... Total number of dynamic memory allocations: 165. Total number of bytes allocated: 1944
+Creating new random pair<long, long> pointer that holds 6436 and 7161... Total number of dynamic memory allocations: 166. Total number of bytes allocated: 1952
+Creating new random pair<long, long> pointer that holds 24471 and 26762... Total number of dynamic memory allocations: 167. Total number of bytes allocated: 1960
+Creating new random pair<long, long> pointer that holds 18198 and 23779... Total number of dynamic memory allocations: 168. Total number of bytes allocated: 1968
+Creating new random pair<long, long> pointer that holds 9735 and 1517... Total number of dynamic memory allocations: 169. Total number of bytes allocated: 1976
+Creating new random pair<long, long> pointer that holds 2674 and 28939... Total number of dynamic memory allocations: 170. Total number of bytes allocated: 1984
+Creating new random pair<long, long> pointer that holds 14866 and 6551... Total number of dynamic memory allocations: 171. Total number of bytes allocated: 1992
+Creating new random pair<long, long> pointer that holds 19504 and 3857... Total number of dynamic memory allocations: 172. Total number of bytes allocated: 2000
 
 Creating new pair array... Total number of dynamic memory allocations: 174. Total number of bytes allocated: 2140
-Creating new random pair<long, long> pointer that holds 8694 and 4967... Total number of dynamic memory allocations: 175. Total number of bytes allocated: 2148
-Creating new random pair<long, long> pointer that holds 7104 and 12118... Total number of dynamic memory allocations: 176. Total number of bytes allocated: 2156
-Creating new random pair<long, long> pointer that holds 4844 and 6607... Total number of dynamic memory allocations: 177. Total number of bytes allocated: 2164
-Creating new random pair<long, long> pointer that holds 10057 and 22062... Total number of dynamic memory allocations: 178. Total number of bytes allocated: 2172
-Creating new random pair<long, long> pointer that holds 427 and 12098... Total number of dynamic memory allocations: 179. Total number of bytes allocated: 2180
-Creating new random pair<long, long> pointer that holds 3985 and 30435... Total number of dynamic memory allocations: 180. Total number of bytes allocated: 2188
-Creating new random pair<long, long> pointer that holds 14622 and 25464... Total number of dynamic memory allocations: 181. Total number of bytes allocated: 2196
-Creating new random pair<long, long> pointer that holds 19444 and 646... Total number of dynamic memory allocations: 182. Total number of bytes allocated: 2204
-Creating new random pair<long, long> pointer that holds 27040 and 12462... Total number of dynamic memory allocations: 183. Total number of bytes allocated: 2212
-Creating new random pair<long, long> pointer that holds 32448 and 19159... Total number of dynamic memory allocations: 184. Total number of bytes allocated: 2220
-Creating new random pair<long, long> pointer that holds 12302 and 10570... Total number of dynamic memory allocations: 185. Total number of bytes allocated: 2228
-Creating new random pair<long, long> pointer that holds 21737 and 15627... Total number of dynamic memory allocations: 186. Total number of bytes allocated: 2236
-Creating new random pair<long, long> pointer that holds 4896 and 10430... Total number of dynamic memory allocations: 187. Total number of bytes allocated: 2244
-Creating new random pair<long, long> pointer that holds 3583 and 14796... Total number of dynamic memory allocations: 188. Total number of bytes allocated: 2252
-Creating new random pair<long, long> pointer that holds 27385 and 2990... Total number of dynamic memory allocations: 189. Total number of bytes allocated: 2260
-Creating new random pair<long, long> pointer that holds 16478 and 11906... Total number of dynamic memory allocations: 190. Total number of bytes allocated: 2268
-Creating new random pair<long, long> pointer that holds 26364 and 13141... Total number of dynamic memory allocations: 191. Total number of bytes allocated: 2276
-Creating new random pair<long, long> pointer that holds 11685 and 21457... Total number of dynamic memory allocations: 192. Total number of bytes allocated: 2284
-Creating new random pair<long, long> pointer that holds 9698 and 22565... Total number of dynamic memory allocations: 193. Total number of bytes allocated: 2292
-Creating new random pair<long, long> pointer that holds 15209 and 13666... Total number of dynamic memory allocations: 194. Total number of bytes allocated: 2300
-Creating new random pair<long, long> pointer that holds 5129 and 28589... Total number of dynamic memory allocations: 195. Total number of bytes allocated: 2308
-Creating new random pair<long, long> pointer that holds 25642 and 26343... Total number of dynamic memory allocations: 196. Total number of bytes allocated: 2316
-Creating new random pair<long, long> pointer that holds 1039 and 10688... Total number of dynamic memory allocations: 197. Total number of bytes allocated: 2324
-Creating new random pair<long, long> pointer that holds 13445 and 2649... Total number of dynamic memory allocations: 198. Total number of bytes allocated: 2332
-Creating new random pair<long, long> pointer that holds 13728 and 18644... Total number of dynamic memory allocations: 199. Total number of bytes allocated: 2340
-Creating new random pair<long, long> pointer that holds 10412 and 2948... Total number of dynamic memory allocations: 200. Total number of bytes allocated: 2348
-Creating new random pair<long, long> pointer that holds 16012 and 22952... Total number of dynamic memory allocations: 201. Total number of bytes allocated: 2356
-Creating new random pair<long, long> pointer that holds 32276 and 13510... Total number of dynamic memory allocations: 202. Total number of bytes allocated: 2364
-Creating new random pair<long, long> pointer that holds 2589 and 3626... Total number of dynamic memory allocations: 203. Total number of bytes allocated: 2372
-Creating new random pair<long, long> pointer that holds 19821 and 276... Total number of dynamic memory allocations: 204. Total number of bytes allocated: 2380
-Creating new random pair<long, long> pointer that holds 25255 and 16279... Total number of dynamic memory allocations: 205. Total number of bytes allocated: 2388
-Creating new random pair<long, long> pointer that holds 215 and 20285... Total number of dynamic memory allocations: 206. Total number of bytes allocated: 2396
+Creating new random pair<long, long> pointer that holds 29466 and 557... Total number of dynamic memory allocations: 175. Total number of bytes allocated: 2148
+Creating new random pair<long, long> pointer that holds 31334 and 5852... Total number of dynamic memory allocations: 176. Total number of bytes allocated: 2156
+Creating new random pair<long, long> pointer that holds 26742 and 3073... Total number of dynamic memory allocations: 177. Total number of bytes allocated: 2164
+Creating new random pair<long, long> pointer that holds 25799 and 3447... Total number of dynamic memory allocations: 178. Total number of bytes allocated: 2172
+Creating new random pair<long, long> pointer that holds 21015 and 27530... Total number of dynamic memory allocations: 179. Total number of bytes allocated: 2180
+Creating new random pair<long, long> pointer that holds 17002 and 2847... Total number of dynamic memory allocations: 180. Total number of bytes allocated: 2188
+Creating new random pair<long, long> pointer that holds 23660 and 15378... Total number of dynamic memory allocations: 181. Total number of bytes allocated: 2196
+Creating new random pair<long, long> pointer that holds 17614 and 20378... Total number of dynamic memory allocations: 182. Total number of bytes allocated: 2204
+Creating new random pair<long, long> pointer that holds 29572 and 22191... Total number of dynamic memory allocations: 183. Total number of bytes allocated: 2212
+Creating new random pair<long, long> pointer that holds 23578 and 28874... Total number of dynamic memory allocations: 184. Total number of bytes allocated: 2220
+Creating new random pair<long, long> pointer that holds 18803 and 5492... Total number of dynamic memory allocations: 185. Total number of bytes allocated: 2228
+Creating new random pair<long, long> pointer that holds 4265 and 22401... Total number of dynamic memory allocations: 186. Total number of bytes allocated: 2236
+Creating new random pair<long, long> pointer that holds 7158 and 22248... Total number of dynamic memory allocations: 187. Total number of bytes allocated: 2244
+Creating new random pair<long, long> pointer that holds 5573 and 32407... Total number of dynamic memory allocations: 188. Total number of bytes allocated: 2252
+Creating new random pair<long, long> pointer that holds 32090 and 21943... Total number of dynamic memory allocations: 189. Total number of bytes allocated: 2260
+Creating new random pair<long, long> pointer that holds 31155 and 10298... Total number of dynamic memory allocations: 190. Total number of bytes allocated: 2268
+Creating new random pair<long, long> pointer that holds 9369 and 10408... Total number of dynamic memory allocations: 191. Total number of bytes allocated: 2276
+Creating new random pair<long, long> pointer that holds 5873 and 32134... Total number of dynamic memory allocations: 192. Total number of bytes allocated: 2284
+Creating new random pair<long, long> pointer that holds 2247 and 32463... Total number of dynamic memory allocations: 193. Total number of bytes allocated: 2292
+Creating new random pair<long, long> pointer that holds 10939 and 19541... Total number of dynamic memory allocations: 194. Total number of bytes allocated: 2300
+Creating new random pair<long, long> pointer that holds 19372 and 27652... Total number of dynamic memory allocations: 195. Total number of bytes allocated: 2308
+Creating new random pair<long, long> pointer that holds 13523 and 22361... Total number of dynamic memory allocations: 196. Total number of bytes allocated: 2316
+Creating new random pair<long, long> pointer that holds 14259 and 22932... Total number of dynamic memory allocations: 197. Total number of bytes allocated: 2324
+Creating new random pair<long, long> pointer that holds 1154 and 27752... Total number of dynamic memory allocations: 198. Total number of bytes allocated: 2332
+Creating new random pair<long, long> pointer that holds 21763 and 28470... Total number of dynamic memory allocations: 199. Total number of bytes allocated: 2340
+Creating new random pair<long, long> pointer that holds 5850 and 13590... Total number of dynamic memory allocations: 200. Total number of bytes allocated: 2348
+Creating new random pair<long, long> pointer that holds 23019 and 2112... Total number of dynamic memory allocations: 201. Total number of bytes allocated: 2356
+Creating new random pair<long, long> pointer that holds 10815 and 30089... Total number of dynamic memory allocations: 202. Total number of bytes allocated: 2364
+Creating new random pair<long, long> pointer that holds 31363 and 2330... Total number of dynamic memory allocations: 203. Total number of bytes allocated: 2372
+Creating new random pair<long, long> pointer that holds 11046 and 11657... Total number of dynamic memory allocations: 204. Total number of bytes allocated: 2380
+Creating new random pair<long, long> pointer that holds 23440 and 10483... Total number of dynamic memory allocations: 205. Total number of bytes allocated: 2388
+Creating new random pair<long, long> pointer that holds 24091 and 20439... Total number of dynamic memory allocations: 206. Total number of bytes allocated: 2396
 
 Creating new pair array... Total number of dynamic memory allocations: 208. Total number of bytes allocated: 2536
-Creating new random pair<long, long> pointer that holds 14688 and 23524... Total number of dynamic memory allocations: 209. Total number of bytes allocated: 2544
-Creating new random pair<long, long> pointer that holds 31315 and 23155... Total number of dynamic memory allocations: 210. Total number of bytes allocated: 2552
-Creating new random pair<long, long> pointer that holds 8306 and 16989... Total number of dynamic memory allocations: 211. Total number of bytes allocated: 2560
-Creating new random pair<long, long> pointer that holds 32375 and 7175... Total number of dynamic memory allocations: 212. Total number of bytes allocated: 2568
-Creating new random pair<long, long> pointer that holds 11087 and 21388... Total number of dynamic memory allocations: 213. Total number of bytes allocated: 2576
-Creating new random pair<long, long> pointer that holds 14183 and 31348... Total number of dynamic memory allocations: 214. Total number of bytes allocated: 2584
-Creating new random pair<long, long> pointer that holds 10565 and 14428... Total number of dynamic memory allocations: 215. Total number of bytes allocated: 2592
-Creating new random pair<long, long> pointer that holds 25600 and 27039... Total number of dynamic memory allocations: 216. Total number of bytes allocated: 2600
-Creating new random pair<long, long> pointer that holds 28242 and 9342... Total number of dynamic memory allocations: 217. Total number of bytes allocated: 2608
-Creating new random pair<long, long> pointer that holds 1878 and 24669... Total number of dynamic memory allocations: 218. Total number of bytes allocated: 2616
-Creating new random pair<long, long> pointer that holds 7737 and 6156... Total number of dynamic memory allocations: 219. Total number of bytes allocated: 2624
-Creating new random pair<long, long> pointer that holds 11361 and 18230... Total number of dynamic memory allocations: 220. Total number of bytes allocated: 2632
-Creating new random pair<long, long> pointer that holds 11733 and 25708... Total number of dynamic memory allocations: 221. Total number of bytes allocated: 2640
-Creating new random pair<long, long> pointer that holds 4595 and 17513... Total number of dynamic memory allocations: 222. Total number of bytes allocated: 2648
-Creating new random pair<long, long> pointer that holds 3758 and 30840... Total number of dynamic memory allocations: 223. Total number of bytes allocated: 2656
-Creating new random pair<long, long> pointer that holds 21229 and 2351... Total number of dynamic memory allocations: 224. Total number of bytes allocated: 2664
-Creating new random pair<long, long> pointer that holds 14538 and 14299... Total number of dynamic memory allocations: 225. Total number of bytes allocated: 2672
-Creating new random pair<long, long> pointer that holds 24243 and 1092... Total number of dynamic memory allocations: 226. Total number of bytes allocated: 2680
-Creating new random pair<long, long> pointer that holds 1734 and 25022... Total number of dynamic memory allocations: 227. Total number of bytes allocated: 2688
-Creating new random pair<long, long> pointer that holds 21981 and 7588... Total number of dynamic memory allocations: 228. Total number of bytes allocated: 2696
-Creating new random pair<long, long> pointer that holds 6181 and 19109... Total number of dynamic memory allocations: 229. Total number of bytes allocated: 2704
-Creating new random pair<long, long> pointer that holds 7984 and 24466... Total number of dynamic memory allocations: 230. Total number of bytes allocated: 2712
-Creating new random pair<long, long> pointer that holds 11751 and 28051... Total number of dynamic memory allocations: 231. Total number of bytes allocated: 2720
-Creating new random pair<long, long> pointer that holds 18636 and 12511... Total number of dynamic memory allocations: 232. Total number of bytes allocated: 2728
-Creating new random pair<long, long> pointer that holds 13661 and 6261... Total number of dynamic memory allocations: 233. Total number of bytes allocated: 2736
-Creating new random pair<long, long> pointer that holds 2470 and 1129... Total number of dynamic memory allocations: 234. Total number of bytes allocated: 2744
-Creating new random pair<long, long> pointer that holds 30013 and 14269... Total number of dynamic memory allocations: 235. Total number of bytes allocated: 2752
-Creating new random pair<long, long> pointer that holds 30521 and 8674... Total number of dynamic memory allocations: 236. Total number of bytes allocated: 2760
-Creating new random pair<long, long> pointer that holds 4338 and 1358... Total number of dynamic memory allocations: 237. Total number of bytes allocated: 2768
-Creating new random pair<long, long> pointer that holds 17273 and 27603... Total number of dynamic memory allocations: 238. Total number of bytes allocated: 2776
-Creating new random pair<long, long> pointer that holds 22069 and 7832... Total number of dynamic memory allocations: 239. Total number of bytes allocated: 2784
-Creating new random pair<long, long> pointer that holds 5897 and 18144... Total number of dynamic memory allocations: 240. Total number of bytes allocated: 2792
+Creating new random pair<long, long> pointer that holds 11433 and 948... Total number of dynamic memory allocations: 209. Total number of bytes allocated: 2544
+Creating new random pair<long, long> pointer that holds 27401 and 960... Total number of dynamic memory allocations: 210. Total number of bytes allocated: 2552
+Creating new random pair<long, long> pointer that holds 11672 and 2098... Total number of dynamic memory allocations: 211. Total number of bytes allocated: 2560
+Creating new random pair<long, long> pointer that holds 11702 and 9457... Total number of dynamic memory allocations: 212. Total number of bytes allocated: 2568
+Creating new random pair<long, long> pointer that holds 8963 and 5800... Total number of dynamic memory allocations: 213. Total number of bytes allocated: 2576
+Creating new random pair<long, long> pointer that holds 28557 and 30093... Total number of dynamic memory allocations: 214. Total number of bytes allocated: 2584
+Creating new random pair<long, long> pointer that holds 32332 and 25444... Total number of dynamic memory allocations: 215. Total number of bytes allocated: 2592
+Creating new random pair<long, long> pointer that holds 28320 and 13949... Total number of dynamic memory allocations: 216. Total number of bytes allocated: 2600
+Creating new random pair<long, long> pointer that holds 15541 and 29120... Total number of dynamic memory allocations: 217. Total number of bytes allocated: 2608
+Creating new random pair<long, long> pointer that holds 21997 and 6664... Total number of dynamic memory allocations: 218. Total number of bytes allocated: 2616
+Creating new random pair<long, long> pointer that holds 16840 and 15188... Total number of dynamic memory allocations: 219. Total number of bytes allocated: 2624
+Creating new random pair<long, long> pointer that holds 2784 and 17571... Total number of dynamic memory allocations: 220. Total number of bytes allocated: 2632
+Creating new random pair<long, long> pointer that holds 12534 and 22378... Total number of dynamic memory allocations: 221. Total number of bytes allocated: 2640
+Creating new random pair<long, long> pointer that holds 29722 and 20490... Total number of dynamic memory allocations: 222. Total number of bytes allocated: 2648
+Creating new random pair<long, long> pointer that holds 2686 and 14002... Total number of dynamic memory allocations: 223. Total number of bytes allocated: 2656
+Creating new random pair<long, long> pointer that holds 7537 and 1167... Total number of dynamic memory allocations: 224. Total number of bytes allocated: 2664
+Creating new random pair<long, long> pointer that holds 3984 and 18232... Total number of dynamic memory allocations: 225. Total number of bytes allocated: 2672
+Creating new random pair<long, long> pointer that holds 23864 and 15538... Total number of dynamic memory allocations: 226. Total number of bytes allocated: 2680
+Creating new random pair<long, long> pointer that holds 12722 and 5266... Total number of dynamic memory allocations: 227. Total number of bytes allocated: 2688
+Creating new random pair<long, long> pointer that holds 24256 and 9971... Total number of dynamic memory allocations: 228. Total number of bytes allocated: 2696
+Creating new random pair<long, long> pointer that holds 4452 and 14430... Total number of dynamic memory allocations: 229. Total number of bytes allocated: 2704
+Creating new random pair<long, long> pointer that holds 13854 and 23012... Total number of dynamic memory allocations: 230. Total number of bytes allocated: 2712
+Creating new random pair<long, long> pointer that holds 20479 and 12012... Total number of dynamic memory allocations: 231. Total number of bytes allocated: 2720
+Creating new random pair<long, long> pointer that holds 24879 and 28290... Total number of dynamic memory allocations: 232. Total number of bytes allocated: 2728
+Creating new random pair<long, long> pointer that holds 14563 and 25655... Total number of dynamic memory allocations: 233. Total number of bytes allocated: 2736
+Creating new random pair<long, long> pointer that holds 23002 and 5317... Total number of dynamic memory allocations: 234. Total number of bytes allocated: 2744
+Creating new random pair<long, long> pointer that holds 1489 and 3354... Total number of dynamic memory allocations: 235. Total number of bytes allocated: 2752
+Creating new random pair<long, long> pointer that holds 7573 and 22134... Total number of dynamic memory allocations: 236. Total number of bytes allocated: 2760
+Creating new random pair<long, long> pointer that holds 17046 and 8384... Total number of dynamic memory allocations: 237. Total number of bytes allocated: 2768
+Creating new random pair<long, long> pointer that holds 20011 and 31809... Total number of dynamic memory allocations: 238. Total number of bytes allocated: 2776
+Creating new random pair<long, long> pointer that holds 5098 and 1629... Total number of dynamic memory allocations: 239. Total number of bytes allocated: 2784
+Creating new random pair<long, long> pointer that holds 20412 and 18699... Total number of dynamic memory allocations: 240. Total number of bytes allocated: 2792
 
 Creating new pair array... Total number of dynamic memory allocations: 242. Total number of bytes allocated: 2932
-Creating new random pair<long, long> pointer that holds 2273 and 17924... Total number of dynamic memory allocations: 243. Total number of bytes allocated: 2940
-Creating new random pair<long, long> pointer that holds 23469 and 1613... Total number of dynamic memory allocations: 244. Total number of bytes allocated: 2948
-Creating new random pair<long, long> pointer that holds 8451 and 21394... Total number of dynamic memory allocations: 245. Total number of bytes allocated: 2956
-Creating new random pair<long, long> pointer that holds 2818 and 449... Total number of dynamic memory allocations: 246. Total number of bytes allocated: 2964
-Creating new random pair<long, long> pointer that holds 12081 and 6336... Total number of dynamic memory allocations: 247. Total number of bytes allocated: 2972
-Creating new random pair<long, long> pointer that holds 21869 and 14410... Total number of dynamic memory allocations: 248. Total number of bytes allocated: 2980
-Creating new random pair<long, long> pointer that holds 23326 and 15279... Total number of dynamic memory allocations: 249. Total number of bytes allocated: 2988
-Creating new random pair<long, long> pointer that holds 13649 and 9378... Total number of dynamic memory allocations: 250. Total number of bytes allocated: 2996
-Creating new random pair<long, long> pointer that holds 12395 and 19841... Total number of dynamic memory allocations: 251. Total number of bytes allocated: 3004
-Creating new random pair<long, long> pointer that holds 17029 and 9905... Total number of dynamic memory allocations: 252. Total number of bytes allocated: 3012
-Creating new random pair<long, long> pointer that holds 11711 and 8197... Total number of dynamic memory allocations: 253. Total number of bytes allocated: 3020
-Creating new random pair<long, long> pointer that holds 23045 and 9810... Total number of dynamic memory allocations: 254. Total number of bytes allocated: 3028
-Creating new random pair<long, long> pointer that holds 18969 and 7830... Total number of dynamic memory allocations: 255. Total number of bytes allocated: 3036
-Creating new random pair<long, long> pointer that holds 28135 and 21338... Total number of dynamic memory allocations: 256. Total number of bytes allocated: 3044
-Creating new random pair<long, long> pointer that holds 25701 and 11840... Total number of dynamic memory allocations: 257. Total number of bytes allocated: 3052
-Creating new random pair<long, long> pointer that holds 4497 and 9943... Total number of dynamic memory allocations: 258. Total number of bytes allocated: 3060
-Creating new random pair<long, long> pointer that holds 20814 and 22821... Total number of dynamic memory allocations: 259. Total number of bytes allocated: 3068
-Creating new random pair<long, long> pointer that holds 5674 and 2453... Total number of dynamic memory allocations: 260. Total number of bytes allocated: 3076
-Creating new random pair<long, long> pointer that holds 31572 and 18719... Total number of dynamic memory allocations: 261. Total number of bytes allocated: 3084
-Creating new random pair<long, long> pointer that holds 19278 and 17383... Total number of dynamic memory allocations: 262. Total number of bytes allocated: 3092
-Creating new random pair<long, long> pointer that holds 18718 and 21927... Total number of dynamic memory allocations: 263. Total number of bytes allocated: 3100
-Creating new random pair<long, long> pointer that holds 14342 and 6819... Total number of dynamic memory allocations: 264. Total number of bytes allocated: 3108
-Creating new random pair<long, long> pointer that holds 15889 and 10486... Total number of dynamic memory allocations: 265. Total number of bytes allocated: 3116
-Creating new random pair<long, long> pointer that holds 24567 and 15727... Total number of dynamic memory allocations: 266. Total number of bytes allocated: 3124
-Creating new random pair<long, long> pointer that holds 2337 and 16489... Total number of dynamic memory allocations: 267. Total number of bytes allocated: 3132
-Creating new random pair<long, long> pointer that holds 26841 and 27195... Total number of dynamic memory allocations: 268. Total number of bytes allocated: 3140
-Creating new random pair<long, long> pointer that holds 30183 and 19498... Total number of dynamic memory allocations: 269. Total number of bytes allocated: 3148
-Creating new random pair<long, long> pointer that holds 13355 and 27151... Total number of dynamic memory allocations: 270. Total number of bytes allocated: 3156
-Creating new random pair<long, long> pointer that holds 29684 and 12813... Total number of dynamic memory allocations: 271. Total number of bytes allocated: 3164
-Creating new random pair<long, long> pointer that holds 16677 and 19207... Total number of dynamic memory allocations: 272. Total number of bytes allocated: 3172
-Creating new random pair<long, long> pointer that holds 10342 and 14264... Total number of dynamic memory allocations: 273. Total number of bytes allocated: 3180
-Creating new random pair<long, long> pointer that holds 27375 and 31644... Total number of dynamic memory allocations: 274. Total number of bytes allocated: 3188
+Creating new random pair<long, long> pointer that holds 26007 and 19227... Total number of dynamic memory allocations: 243. Total number of bytes allocated: 2940
+Creating new random pair<long, long> pointer that holds 2053 and 32646... Total number of dynamic memory allocations: 244. Total number of bytes allocated: 2948
+Creating new random pair<long, long> pointer that holds 17374 and 29784... Total number of dynamic memory allocations: 245. Total number of bytes allocated: 2956
+Creating new random pair<long, long> pointer that holds 8929 and 26114... Total number of dynamic memory allocations: 246. Total number of bytes allocated: 2964
+Creating new random pair<long, long> pointer that holds 25622 and 16910... Total number of dynamic memory allocations: 247. Total number of bytes allocated: 2972
+Creating new random pair<long, long> pointer that holds 16 and 15494... Total number of dynamic memory allocations: 248. Total number of bytes allocated: 2980
+Creating new random pair<long, long> pointer that holds 8342 and 30098... Total number of dynamic memory allocations: 249. Total number of bytes allocated: 2988
+Creating new random pair<long, long> pointer that holds 11832 and 22815... Total number of dynamic memory allocations: 250. Total number of bytes allocated: 2996
+Creating new random pair<long, long> pointer that holds 27605 and 28802... Total number of dynamic memory allocations: 251. Total number of bytes allocated: 3004
+Creating new random pair<long, long> pointer that holds 5929 and 24184... Total number of dynamic memory allocations: 252. Total number of bytes allocated: 3012
+Creating new random pair<long, long> pointer that holds 32464 and 16376... Total number of dynamic memory allocations: 253. Total number of bytes allocated: 3020
+Creating new random pair<long, long> pointer that holds 16741 and 16555... Total number of dynamic memory allocations: 254. Total number of bytes allocated: 3028
+Creating new random pair<long, long> pointer that holds 18092 and 26628... Total number of dynamic memory allocations: 255. Total number of bytes allocated: 3036
+Creating new random pair<long, long> pointer that holds 19168 and 3159... Total number of dynamic memory allocations: 256. Total number of bytes allocated: 3044
+Creating new random pair<long, long> pointer that holds 21917 and 858... Total number of dynamic memory allocations: 257. Total number of bytes allocated: 3052
+Creating new random pair<long, long> pointer that holds 260 and 9203... Total number of dynamic memory allocations: 258. Total number of bytes allocated: 3060
+Creating new random pair<long, long> pointer that holds 23302 and 2887... Total number of dynamic memory allocations: 259. Total number of bytes allocated: 3068
+Creating new random pair<long, long> pointer that holds 14840 and 26465... Total number of dynamic memory allocations: 260. Total number of bytes allocated: 3076
+Creating new random pair<long, long> pointer that holds 26338 and 23530... Total number of dynamic memory allocations: 261. Total number of bytes allocated: 3084
+Creating new random pair<long, long> pointer that holds 21282 and 31174... Total number of dynamic memory allocations: 262. Total number of bytes allocated: 3092
+Creating new random pair<long, long> pointer that holds 31842 and 18592... Total number of dynamic memory allocations: 263. Total number of bytes allocated: 3100
+Creating new random pair<long, long> pointer that holds 30955 and 6554... Total number of dynamic memory allocations: 264. Total number of bytes allocated: 3108
+Creating new random pair<long, long> pointer that holds 14295 and 21696... Total number of dynamic memory allocations: 265. Total number of bytes allocated: 3116
+Creating new random pair<long, long> pointer that holds 7106 and 16123... Total number of dynamic memory allocations: 266. Total number of bytes allocated: 3124
+Creating new random pair<long, long> pointer that holds 3027 and 25737... Total number of dynamic memory allocations: 267. Total number of bytes allocated: 3132
+Creating new random pair<long, long> pointer that holds 13923 and 29767... Total number of dynamic memory allocations: 268. Total number of bytes allocated: 3140
+Creating new random pair<long, long> pointer that holds 22923 and 31320... Total number of dynamic memory allocations: 269. Total number of bytes allocated: 3148
+Creating new random pair<long, long> pointer that holds 18777 and 7401... Total number of dynamic memory allocations: 270. Total number of bytes allocated: 3156
+Creating new random pair<long, long> pointer that holds 26752 and 21534... Total number of dynamic memory allocations: 271. Total number of bytes allocated: 3164
+Creating new random pair<long, long> pointer that holds 12225 and 7795... Total number of dynamic memory allocations: 272. Total number of bytes allocated: 3172
+Creating new random pair<long, long> pointer that holds 351 and 32018... Total number of dynamic memory allocations: 273. Total number of bytes allocated: 3180
+Creating new random pair<long, long> pointer that holds 12626 and 8174... Total number of dynamic memory allocations: 274. Total number of bytes allocated: 3188
 
 
 

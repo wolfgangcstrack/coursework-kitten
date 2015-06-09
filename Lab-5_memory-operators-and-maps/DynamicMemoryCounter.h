@@ -4,7 +4,7 @@ Wolfgang C. Strack
 Windows 8 Visual C++ 2013
 
 This header file contains the class definition of the base class that will
-monitor dynamic memory allocation in the project.
+monitor the number of dynamic memory allocations in the project.
 */
 
 #ifndef DYNAMIC_MEMORY_COUNTER_H_
