@@ -82,6 +82,12 @@
     <ClInclude Include="XmlNodeList.h" />
     <ClInclude Include="XmlRegexIO.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Patient.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Barcodes.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

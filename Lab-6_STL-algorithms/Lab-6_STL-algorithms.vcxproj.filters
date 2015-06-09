@@ -25,4 +25,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Patient.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Barcodes.txt" />
+  </ItemGroup>
 </Project>
