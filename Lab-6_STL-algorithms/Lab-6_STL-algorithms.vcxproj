@@ -78,12 +78,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Patient.h" />
     <ClInclude Include="XmlNode.h" />
     <ClInclude Include="XmlNodeList.h" />
     <ClInclude Include="XmlRegexIO.h" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="Patient.xml" />
+    <Xml Include="Patient.xml">
+      <SubType>Designer</SubType>
+    </Xml>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Barcodes.txt" />

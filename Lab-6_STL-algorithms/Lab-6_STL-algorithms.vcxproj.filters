@@ -24,6 +24,9 @@
     <ClInclude Include="XmlRegexIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Patient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Patient.xml" />
