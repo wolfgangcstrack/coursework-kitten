@@ -3,8 +3,7 @@ Lab 6 - STL Containers and Algorithms
 Wolfgang C. Strack
 Windows 8 Visual C++ 2013
 
-This header file contains the Patient class, which is an XmlNode in this
-lab. It extends the XmlNode class.
+
 */
 
 #ifndef PATIENT_HASH_MAP_H_
@@ -12,6 +11,7 @@ lab. It extends the XmlNode class.
 
 #include "Patient.h"
 #include <unordered_map>
+#include <bitset>
 using namespace std;
 
 // Hash function declared as a functor instead of lambda mainly for reuse
