@@ -43,11 +43,11 @@ public:
 	const string & getMaritalStatus() const { return *maritalStatus; }
 	int getIncome() const                   { return income; }
 	int getDependents() const               { return dependents; }
-	void setName(const string &n)           { *name = n; }
+	void setName(const string &n)           { name.reset(new string(n)); }
 	void setAge(int a)                      { age = a; }
 	void setGender(char g)                  { gender = g; }
 	void setBloodType(char bt)              { bloodType = bt; }
-	void setMaritalStatus(const string &ms) { *maritalStatus = ms; }
+	void setMaritalStatus(const string &ms) { maritalStatus.reset(new string(ms)); }
 	void setIncome(int i)                   { income = i; }
 	void setDependents(int d)               { dependents = d; }
 	// overridden methods from XmlNode
