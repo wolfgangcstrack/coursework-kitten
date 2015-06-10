@@ -6,8 +6,8 @@ Windows 8 Visual C++ 2013
 This file includes the main application for this lab.
 */
 
-#include <bitset>
 #include <iostream>
+#include <bitset>
 using namespace std;
 
 int main()
