@@ -34,4 +34,9 @@
   <ItemGroup>
     <Text Include="Barcodes.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>

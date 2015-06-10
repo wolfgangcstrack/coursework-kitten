@@ -33,12 +33,7 @@ public:
 	// constructors and destructor
 	Patient() : encryptedBarcode(0),
 		age(0), gender(0), bloodType(0),
-		income(0), dependents(0)
-	{
-		binaryBarcode = 0;
-		name = 0;
-		maritalStatus = 0;
-	}
+		income(0), dependents(0) {}
 	~Patient() {}
 	// getters/setters
 	const string & getName() const          { return *name; }
@@ -58,5 +53,18 @@ public:
 	// overridden methods from XmlNode
 	void readData(const string &data);
 };
+
+void Patient::readData(const string &data)
+{
+	encryptedBarcode = this->get_ulong(data, regex("^[0-9]*?$"));
+	binaryBarcode.reset(new bitset<15>(encryptedBarcode));
+	name.reset(new string(this->getString(data, "name")));
+	age = this->get_ulong(data, "age");
+	gender = this->getString(data, "gender").at(0);
+	bloodType = this->getString(data, "bloodtype").at(0);
+	maritalStatus.reset(new string(this->getString(data, "maritalstatus")));
+	income = this->get_ulong(data, "income");
+	dependents = this->get_ulong(data, "dependents");
+}
 
 #endif // PATIENT_H_
