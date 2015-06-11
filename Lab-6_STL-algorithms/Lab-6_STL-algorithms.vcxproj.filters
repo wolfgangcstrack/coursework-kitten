@@ -33,6 +33,9 @@
     <ClInclude Include="PatientTree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PatientDatabase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Patient.xml" />

@@ -35,7 +35,7 @@ private:
 	PatientHashSingleton()  {}
 	~PatientHashSingleton() {}
 public:
-	static PatientHash * getInstance() { return instance; }
+	static PatientHash * getInstance() { if (instance) instance = new PatientHash(); return instance; }
 	static void resetInstance()        { delete instance; instance = 0; }
 	static bool exists()               { return (instance != 0); }
 };

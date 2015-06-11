@@ -79,6 +79,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Patient.h" />
+    <ClInclude Include="PatientDatabase.h" />
     <ClInclude Include="PatientHash.h" />
     <ClInclude Include="PatientTree.h" />
     <ClInclude Include="XmlNode.h" />

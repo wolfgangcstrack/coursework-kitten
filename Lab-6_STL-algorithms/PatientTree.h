@@ -26,7 +26,7 @@ private:
 	PatientTreeSingleton()  {}
 	~PatientTreeSingleton() {}
 public:
-	static PatientTree * getInstance() { return instance; }
+	static PatientTree * getInstance() { if (instance) instance = new PatientTree(); return instance; }
 	static void resetInstance()        { delete instance; instance = 0; }
 	static bool exists()               { return (instance != 0); }
 };
