@@ -79,7 +79,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Patient.h" />
-    <ClInclude Include="Patient_HashMap.h" />
+    <ClInclude Include="PatientHash.h" />
     <ClInclude Include="XmlNode.h" />
     <ClInclude Include="XmlNodeList.h" />
     <ClInclude Include="XmlRegexIO.h" />

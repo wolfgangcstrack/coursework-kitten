@@ -27,7 +27,7 @@
     <ClInclude Include="Patient.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Patient_HashMap.h">
+    <ClInclude Include="PatientHash.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
