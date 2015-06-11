@@ -3,7 +3,8 @@ Lab 6 - STL Containers and Algorithms
 Wolfgang C. Strack
 Windows 8 Visual C++ 2013
 
-
+This file contains the PatientHash typedef and a class that manages
+a PatientHash instance as a singleton.
 */
 
 #ifndef PATIENT_HASH_
@@ -12,10 +13,11 @@ Windows 8 Visual C++ 2013
 #include "Patient.h"
 #include <unordered_map>
 #include <bitset>
+#include <memory>
 using namespace std;
 
 // Hash function declared as a functor instead of inline lambda mainly for reuse
-struct patientHash
+struct patientHashFunction
 {
 	unsigned long operator()(const bitset<15> &barcode)
 	{
@@ -23,7 +25,7 @@ struct patientHash
 	}
 };
 
-typedef unordered_map<bitset<15>, Patient, patientHash> PatientHash;
+typedef unordered_map<bitset<15>, shared_ptr<Patient>, patientHashFunction> PatientHash;
 
 class PatientHashSingleton
 {
