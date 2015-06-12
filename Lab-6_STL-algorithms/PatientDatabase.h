@@ -3,7 +3,9 @@ Lab 6 - STL Containers and Algorithms
 Wolfgang C. Strack
 Windows 8 Visual C++ 2013
 
-
+This file includes the PatientDatabase singleton class. It combines a hash
+table and a tree that both point to the patient data and are both used for
+different types of searches.
 */
 
 #ifndef PATIENT_DATABASE_H_
@@ -27,6 +29,9 @@ public:
 	static void resetInstance()            { delete instance; instance = 0; }
 	static bool exists()                   { return (instance != 0); }
 	static bool componentsExist()          { return (PatientHashSingleton::exists() && PatientTreeSingleton::exists()); }
+
+	PatientHash * getPatientHash()         { return phash; }
+	PatientTree * getPatientTree()         { return ptree; }
 };
 
 PatientDatabase * PatientDatabase::instance = 0;
