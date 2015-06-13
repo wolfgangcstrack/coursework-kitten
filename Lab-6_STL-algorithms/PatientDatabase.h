@@ -17,15 +17,15 @@ different types of searches.
 class PatientDatabase
 {
 private:
-	PatientHash *phash;
-	PatientTree *ptree;
+	static PatientHash *phash;
+	static PatientTree *ptree;
 
 	static PatientDatabase *instance;
 
 	PatientDatabase()  { phash = PatientHashSingleton::getInstance(); ptree = PatientTreeSingleton::getInstance(); }
 	~PatientDatabase() { PatientHashSingleton::resetInstance(); PatientTreeSingleton::resetInstance(); }
 public:
-	static PatientDatabase * getInstance() { if (instance) instance = new PatientDatabase(); return instance; }
+	static PatientDatabase * getInstance();
 	static void resetInstance()            { delete instance; instance = 0; }
 	static bool exists()                   { return (instance != 0); }
 	static bool componentsExist()          { return (PatientHashSingleton::exists() && PatientTreeSingleton::exists()); }
@@ -34,6 +34,18 @@ public:
 	PatientTree * getPatientTree()         { return ptree; }
 };
 
+PatientHash * PatientDatabase::phash = 0;
+PatientTree * PatientDatabase::ptree = 0;
 PatientDatabase * PatientDatabase::instance = 0;
+
+PatientDatabase * PatientDatabase::getInstance()
+{
+	if (!instance)
+	{
+		instance = new PatientDatabase();
+	}
+
+	return instance;
+}
 
 #endif // PATIENT_DATABASE_H_
