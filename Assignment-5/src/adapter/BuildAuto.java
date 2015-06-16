@@ -7,7 +7,10 @@
  */
 package adapter;
 
+import server.AutoServer;
+
 public class BuildAuto extends ProxyAutomobile
-implements CreateAuto, ReadAuto, UpdateAuto, DeleteAuto, FixAuto {
+implements CreateAuto, ReadAuto, UpdateAuto, DeleteAuto,
+		FixAuto, AutoServer {
 	// magic
 }

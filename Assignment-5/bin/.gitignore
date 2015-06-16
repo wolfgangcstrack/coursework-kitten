@@ -1,7 +1,2 @@
-/adapter/
-/driver/
-/model/
-/scale/
-/util/
 /server/
-/client/
+/adapter/
