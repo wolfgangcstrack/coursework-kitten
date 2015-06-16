@@ -19,7 +19,7 @@ class Driver {
 		AutoIO aio = new AutoIO();
 		
 		try {
-			model.Automobile testAuto = aio.buildAutoObject(propertiesFileName, true);
+			model.Automobile testAuto = aio.buildAutoObject(propertiesFileName, 2);
 			System.out.println(testAuto.toString());
 		} catch (StringIndexOutOfBoundsException ioobe) {
 			ioobe.printStackTrace();
