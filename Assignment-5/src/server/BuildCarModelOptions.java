@@ -7,6 +7,13 @@
  */
 package server;
 
-public class BuildCarModelOptions {
+import model.Automobile;
+import util.*;
 
+import java.util.Properties;
+
+public class BuildCarModelOptions {
+//	public Automobile createAuto(Properties a1) throws AutoException {
+//		return new AutoIO().buildAutoObjectFromPropertiesFile(propertiesFileName)
+//	}
 }

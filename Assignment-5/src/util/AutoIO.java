@@ -25,9 +25,17 @@ public class AutoIO {
 	public Automobile buildAutoObject(String filename, int fileType) throws AutoException {
 		switch (fileType) {
 		case 1:
-			return buildAutoObjectFromFile(filename);
+			return buildAutoObject(filename);
 		case 2:
-			return buildAutoObjectFromPropertiesFile(filename);
+			try (FileInputStream in = new FileInputStream(filename)) {
+				Properties properties = new Properties();
+				properties.load(in);
+				return buildAutoObject(properties);
+			} catch (FileNotFoundException fnfE) {
+				throw new AutoException ("Error: properties file " + filename + " not found", 1);
+			} catch (IOException ioE) {
+				throw new AutoException("Error while reading from input stream of Properties file", 2);
+			}
 		default:
 			throw new util.AutoException("Invalid file type parameter");
 		}
@@ -56,7 +64,7 @@ public class AutoIO {
 	 * .
 	 * .
 	 */
-	private Automobile buildAutoObjectFromFile(String filename) throws AutoException {	
+	public Automobile buildAutoObject(String filename) throws AutoException {	
 		StringBuilder errorMessage = new StringBuilder("Error in file ").append(filename);
 		String line; // for reading file
 		int lineNumber = 1;
@@ -124,14 +132,10 @@ public class AutoIO {
 		}
 	}
 	
-	private Automobile buildAutoObjectFromPropertiesFile(String propertiesFileName) throws AutoException {
+	public Automobile buildAutoObject(Properties properties) throws AutoException {
 		StringBuilder errorMessage = new StringBuilder("Error in file ");
-		errorMessage.append(propertiesFileName);
-		Properties properties = new Properties();
 		
-		try (FileInputStream in = new FileInputStream(propertiesFileName)) {
-			properties.load(in);
-			
+		try {
 			String key;
 			String make, model;
 			double baseprice;
@@ -187,11 +191,6 @@ public class AutoIO {
 		} catch (NumberFormatException nfE) {
 			errorMessage.append(": Baseprice property not parsable or missing");
 			throw new AutoException(errorMessage.toString(), -1);
-		} catch (FileNotFoundException fnfE) {
-			errorMessage.append(": file not found");
-			throw new AutoException (errorMessage.toString(), 1);
-		} catch (IOException ioE) {
-			throw new AutoException(errorMessage.toString(), 2);
 		}
 	}
 	
