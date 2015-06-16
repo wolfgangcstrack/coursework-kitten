@@ -16,6 +16,23 @@ import java.util.Properties;
 import model.Automobile;
 
 public class AutoIO {
+	
+	/**
+	 * File types:
+	 * 1 - Regular file
+	 * 2 - Properties file
+	 */
+	public Automobile buildAutoObject(String filename, int fileType) throws AutoException {
+		switch (fileType) {
+		case 1:
+			return buildAutoObjectFromFile(filename);
+		case 2:
+			return buildAutoObjectFromPropertiesFile(filename);
+		default:
+			throw new util.AutoException("Invalid file type parameter");
+		}
+	}
+	
 	/**
 	 * The buildAutoObject method takes a filename, reads from that file,
 	 * and instantiates a new Automotive based on the information in the file.
@@ -39,11 +56,7 @@ public class AutoIO {
 	 * .
 	 * .
 	 */
-	public Automobile buildAutoObject(String filename, boolean isPropertiesFile) throws AutoException {
-		if (isPropertiesFile) {
-			return buildAutoObject(filename);
-		}
-		
+	private Automobile buildAutoObjectFromFile(String filename) throws AutoException {	
 		StringBuilder errorMessage = new StringBuilder("Error in file ").append(filename);
 		String line; // for reading file
 		int lineNumber = 1;
@@ -111,7 +124,7 @@ public class AutoIO {
 		}
 	}
 	
-	private Automobile buildAutoObject(String propertiesFileName) throws AutoException {
+	private Automobile buildAutoObjectFromPropertiesFile(String propertiesFileName) throws AutoException {
 		StringBuilder errorMessage = new StringBuilder("Error in file ");
 		errorMessage.append(propertiesFileName);
 		Properties properties = new Properties();
