@@ -8,12 +8,10 @@ This file includes the main application for this lab.
 
 #include <iostream>
 #include <bitset>
+#include <list>
 using namespace std;
 
 int main()
 {
-	/*bitset<15> bits(13038);
-	cout << bits << endl;
-	cout << bits.to_ulong() << endl;
-	return 0;*/
+	
 }

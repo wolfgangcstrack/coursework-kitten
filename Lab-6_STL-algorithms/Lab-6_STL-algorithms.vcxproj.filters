@@ -39,6 +39,9 @@
     <ClInclude Include="Barcode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PatientList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Patient.xml" />
