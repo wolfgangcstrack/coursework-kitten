@@ -13,11 +13,11 @@ import java.io.*;
 public class AutoServerSocket {
 	private ServerSocket serverSocket;
 	
-	public AutoServerSocket() {
+	public AutoServerSocket(int port) {
 		try {
-			serverSocket = new ServerSocket(4444);
+			serverSocket = new ServerSocket(port);
 		} catch (IOException ioe) {
-			System.err.println("Could not listen on port: 4444.");
+			System.err.println("Could not listen on port: " + port);
 			System.exit(1);
 		}
 	}
