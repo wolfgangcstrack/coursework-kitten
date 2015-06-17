@@ -53,8 +53,10 @@ public:
 	PatientTree * getPatientTree() { return ptree; }
 };
 
+PatientList * PatientDatabase::plist = 0;
 PatientHash * PatientDatabase::phash = 0;
 PatientTree * PatientDatabase::ptree = 0;
+
 PatientDatabase * PatientDatabase::instance = 0;
 
 PatientDatabase * PatientDatabase::getInstance()
