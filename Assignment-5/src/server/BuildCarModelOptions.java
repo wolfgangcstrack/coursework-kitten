@@ -11,9 +11,18 @@ import model.Automobile;
 import util.*;
 
 import java.util.Properties;
+import adapter.BuildAuto;
 
-public class BuildCarModelOptions {
-//	public Automobile createAuto(Properties a1) throws AutoException {
-//		return new AutoIO().buildAutoObjectFromPropertiesFile(propertiesFileName)
-//	}
+public class BuildCarModelOptions implements AutoServer {
+	public Automobile createAuto(Properties properties) throws AutoException {
+		return new BuildAuto().createAuto(properties);
+	}
+	
+	public void addAuto(Properties properties) throws AutoException {
+		new BuildAuto().addAuto(properties);
+	}
+	
+	public void addAuto(Automobile auto) {
+		new BuildAuto().addAuto(auto);
+	}
 }

@@ -30,6 +30,7 @@ public class AutoIO {
 			try (FileInputStream in = new FileInputStream(filename)) {
 				Properties properties = new Properties();
 				properties.load(in);
+				
 				return buildAutoObject(properties);
 			} catch (FileNotFoundException fnfE) {
 				throw new AutoException ("Error: properties file " + filename + " not found", 1);
