@@ -11,27 +11,46 @@ different types of searches.
 #ifndef PATIENT_DATABASE_H_
 #define PATIENT_DATABASE_H_
 
+#include "PatientList.h"
 #include "PatientHash.h"
 #include "PatientTree.h"
 
 class PatientDatabase
 {
 private:
+	static PatientList *plist;
 	static PatientHash *phash;
 	static PatientTree *ptree;
 
 	static PatientDatabase *instance;
 
-	PatientDatabase()  { phash = PatientHashSingleton::getInstance(); ptree = PatientTreeSingleton::getInstance(); }
-	~PatientDatabase() { PatientHashSingleton::resetInstance(); PatientTreeSingleton::resetInstance(); }
+	PatientDatabase()
+	{
+		plist = PatientListSingleton::getInstance();
+		phash = PatientHashSingleton::getInstance();
+		ptree = PatientTreeSingleton::getInstance();
+	}
+
+	~PatientDatabase()
+	{
+		PatientListSingleton::resetInstance();
+		PatientHashSingleton::resetInstance();
+		PatientTreeSingleton::resetInstance();
+	}
 public:
 	static PatientDatabase * getInstance();
-	static void resetInstance()            { delete instance; instance = 0; }
-	static bool exists()                   { return (instance != 0); }
-	static bool componentsExist()          { return (PatientHashSingleton::exists() && PatientTreeSingleton::exists()); }
+	static void resetInstance()    { delete instance; instance = 0; }
+	static bool exists()           { return (instance != 0); }
+	static bool componentsExist()
+	{
+		return (PatientListSingleton::exists() && 
+			PatientHashSingleton::exists() && 
+			PatientTreeSingleton::exists());
+	}
 
-	PatientHash * getPatientHash()         { return phash; }
-	PatientTree * getPatientTree()         { return ptree; }
+	PatientList * getPatientList() { return plist; }
+	PatientHash * getPatientHash() { return phash; }
+	PatientTree * getPatientTree() { return ptree; }
 };
 
 PatientHash * PatientDatabase::phash = 0;
