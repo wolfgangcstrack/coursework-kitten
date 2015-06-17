@@ -11,9 +11,9 @@ import java.net.*;
 import java.io.*;
 
 public class DefaultSocketClient extends Thread implements SocketClientInterface {
-	private ObjectInputStream ois;
-	private ObjectOutputStream oos;
-	private Socket soc;
+	protected ObjectInputStream ois;
+	protected ObjectOutputStream oos;
+	protected Socket soc;
 	
 	DefaultSocketClient(Socket s) {
 		soc = s;
