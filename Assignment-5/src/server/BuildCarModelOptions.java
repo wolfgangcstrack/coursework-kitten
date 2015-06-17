@@ -14,6 +14,8 @@ import java.util.Properties;
 import adapter.BuildAuto;
 
 public class BuildCarModelOptions implements AutoServer {
+	public BuildCarModelOptions() {}
+	
 	public Automobile createAuto(Properties properties) throws AutoException {
 		return new BuildAuto().createAuto(properties);
 	}
