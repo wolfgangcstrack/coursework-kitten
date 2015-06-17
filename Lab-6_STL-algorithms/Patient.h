@@ -11,6 +11,7 @@ lab. It extends the XmlNode class.
 #define PATIENT_H_
 
 #include "XmlNode.h"
+#include "Barcode.h"
 #include <memory>
 #include <string>
 #include <bitset>
@@ -19,8 +20,7 @@ using namespace std;
 class Patient : public XmlNode
 {
 private:
-	int encryptedBarcode;
-	unique_ptr<bitset<15>> binaryBarcode;
+	Barcode barcode;
 
 	unique_ptr<string> name;
 	int age;
@@ -31,8 +31,7 @@ private:
 	int dependents;
 public:
 	// constructors and destructor
-	Patient() : encryptedBarcode(0),
-		age(0), gender(0), bloodType(0),
+	Patient() :	age(0), gender(0), bloodType(0),
 		income(0), dependents(0) {}
 	~Patient() {}
 	// getters/setters
@@ -56,8 +55,8 @@ public:
 
 void Patient::readData(const string &data)
 {
-	encryptedBarcode = this->get_ulong(data, regex("^[0-9]*?$"));
-	binaryBarcode.reset(new bitset<15>(encryptedBarcode));
+	/*encryptedBarcode = this->get_ulong(data, regex("^[0-9]*?$"));
+	binaryBarcode.reset(new bitset<15>(encryptedBarcode));*/
 	name.reset(new string(this->getString(data, "name")));
 	age = this->get_ulong(data, "age");
 	gender = this->getString(data, "gender").at(0);

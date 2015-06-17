@@ -78,6 +78,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Barcode.h" />
     <ClInclude Include="Patient.h" />
     <ClInclude Include="PatientDatabase.h" />
     <ClInclude Include="PatientHash.h" />
