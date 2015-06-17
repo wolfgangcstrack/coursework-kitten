@@ -12,10 +12,6 @@ import java.io.*;
 
 public class AutoServerSocket {
 	private ServerSocket serverSocket;
-	Socket clientSocket;
-	
-	private ObjectInputStream ois;
-	private ObjectOutputStream oos;
 	
 	public AutoServerSocket() {
 		try {
@@ -26,16 +22,16 @@ public class AutoServerSocket {
 		}
 	}
 	
-	public void startServer() throws IOException {
-		try {
-			clientSocket = serverSocket.accept();
-		} catch (IOException ioe) {
-			System.err.println("Accept failed.");
-			System.exit(1);
+	public void startServer() {
+		while (true) {
+			DefaultSocketClient clientSocket;
+			
+			try (Socket soc = serverSocket.accept()) {
+				clientSocket = new DefaultSocketClient(soc);
+				clientSocket.start();
+			} catch (IOException ioe) {
+				System.err.println("Accept failed.");
+			}
 		}
-		
-		PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-		BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-		String inputLine, outputLine;
 	}
 }
