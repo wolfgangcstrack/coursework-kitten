@@ -51,6 +51,8 @@ public:
 	PatientList * getPatientList() { return plist; }
 	PatientHash * getPatientHash() { return phash; }
 	PatientTree * getPatientTree() { return ptree; }
+
+	bool addPatient(const Patient &patient);
 };
 
 PatientList * PatientDatabase::plist = 0;
@@ -67,6 +69,17 @@ PatientDatabase * PatientDatabase::getInstance()
 	}
 
 	return instance;
+}
+
+bool PatientDatabase::addPatient(const Patient &patient)
+{
+	shared_ptr<Patient> ptr(new Patient(patient));
+	plist->push_back(ptr);
+
+	pair<bitset<15>, shared_ptr<Patient>> newPair(ptr->getBarcode().getBinaryBarcode(), ptr);
+	phash->insert(newPair);
+	ptree->insert(newPair);
+	return true;
 }
 
 #endif // PATIENT_DATABASE_H_

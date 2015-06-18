@@ -29,6 +29,8 @@ public:
 	ushort getEncryptedBarcode() const { return encryptedBarcode; }
 	const std::bitset<15> & getBinaryBarcode() const { return binaryBarcode; }
 	void setBarcode(ushort ebar) { encryptedBarcode = ebar; binaryBarcode = std::bitset<15>(encryptedBarcode); }
+	// operator overloads
+	Barcode & operator=(const Barcode &toCopy) { encryptedBarcode = toCopy.encryptedBarcode; binaryBarcode = toCopy.binaryBarcode; }
 };
 
 #endif // BARCODE_H_

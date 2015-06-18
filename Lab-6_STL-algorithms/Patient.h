@@ -19,6 +19,14 @@ lab. It extends the XmlNode class.
 using namespace std;
 
 #define PATIENT_DATA_TYPES Barcode, string, int, char, char, string, int, int
+#define PATIENT_DATA_PARAMS const Barcode &barcode,\
+							const string &name,\
+							int age,\
+							char gender,\
+							char bloodType,\
+							const string &maritalStatus,\
+							int income,\
+							int dependents
 
 class Patient : public XmlNode
 {
@@ -38,8 +46,10 @@ private:
 public:
 	// constructors and destructor
 	Patient()  {}
+	Patient(PATIENT_DATA_PARAMS);
 	~Patient() {}
 	// getters/setters
+	const Barcode &getBarcode() const       { return get<0>(*data); }
 	const string & getName() const          { return get<1>(*data); }
 	int getAge() const                      { return get<2>(*data); }
 	char getGender() const                  { return get<3>(*data); }
@@ -47,6 +57,7 @@ public:
 	const string & getMaritalStatus() const { return get<5>(*data); }
 	int getIncome() const                   { return get<6>(*data); }
 	int getDependents() const               { return get<7>(*data); }
+	void setBarcode(const Barcode &bcode)   { get<0>(*data) = bcode; }
 	void setName(const string &n)           { get<1>(*data) = n; }
 	void setAge(int a)                      { get<2>(*data) = a; }
 	void setGender(char g)                  { get<3>(*data) = g; }
@@ -58,9 +69,21 @@ public:
 	void readData(const string &data);
 };
 
+Patient::Patient(PATIENT_DATA_PARAMS)
+{
+	get<0>(*data) = barcode;
+	get<1>(*data) = name;
+	get<2>(*data) = age;
+	get<3>(*data) = gender;
+	get<4>(*data) = bloodType;
+	get<5>(*data) = maritalStatus;
+	get<6>(*data) = income;
+	get<7>(*data) = dependents;
+}
+
 void Patient::readData(const string &xmlData)
 {
-	std::get<0>(*data).setBarcode(this->get_ulong(xmlData, regex("^[0-9]*?$")));
+	get<0>(*data).setBarcode(this->get_ulong(xmlData, regex("^[0-9]*?$")));
 	get<1>(*data) = this->getString(xmlData, "name");
 	get<2>(*data) = this->get_ulong(xmlData, "age");
 	get<3>(*data) = this->getString(xmlData, "gender").at(0);
