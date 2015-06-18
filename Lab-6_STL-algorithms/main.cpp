@@ -17,14 +17,14 @@ void testDatabase(PatientDatabase *pDB);
 
 int main()
 {
+	// Variable declarations ---------------------------------------------
 	const string dataFile = "Patient.xml";
 	const string barcodeFile = "Barcodes.txt";
-
 	PatientDatabase *pDB = PatientDatabase::getInstance();
-
 	XmlRegexIO xrio("^[0-9]+$\n<patient>(.|\n)*?</patient>");
 	vector<string> tags;
 
+	// Start program (and timer) -----------------------------------------
 	cout << "Now reading tags from file...\n\n\n";
 	if (!xrio.getAllMatches(dataFile, tags))
 	{
@@ -33,7 +33,7 @@ int main()
 	}
 
 	cout << "Now populating Patient database...\n\n\n";
-	if (!populateDatabase(pDB))
+	if (!populateDatabase(pDB, xrio, tags))
 	{
 		cout << "Error: something went wrong while populating the Patient DB!\n";
 		return 2;
@@ -41,6 +41,9 @@ int main()
 
 	cout << "Now testing Patient database...\n\n\n";
 	testDatabase(pDB);
+
+	// End program (and timer) and display statistics --------------------
+
 
 	PatientDatabase::resetInstance();
 	return 0;
@@ -61,4 +64,9 @@ bool populateDatabase(PatientDatabase *pDB, XmlRegexIO &xrio, const vector<strin
 	}
 
 	return true;
+}
+
+void testDatabase(PatientDatabase *pDB)
+{
+	cout << "TEST DATABASE STUB" << endl;
 }
