@@ -14,9 +14,8 @@ a PatientList instance as a singleton.
 #include <bitset>
 #include <memory>
 #include <list>
-using namespace std;
 
-typedef list<shared_ptr<Patient>> PatientList;
+typedef std::list<std::shared_ptr<Patient>> PatientList;
 
 class PatientListSingleton
 {

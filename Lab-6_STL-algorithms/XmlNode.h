@@ -10,40 +10,39 @@ chosen for this lab.
 #ifndef _XML_NODE_H
 #define _XML_NODE_H
 
-#include <regex>
 #include <string>
 #include <vector>
-using namespace std;
-
-typedef unsigned short ushort;
-typedef unsigned long ulong;
+#include <regex>
 
 class XmlNode
 {
 protected:
-	string className;
-	string xmlTags;
+	typedef unsigned short ushort;
+	typedef unsigned long ulong;
 
-	long get_ulong(const string &data, const string &tagName) 
+	std::string className;
+	std::string xmlTags;
+
+	long get_ulong(const std::string &data, const std::string &tagName) 
 	{
-		return get_ulong(data, regex("<" + tagName + ">[0-9]*"));
+		return get_ulong(data, std::regex("<" + tagName + ">[0-9]*"));
 	}
-	long get_ulong(const string &data, regex rx)
+	long get_ulong(const std::string &data, std::regex rx)
 	{
-		auto match = sregex_iterator(data.begin(), data.end(), rx);
-		string temp = match->str();
-		return stol((sregex_iterator(temp.begin(), temp.end(), regex("[0-9]+"))->str()));
+		auto match = std::sregex_iterator(data.begin(), data.end(), rx);
+		std::string temp = match->str();
+		return stol((std::sregex_iterator(temp.begin(), temp.end(), std::regex("[0-9]+"))->str()));
 	}
 
-	string getString(const string &data, const string &tagName)
+	std::string getString(const std::string &data, const std::string &tagName)
 	{
-		return getString(data, regex("<" + tagName + ">.*?</" + tagName + ">"));
+		return getString(data, std::regex("<" + tagName + ">.*?</" + tagName + ">"));
 	}
-	string getString(const string &data, regex rx)
+	std::string getString(const std::string &data, std::regex rx)
 	{
-		auto match = sregex_iterator(data.begin(), data.end(), rx);
-		string temp = match->str();
-		string pTemp = "";
+		auto match = std::sregex_iterator(data.begin(), data.end(), rx);
+		std::string temp = match->str();
+		std::string pTemp = "";
 		for (int i = temp.find('>') + 1; i < temp.length(); i++)
 		{
 			if (temp[i] == '<')
@@ -54,24 +53,24 @@ protected:
 		return pTemp;
 	}
 
-	bool getBoolean(const string &data, regex rx)
+	bool getBoolean(const std::string &data, std::regex rx)
 	{
-		auto match = sregex_iterator(data.begin(), data.end(), rx);
-		string temp = match->str();
+		auto match = std::sregex_iterator(data.begin(), data.end(), rx);
+		std::string temp = match->str();
 		return (temp.find("true") > -1 ? true : false);
 	}
 public:
 	// constructors and destructor
 	XmlNode() {}
-	XmlNode(const string &tags) { xmlTags = tags; }
+	XmlNode(const std::string &tags) { xmlTags = tags; }
 	virtual ~XmlNode() {}
 	// getter
-	const string & getXMLTags() const { return xmlTags; }
-	const string & getClassName() const { return className; }
+	const std::string & getXMLTags() const { return xmlTags; }
+	const std::string & getClassName() const { return className; }
 	// setter
-	void setXMLTags(const string &newTags) { xmlTags = newTags; }
+	void setXMLTags(const std::string &newTags) { xmlTags = newTags; }
 	// other methods
-	virtual void readData(const string &data) = 0;
+	virtual void readData(const std::string &data) = 0;
 };
 
 #endif // _XML_NODE_H

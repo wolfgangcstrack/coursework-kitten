@@ -21,14 +21,31 @@ private:
 	std::bitset<15> binaryBarcode;
 public:
 	// constructors and destructor
-	Barcode() : encryptedBarcode(0), binaryBarcode(0) {}
-	Barcode(const Barcode &toCopy) : encryptedBarcode(toCopy.encryptedBarcode), binaryBarcode(toCopy.binaryBarcode) {}
-	Barcode(ushort ebar) : encryptedBarcode(ebar), binaryBarcode(encryptedBarcode) {}
+	Barcode()
+		: encryptedBarcode(0),
+		binaryBarcode(0) {}
+
+	Barcode(const Barcode &toCopy)
+		: encryptedBarcode(toCopy.encryptedBarcode),
+		binaryBarcode(toCopy.binaryBarcode) {}
+
+	Barcode(ushort ebar)
+		: encryptedBarcode(ebar),
+		binaryBarcode(encryptedBarcode) {}
+
 	~Barcode() {}
+
 	// getters/setters
 	ushort getEncryptedBarcode() const { return encryptedBarcode; }
+
 	const std::bitset<15> & getBinaryBarcode() const { return binaryBarcode; }
-	void setBarcode(ushort ebar) { encryptedBarcode = ebar; binaryBarcode = std::bitset<15>(encryptedBarcode); }
+
+	void setBarcode(ushort ebar)
+	{
+		encryptedBarcode = ebar;
+		binaryBarcode = std::bitset<15>(encryptedBarcode);
+	}
+
 	// operator overloads
 	Barcode & operator=(const Barcode &toCopy)
 	{

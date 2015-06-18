@@ -14,18 +14,17 @@ a PatientHash instance as a singleton.
 #include <unordered_map>
 #include <bitset>
 #include <memory>
-using namespace std;
 
 // Hash function declared as a functor instead of inline lambda mainly for reuse
 struct patientHashFunction
 {
-	unsigned long operator()(const bitset<15> &barcode)
+	unsigned long operator()(const std::bitset<15> &barcode)
 	{
 		return barcode.to_ulong();
 	}
 };
 
-typedef unordered_map<bitset<15>, shared_ptr<Patient>, patientHashFunction> PatientHash;
+typedef std::unordered_map<std::bitset<15>, std::shared_ptr<Patient>, patientHashFunction> PatientHash;
 
 class PatientHashSingleton
 {

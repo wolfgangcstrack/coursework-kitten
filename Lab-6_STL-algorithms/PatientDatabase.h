@@ -74,14 +74,14 @@ PatientDatabase * PatientDatabase::getInstance()
 
 bool PatientDatabase::addPatient(const Patient &patient)
 {
-	typedef pair<bitset<15>, shared_ptr<Patient>> BarcodeAndPatient;
+	typedef std::pair<std::bitset<15>, std::shared_ptr<Patient>> BarcodeAndPatient;
 
-	shared_ptr<Patient> ptr(new Patient(patient));
+	std::shared_ptr<Patient> ptr(new Patient(patient));
 	BarcodeAndPatient bap(ptr->getBarcode().getBinaryBarcode(), ptr);
 
-	thread listInsert([](shared_ptr<Patient> p){ plist->push_back(p); }, ptr);
-	thread hashInsert([](BarcodeAndPatient bp){ phash->insert(bp); }, bap);
-	thread treeInsert([](BarcodeAndPatient bp){ ptree->insert(bp); }, bap);
+	std::thread listInsert([](std::shared_ptr<Patient> p){ plist->push_back(p); }, ptr);
+	std::thread hashInsert([](BarcodeAndPatient bp){ phash->insert(bp); }, bap);
+	std::thread treeInsert([](BarcodeAndPatient bp){ ptree->insert(bp); }, bap);
 
 	listInsert.join();
 	hashInsert.join();

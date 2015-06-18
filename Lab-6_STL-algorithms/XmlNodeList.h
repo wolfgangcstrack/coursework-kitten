@@ -13,12 +13,11 @@ This class is essentially a wrapper of the stl vector.
 #include "XmlNode.h"
 #include <vector>
 #include <memory>
-using namespace std;
 
 class XmlNodeList
 {
 private:
-	vector<shared_ptr<XmlNode>> nodeList;
+	std::vector<std::shared_ptr<XmlNode>> nodeList;
 public:
 	// constructors and destructor
 	XmlNodeList() {}
@@ -26,10 +25,10 @@ public:
 	// wrapped methods
 	int size() const { return nodeList.size(); }
 	bool empty() const { return nodeList.empty(); }
-	shared_ptr<XmlNode> operator[](unsigned int index) const { return nodeList[index]; }
-	shared_ptr<XmlNode> front() const { return nodeList[0]; }
-	void push_front(shared_ptr<XmlNode> &xmlNode) { nodeList.insert(nodeList.begin(), xmlNode); }
-	void push_back(shared_ptr<XmlNode> &xmlNode) { nodeList.push_back(xmlNode); }
+	std::shared_ptr<XmlNode> operator[](unsigned int index) const { return nodeList[index]; }
+	std::shared_ptr<XmlNode> front() const { return nodeList[0]; }
+	void push_front(std::shared_ptr<XmlNode> &xmlNode) { nodeList.insert(nodeList.begin(), xmlNode); }
+	void push_back(std::shared_ptr<XmlNode> &xmlNode) { nodeList.push_back(xmlNode); }
 	void pop_front() { nodeList.erase(nodeList.begin()); }
 	void pop_back() { nodeList.pop_back(); }
 };

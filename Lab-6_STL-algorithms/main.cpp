@@ -18,8 +18,8 @@ void testDatabase(PatientDatabase *pDB);
 int main()
 {
 	// Variable declarations ---------------------------------------------
-	const string dataFile = "Patient.xml";
-	const string barcodeFile = "Barcodes.txt";
+	const std::string dataFile = "Patient.xml";
+	const std::string barcodeFile = "Barcodes.txt";
 	PatientDatabase *pDB = PatientDatabase::getInstance();
 	XmlRegexIO xrio("[0-9]*\\n<patient>(.|\\n)*?</patient>");
 	vector<string> tags;

@@ -14,18 +14,17 @@ a PatientTree instance as a singleton.
 #include <bitset>
 #include <memory>
 #include <map>
-using namespace std;
 
 // Compare function declared as a functor instead of inline lambda mainly for reuse
 struct patientTreeCompareFunction
 {
-	bool operator()(const bitset<15> &lhs, const bitset<15> &rhs)
+	bool operator()(const std::bitset<15> &lhs, const std::bitset<15> &rhs)
 	{
 		return (lhs.to_ulong() < rhs.to_ulong());
 	}
 };
 
-typedef map<bitset<15>, shared_ptr<Patient>, patientTreeCompareFunction> PatientTree;
+typedef std::map<std::bitset<15>, std::shared_ptr<Patient>, patientTreeCompareFunction> PatientTree;
 
 class PatientTreeSingleton
 {
