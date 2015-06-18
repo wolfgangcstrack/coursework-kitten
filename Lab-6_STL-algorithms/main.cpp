@@ -6,13 +6,15 @@ Windows 8 Visual C++ 2013
 This file includes the main application for this lab.
 */
 
+#include "SpecializedPatientParser.h"
 #include "PatientDatabase.h"
-#include "XmlRegexIO.h"
 #include <iostream>
 #include <vector>
 using namespace std;
 
-bool populateDatabase(PatientDatabase *pDB, XmlRegexIO &xrio, const vector<string> &tags);
+typedef SpecializedPatientParser SPP;
+
+bool populateDatabase(PatientDatabase *pDB, SPP &spp, const vector<string> &tags);
 void testDatabase(PatientDatabase *pDB);
 
 int main()
@@ -21,19 +23,19 @@ int main()
 	const std::string dataFile = "Patient.xml";
 	const std::string barcodeFile = "Barcodes.txt";
 	PatientDatabase *pDB = PatientDatabase::getInstance();
-	XmlRegexIO xrio("[0-9]*\\n<patient>(.|\\n)*?</patient>");
+	SPP spp("[0-9]*\\n<patient>(.|\\n)*?</patient>");
 	vector<string> tags;
 
 	// Start program (and timer) -----------------------------------------
 	cout << "Now reading tags from file...\n\n\n";
-	if (!xrio.getAllMatches(dataFile, tags))
+	if (!spp.getAllMatches(dataFile, tags))
 	{
 		cout << "Error: something went wrong while reading XML tags from file!\n";
 		return 1;
 	}
 
 	cout << "Now populating Patient database...\n\n\n";
-	if (!populateDatabase(pDB, xrio, tags))
+	if (!populateDatabase(pDB, spp, tags))
 	{
 		cout << "Error: something went wrong while populating the Patient DB!\n";
 		return 2;
@@ -49,14 +51,14 @@ int main()
 	return 0;
 }
 
-bool populateDatabase(PatientDatabase *pDB, XmlRegexIO &xrio, const vector<string> &tags)
+bool populateDatabase(PatientDatabase *pDB, SPP &spp, const vector<string> &tags)
 {
 	for (int i = 0; i < tags.size(); i++)
 	{
 		Patient patient;
 		patient.setXMLTags(tags[i]);
 
-		if (!xrio.getXmlDataFromString(tags[i], patient))
+		if (!spp.getXmlDataFromString(tags[i], patient))
 			return false;
 
 		if (!pDB->addPatient(patient))

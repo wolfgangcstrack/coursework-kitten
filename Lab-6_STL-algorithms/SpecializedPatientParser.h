@@ -12,11 +12,18 @@ functionality to improve speed.
 #ifndef SPECIALIZED_PATIENT_PARSER_H_
 #define SPECIALIZED_PATIENT_PARSER_H_
 
+#include "PatientDatabase.h"
 #include "XmlRegexIO.h"
 
 class SpecializedPatientParser : public XmlRegexIO
 {
-
+public:
+	// constructors and destructor
+	SpecializedPatientParser() : XmlRegexIO() {}
+	SpecializedPatientParser(const std::string &pattern) : XmlRegexIO(pattern) {}
+	~SpecializedPatientParser () {}
+	// other methods
+	bool specializedParse(const std::string &fileName, PatientDatabase *pDB);
 };
 
 #endif // SPECIALIZED_PATIENT_PARSER_H_
