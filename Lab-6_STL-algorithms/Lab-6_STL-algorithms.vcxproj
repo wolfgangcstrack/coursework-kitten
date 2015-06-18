@@ -84,6 +84,7 @@
     <ClInclude Include="PatientHash.h" />
     <ClInclude Include="PatientList.h" />
     <ClInclude Include="PatientTree.h" />
+    <ClInclude Include="SpecializedPatientParser.h" />
     <ClInclude Include="XmlNode.h" />
     <ClInclude Include="XmlNodeList.h" />
     <ClInclude Include="XmlRegexIO.h" />

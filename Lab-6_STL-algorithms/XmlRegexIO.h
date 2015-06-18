@@ -24,7 +24,7 @@ using namespace std;
 
 class XmlRegexIO
 {
-private:
+protected:
 	string pattern;
 	regex rex;
 public:
@@ -38,10 +38,10 @@ public:
 	// setters
 	void setPattern(const string &patt) { pattern = patt; rex = regex(pattern); }
 	// other methods
-	bool getXmlTags(const string &filename, XmlNode &store);
-	bool getXmlDataFromFile(const string &dataFilename, XmlNode &store);
-	bool getXmlDataFromString(const string &data, XmlNode &store);
-	bool getAllMatches(const string &dataFilename, vector<string> &store);
+	virtual bool getXmlTags(const string &filename, XmlNode &store);
+	virtual bool getXmlDataFromFile(const string &dataFilename, XmlNode &store);
+	virtual bool getXmlDataFromString(const string &data, XmlNode &store);
+	virtual bool getAllMatches(const string &dataFilename, vector<string> &store);
 };
 
 bool XmlRegexIO::getXmlTags(const string &filename, XmlNode &store)

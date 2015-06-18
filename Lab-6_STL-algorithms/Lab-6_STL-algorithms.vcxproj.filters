@@ -42,6 +42,9 @@
     <ClInclude Include="PatientList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SpecializedPatientParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Patient.xml" />
