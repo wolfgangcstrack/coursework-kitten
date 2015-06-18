@@ -21,7 +21,7 @@ int main()
 	const string dataFile = "Patient.xml";
 	const string barcodeFile = "Barcodes.txt";
 	PatientDatabase *pDB = PatientDatabase::getInstance();
-	XmlRegexIO xrio("^[0-9]+$\n<patient>(.|\n)*?</patient>");
+	XmlRegexIO xrio("[0-9]*\\n<patient>(.|\\n)*?</patient>");
 	vector<string> tags;
 
 	// Start program (and timer) -----------------------------------------

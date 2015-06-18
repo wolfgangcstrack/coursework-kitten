@@ -14,6 +14,7 @@ different types of searches.
 #include "PatientList.h"
 #include "PatientHash.h"
 #include "PatientTree.h"
+#include <thread>
 
 class PatientDatabase
 {
@@ -73,12 +74,19 @@ PatientDatabase * PatientDatabase::getInstance()
 
 bool PatientDatabase::addPatient(const Patient &patient)
 {
-	shared_ptr<Patient> ptr(new Patient(patient));
-	plist->push_back(ptr);
+	typedef pair<bitset<15>, shared_ptr<Patient>> BarcodeAndPatient;
 
-	pair<bitset<15>, shared_ptr<Patient>> newPair(ptr->getBarcode().getBinaryBarcode(), ptr);
-	phash->insert(newPair);
-	ptree->insert(newPair);
+	shared_ptr<Patient> ptr(new Patient(patient));
+	BarcodeAndPatient bap(ptr->getBarcode().getBinaryBarcode(), ptr);
+
+	thread listInsert([](shared_ptr<Patient> p){ plist->push_back(p); }, ptr);
+	thread hashInsert([](BarcodeAndPatient bp){ phash->insert(bp); }, bap);
+	thread treeInsert([](BarcodeAndPatient bp){ ptree->insert(bp); }, bap);
+
+	listInsert.join();
+	hashInsert.join();
+	treeInsert.join();
+
 	return true;
 }
 
