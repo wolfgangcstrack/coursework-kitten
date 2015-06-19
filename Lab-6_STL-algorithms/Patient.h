@@ -17,12 +17,12 @@ lab. It extends the XmlNode class.
 #include <tuple>
 
 // some macros for parameter lists
-#define PATIENT_DATA_TYPES Barcode, std::string, int, char, char, std::string, int, int
+#define PATIENT_DATA_TYPES Barcode, std::string, int, char, std::string, std::string, int, int
 #define PATIENT_DATA_PARAMS const Barcode &barcode,\
 							const std::string &name,\
 							int age,\
 							char gender,\
-							char bloodType,\
+							const std::string &bloodType,\
 							const std::string &maritalStatus,\
 							int income,\
 							int dependents
@@ -37,7 +37,7 @@ private:
 	1 std::string name;
 	2 int age;
 	3 char gender;
-	4 char bloodType;
+	4 std::string bloodType;
 	5 std::string maritalStatus;
 	6 int income;
 	7 int dependents;
@@ -53,7 +53,7 @@ public:
 	const std::string & getName() const          { return std::get<1>(data); }
 	int getAge() const                           { return std::get<2>(data); }
 	char getGender() const                       { return std::get<3>(data); }
-	char getBloodtype() const                    { return std::get<4>(data); }
+	const std::string & getBloodtype() const     { return std::get<4>(data); }
 	const std::string & getMaritalStatus() const { return std::get<5>(data); }
 	int getIncome() const                        { return std::get<6>(data); }
 	int getDependents() const                    { return std::get<7>(data); }
@@ -74,13 +74,13 @@ public:
 std::ostream & operator<<(std::ostream &os, Patient &p)
 {
 	os << "Patient " << p.getBarcode().getEncryptedBarcode() << std::endl
-		<< '\t' << p.getName() << std::endl
-		<< '\t' << p.getAge() << std::endl
-		<< '\t' << p.getGender() << std::endl
-		<< '\t' << p.getBloodtype() << std::endl
-		<< '\t' << p.getMaritalStatus() << std::endl
-		<< '\t' << p.getIncome() << std::endl
-		<< '\t' << p.getDependents();
+		<< "\tName: " << p.getName() << std::endl
+		<< "\tAge: " << p.getAge() << std::endl
+		<< "\tGender: " << p.getGender() << std::endl
+		<< "\tBlood type: " << p.getBloodtype() << std::endl
+		<< "\tMarital status: " << p.getMaritalStatus() << std::endl
+		<< "\tIncome: " << p.getIncome() << std::endl
+		<< "\tDependents: " << p.getDependents();
 
 	return os;
 }
@@ -104,14 +104,29 @@ Patient::Patient(PATIENT_DATA_PARAMS)
 
 void Patient::readData(const std::string &xmlData)
 {
-	std::get<0>(data).setBarcode(this->get_ulong(xmlData, std::regex("^[0-9]*")));
-	std::get<1>(data) = this->getString(xmlData, "name");
-	std::get<2>(data) = this->get_ulong(xmlData, "age");
-	std::get<3>(data) = this->getString(xmlData, "gender").at(0);
-	std::get<4>(data) = this->getString(xmlData, "bloodtype").at(0);
-	std::get<5>(data) = this->getString(xmlData, "maritalstatus");
-	std::get<6>(data) = this->get_ulong(xmlData, "income");
-	std::get<7>(data) = this->get_ulong(xmlData, "dependents");
+	size_t bpos = 0, epos = xmlData.find("<patient>");
+	std::get<0>(data).setBarcode(std::stoi(xmlData.substr(bpos, epos - bpos)));
+
+	bpos = xmlData.find("<name>", epos) + 6, epos = xmlData.find("</name>", bpos);
+	std::get<1>(data) = xmlData.substr(bpos, epos - bpos);
+
+	bpos = xmlData.find("<age>", epos) + 5, epos = xmlData.find("</age>", bpos);
+	std::get<2>(data) = std::stoi(xmlData.substr(bpos, epos - bpos));
+
+	bpos = xmlData.find("<gender>", epos) + 8, epos = xmlData.find("</gender>", bpos);
+	std::get<3>(data) = xmlData.substr(bpos, epos - bpos).at(0);
+
+	bpos = xmlData.find("<bloodtype>", epos) + 11, epos = xmlData.find("</bloodtype>", bpos);
+	std::get<4>(data) = xmlData.substr(bpos, epos - bpos);
+
+	bpos = xmlData.find("<maritalstatus>", epos) + 15, epos = xmlData.find("</maritalstatus>", bpos);
+	std::get<5>(data) = xmlData.substr(bpos, epos - bpos);
+
+	bpos = xmlData.find("<income>", epos) + 8, epos = xmlData.find("</income>", bpos);
+	std::get<6>(data) = std::stoi(xmlData.substr(bpos, epos - bpos));
+
+	bpos = xmlData.find("<dependents>", epos) + 12, epos = xmlData.find("</dependents>", bpos);
+	std::get<7>(data) = std::stoi(xmlData.substr(bpos, epos - bpos));
 }
 
 #endif // PATIENT_H_

@@ -5,7 +5,7 @@ Windows 8 Visual C++ 2013
 
 This file includes the main application for this lab.
 
-PLEASE NOTE: Using the SpecializedPatientParser initialization list
+PLEASE NOTE: Using the SpecializedPatientParser default initialization list
 constructor results in near-100% use of the CPU. This is intended in order
 to maximize speed by running a separate thread on each logical processor.
 If this is undesirable for any reason, pass the SpecializedPatientParser
@@ -62,7 +62,7 @@ void testDatabase(PatientDatabase &pDB)
 	int pcount = 0;
 	auto iter = ph->begin();
 	auto end = ph->end();
-	while (pcount++ < 10)
+	while (pcount++ < 5)
 	{
 		if (iter == end)
 			break;

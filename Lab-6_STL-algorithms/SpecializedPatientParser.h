@@ -74,7 +74,7 @@ void SpecializedPatientParser::parseAndInsertData(std::string data, PatientDatab
 
 	while (epos != std::string::npos)
 	{
-		std::string temp = data.substr(bpos, (epos+=pattern.length())); // get a single patient node
+		std::string temp = data.substr(bpos, (epos += pattern.length()) - bpos); // get a single patient node
 		// parse data, create Patient and insert Patient into database
 		Patient newPatient;
 		newPatient.readData(temp);
