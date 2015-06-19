@@ -19,6 +19,8 @@ functionality to improve speed.
 #include <mutex>
 #include <list>
 
+#include <iostream>
+
 class SpecializedPatientParser : public XmlRegexIO
 {
 private:
@@ -42,8 +44,7 @@ public:
 const std::regex SpecializedPatientParser::splitterRegex(
 	std::string("([0-9]*\\n<patient>[\\s\\S]*?</patient>\\n*?){") +
 	std::to_string(PATIENT_COUNT_SPLITTER) + 
-	std::string("}")
-);
+	std::string("}"));
 const std::regex SpecializedPatientParser::patientRegex("[0-9]*\\n<patient>(.|\\n)*?</patient>");
 
 // private method used by threads
@@ -70,8 +71,9 @@ bool SpecializedPatientParser::specializedParse(const std::string &filename, Pat
 		return false;
 
 	// split file and parse all pieces concurrently
-	std::string content((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
 
+	/* doesn't work
+	std::string content((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
 	std::sregex_token_iterator begin(content.begin(), content.end(), splitterRegex);
 	std::sregex_token_iterator end;
 
@@ -89,6 +91,7 @@ bool SpecializedPatientParser::specializedParse(const std::string &filename, Pat
 			)
 		);
 	}
+	*/
 
 	// join all parser threads
 	std::for_each(

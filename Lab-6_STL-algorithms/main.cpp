@@ -27,19 +27,19 @@ int main()
 	vector<string> tags;
 
 	// Start program (and timer) -----------------------------------------
-	cout << "Now reading tags from file...\n\n\n";
+	cout << "Now parsing Patients from file...\n\n\n";
 	if (!spp.specializedParse(dataFile, pDB))
 	{
 		cout << "Error: something went wrong while parsing the XML file!\n";
 		return 1;
 	}
 
-	cout << "Now populating Patient database...\n\n\n";
+	/*cout << "Now populating Patient database...\n\n\n";
 	if (!populateDatabase(pDB, spp, tags))
 	{
 		cout << "Error: something went wrong while populating the Patient DB!\n";
 		return 2;
-	}
+	}*/
 
 	cout << "Now testing Patient database...\n\n\n";
 	testDatabase(pDB);
@@ -51,22 +51,22 @@ int main()
 	return 0;
 }
 
-bool populateDatabase(PatientDatabase *pDB, SPP &spp, const vector<string> &tags)
-{
-	for (int i = 0; i < tags.size(); i++)
-	{
-		Patient patient;
-		patient.setXMLTags(tags[i]);
-
-		if (!spp.getXmlDataFromString(tags[i], patient))
-			return false;
-
-		if (!pDB->addPatient(patient))
-			return false;
-	}
-
-	return true;
-}
+//bool populateDatabase(PatientDatabase *pDB, SPP &spp, const vector<string> &tags)
+//{
+//	for (int i = 0; i < tags.size(); i++)
+//	{
+//		Patient patient;
+//		patient.setXMLTags(tags[i]);
+//
+//		if (!spp.getXmlDataFromString(tags[i], patient))
+//			return false;
+//
+//		if (!pDB->addPatient(patient))
+//			return false;
+//	}
+//
+//	return true;
+//}
 
 void testDatabase(PatientDatabase *pDB)
 {
