@@ -23,51 +23,47 @@ singleton PatientDatabase used in this lab for insertion efficiency.
 class SpecializedPatientParser : public XmlRegexIO
 {
 private:
-	static int NUM_OF_LOGICAL_PROCESSORS;
-	static int PATIENT_COUNT_SPLITTER;
+	int NUM_OF_LOGICAL_PROCESSORS;
+	int PATIENT_COUNT_SPLITTER;
+
+	std::string fileToParse;
 
 	std::list<std::thread> parserThreads;
-
-	// private method used by static initializer
-	static int getValidSplitValue()
-	{
-		int temp = NUM_OF_LOGICAL_PROCESSORS, result;
-
-		if (100000 % temp == 0)
-		{
-			result = 100000 / temp;
-		}
-		else if (temp == 0)
-		{
-			result = 100000 / 4; // this default is based on tests using my own computer
-		}
-		else
-		{
-			if (temp < 4)
-				result = 100000 / 2;
-			else
-			{
-				do { --temp; } while (temp % 4 != 0);
-				result = 100000 / temp;
-			}
-		}
-
-		return result;
-	}
 
 	// private method used by threads
 	static void parseAndInsertData(std::string data, PatientDatabase *&pDB);
 public:
 	// constructors and destructor
 	SpecializedPatientParser()  {}
+	SpecializedPatientParser(const std::string &filename, size_t numberOfLinesInFile, bool limitCPUusage = false);
 	~SpecializedPatientParser() {}
 	// other methods
-	bool specializedParse(const std::string &fileName, PatientDatabase &pDB);
+	bool specializedParse(PatientDatabase &pDB);
 };
 
-// static variable initializers
-int SpecializedPatientParser::NUM_OF_LOGICAL_PROCESSORS = std::thread::hardware_concurrency();
-int SpecializedPatientParser::PATIENT_COUNT_SPLITTER = SpecializedPatientParser::getValidSplitValue();
+SpecializedPatientParser::SpecializedPatientParser(
+	const std::string &filename,
+	size_t numberOfLinesInFile,
+	bool limitCPUusage)
+	: NUM_OF_LOGICAL_PROCESSORS(std::thread::hardware_concurrency()),
+	fileToParse(filename)
+{
+	if (numberOfLinesInFile % NUM_OF_LOGICAL_PROCESSORS == 0)
+		PATIENT_COUNT_SPLITTER = numberOfLinesInFile / NUM_OF_LOGICAL_PROCESSORS;
+	else if (NUM_OF_LOGICAL_PROCESSORS == 0)
+		// this default was based on tests using an average CPU
+		PATIENT_COUNT_SPLITTER = numberOfLinesInFile / 4;
+	else
+	{
+		if (NUM_OF_LOGICAL_PROCESSORS < 4)
+			PATIENT_COUNT_SPLITTER = numberOfLinesInFile / 2;
+		else
+		{
+			do { --NUM_OF_LOGICAL_PROCESSORS; } while (NUM_OF_LOGICAL_PROCESSORS % 4 != 0);
+			PATIENT_COUNT_SPLITTER = numberOfLinesInFile / NUM_OF_LOGICAL_PROCESSORS;
+		}
+	}
+}
 
 // private method used by threads
 void SpecializedPatientParser::parseAndInsertData(std::string data, PatientDatabase *&pDB)
@@ -90,11 +86,11 @@ void SpecializedPatientParser::parseAndInsertData(std::string data, PatientDatab
 	}
 }
 
-bool SpecializedPatientParser::specializedParse(const std::string &filename, PatientDatabase &pDB)
+bool SpecializedPatientParser::specializedParse(PatientDatabase &pDB)
 {
 	// check if file opens
 	std::ifstream ifs;
-	ifs.open(filename);
+	ifs.open(fileToParse);
 	if (!ifs.is_open())
 		return false;
 

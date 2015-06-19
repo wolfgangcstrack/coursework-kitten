@@ -5,12 +5,13 @@ Windows 8 Visual C++ 2013
 
 This file includes the main application for this lab.
 
-PLEASE NOTE: Using the SpecializedPatientParser default constructor results
-in near-100% use of the CPU. This is intended in order to maximize speed by
-running a separate thread on each logical processor. If this is undesirable
-for any reason, pass the SpecializedPatientParser constructor "true" i.e.
+PLEASE NOTE: Using the SpecializedPatientParser initialization list
+constructor results in near-100% use of the CPU. This is intended in order
+to maximize speed by running a separate thread on each logical processor.
+If this is undesirable for any reason, pass the SpecializedPatientParser
+constructor "true" i.e.:
 
-SpecializedPatientParser spp(true);
+SpecializedPatientParser spp(dataFilename, numOfLinesInDataFile, true);
 
 to halve the CPU usage of the multi-threaded parser.
 */
@@ -27,16 +28,17 @@ void testDatabase(PatientDatabase &pDB);
 int main()
 {
 	// Variable declarations ---------------------------------------------
-	const std::string dataFile = "Patient.xml";
+	const std::string dataFileName = "Patient.xml";
+	const int numberOfLinesInDataFile = 100000;
 	const std::string barcodeFile = "Barcodes.txt";
 	PatientDatabase *pDB = PatientDatabase::getInstance(); // turn on patient database
-	SpecializedPatientParser spp;
+	SpecializedPatientParser spp(dataFileName, numberOfLinesInDataFile);
 
 	// Start program (and timer) -----------------------------------------
 	clock_t begin = clock();
 
 	cout << "Now parsing Patients from file...\n\n\n";
-	if (!spp.specializedParse(dataFile, *pDB))
+	if (!spp.specializedParse(*pDB))
 	{
 		cout << "Error: something went wrong while parsing the XML file!\n";
 		return 1;
