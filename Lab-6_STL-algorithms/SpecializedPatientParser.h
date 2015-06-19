@@ -19,28 +19,22 @@ functionality to improve speed.
 #include <mutex>
 #include <list>
 
-#include <iostream>
-
 class SpecializedPatientParser : public XmlRegexIO
 {
 private:
 	static int NUM_OF_LOGICAL_PROCESSORS;
 	static int PATIENT_COUNT_SPLITTER;
-	static const std::regex splitterRegex;
-	static const std::regex patientRegex;
 
 	std::list<std::thread> parserThreads;
 
 	// private method used by static initializer
 	static int getValidSplitValue()
 	{
-		int temp = NUM_OF_LOGICAL_PROCESSORS;
-		std::cout << "NUMBER OF LOGICAL PROCESSORS: " << temp << std::endl;
-		int result;
+		int temp = NUM_OF_LOGICAL_PROCESSORS, result;
+
 		if (100000 % temp == 0)
 		{
 			result = 100000 / temp;
-			std::cout << "TRUE" << std::endl;
 		}
 		else if (temp == 0)
 		{
@@ -56,25 +50,21 @@ private:
 				result = 100000 / temp;
 			}
 		}
-		std::cout << "THE NUMBER OF LINES: " << result << std::endl;
+
 		return result;
 	}
+
+	// private method used by threads
+	static void parseAndInsertData(std::string data, PatientDatabase *&pDB);
 public:
 	// constructors and destructor
 	SpecializedPatientParser()  {}
 	~SpecializedPatientParser() {}
 	// other methods
 	bool specializedParse(const std::string &fileName, PatientDatabase &pDB);
-	static void parseAndInsertData(std::string data, PatientDatabase *&pDB);
 };
 
 // static variable initializers
-//const std::regex SpecializedPatientParser::splitterRegex(
-//	std::string("([0-9]*\\n<patient>[\\s\\S]*?</patient>\\n*?){") +
-//	std::to_string(PATIENT_COUNT_SPLITTER) + 
-//	std::string("}"));
-//const std::regex SpecializedPatientParser::patientRegex("[0-9]*\\n<patient>(.|\\n)*?</patient>");
-
 int SpecializedPatientParser::NUM_OF_LOGICAL_PROCESSORS = std::thread::hardware_concurrency();
 int SpecializedPatientParser::PATIENT_COUNT_SPLITTER = SpecializedPatientParser::getValidSplitValue();
 
@@ -88,10 +78,8 @@ void SpecializedPatientParser::parseAndInsertData(std::string data, PatientDatab
 	while (epos != std::string::npos)
 	{
 		std::string temp = data.substr(bpos, (epos+=pattern.length())); // get a single patient node
-		//std::cout << temp << std::endl;
 		// parse data, create Patient and insert Patient into database
 		Patient newPatient;
-		//newPatient.setXMLTags(temp);
 		newPatient.readData(temp);
 		pDB->addPatient(Patient(newPatient));
 
@@ -99,30 +87,16 @@ void SpecializedPatientParser::parseAndInsertData(std::string data, PatientDatab
 		bpos = epos; // also sets bpos to one index past the last occurrence of </patient>
 		epos = data.find(pattern, bpos);
 	}
-
-	/* doesn't work
-	std::sregex_token_iterator begin(data.begin(), data.end(), patientRegex);
-	std::sregex_token_iterator end;
-
-	for (auto i = begin; i != end; ++i)
-	{
-		Patient newPatient;
-		newPatient.setXMLTags(i->str());
-		newPatient.readData(newPatient.getXMLTags());
-		pDB->addPatient(newPatient);
-	}
-	*/
 }
 
 bool SpecializedPatientParser::specializedParse(const std::string &filename, PatientDatabase &pDB)
 {
-	//std::cout << "SPP OPENING FILE" << std::endl;
 	// check if file opens
 	std::ifstream ifs;
 	ifs.open(filename);
 	if (!ifs.is_open())
 		return false;
-	//std::cout << "SPP OPENED FILE" << std::endl;
+
 	// split file and parse all pieces concurrently
 	int count = 0;
 	std::string line;
@@ -130,51 +104,24 @@ bool SpecializedPatientParser::specializedParse(const std::string &filename, Pat
 
 	while (!ifs.eof()) // read until end of file
 	{
-		//std::cout << "SPP READING CHUNK" << std::endl;
 		// Fill "chunk" string with a certain number of lines from file
 		// where number of lines is specified by PATIENT_COUNT_SPLITTER
 		while (++count <= PATIENT_COUNT_SPLITTER)
 		{
 			std::getline(ifs, line);
-			//std::cout << line << std::endl;
 			chunk.append(line);
-			//std::cout << "\tDOOOOOOOOOOOOOOOOGE 4" << std::endl;
 		}
-		//std::cout << "SPP STARTING NEW THREAD FOR CHUNK" << std::endl;
-
+		
 		// start a new thread that runs the member function parseAndInsertData,
 		// using std::bind to bind the "this" pointer to the function call
 		parserThreads.push_back(
 			std::thread(&SpecializedPatientParser::parseAndInsertData, chunk, &pDB)
 		);
-		//parseAndInsertData(chunk, pDB);
-		//std::cout << "\nSPP THREAD STARTED FOR CHUNK\n" << std::endl;
 
 		// reset loop/temporary variables
 		count = 0;
 		chunk.clear();
 	}
-
-	/* doesn't work
-	std::string content((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
-	std::sregex_token_iterator begin(content.begin(), content.end(), splitterRegex);
-	std::sregex_token_iterator end;
-
-	for (auto i = begin; i != end; ++i)
-	{
-		// start a new thread that runs the member function parseAndInsertData,
-		// using std::bind to bind the "this" pointer to the function call
-		parserThreads.push_back(
-			std::thread(
-				std::bind(
-					&SpecializedPatientParser::parseAndInsertData,
-					std::string(i->str()),
-					pDB
-				)
-			)
-		);
-	}
-	*/
 
 	// join all parser threads
 	std::for_each(

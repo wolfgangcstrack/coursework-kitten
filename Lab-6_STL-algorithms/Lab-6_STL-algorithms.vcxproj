@@ -80,13 +80,10 @@
   <ItemGroup>
     <ClInclude Include="Barcode.h" />
     <ClInclude Include="Patient.h" />
+    <ClInclude Include="PatientContainers.h" />
     <ClInclude Include="PatientDatabase.h" />
-    <ClInclude Include="PatientHash.h" />
-    <ClInclude Include="PatientList.h" />
-    <ClInclude Include="PatientTree.h" />
     <ClInclude Include="SpecializedPatientParser.h" />
     <ClInclude Include="XmlNode.h" />
-    <ClInclude Include="XmlNodeList.h" />
     <ClInclude Include="XmlRegexIO.h" />
   </ItemGroup>
   <ItemGroup>

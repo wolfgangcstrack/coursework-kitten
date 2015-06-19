@@ -18,19 +18,10 @@
     <ClInclude Include="XmlNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="XmlNodeList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="XmlRegexIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Patient.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PatientHash.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PatientTree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PatientDatabase.h">
@@ -39,10 +30,10 @@
     <ClInclude Include="Barcode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PatientList.h">
+    <ClInclude Include="SpecializedPatientParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SpecializedPatientParser.h">
+    <ClInclude Include="PatientContainers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

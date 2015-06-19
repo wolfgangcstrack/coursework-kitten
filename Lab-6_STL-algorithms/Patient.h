@@ -12,10 +12,11 @@ lab. It extends the XmlNode class.
 
 #include "XmlNode.h"
 #include "Barcode.h"
+#include <ostream>
 #include <string>
 #include <tuple>
-#include <iostream>
 
+// some macros for parameter lists
 #define PATIENT_DATA_TYPES Barcode, std::string, int, char, char, std::string, int, int
 #define PATIENT_DATA_PARAMS const Barcode &barcode,\
 							const std::string &name,\
@@ -103,7 +104,6 @@ Patient::Patient(PATIENT_DATA_PARAMS)
 
 void Patient::readData(const std::string &xmlData)
 {
-	//std::cout << xmlData << std::endl;
 	std::get<0>(data).setBarcode(this->get_ulong(xmlData, std::regex("^[0-9]*")));
 	std::get<1>(data) = this->getString(xmlData, "name");
 	std::get<2>(data) = this->get_ulong(xmlData, "age");
