@@ -6,7 +6,8 @@ Windows 8 Visual C++ 2013
 This header file contains the parser specialized for Lab 6 to parse Patients
 more quickly and automatically insert to the PatientDatabase. It extends the
 XmlRegexIO parser built from the previous lab and adds multithreading
-functionality to improve speed.
+functionality to improve speed. It also works in conjunction with the
+singleton PatientDatabase used in this lab for insertion efficiency.
 */
 
 #ifndef SPECIALIZED_PATIENT_PARSER_H_

@@ -4,6 +4,15 @@ Wolfgang C. Strack
 Windows 8 Visual C++ 2013
 
 This file includes the main application for this lab.
+
+PLEASE NOTE: Using the SpecializedPatientParser default constructor results
+in near-100% use of the CPU. This is intended in order to maximize speed by
+running a separate thread on each logical processor. If this is undesirable
+for any reason, pass the SpecializedPatientParser constructor "true" i.e.
+
+SpecializedPatientParser spp(true);
+
+to halve the CPU usage of the multi-threaded parser.
 */
 
 #include "SpecializedPatientParser.h"

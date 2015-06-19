@@ -3,9 +3,10 @@ Lab 6 - STL Containers and Algorithms
 Wolfgang C. Strack
 Windows 8 Visual C++ 2013
 
-This file includes the PatientDatabase singleton class. It combines a hash
-table and a tree that both point to the patient data and are both used for
-different types of searches.
+This file includes the PatientDatabase singleton class. This class is a
+singleton-type due to the nature of databases to usually become large.
+Therefore, accidentally copying the PatientDatabase anywhere would waste
+resources and time.
 */
 
 #ifndef PATIENT_DATABASE_H_
