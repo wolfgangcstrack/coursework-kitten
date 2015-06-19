@@ -15,6 +15,7 @@ different types of searches.
 #include "PatientHash.h"
 #include "PatientTree.h"
 #include <thread>
+#include <mutex>
 
 class PatientDatabase
 {
@@ -24,6 +25,7 @@ private:
 	static PatientTree *ptree;
 
 	static PatientDatabase *instance;
+	static std::mutex pdb_mutex;
 
 	PatientDatabase()
 	{
@@ -62,6 +64,8 @@ PatientTree * PatientDatabase::ptree = 0;
 
 PatientDatabase * PatientDatabase::instance = 0;
 
+std::mutex PatientDatabase::pdb_mutex;
+
 PatientDatabase * PatientDatabase::getInstance()
 {
 	if (!instance)
@@ -79,13 +83,17 @@ bool PatientDatabase::addPatient(const Patient &patient)
 	std::shared_ptr<Patient> ptr(new Patient(patient));
 	BarcodeAndPatient bap(ptr->getBarcode().getBinaryBarcode(), ptr);
 
-	std::thread listInsert([](std::shared_ptr<Patient> p){ plist->push_back(p); }, ptr);
-	std::thread hashInsert([](BarcodeAndPatient bp){ phash->insert(bp); }, bap);
-	std::thread treeInsert([](BarcodeAndPatient bp){ ptree->insert(bp); }, bap);
+	pdb_mutex.lock();
+
+	std::thread listInsert([](std::shared_ptr<Patient> &p){ plist->push_back(p); }, ptr);
+	std::thread hashInsert([](BarcodeAndPatient &bp){ phash->insert(bp); }, bap);
+	std::thread treeInsert([](BarcodeAndPatient &bp){ ptree->insert(bp); }, bap);
 
 	listInsert.join();
 	hashInsert.join();
 	treeInsert.join();
+
+	pdb_mutex.unlock();
 
 	return true;
 }

@@ -23,14 +23,14 @@ int main()
 	const std::string dataFile = "Patient.xml";
 	const std::string barcodeFile = "Barcodes.txt";
 	PatientDatabase *pDB = PatientDatabase::getInstance();
-	SPP spp("[0-9]*\\n<patient>(.|\\n)*?</patient>");
+	SPP spp;
 	vector<string> tags;
 
 	// Start program (and timer) -----------------------------------------
 	cout << "Now reading tags from file...\n\n\n";
-	if (!spp.getAllMatches(dataFile, tags))
+	if (!spp.specializedParse(dataFile, pDB))
 	{
-		cout << "Error: something went wrong while reading XML tags from file!\n";
+		cout << "Error: something went wrong while parsing the XML file!\n";
 		return 1;
 	}
 
