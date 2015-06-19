@@ -16,30 +16,37 @@ different types of searches.
 #include "PatientTree.h"
 #include <thread>
 #include <mutex>
+#include <iostream>
+static std::mutex pdb_mutex;
 
 class PatientDatabase
 {
 private:
-	static PatientList *plist;
-	static PatientHash *phash;
-	static PatientTree *ptree;
+	typedef std::pair<std::bitset<15>, std::shared_ptr<Patient>> BarcodeAndPatient;
+
+	/*static*/ PatientList plist;
+	/*static*/ PatientHash phash;
+	/*static*/ PatientTree ptree;
 
 	static PatientDatabase *instance;
-	static std::mutex pdb_mutex;
 
 	PatientDatabase()
 	{
-		plist = PatientListSingleton::getInstance();
+		/*plist = PatientListSingleton::getInstance();
 		phash = PatientHashSingleton::getInstance();
-		ptree = PatientTreeSingleton::getInstance();
+		ptree = PatientTreeSingleton::getInstance();*/
 	}
 
 	~PatientDatabase()
 	{
-		PatientListSingleton::resetInstance();
+		/*PatientListSingleton::resetInstance();
 		PatientHashSingleton::resetInstance();
-		PatientTreeSingleton::resetInstance();
+		PatientTreeSingleton::resetInstance();*/
 	}
+
+	static void plistInsert(std::shared_ptr<Patient> ptr, PatientList & pl) { pl.push_back(ptr); }
+	static void phashInsert(BarcodeAndPatient &bp, PatientHash & ph) { ph.insert(bp); }
+	static void ptreeInsert(BarcodeAndPatient &bp, PatientTree & pt) { pt.insert(bp); }
 public:
 	static PatientDatabase * getInstance();
 	static void resetInstance()    { delete instance; instance = 0; }
@@ -51,20 +58,20 @@ public:
 			PatientTreeSingleton::exists());
 	}
 
-	PatientList * getPatientList() { return plist; }
-	PatientHash * getPatientHash() { return phash; }
-	PatientTree * getPatientTree() { return ptree; }
+	PatientList * getPatientList() { return &plist; }
+	PatientHash * getPatientHash() { return &phash; }
+	PatientTree * getPatientTree() { return &ptree; }
 
 	bool addPatient(const Patient &patient);
 };
 
-PatientList * PatientDatabase::plist = 0;
-PatientHash * PatientDatabase::phash = 0;
-PatientTree * PatientDatabase::ptree = 0;
+//PatientList * PatientDatabase::plist = 0;
+//PatientHash * PatientDatabase::phash = 0;
+//PatientTree * PatientDatabase::ptree = 0;
 
 PatientDatabase * PatientDatabase::instance = 0;
 
-std::mutex PatientDatabase::pdb_mutex;
+//std::mutex PatientDatabase::pdb_mutex;
 
 PatientDatabase * PatientDatabase::getInstance()
 {
@@ -78,16 +85,24 @@ PatientDatabase * PatientDatabase::getInstance()
 
 bool PatientDatabase::addPatient(const Patient &patient)
 {
-	typedef std::pair<std::bitset<15>, std::shared_ptr<Patient>> BarcodeAndPatient;
-
 	std::shared_ptr<Patient> ptr(new Patient(patient));
 	BarcodeAndPatient bap(ptr->getBarcode().getBinaryBarcode(), ptr);
 
 	pdb_mutex.lock();
 
-	std::thread listInsert([](std::shared_ptr<Patient> &p){ plist->push_back(p); }, ptr);
-	std::thread hashInsert([](BarcodeAndPatient &bp){ phash->insert(bp); }, bap);
-	std::thread treeInsert([](BarcodeAndPatient &bp){ ptree->insert(bp); }, bap);
+	/*plist.push_back(ptr);
+	phash.insert(bap);
+	ptree.insert(bap);*/
+	
+	std::cout << *ptr << std::endl;
+
+	std::thread listInsert([&]{ plist.push_back(ptr); });
+	std::thread hashInsert([&]{ phash.insert(bap); });
+	std::thread treeInsert([&]{ ptree.insert(bap); });
+
+	/*std::thread listInsert(&PatientDatabase::plistInsert, ptr, plist);
+	std::thread hashInsert(&PatientDatabase::phashInsert, bap, phash);
+	std::thread treeInsert(&PatientDatabase::ptreeInsert, bap, ptree);*/
 
 	listInsert.join();
 	hashInsert.join();

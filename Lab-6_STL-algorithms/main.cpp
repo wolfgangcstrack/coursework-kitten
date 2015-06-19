@@ -15,20 +15,19 @@ using namespace std;
 typedef SpecializedPatientParser SPP;
 
 bool populateDatabase(PatientDatabase *pDB, SPP &spp, const vector<string> &tags);
-void testDatabase(PatientDatabase *pDB);
+void testDatabase(PatientDatabase &pDB);
 
 int main()
 {
 	// Variable declarations ---------------------------------------------
-	const std::string dataFile = "Patient.xml";
+	const std::string dataFile = "sample.txt";
 	const std::string barcodeFile = "Barcodes.txt";
 	PatientDatabase *pDB = PatientDatabase::getInstance();
 	SPP spp;
-	vector<string> tags;
 
 	// Start program (and timer) -----------------------------------------
 	cout << "Now parsing Patients from file...\n\n\n";
-	if (!spp.specializedParse(dataFile, pDB))
+	if (!spp.specializedParse(dataFile, *pDB))
 	{
 		cout << "Error: something went wrong while parsing the XML file!\n";
 		return 1;
@@ -42,7 +41,7 @@ int main()
 	}*/
 
 	cout << "Now testing Patient database...\n\n\n";
-	testDatabase(pDB);
+	testDatabase(*pDB);
 
 	// End program (and timer) and display statistics --------------------
 
@@ -68,7 +67,9 @@ int main()
 //	return true;
 //}
 
-void testDatabase(PatientDatabase *pDB)
+void testDatabase(PatientDatabase &pDB)
 {
-	cout << "TEST DATABASE STUB" << endl;
+	PatientList *plist = pDB.getPatientList();
+
+	cout << "THIS IS THE FIRST PATIENT: \n\n" << *plist->front() << endl;
 }

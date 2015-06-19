@@ -14,6 +14,7 @@ lab. It extends the XmlNode class.
 #include "Barcode.h"
 #include <string>
 #include <tuple>
+#include <iostream>
 
 #define PATIENT_DATA_TYPES Barcode, std::string, int, char, char, std::string, int, int
 #define PATIENT_DATA_PARAMS const Barcode &barcode,\
@@ -64,7 +65,15 @@ public:
 	void setDependents(int d)                    { std::get<7>(data) = d; }
 	// overridden methods from XmlNode
 	void readData(const std::string &xmlData);
+	// other methods
+	friend std::ostream & operator<<(std::ostream &os, Patient &p);
 };
+
+std::ostream & operator<<(std::ostream &os, Patient &p)
+{
+	os << "Hi, my name is " << p.getName() << '\n';
+	return os;
+}
 
 Patient::Patient(PATIENT_DATA_PARAMS)
 {
@@ -80,7 +89,7 @@ Patient::Patient(PATIENT_DATA_PARAMS)
 
 void Patient::readData(const std::string &xmlData)
 {
-	std::get<0>(data).setBarcode(this->get_ulong(xmlData, std::regex("^[0-9]*?$")));
+	std::get<0>(data).setBarcode(this->get_ulong(xmlData, std::regex("^[0-9]*")));
 	std::get<1>(data) = this->getString(xmlData, "name");
 	std::get<2>(data) = this->get_ulong(xmlData, "age");
 	std::get<3>(data) = this->getString(xmlData, "gender").at(0);

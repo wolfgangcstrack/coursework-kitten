@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Barcodes.txt" />
+    <Text Include="sample.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

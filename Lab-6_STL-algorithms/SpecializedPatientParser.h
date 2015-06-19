@@ -24,20 +24,20 @@ functionality to improve speed.
 class SpecializedPatientParser : public XmlRegexIO
 {
 private:
-	static const int PATIENT_COUNT_SPLITTER = 5000;
+	static const int PATIENT_COUNT_SPLITTER = 100;
 	static const std::regex splitterRegex;
 	static const std::regex patientRegex;
 
 	std::list<std::thread> parserThreads;
 
 	// private method used by threads
-	static void parseAndInsertData(const std::string data, PatientDatabase *&pDB);
 public:
 	// constructors and destructor
 	SpecializedPatientParser()  {}
 	~SpecializedPatientParser() {}
 	// other methods
-	bool specializedParse(const std::string &fileName, PatientDatabase *&pDB);
+	bool specializedParse(const std::string &fileName, PatientDatabase &pDB);
+	static void parseAndInsertData(std::string data, PatientDatabase &pDB);
 };
 
 // static variable initializers
@@ -48,8 +48,28 @@ const std::regex SpecializedPatientParser::splitterRegex(
 const std::regex SpecializedPatientParser::patientRegex("[0-9]*\\n<patient>(.|\\n)*?</patient>");
 
 // private method used by threads
-void SpecializedPatientParser::parseAndInsertData(const std::string data, PatientDatabase *&pDB)
+void SpecializedPatientParser::parseAndInsertData(std::string data, PatientDatabase &pDB)
 {
+	std::string temp;
+	std::string pattern("</patient>");
+	size_t bpos = 0; // "beginning position" of substring
+	size_t epos = data.find(pattern); // "end position" of substring
+
+	while (epos != std::string::npos)
+	{
+		temp = data.substr(bpos, (epos+=pattern.length())); // get a single patient node
+		//std::cout << temp << std::endl;
+		// parse data, create Patient and insert Patient into database
+		Patient newPatient;
+		//newPatient.setXMLTags(temp);
+		newPatient.readData(temp);
+		pDB.addPatient(newPatient);
+
+		// sets epos so string::find looks for next occurrence instead of previous one
+		bpos = epos; // also sets bpos to one index past the last occurrence of </patient>
+		epos = data.find(pattern, epos);
+	}
+
 	/* doesn't work
 	std::sregex_token_iterator begin(data.begin(), data.end(), patientRegex);
 	std::sregex_token_iterator end;
@@ -64,15 +84,15 @@ void SpecializedPatientParser::parseAndInsertData(const std::string data, Patien
 	*/
 }
 
-bool SpecializedPatientParser::specializedParse(const std::string &filename, PatientDatabase *&pDB)
+bool SpecializedPatientParser::specializedParse(const std::string &filename, PatientDatabase &pDB)
 {
-	std::cout << "DOOOOOOOOOOOOOOOOGE 1" << std::endl;
+	std::cout << "SPP OPENING FILE" << std::endl;
 	// check if file opens
 	std::ifstream ifs;
 	ifs.open(filename);
 	if (!ifs.is_open())
 		return false;
-	std::cout << "DOOOOOOOOOOOOOOOOGE 2" << std::endl;
+	std::cout << "SPP OPENED FILE" << std::endl;
 	// split file and parse all pieces concurrently
 	short count = 0;
 	std::string line;
@@ -80,29 +100,25 @@ bool SpecializedPatientParser::specializedParse(const std::string &filename, Pat
 
 	while (!ifs.eof()) // read until end of file
 	{
-		std::cout << "DOOOOOOOOOOOOOOOOGE 3" << std::endl;
+		std::cout << "SPP READING CHUNK" << std::endl;
 		// Fill "chunk" string with a certain number of lines from file
 		// where number of lines is specified by PATIENT_COUNT_SPLITTER
 		while (++count <= PATIENT_COUNT_SPLITTER)
 		{
 			std::getline(ifs, line);
+			//std::cout << line << std::endl;
 			chunk.append(line);
 			//std::cout << "\tDOOOOOOOOOOOOOOOOGE 4" << std::endl;
 		}
-		std::cout << "DOOOOOOOOOOOOOOOOGE 5" << std::endl;
+		std::cout << "SPP STARTING NEW THREAD FOR CHUNK" << std::endl;
 
 		// start a new thread that runs the member function parseAndInsertData,
 		// using std::bind to bind the "this" pointer to the function call
 		parserThreads.push_back(
-			std::thread(
-				std::bind(
-					&SpecializedPatientParser::parseAndInsertData,
-					chunk,
-					pDB
-				)
-			)
+			std::thread([&]{ SpecializedPatientParser::parseAndInsertData(chunk, pDB); })
 		);
-		std::cout << "\nDOOOOOOOOOOOOOOOOGE 7\n" << std::endl;
+		//parseAndInsertData(chunk, pDB);
+		std::cout << "\nSPP THREAD STARTED FOR CHUNK\n" << std::endl;
 
 		// reset loop/temporary variables
 		count = 0;
