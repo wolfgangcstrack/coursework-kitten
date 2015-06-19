@@ -24,7 +24,7 @@ functionality to improve speed.
 class SpecializedPatientParser : public XmlRegexIO
 {
 private:
-	static const int PATIENT_COUNT_SPLITTER = 500;
+	static const int PATIENT_COUNT_SPLITTER = 5000;
 	static const std::regex splitterRegex;
 	static const std::regex patientRegex;
 
@@ -50,6 +50,7 @@ const std::regex SpecializedPatientParser::patientRegex("[0-9]*\\n<patient>(.|\\
 // private method used by threads
 void SpecializedPatientParser::parseAndInsertData(const std::string data, PatientDatabase *&pDB)
 {
+	/* doesn't work
 	std::sregex_token_iterator begin(data.begin(), data.end(), patientRegex);
 	std::sregex_token_iterator end;
 
@@ -60,17 +61,53 @@ void SpecializedPatientParser::parseAndInsertData(const std::string data, Patien
 		newPatient.readData(newPatient.getXMLTags());
 		pDB->addPatient(newPatient);
 	}
+	*/
 }
 
 bool SpecializedPatientParser::specializedParse(const std::string &filename, PatientDatabase *&pDB)
 {
+	std::cout << "DOOOOOOOOOOOOOOOOGE 1" << std::endl;
 	// check if file opens
 	std::ifstream ifs;
 	ifs.open(filename);
 	if (!ifs.is_open())
 		return false;
-
+	std::cout << "DOOOOOOOOOOOOOOOOGE 2" << std::endl;
 	// split file and parse all pieces concurrently
+	short count = 0;
+	std::string line;
+	std::string chunk;
+
+	while (!ifs.eof()) // read until end of file
+	{
+		std::cout << "DOOOOOOOOOOOOOOOOGE 3" << std::endl;
+		// Fill "chunk" string with a certain number of lines from file
+		// where number of lines is specified by PATIENT_COUNT_SPLITTER
+		while (++count <= PATIENT_COUNT_SPLITTER)
+		{
+			std::getline(ifs, line);
+			chunk.append(line);
+			//std::cout << "\tDOOOOOOOOOOOOOOOOGE 4" << std::endl;
+		}
+		std::cout << "DOOOOOOOOOOOOOOOOGE 5" << std::endl;
+
+		// start a new thread that runs the member function parseAndInsertData,
+		// using std::bind to bind the "this" pointer to the function call
+		parserThreads.push_back(
+			std::thread(
+				std::bind(
+					&SpecializedPatientParser::parseAndInsertData,
+					chunk,
+					pDB
+				)
+			)
+		);
+		std::cout << "\nDOOOOOOOOOOOOOOOOGE 7\n" << std::endl;
+
+		// reset loop/temporary variables
+		count = 0;
+		chunk.clear();
+	}
 
 	/* doesn't work
 	std::string content((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
