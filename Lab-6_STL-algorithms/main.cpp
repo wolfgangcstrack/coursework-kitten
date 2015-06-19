@@ -10,6 +10,7 @@ This file includes the main application for this lab.
 #include "PatientDatabase.h"
 #include <iostream>
 #include <vector>
+#include <ctime>
 using namespace std;
 
 typedef SpecializedPatientParser SPP;
@@ -19,8 +20,9 @@ void testDatabase(PatientDatabase &pDB);
 
 int main()
 {
+	clock_t begin = clock();
 	// Variable declarations ---------------------------------------------
-	const std::string dataFile = "sample.txt";
+	const std::string dataFile = "Patient.xml";
 	const std::string barcodeFile = "Barcodes.txt";
 	PatientDatabase *pDB = PatientDatabase::getInstance();
 	SPP spp;
@@ -47,6 +49,8 @@ int main()
 
 
 	PatientDatabase::resetInstance();
+	clock_t end = clock();
+	cout << "\nElapsed time:\t" << double(end - begin) / CLOCKS_PER_SEC << endl;
 	return 0;
 }
 

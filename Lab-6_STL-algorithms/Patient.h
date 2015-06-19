@@ -44,6 +44,7 @@ private:
 public:
 	// constructors and destructor
 	Patient()  {}
+	Patient(const Patient &toCopy);
 	Patient(PATIENT_DATA_PARAMS);
 	~Patient() {}
 	// getters/setters
@@ -71,8 +72,21 @@ public:
 
 std::ostream & operator<<(std::ostream &os, Patient &p)
 {
-	os << "Hi, my name is " << p.getName() << '\n';
+	os << "Patient " << p.getBarcode().getEncryptedBarcode() << std::endl
+		<< '\t' << p.getName() << std::endl
+		<< '\t' << p.getAge() << std::endl
+		<< '\t' << p.getGender() << std::endl
+		<< '\t' << p.getBloodtype() << std::endl
+		<< '\t' << p.getMaritalStatus() << std::endl
+		<< '\t' << p.getIncome() << std::endl
+		<< '\t' << p.getDependents();
+
 	return os;
+}
+
+Patient::Patient(const Patient &toCopy)
+{
+	data = toCopy.data;
 }
 
 Patient::Patient(PATIENT_DATA_PARAMS)
@@ -89,6 +103,7 @@ Patient::Patient(PATIENT_DATA_PARAMS)
 
 void Patient::readData(const std::string &xmlData)
 {
+	//std::cout << xmlData << std::endl;
 	std::get<0>(data).setBarcode(this->get_ulong(xmlData, std::regex("^[0-9]*")));
 	std::get<1>(data) = this->getString(xmlData, "name");
 	std::get<2>(data) = this->get_ulong(xmlData, "age");

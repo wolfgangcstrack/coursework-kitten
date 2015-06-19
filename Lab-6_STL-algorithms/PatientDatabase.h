@@ -62,7 +62,7 @@ public:
 	PatientHash * getPatientHash() { return &phash; }
 	PatientTree * getPatientTree() { return &ptree; }
 
-	bool addPatient(const Patient &patient);
+	bool addPatient(const Patient patient);
 };
 
 //PatientList * PatientDatabase::plist = 0;
@@ -83,7 +83,7 @@ PatientDatabase * PatientDatabase::getInstance()
 	return instance;
 }
 
-bool PatientDatabase::addPatient(const Patient &patient)
+bool PatientDatabase::addPatient(const Patient patient)
 {
 	std::shared_ptr<Patient> ptr(new Patient(patient));
 	BarcodeAndPatient bap(ptr->getBarcode().getBinaryBarcode(), ptr);
@@ -94,7 +94,7 @@ bool PatientDatabase::addPatient(const Patient &patient)
 	phash.insert(bap);
 	ptree.insert(bap);*/
 	
-	std::cout << *ptr << std::endl;
+	//std::cout << *ptr << std::endl;
 
 	std::thread listInsert([&]{ plist.push_back(ptr); });
 	std::thread hashInsert([&]{ phash.insert(bap); });
