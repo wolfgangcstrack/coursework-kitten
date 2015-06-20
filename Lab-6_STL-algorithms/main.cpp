@@ -56,7 +56,6 @@ int main()
 	PatientDatabase::resetInstance(); // turn off patient database
 	clock_t end = clock();
 	cout << "\nElapsed time:\t" << double(end - begin) / CLOCKS_PER_SEC << endl;
-
 	return 0;
 }
 
@@ -74,11 +73,7 @@ bool testDatabase(const string &barcodeFile, PatientDatabase &pDB)
 	{
 		Patient nullPatient;
 		Patient patient = *phash->find(bitset<15>(line))->second;
-		if (patient == nullPatient)
-			cout << "Patient with code " << line << " could not be retrieved." << endl;
-		//cout << "Patient code: " << line << ", Name: " << p.getName() << endl;
-		//cout << *phash->find(bitset<15>(line))->second << endl << endl;
-		//cout << *pDB.getPatient(bitset<15>(line)) << endl << endl;
+		cout << "Patient with code " << line << " retrieved: " << patient.getName() << endl;
 	}
 
 	return true;
