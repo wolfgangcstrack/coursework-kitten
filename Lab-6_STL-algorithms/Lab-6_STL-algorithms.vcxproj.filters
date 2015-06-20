@@ -43,6 +43,7 @@
   <ItemGroup>
     <Text Include="Barcodes.txt" />
     <Text Include="sample.txt" />
+    <Text Include="duplicate_barcodes_log.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

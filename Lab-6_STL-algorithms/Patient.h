@@ -12,6 +12,7 @@ lab. It extends the XmlNode class.
 
 #include "XmlNode.h"
 #include "Barcode.h"
+#include <iostream>
 #include <ostream>
 #include <string>
 #include <tuple>
@@ -68,10 +69,10 @@ public:
 	// overridden methods from XmlNode
 	void readData(const std::string &xmlData);
 	// other methods
-	friend std::ostream & operator<<(std::ostream &os, Patient &p);
+	friend std::ostream & operator<<(std::ostream &os, const Patient &p);
 };
 
-std::ostream & operator<<(std::ostream &os, Patient &p)
+std::ostream & operator<<(std::ostream &os, const Patient &p)
 {
 	os << "Patient " << p.getBarcode().getEncryptedBarcode() << std::endl
 		<< "\tName: " << p.getName() << std::endl

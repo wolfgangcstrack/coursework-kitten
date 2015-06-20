@@ -15,6 +15,8 @@ resources and time.
 #include "PatientContainers.h"
 #include <mutex>
 
+#include <iostream>
+
 class PatientDatabase
 {
 private:
@@ -35,7 +37,12 @@ public:
 	// getter method (mutable)
 	PatientHash * getPatientHash() { return &phash; }
 	// other methods
-	bool addPatient(const Patient patient);
+	bool insertPatient(const Patient patient);
+	bool removePatient(const std::bitset<15> binaryBarcode);
+	bool removePatient(const std::string binaryBarcode);
+	const Patient & getPatient(const std::bitset<15> binaryBarcode);
+	const Patient & getPatient(const std::string binaryBarcode);
+	const Patient & getPatient(unsigned int encryptedBarcode);
 };
 
 // static class member initializer
@@ -51,16 +58,26 @@ PatientDatabase * PatientDatabase::getInstance()
 	return instance;
 }
 
-bool PatientDatabase::addPatient(const Patient patient)
+bool PatientDatabase::insertPatient(const Patient patient)
 {
 	std::shared_ptr<Patient> ptr(new Patient(patient));
 	BarcodeAndPatient bap(ptr->getBarcode().getBinaryBarcode(), ptr);
 
 	pdb_mutex.lock();
-	phash.insert(bap);
+	// the .second value is a bool that indicates successful insert or not
+	bool successfulInsert = (phash.insert(bap)).second;
 	pdb_mutex.unlock();
 
-	return true;
+	return successfulInsert;
+}
+
+bool PatientDatabase::removePatient(const std::bitset<15> binaryBarcode)
+{
+	pdb_mutex.lock();
+	bool successfulRemove = phash.erase(binaryBarcode);
+	pdb_mutex.unlock();
+
+	return successfulRemove;
 }
 
 #endif // PATIENT_DATABASE_H_

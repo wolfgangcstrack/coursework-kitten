@@ -5,7 +5,7 @@ Windows 8 Visual C++ 2013
 
 This file includes the main application for this lab.
 
-PLEASE NOTE: Using the SpecializedPatientParser default initialization list
+WARNING: Using the SpecializedPatientParser default initialization list
 constructor results in near-100% use of the CPU. This is intended in order
 to maximize speed by running a separate thread on each logical processor.
 If this is undesirable for any reason, pass the SpecializedPatientParser

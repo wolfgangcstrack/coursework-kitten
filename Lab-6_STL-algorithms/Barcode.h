@@ -15,9 +15,9 @@ patient data.
 class Barcode
 {
 private:
-	typedef unsigned short ushort;
+	typedef unsigned int uint;
 
-	ushort encryptedBarcode;
+	uint encryptedBarcode;
 	std::bitset<15> binaryBarcode;
 public:
 	// constructors and destructor
@@ -29,18 +29,18 @@ public:
 		: encryptedBarcode(toCopy.encryptedBarcode),
 		binaryBarcode(toCopy.binaryBarcode) {}
 
-	Barcode(ushort ebar)
+	Barcode(uint ebar)
 		: encryptedBarcode(ebar),
 		binaryBarcode(encryptedBarcode) {}
 
 	~Barcode() {}
 
 	// getters/setters
-	ushort getEncryptedBarcode() const { return encryptedBarcode; }
+	uint getEncryptedBarcode() const { return encryptedBarcode; }
 
 	const std::bitset<15> & getBinaryBarcode() const { return binaryBarcode; }
 
-	void setBarcode(ushort ebar)
+	void setBarcode(uint ebar)
 	{
 		encryptedBarcode = ebar;
 		binaryBarcode = std::bitset<15>(encryptedBarcode);

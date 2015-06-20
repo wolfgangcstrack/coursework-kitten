@@ -48,6 +48,9 @@ SpecializedPatientParser::SpecializedPatientParser(
 	: NUM_OF_LOGICAL_PROCESSORS(std::thread::hardware_concurrency()),
 	fileToParse(filename)
 {
+	if (limitCPUusage)
+		NUM_OF_LOGICAL_PROCESSORS /= 2;
+
 	if (numberOfLinesInFile % NUM_OF_LOGICAL_PROCESSORS == 0)
 		PATIENT_COUNT_SPLITTER = numberOfLinesInFile / NUM_OF_LOGICAL_PROCESSORS;
 	else if (NUM_OF_LOGICAL_PROCESSORS == 0)
@@ -78,7 +81,7 @@ void SpecializedPatientParser::parseAndInsertData(std::string data, PatientDatab
 		// parse data, create Patient and insert Patient into database
 		Patient newPatient;
 		newPatient.readData(temp);
-		pDB->addPatient(Patient(newPatient));
+		pDB->insertPatient(Patient(newPatient));
 
 		// sets epos so string::find looks for next occurrence instead of previous one
 		bpos = epos; // also sets bpos to one index past the last occurrence of </patient>

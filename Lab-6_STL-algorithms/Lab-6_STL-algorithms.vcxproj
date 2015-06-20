@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Barcodes.txt" />
+    <Text Include="duplicate_barcodes_log.txt" />
     <Text Include="sample.txt" />
   </ItemGroup>
   <ItemGroup>
