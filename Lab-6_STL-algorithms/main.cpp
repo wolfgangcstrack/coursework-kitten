@@ -38,24 +38,29 @@ int main()
 	// Start program (and timer) -----------------------------------------
 	clock_t begin = clock();
 
-	cout << "Now parsing Patients from file...\n\n\n";
+	cout << "Now parsing Patients from \"Patient.xml\"...\n\n\n";
 	if (!spp.specializedParse(*pDB))
 	{
 		cout << "Error: something went wrong while parsing the XML file!\n";
 		return 1;
 	}
 
-	cout << "Now testing Patient database...\n\n\n";
+	cout << "Now accessing Patient database with barcodes from \"Barcodes.txt\"...\n";
+	cout << "NOTE: Output suppressed for speed\n\n\n";
 	if (!testDatabase(barcodeFile, *pDB))
 	{
-		cout << "Error: something went wrong while testing the patient database!\n";
+		cout << "Error: something went wrong while accessing the patient database!\n";
 		return 2;
 	}
+	cout << "Patient database access successful!\n\n\n";
 
 	// End program (and timer) and display statistics --------------------
 	PatientDatabase::resetInstance(); // turn off patient database
+
 	clock_t end = clock();
+
 	cout << "\nElapsed time:\t" << double(end - begin) / CLOCKS_PER_SEC << endl;
+
 	return 0;
 }
 
@@ -69,11 +74,25 @@ bool testDatabase(const string &barcodeFile, PatientDatabase &pDB)
 	const PatientHash *phash = pDB.getPatientHash();
 
 	string line;
+	Patient nullPatient;
 	while (getline(ifs, line))
 	{
-		Patient nullPatient;
 		Patient patient = *phash->find(bitset<15>(line))->second;
-		cout << "Patient with code " << line << " retrieved: " << patient.getName() << endl;
+		if (patient == nullPatient)
+		{
+			cout << "ERROR: Patient with code " << line << " unable to be retrieved\n";
+			return false;
+		}
+
+		/* NOTE:
+		The following statement below is commented out because they increase the time it takes for the program
+		to complete. An unsuccessful access will result in the error message above and the program will
+		exit. In my opinion, using this system makes up for not printing out the actual patient data.
+		
+		However, if so desired, feel free to uncomment the statement below to see that the program does, in fact,
+		parse the and capture the data correctly.
+		*/
+		//cout << "Patient with code " << line << ":\n" << patient << endl; // uncommenting this adds about 30 seconds on my test machine
 	}
 
 	return true;

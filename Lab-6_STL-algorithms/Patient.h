@@ -75,14 +75,14 @@ public:
 
 std::ostream & operator<<(std::ostream &os, const Patient &p)
 {
-	os << "Patient " << p.getBarcode().getEncryptedBarcode() << std::endl
-		<< "\tName: " << p.getName() << std::endl
-		<< "\tAge: " << p.getAge() << std::endl
-		<< "\tGender: " << p.getGender() << std::endl
-		<< "\tBlood type: " << p.getBloodtype() << std::endl
-		<< "\tMarital status: " << p.getMaritalStatus() << std::endl
-		<< "\tIncome: " << p.getIncome() << std::endl
-		<< "\tDependents: " << p.getDependents();
+	os << "Patient " << std::get<0>(p.data).getEncryptedBarcode() << std::endl
+		<< "\tName: " << std::get<1>(p.data) << std::endl
+		<< "\tAge: " << std::get<2>(p.data) << std::endl
+		<< "\tGender: " << std::get<3>(p.data) << std::endl
+		<< "\tBlood type: " << std::get<4>(p.data) << std::endl
+		<< "\tMarital status: " << std::get<5>(p.data) << std::endl
+		<< "\tIncome: " << std::get<6>(p.data) << std::endl
+		<< "\tDependents: " << std::get<7>(p.data);
 
 	return os;
 }
