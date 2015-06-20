@@ -45,7 +45,7 @@ private:
 	*/
 public:
 	// constructors and destructor
-	Patient()  {}
+	Patient();
 	Patient(const Patient &toCopy);
 	Patient(PATIENT_DATA_PARAMS);
 	~Patient() {}
@@ -69,6 +69,7 @@ public:
 	// overridden methods from XmlNode
 	void readData(const std::string &xmlData);
 	// other methods
+	bool operator==(const Patient &right)        { return (this->data == right.data); }
 	friend std::ostream & operator<<(std::ostream &os, const Patient &p);
 };
 
@@ -84,6 +85,11 @@ std::ostream & operator<<(std::ostream &os, const Patient &p)
 		<< "\tDependents: " << p.getDependents();
 
 	return os;
+}
+
+Patient::Patient()
+{
+	data = std::make_tuple(Barcode(), "NULL PATIENT", 0, '0', "n/a", "n/a", 0, 0);
 }
 
 Patient::Patient(const Patient &toCopy)

@@ -15,8 +15,6 @@ resources and time.
 #include "PatientContainers.h"
 #include <mutex>
 
-#include <iostream>
-
 class PatientDatabase
 {
 private:
@@ -34,15 +32,15 @@ public:
 	static PatientDatabase * getInstance();
 	static void resetInstance()    { delete instance; instance = 0; }
 	static bool exists()           { return (instance != 0); }
-	// getter method (mutable)
-	PatientHash * getPatientHash() { return &phash; }
 	// other methods
+	const PatientHash * getPatientHash() const { return &phash; }
+
 	bool insertPatient(const Patient patient);
 	bool removePatient(const std::bitset<15> binaryBarcode);
 	bool removePatient(const std::string binaryBarcode);
-	const Patient & getPatient(const std::bitset<15> binaryBarcode);
-	const Patient & getPatient(const std::string binaryBarcode);
-	const Patient & getPatient(unsigned int encryptedBarcode);
+	const std::shared_ptr<Patient> & getPatient(const std::bitset<15> binaryBarcode);
+	const std::shared_ptr<Patient> & getPatient(const std::string binaryBarcode);
+	const std::shared_ptr<Patient> & getPatient(unsigned int encryptedBarcode);
 };
 
 // static class member initializer
@@ -78,6 +76,30 @@ bool PatientDatabase::removePatient(const std::bitset<15> binaryBarcode)
 	pdb_mutex.unlock();
 
 	return successfulRemove;
+}
+
+bool PatientDatabase::removePatient(const std::string binaryBarcode)
+{
+	return this->removePatient(std::bitset<15>(binaryBarcode));
+}
+
+const std::shared_ptr<Patient> & PatientDatabase::getPatient(const std::bitset<15> binaryBarcode)
+{
+	pdb_mutex.lock();
+	auto iter = phash.find(binaryBarcode);
+	pdb_mutex.unlock();
+
+	return (iter != phash.end() ? (iter->second) : std::shared_ptr<Patient>());
+}
+
+const std::shared_ptr<Patient> & PatientDatabase::getPatient(const std::string binaryBarcode)
+{
+	return this->getPatient(std::bitset<15>(binaryBarcode));
+}
+
+const std::shared_ptr<Patient> & PatientDatabase::getPatient(unsigned int encryptedBarcode)
+{
+	return this->getPatient(std::bitset<15>(encryptedBarcode));
 }
 
 #endif // PATIENT_DATABASE_H_

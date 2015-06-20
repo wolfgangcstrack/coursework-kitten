@@ -6,10 +6,10 @@ Windows 8 Visual C++ 2013
 This file includes the main application for this lab.
 
 WARNING: Using the SpecializedPatientParser default initialization list
-constructor results in near-100% use of the CPU. This is intended in order
-to maximize speed by running a separate thread on each logical processor.
-If this is undesirable for any reason, pass the SpecializedPatientParser
-constructor "true" i.e.:
+constructor results in use of a large percentage of the CPU. This is
+intended in order to maximize speed by running a separate thread on each
+logical processor. If this is undesirable for any reason, pass the
+SpecializedPatientParser constructor "true" i.e.:
 
 SpecializedPatientParser spp(dataFilename, numOfLinesInDataFile, true);
 
@@ -19,18 +19,19 @@ to halve the CPU usage of the multi-threaded parser.
 #include "SpecializedPatientParser.h"
 #include "PatientDatabase.h"
 #include <iostream>
-#include <vector>
+#include <fstream>
+#include <string>
 #include <ctime>
 using namespace std;
 
-void testDatabase(PatientDatabase &pDB);
+bool testDatabase(const string &barcodeFile, PatientDatabase &pDB);
 
 int main()
 {
 	// Variable declarations ---------------------------------------------
-	const std::string dataFileName = "Patient.xml";
+	const string dataFileName = "Patient.xml";
 	const int numberOfLinesInDataFile = 100000;
-	const std::string barcodeFile = "Barcodes.txt";
+	const string barcodeFile = "Barcodes.txt";
 	PatientDatabase *pDB = PatientDatabase::getInstance(); // turn on patient database
 	SpecializedPatientParser spp(dataFileName, numberOfLinesInDataFile);
 
@@ -45,7 +46,11 @@ int main()
 	}
 
 	cout << "Now testing Patient database...\n\n\n";
-	testDatabase(*pDB);
+	if (!testDatabase(barcodeFile, *pDB))
+	{
+		cout << "Error: something went wrong while testing the patient database!\n";
+		return 2;
+	}
 
 	// End program (and timer) and display statistics --------------------
 	PatientDatabase::resetInstance(); // turn off patient database
@@ -55,19 +60,26 @@ int main()
 	return 0;
 }
 
-void testDatabase(PatientDatabase &pDB)
+bool testDatabase(const string &barcodeFile, PatientDatabase &pDB)
 {
-	PatientHash *ph = pDB.getPatientHash();
+	ifstream ifs;
+	ifs.open(barcodeFile);
+	if (!ifs.is_open())
+		return false;
 
-	int pcount = 0;
-	auto iter = ph->begin();
-	auto end = ph->end();
-	while (pcount++ < 5)
+	const PatientHash *phash = pDB.getPatientHash();
+
+	string line;
+	while (getline(ifs, line))
 	{
-		if (iter == end)
-			break;
-
-		cout << *iter->second << endl;
-		++iter;
+		Patient nullPatient;
+		Patient patient = *phash->find(bitset<15>(line))->second;
+		if (patient == nullPatient)
+			cout << "Patient with code " << line << " could not be retrieved." << endl;
+		//cout << "Patient code: " << line << ", Name: " << p.getName() << endl;
+		//cout << *phash->find(bitset<15>(line))->second << endl << endl;
+		//cout << *pDB.getPatient(bitset<15>(line)) << endl << endl;
 	}
+
+	return true;
 }

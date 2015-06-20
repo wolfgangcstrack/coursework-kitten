@@ -53,6 +53,11 @@ public:
 		binaryBarcode = toCopy.binaryBarcode;
 		return *this;
 	}
+
+	friend bool operator==(const Barcode &left, const Barcode &right)
+	{
+		return (left.encryptedBarcode == right.encryptedBarcode);
+	}
 };
 
 #endif // BARCODE_H_
