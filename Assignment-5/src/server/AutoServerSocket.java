@@ -13,7 +13,8 @@ import java.io.*;
 public class AutoServerSocket {
 	private ServerSocket serverSocket;
 	
-	public AutoServerSocket(int port) {
+	public AutoServerSocket(/*int port*/) {
+		int port = 4444;
 		try {
 			serverSocket = new ServerSocket(port);
 		} catch (IOException ioe) {
@@ -26,7 +27,8 @@ public class AutoServerSocket {
 		while (true) {
 			DefaultSocketClient clientSocket;
 			
-			try (Socket soc = serverSocket.accept()) {
+			try {
+				Socket soc = serverSocket.accept();
 				clientSocket = new DefaultSocketClient(soc);
 				clientSocket.start();
 			} catch (IOException ioe) {

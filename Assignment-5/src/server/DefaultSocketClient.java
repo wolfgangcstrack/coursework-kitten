@@ -15,7 +15,7 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
 	protected ObjectOutputStream oos;
 	protected Socket soc;
 	
-	DefaultSocketClient(Socket s) {
+	public DefaultSocketClient(Socket s) {
 		soc = s;
 	}
 	

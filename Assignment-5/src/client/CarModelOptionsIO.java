@@ -7,6 +7,19 @@
  */
 package client;
 
-public class CarModelOptionsIO {
+import java.io.*;
+import java.util.*;
 
+import util.*;
+
+public class CarModelOptionsIO {
+	public Properties readData(String propertiesFilename) throws AutoException {
+		try (FileInputStream fis = new FileInputStream(propertiesFilename)) {
+			Properties result = new Properties();
+			result.load(fis);
+			return result;
+		} catch (Exception e) {
+			throw new AutoException("Properties file " + propertiesFilename + " unable to be loaded.");
+		}
+	}
 }
