@@ -15,30 +15,36 @@ public class AutoClient {
 	// leaving DefaultClientSocket out from here because
 	// its functionality doesn't seem to fit as a helper
 	// for the client
-	BufferedReader in;
-	PrintWriter out;
-	ObjectOutputStream fileSender;
+	ObjectInputStream clientIn;
+	ObjectOutputStream clientOut;
+	
+	BufferedReader stdIn;
 	
 	public AutoClient() throws IOException {
 		clientSocket = new Socket(InetAddress.getLocalHost(), 4444);
-		out = new PrintWriter(clientSocket.getOutputStream(), true);
-		in = new BufferedReader(new InputStreamReader(System.in));
-		fileSender = new ObjectOutputStream(clientSocket.getOutputStream());
+		clientIn = new ObjectInputStream(clientSocket.getInputStream());
+		clientOut = new ObjectOutputStream(clientSocket.getOutputStream());
+		
+		stdIn = new BufferedReader(new InputStreamReader(System.in));
 	}
 	
-	public void selectServiceOperation() throws IOException {		
+	public void selectServiceOperation() {		
 		String choice = "";
 		
 		while (!choice.equals("0")) {
-			printMenu();
-			
-			choice = in.readLine();
-			
-			switch (choice) {
-			case "0": continue; // exit while loop
-			case "1": performOperation(1); break;
-			case "2": performOperation(2); break;
-			default: System.out.println("Invalid operation choice.\n");
+			try {
+				printMenu();
+				
+				choice = stdIn.readLine();
+				
+				switch (choice) {
+				case "0": clientOut.writeObject("exit"); break;
+				case "1": performOperation(1); break;
+				case "2": performOperation(2); break;
+				default: System.out.println("Invalid operation choice.\n");
+				}
+			} catch (IOException ioe) {
+				System.out.println(ioe.toString());
 			}
 		}
 	}
@@ -55,11 +61,11 @@ public class AutoClient {
 		System.out.print("Enter name of file to send: ");
 		
 		try {
-			String filename = in.readLine();
+			String filename = stdIn.readLine();
 			
 			CarModelOptionsIO cmoIO = new CarModelOptionsIO();
 			
-			fileSender.writeObject(cmoIO.readData(filename, optionChoice));
+			clientOut.writeObject(cmoIO.readData(filename, optionChoice));
 			
 			System.out.println("The file " + filename + " sent!");
 		} catch (FileNotFoundException fnfe) {
