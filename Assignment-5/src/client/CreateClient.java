@@ -52,11 +52,11 @@ public class CreateClient {
 	}
 	
 	private void performOperation(int optionChoice) {
-//		out.print("Enter name of file to send: ");
-//		
-//		switch (optionChoice) {
-//		case 1:
-//			
-//		}
+		out.print("Enter name of file to send: ");
+		
+		switch (optionChoice) {
+		case 1:
+			out.print("Enter name of file: ");
+		}
 	}
 }
