@@ -159,8 +159,7 @@ public class Automobile implements java.io.Serializable {
 		OptionSet opset = optionSets.get(optionSetName);
 		
 		if (opset != null) {
-			opset.setOptionChoice(optionName);
-			return true;
+			return opset.updateOptionChoice(optionName);
 		}
 		
 		return false;

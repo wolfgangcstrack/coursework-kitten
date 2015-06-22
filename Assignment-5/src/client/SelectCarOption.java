@@ -222,6 +222,7 @@ public class SelectCarOption {
 		
 		if (!autoServer.containsOption(make, model, optionSet, option)) {
 			System.out.println("Error: Option " + optionSet+"."+option + " does not exist");
+			return;
 		}
 		
 		System.out.print("Enter new option name for " + option + ": ");
@@ -246,6 +247,26 @@ public class SelectCarOption {
 	}
 	
 	private void editOptionSetChoice(String make, String model, BuildAuto autoServer) throws IOException {
+		String optionSet, newOptionChoice;
 		
+		System.out.print("Enter name of option set whose choice you want to set: ");
+		optionSet = stdIn.readLine();
+		System.out.println();
+		
+		if (!autoServer.containsOptionSet(make, model, optionSet)) {
+			System.out.println("Error: Option set " + optionSet + " does not exist");
+			return;
+		}
+		
+		System.out.print("Enter name of option from option set " + optionSet + " to set as choice: ");
+		newOptionChoice = stdIn.readLine();
+		System.out.println();
+		
+		System.out.print("The setting of option set " + optionSet + "\'s choice to " + newOptionChoice);
+		if (autoServer.updateOptionChoice(make, model, optionSet, newOptionChoice)) {
+			System.out.println(" was successful");
+		} else {
+			System.out.println(" was unsuccessful");
+		}
 	}
 }
