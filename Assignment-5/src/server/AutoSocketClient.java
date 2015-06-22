@@ -7,10 +7,10 @@
  */
 package server;
 
+import java.io.*;
 import java.net.*;
 
 public class AutoSocketClient extends DefaultSocketClient {
 	public AutoSocketClient(Socket s) { super(s); }
-	
 	
 }

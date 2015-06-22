@@ -13,13 +13,23 @@ import java.util.*;
 import util.*;
 
 public class CarModelOptionsIO {
-	public Properties readData(String propertiesFilename) throws AutoException {
-		try (FileInputStream fis = new FileInputStream(propertiesFilename)) {
-			Properties result = new Properties();
-			result.load(fis);
-			return result;
-		} catch (Exception e) {
-			throw new AutoException("Properties file " + propertiesFilename + " unable to be loaded.");
+	/*
+	 * File types:
+	 * 1 - Formatted file (see util.AutoIO)
+	 * 2 - Properties file
+	 */
+	public Object readData(String filename, int fileType) throws FileNotFoundException, IOException {
+		switch (fileType) {
+		case 1:
+			FileReader filereader = new FileReader(filename);
+			return filereader;
+		case 2:
+			FileInputStream fis = new FileInputStream(filename);
+			Properties properties = new Properties();
+			properties.load(fis);
+			return properties;
+		default:
+			return null;
 		}
 	}
 }
