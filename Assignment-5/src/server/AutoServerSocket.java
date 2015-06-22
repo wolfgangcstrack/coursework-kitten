@@ -25,12 +25,12 @@ public class AutoServerSocket {
 	
 	public void startServer() {
 		while (true) {
-			DefaultSocketClient clientSocket;
+			AutoServerClientSession ascs;
 			
 			try {
 				Socket soc = serverSocket.accept();
-				clientSocket = new DefaultSocketClient(soc);
-				clientSocket.start();
+				ascs = new AutoServerClientSession(soc);
+				ascs.start();
 			} catch (IOException ioe) {
 				System.err.println("Accept failed.");
 			}

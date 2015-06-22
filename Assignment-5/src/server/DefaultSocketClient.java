@@ -50,7 +50,9 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
 	public void sendOutput(Object output) {
 		try {
 			oos.writeObject(output);
-		} catch (IOException ioe) {}
+		} catch (IOException ioe) {
+			System.out.println("Could not send output: " + output);
+		}
 	}
 	
 	public void handleInput(Object input) {

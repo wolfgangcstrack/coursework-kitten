@@ -13,10 +13,10 @@ import java.util.*;
 
 import util.AutoException;
 
-public class AutoSocketClient extends DefaultSocketClient {
+public class AutoServerClientSession extends DefaultSocketClient {
 	boolean sessionOn;
 	
-	public AutoSocketClient(Socket s) {
+	public AutoServerClientSession(Socket s) {
 		super(s);
 		sessionOn = false;
 	}
@@ -39,7 +39,7 @@ public class AutoSocketClient extends DefaultSocketClient {
 	
 	public void handleInput(Object input) {
 		if (input instanceof String) {
-			handleString((String) input);
+			handleQuery((String) input);
 		} else if (input instanceof FileReader) {
 			handleFileReader((FileReader) input);
 		} else if (input instanceof Properties) {
@@ -47,9 +47,13 @@ public class AutoSocketClient extends DefaultSocketClient {
 		}
 	}
 
-	private void handleString(String input) {
-		if (input.equals("exit")) {
+	private void handleQuery(String query) {
+		if (query.equals("exit")) {
 			sessionOn = false;
+			sendOutput("Bye");
+		} else {
+			System.out.println("Bad query from client: " + query);
+			sendOutput("Invalid query");
 		}
 	}
 
@@ -58,9 +62,11 @@ public class AutoSocketClient extends DefaultSocketClient {
 		
 		try {
 			autoBuilder.addAuto(autoBuilder.createAuto(input));
+			sendOutput("Succesfully added automobile to server from default-formatted file");
 		} catch (AutoException ae) {
 			System.out.println("Error while handling file reader");
 			System.out.println(ae.toString());
+			sendOutput("Could not add automobile from default-formatted file");
 		}
 	}
 	
@@ -69,9 +75,11 @@ public class AutoSocketClient extends DefaultSocketClient {
 		
 		try {
 			autoBuilder.addAuto(autoBuilder.createAuto(input));
+			sendOutput("Successfully added automobile to server from properties file");
 		} catch (AutoException ae) {
 			System.out.println("Error while handling properties file");
 			System.out.println(ae.toString());
+			sendOutput("Could not add automobile from properties file");
 		}
 	}
 }
