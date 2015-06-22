@@ -7,9 +7,8 @@
  */
 package adapter;
 
-import java.util.Collection;
-import java.util.Properties;
-import java.util.Scanner;
+import java.util.*;
+import java.io.*;
 
 import util.*;
 import model.*;
@@ -210,12 +209,11 @@ public abstract class ProxyAutomobile {
 	}
 	
 	// AutoServer interface methods --------------------------------------
+	public Automobile createAuto(FileReader formattedFileReader) throws AutoException {
+		return new AutoIO().buildAutoObject(formattedFileReader);
+	}
 	public Automobile createAuto(Properties properties) throws AutoException {
 		return new AutoIO().buildAutoObject(properties);
-	}
-	
-	public void addAuto(Properties properties) throws AutoException {
-		fleet.addAutomobile(this.createAuto(properties));
 	}
 	
 	public void addAuto(Automobile auto) {

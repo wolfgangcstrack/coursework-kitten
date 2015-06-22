@@ -65,13 +65,21 @@ public class AutoIO {
 	 * .
 	 * .
 	 */
-	public Automobile buildAutoObject(String filename) throws AutoException {	
-		StringBuilder errorMessage = new StringBuilder("Error in file ").append(filename);
+	public Automobile buildAutoObject(String filename) throws AutoException {
+		try {
+			FileReader filereader = new FileReader(filename);
+			return buildAutoObject(filereader);
+		} catch (FileNotFoundException fnfe) {
+			throw new AutoException(fnfe.toString(), 1);
+		}
+	}
+	public Automobile buildAutoObject(FileReader filereader) throws AutoException {	
+		StringBuilder errorMessage = new StringBuilder("Error reading file");
 		String line; // for reading file
 		int lineNumber = 1;
 		
-		try (FileReader file = new FileReader(filename);
-				BufferedReader buffer = new BufferedReader(file)) {
+		try {
+			BufferedReader buffer = new BufferedReader(filereader);
 			boolean eof = false;
 			
 			// read the first three lines, which must be the Automotive make, model,
@@ -117,6 +125,7 @@ public class AutoIO {
 				}
 			}
 			
+			buffer.close();
 			return newAuto;
 		} catch (IndexOutOfBoundsException iobE) {
 			errorMessage.append(": at line ").append(lineNumber);

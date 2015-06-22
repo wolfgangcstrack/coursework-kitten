@@ -7,10 +7,11 @@
  */
 package server;
 
+import java.util.Properties;
+import java.io.*;
+
 import model.Automobile;
 import util.*;
-
-import java.util.Properties;
 import adapter.BuildAuto;
 
 public class BuildCarModelOptions implements AutoServer {
@@ -20,8 +21,8 @@ public class BuildCarModelOptions implements AutoServer {
 		return new BuildAuto().createAuto(properties);
 	}
 	
-	public void addAuto(Properties properties) throws AutoException {
-		new BuildAuto().addAuto(properties);
+	public Automobile createAuto(FileReader formattedFileReader) throws AutoException {
+		return new BuildAuto().createAuto(formattedFileReader);
 	}
 	
 	public void addAuto(Automobile auto) {
