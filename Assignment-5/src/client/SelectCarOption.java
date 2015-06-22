@@ -38,6 +38,8 @@ public class SelectCarOption {
 			case "3": performOperation(3); break;
 			default: System.out.println("Invalid operation choice.\n");
 			}
+			
+			System.out.println();
 		}
 	}
 	
@@ -126,8 +128,7 @@ public class SelectCarOption {
 		System.out.println("Automobile with make " + make + " and model " + model + " found:\n");
 		System.out.println(fullAutoDescription + '\n');
 		
-		String choice ="", optionSet, option;
-		float optionPrice; // input variables
+		String choice ="", optionSet; // input variables
 		
 		while (!choice.equals("0")) {
 			printMenu(2);
@@ -137,6 +138,7 @@ public class SelectCarOption {
 			System.out.println();
 			
 			switch (choice) {
+			case "0": break;
 			case "1":
 				System.out.println(fullAutoDescription + '\n');
 				
@@ -165,7 +167,27 @@ public class SelectCarOption {
 				editOptionSetChoice(make, model, autoServer);
 				
 				break;
+			case "6":
+				deleteOption(make, model, autoServer);
+				
+				break;
+			case "7":
+				System.out.print("Enter name of option set to delete: ");
+				optionSet = stdIn.readLine();
+				
+				System.out.print("\nThe option set " + optionSet);
+				if (autoServer.deleteOptionSet(make, model, optionSet)) {
+					System.out.println(" was successfully deleted");
+				} else {
+					System.out.println(" does not exist or could not be deleted");
+				}
+				
+				break;
+			default:
+				System.out.println("Invalid edit choice");
 			}
+			
+			System.out.println();
 		}
 	}
 	
@@ -267,6 +289,30 @@ public class SelectCarOption {
 			System.out.println(" was successful");
 		} else {
 			System.out.println(" was unsuccessful");
+		}
+	}
+	
+	private void deleteOption(String make, String model, BuildAuto autoServer) throws IOException {
+		String optionSet, option;
+		
+		System.out.print("Enter name of option set with option you want to delete: ");
+		optionSet = stdIn.readLine();
+		System.out.println();
+		
+		if (!autoServer.containsOptionSet(make, model, optionSet)) {
+			System.out.println("Error: Option set " + optionSet + " does not exist");
+			return;
+		}
+		
+		System.out.print("Enter name of option from option set " + optionSet + " to delete: ");
+		option = stdIn.readLine();
+		System.out.println();
+		
+		System.out.print("The option " + optionSet+"."+option +" ");
+		if (autoServer.deleteOption(make, model, optionSet, option)) {
+			System.out.println(" was deleted");
+		} else {
+			System.out.println(" does not exist or could not be deleted");
 		}
 	}
 }
