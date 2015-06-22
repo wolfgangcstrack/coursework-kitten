@@ -8,6 +8,9 @@
 package adapter;
 
 public interface ReadAuto {
+	public String readAuto(String autoMake, String autoModel);
+	public String readAllAuto();
+	
 	public void printAuto(String autoMake, String autoModel);
 	public void printAllAuto();
 }

@@ -7,6 +7,16 @@
  */
 package client;
 
-public class SelectCarOption {
+import java.io.*;
 
+public class SelectCarOption {
+	private BufferedReader in;
+	private PrintWriter out;
+	
+	protected SelectCarOption(BufferedReader in, PrintWriter out) {
+		this.in = in;
+		this.out = out;
+	}
+	
+	
 }

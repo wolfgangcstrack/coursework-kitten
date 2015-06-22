@@ -42,19 +42,30 @@ public abstract class ProxyAutomobile {
 	}
 	
 	// ReadAuto interface methods ----------------------------------------
+	public String readAuto(String autoMake, String autoModel) {
+		return fleet.getAuto(autoMake, autoModel).toString();
+	}
+	
+	public String readAllAuto() {
+		Collection<Automobile> allAutos = fleet.getAllAuto();
+		StringBuilder allAutoStrings = new StringBuilder();
+		char newline = '\n';
+		
+		for (Automobile auto : allAutos) {
+			allAutoStrings.append(auto.toString()).append(newline);
+		}
+		
+		return allAutoStrings.toString();
+	}
 	public void printAuto(String autoMake, String autoModel) {
 		synchronized (System.out) {
-			System.out.println(fleet.getAuto(autoMake, autoModel).toString());
+			System.out.println(readAuto(autoMake, autoModel));
 		}
 	}
 	
 	public void printAllAuto() {
 		synchronized (System.out) {
-			Collection<Automobile> allAutos = fleet.getAllAuto();
-			
-			for (Automobile auto : allAutos) {
-				System.out.println(auto.toString());
-			}
+			System.out.println(readAllAuto());
 		}
 	}
 	

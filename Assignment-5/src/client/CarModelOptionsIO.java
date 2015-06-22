@@ -10,8 +10,6 @@ package client;
 import java.io.*;
 import java.util.*;
 
-import util.*;
-
 public class CarModelOptionsIO {
 	/*
 	 * File types:
