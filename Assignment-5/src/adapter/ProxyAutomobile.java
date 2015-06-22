@@ -55,6 +55,7 @@ public abstract class ProxyAutomobile {
 		
 		return autoList.toString();
 	}
+	
 	public String readAuto(String autoMake, String autoModel) {
 		Automobile auto = fleet.getAuto(autoMake, autoModel);
 		return (auto != null ? auto.toString() : null);
@@ -62,6 +63,11 @@ public abstract class ProxyAutomobile {
 	
 	public String readAllAuto() {
 		Collection<Automobile> allAutos = fleet.getAllAuto();
+		
+		if (allAutos.isEmpty()) {
+			return null;
+		}
+		
 		StringBuilder allAutoStrings = new StringBuilder();
 		char newline = '\n';
 		
@@ -71,6 +77,24 @@ public abstract class ProxyAutomobile {
 		
 		return allAutoStrings.toString();
 	}
+	
+	public boolean containsOptionSet(
+			String autoMake,
+			String autoModel,
+			String optionSetName) {
+		Automobile auto = fleet.getAuto(autoMake, autoModel);
+		return (auto != null ? auto.containsOptionSet(optionSetName) : false);
+	}
+	
+	public boolean containsOption(
+			String autoMake,
+			String autoModel,
+			String optionSetName,
+			String optionName) {
+		Automobile auto = fleet.getAuto(autoMake, autoModel);
+		return (auto != null ? auto.containsOption(optionSetName, optionName) : false);
+	}
+	
 	public void printAuto(String autoMake, String autoModel) {
 		synchronized (System.out) {
 			System.out.println(readAuto(autoMake, autoModel));
