@@ -36,6 +36,9 @@
     <ClInclude Include="ThreadedUserParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="StopWatch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="users_1.xml" />
