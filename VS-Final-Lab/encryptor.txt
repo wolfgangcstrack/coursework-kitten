@@ -1,3 +1,7 @@
+This file contained a program that encrypted the data files used for this lab.
+Although sloppily written and shortlived, it has been left in this project
+mainly for reference to the encryption algorithm used.
+
 /*
 Wolfgang C. Strack
 Windows 8 Visual C++ 2013

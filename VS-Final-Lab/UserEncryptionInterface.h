@@ -21,8 +21,8 @@ protected:
 	std::string cache;
 public:
 	virtual const std::string & getCache() { return cache; }
-	virtual bool convert(User &user) = 0;
-	virtual bool convert(std::string &line) = 0;
+	virtual void convert(User &user) = 0;
+	virtual void convert(std::string &line) = 0;
 };
 
 #endif // USER_ENCRYPTION_INTERFACE_

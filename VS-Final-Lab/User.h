@@ -20,7 +20,7 @@ private:
 	std::string data [3];
 public:
 	// constructors and destructor
-	User() {}
+	User()  {}
 	User(const User &user) { std::copy(user.data, user.data + 3, data); }
 	~User() {}
 	// getters/setters
@@ -50,7 +50,7 @@ void User::readData(const std::string &data)
 std::string User::toString()
 {
 	return "Username: " + data[USERNAME] + '\n'
-		+ "\tName (last, first): " + data[LASTNAME] + ", " + data[FIRSTNAME];
+		+ "    Name (last, first): " + data[LASTNAME] + ", " + data[FIRSTNAME];
 }
 
 #endif // XML_USER_H_
