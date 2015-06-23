@@ -33,9 +33,17 @@ public class AutoClient {
 		this.run(); // not a thread!
 	}
 	
-	private void run() {		
+	private void run() {
 		String choice = "";
 		String fromServer = null;
+		
+		try {
+			fromServer = (String) clientIn.readObject();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		while (!choice.equals("0")) {
 			if (fromServer != null) {

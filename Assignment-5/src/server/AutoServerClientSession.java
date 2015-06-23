@@ -26,6 +26,8 @@ public class AutoServerClientSession extends DefaultSocketClient {
 		
 		Object input;
 		
+		sendOutput("Greetings from AutoServer 0.1!");
+		
 		while (sessionOn) {
 			try {
 				input = ois.readObject();

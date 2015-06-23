@@ -9,8 +9,6 @@ package client;
 
 import java.io.*;
 
-import adapter.*;
-
 public class SelectCarOption {
 	private ObjectInputStream fromServer;
 	private ObjectOutputStream toServer;
