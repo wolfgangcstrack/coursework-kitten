@@ -53,8 +53,7 @@ void User::readData(const std::string &data)
 
 std::string User::toString()
 {
-	return "Username: " + data[USERNAME] + '\n'
-		+ "    Name (last, first): " + data[LASTNAME] + ", " + data[FIRSTNAME];
+	return data[USERNAME] + ": " + data[LASTNAME] + ", " + data[FIRSTNAME];
 }
 
 #endif // XML_USER_H_

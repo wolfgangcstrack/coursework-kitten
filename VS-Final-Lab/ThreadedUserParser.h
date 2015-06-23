@@ -23,16 +23,18 @@ private:
 	std::mutex nodelist_mutex;
 	XmlNodeList nodelist;
 
-	void parseFile(const std::string &filename); // used by threads to parse multiple file at once
+	void parseFile(const std::string &filename); // used by thread
 public:
 	// constructor/destructor
 	ThreadedUserParser() {}
+	ThreadedUserParser(const std::string pattern) : XmlRegexIO(pattern) {}
 	~ThreadedUserParser(){}
 	// new methods
 	const XmlNodeList & parseUserFiles(std::vector<std::string> filenames);
 	// other methods used are inherited from XmlRegexIO
 };
 
+// private method used by thread
 void ThreadedUserParser::parseFile(const std::string &filename)
 {
 	std::vector<std::string> tags;
@@ -59,8 +61,9 @@ const XmlNodeList & ThreadedUserParser::parseUserFiles(std::vector<std::string> 
 	// run separate thread for each file
 	for (auto filename = filenames.begin(); filename != filenames.end(); ++filename)
 	{
+		//parseFile(*filename);
 		threads.push_back(
-			std::thread(&ThreadedUserParser::parseFile, *this, *filename));
+			std::thread([this, filename]{ this->parseFile(*filename); }));
 		// parseFile() modified this->nodelist, which
 		// will be the return value of this function
 	}

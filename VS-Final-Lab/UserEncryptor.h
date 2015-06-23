@@ -3,7 +3,9 @@ Wolfgang C. Strack
 Windows 8 Visual C++ 2013
 
 This file contains UserEncryptor class, used to encrypt the user data
-represented by the xml files in this lab.
+represented by the xml files in this lab. While this file is not
+included in main.cpp, it can be used to reencrypt data that has been
+decrypted by the UserDecryptor class.
 */
 
 #ifndef USER_ENCRYPTOR_H_
