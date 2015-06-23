@@ -1,10 +1,9 @@
 /*
-Lab 6 - STL Containers and Algorithms
 Wolfgang C. Strack
 Windows 8 Visual C++ 2013
 
 This header file contains the utility class for extracting XML nodes and
-XML node data from given files. The methods store the build XML node in a
+XML node data from given files. The methods store the built XML node in a
 parameter and return booleans.
 */
 
@@ -29,7 +28,7 @@ public:
 	~XmlRegexIO() {}
 	// getters
 	const std::string & getPattern() { return pattern; }
-	const std::regex & getRegex() { return rex; }
+	const std::regex & getRegex()    { return rex; }
 	// setters
 	void setPattern(const std::string &patt) { pattern = patt; rex = std::regex(pattern); }
 	// other methods
