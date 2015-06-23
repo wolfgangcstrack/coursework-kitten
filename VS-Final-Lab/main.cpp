@@ -11,42 +11,40 @@ This file contains the main application for this lab.
 #include "User.h"
 #include <iostream>
 #include <memory>
-#include <string>
 #include <vector>
+#include <string>
 using namespace std;
 
+vector<string> getFileNames(int numFiles);
 void displayNodeList(XmlNodeList &nodelist, bool andDelete = false);
 void decryptUserData(XmlNodeList &nodelist);
 
 int main()
 {
-	// this for-loop is in place in case there are more than 8 files
-	const int NUMBER_OF_FILES = 8;
-	string allFileNames[NUMBER_OF_FILES];
-	for (int i = 1; i <= NUMBER_OF_FILES; i++)
-	{
-		allFileNames[i - 1] = "users_";
-		allFileNames[i - 1] += to_string(i);
-		allFileNames[i - 1] += ".xml";
-	}
-
-	vector<string> filenames(allFileNames, allFileNames + NUMBER_OF_FILES);
+	const int NUMBER_OF_FILES = 8; // can change if more than 8 files
+	vector<string> filenames = getFileNames(NUMBER_OF_FILES);
 
 	ThreadedUserParser userParser("<user>(.|\\n)*?</user>");
 
+	cout << "Starting timer...\n\n\n";
+	clock_t begin = clock(); // start timer
+
 	cout << "Now parsing all files...";
 	XmlNodeList nodelist = userParser.parseUserFiles(filenames);
-	cout << "Finished parsing all files\n\n\n";
 
-	cout << "Now displaying all user data (encrypted):\n\n";
+	clock_t end = clock();
+	cout << "Finished parsing all files. Total time taken to parse: "
+		<< double(end - begin) / CLOCKS_PER_SEC << " seconds\n\n\n";
+
+	cout << "\n\nNow displaying all user data (encrypted):\n\n";
 	displayNodeList(nodelist);
 	cout << "\n\n\n\n\n";
 
 	cout << "Decrypting all user data...";
 	decryptUserData(nodelist);
-	cout << "Finished decrypting all user data\n\n\n\n\n";
+	cout << "Finished decrypting all user data.\n\n\n";
 
-	cout << "Now displaying user data (decrypted):\n\n";
+	cout << "\n\nNow displaying user data (decrypted):\n\n";
 	displayNodeList(nodelist, true);
 	
 	cout << "\n\n\nNow exiting...\n\n";
@@ -54,6 +52,22 @@ int main()
 	return 0;
 }
 
+vector<string> getFileNames(int numFiles)
+{
+	vector<string> filenames;
+
+	string temp;
+	for (int i = 1; i <= numFiles; i++)
+	{
+		temp = "users_";
+		temp += to_string(i);
+		temp += "_encrypted.xml";
+
+		filenames.push_back(temp);
+	}
+
+	return filenames;
+}
 
 void displayNodeList(XmlNodeList &nodelist, bool andDelete)
 {
