@@ -47,6 +47,8 @@ void UserEncryptor::convert(User &user)
 	cache = user.getFirstName();
 	this->encrypt();
 	user.setFirstName(cache);
+
+	user.setAsEncrypted();
 }
 
 void UserEncryptor::convert(std::string &line)
