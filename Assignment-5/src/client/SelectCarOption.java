@@ -12,34 +12,61 @@ import java.io.*;
 import adapter.*;
 
 public class SelectCarOption {
-	private ObjectInputStream in;
-	private ObjectOutputStream out;
+	private ObjectInputStream fromServer;
+	private ObjectOutputStream toServer;
 	
 	private BufferedReader stdIn;
 	
 	protected SelectCarOption(ObjectInputStream in, ObjectOutputStream out, BufferedReader brIn) {
-		this.in = in;
-		this.out = out;
+		this.fromServer = in;
+		this.toServer = out;
 		stdIn = brIn;
 	}
 	
-	protected void selectOperation() throws IOException {
+	protected void run() throws IOException, ClassNotFoundException {
 		String choice = "";
+		String serverResponse = null;
 		
 		while (!choice.equals("0")) {
+			if (serverResponse != null) {
+				System.out.print("Server: ");
+				if (serverResponse.contains("\n")) {
+					System.out.println("\n\n" + serverResponse);
+				} else {
+					System.out.println(serverResponse);
+				}
+			}
+			
 			printMenu(1);
 			
 			choice = stdIn.readLine();
 			
 			switch (choice) {
 			case "0": break;
-			case "1": performOperation(1); break;
-			case "2": performOperation(2); break;
-			case "3": performOperation(3); break;
+			case "1":
+				System.out.print("Enter make: ");
+				String make = stdIn.readLine();
+				System.out.println("Enter model: ");
+				String model = stdIn.readLine();
+				
+				// send server query for requested automobile
+				toServer.writeObject("get auto " + make + " " + model);
+				
+				break;
+			case "2":
+				toServer.writeObject("get all auto");
+				
+				break;
+			case "3":
+				editAutomobile(); // gets its own server response
+				serverResponse = null;
+				continue; // skip to beginning of while loop
 			default: System.out.println("Invalid operation choice.\n");
 			}
 			
 			System.out.println();
+			
+			serverResponse = (String) fromServer.readObject();
 		}
 	}
 	
@@ -76,61 +103,34 @@ public class SelectCarOption {
 			System.out.println("Invalid menu number");
 		}
 	}
-	
-	private void performOperation(int optionChoice) throws IOException {
-		ReadAuto readAuto = new BuildAuto();
-		
-		switch (optionChoice) {
-		case 1:
-			System.out.print("Enter make: ");
-			String make = stdIn.readLine();
-			System.out.println("Enter model: ");
-			String model = stdIn.readLine();
-			
-			String auto = readAuto.readAuto(make, model);
-			if (auto == null) {
-				auto = "Automobile with make " + make + " and model " + model + " was not found";
-			}
-			
-			System.out.println(auto);
-			
-			break;
-		case 2:
-			String autoList = readAuto.getListOfAutos();
-			if (autoList == null) {
-				autoList = "No automobiles on server";
-			}
-			
-			System.out.println(autoList);
-			
-			break;
-		case 3:
-			editAutomobile();
-			break;
-		default: System.out.println("Invalid operation choice.\n");
-		}
-	}
 
-	private void editAutomobile() throws IOException {
+	private void editAutomobile() throws IOException, ClassNotFoundException {
 		System.out.print("Enter make of automobile to edit: ");
 		String make = stdIn.readLine();
 		System.out.print("Enter model of automobile to edit: ");
 		String model = stdIn.readLine();
 		
-		BuildAuto autoServer = new BuildAuto();
-		String fullAutoDescription = autoServer.readAuto(make, model);
+		toServer.writeObject("get auto " + make + " " + model);
+		String fullAutoDescription = (String) fromServer.readObject();
 		
 		if (fullAutoDescription == null) {
-			System.out.println("Automobile with make " + make + " and model " + model + " was not found");
+			System.out.println("Server: Automobile with make " + make + " and model " + model + " was not found");
 			return;
 		}
 		
-		System.out.println("Automobile with make " + make + " and model " + model + " found:\n");
+		System.out.println("Server: Automobile with make " + make + " and model " + model + " found:\n");
 		System.out.println(fullAutoDescription + '\n');
 		
-		String choice ="", optionSet; // input variables
+		String choice = "", optionSet, serverResponse = null;
 		
 		while (!choice.equals("0")) {
+			
+			System.out.println();
+			
+			if (serverResponse != null) {
+				System.out.println("Server: " + serverResponse);
+			}
+			
 			printMenu(2);
 			
 			System.out.print("\nEnter choice number: ");
@@ -141,68 +141,56 @@ public class SelectCarOption {
 			case "0": break;
 			case "1":
 				System.out.println(fullAutoDescription + '\n');
+				serverResponse = null;
 				
-				break;
+				continue; // skip to top of while loop
 			case "2":
 				System.out.print("Enter new option set name: ");
 				optionSet = stdIn.readLine();
 				
-				System.out.print("\nThe option set " + optionSet);
-				if (autoServer.addOptionSet(make, model, optionSet)) {
-					System.out.println(" was successfully added");
-				} else {
-					System.out.println(" already exists or could not be added");
-				}
-				
+				toServer.writeObject("add optionSet "+make+" "+model+" "+optionSet);
+
 				break;
 			case "3":
-				addOption(make, model, autoServer);
-				
+				addOption(make, model);
+
 				break;
 			case "4":
-				editOption(make, model, autoServer);
+				editOption(make, model);
 				
 				break;
 			case "5":
-				editOptionSetChoice(make, model, autoServer);
+				editOptionSetChoice(make, model);
 				
 				break;
 			case "6":
-				deleteOption(make, model, autoServer);
+				deleteOption(make, model);
 				
 				break;
 			case "7":
 				System.out.print("Enter name of option set to delete: ");
 				optionSet = stdIn.readLine();
 				
-				System.out.print("\nThe option set " + optionSet);
-				if (autoServer.deleteOptionSet(make, model, optionSet)) {
-					System.out.println(" was successfully deleted");
-				} else {
-					System.out.println(" does not exist or could not be deleted");
-				}
+				toServer.writeObject("delete optionSet "+make+" "+model+" "+optionSet);
 				
 				break;
 			default:
 				System.out.println("Invalid edit choice");
+				serverResponse = null;
+				continue; // skip to top of while loop
 			}
 			
-			System.out.println();
+			serverResponse = (String) fromServer.readObject();
 		}
 	}
 	
-	private void addOption(String make, String model, BuildAuto autoServer) throws IOException {
+	private void addOption(String make, String model) throws IOException {
 		String optionSet, option;
 		float optionPrice;
 		
 		System.out.print("Enter name of option set to add new option to: ");
 		optionSet = stdIn.readLine();
 		System.out.println();
-		
-		if (!autoServer.containsOptionSet(make, model, optionSet)) {
-			System.out.println("Error: Option set " + optionSet + " does not exist");
-			return;
-		}
 		
 		System.out.print("Enter name of new option to add to " + optionSet + ": ");
 		option = stdIn.readLine();
@@ -211,21 +199,17 @@ public class SelectCarOption {
 		System.out.print("Enter price of new option " + option + ": ");
 		try {
 			optionPrice = Float.parseFloat(stdIn.readLine());
+			System.out.println();
 		} catch (NumberFormatException nfe) {
 			System.out.println("Error: invalid value entered for price");
+			toServer.writeObject("get null");
 			return;
 		}
-		System.out.println();
 		
-		System.out.print("The option " + optionSet +"."+option + " ");
-		if (autoServer.addOption(make, model, optionSet, option, optionPrice)) {
-			System.out.println(" was successfully added");
-		} else {
-			System.out.println(" already exists or could not be added");
-		}
+		toServer.writeObject("add option "+make+" "+model+" "+optionSet+" "+option+" "+optionPrice);
 	}
 	
-	private void editOption(String make, String model, BuildAuto autoServer) throws IOException {
+	private void editOption(String make, String model) throws IOException {
 		String optionSet, option, newOptionName;
 		float newOptionPrice;
 		
@@ -233,19 +217,9 @@ public class SelectCarOption {
 		optionSet = stdIn.readLine();
 		System.out.println();
 		
-		if (!autoServer.containsOptionSet(make, model, optionSet)) {
-			System.out.println("Error: Option set " + optionSet + " does not exist");
-			return;
-		}
-		
 		System.out.print("Enter name of option to edit from " + optionSet + ": ");
 		option = stdIn.readLine();
 		System.out.println();
-		
-		if (!autoServer.containsOption(make, model, optionSet, option)) {
-			System.out.println("Error: Option " + optionSet+"."+option + " does not exist");
-			return;
-		}
 		
 		System.out.print("Enter new option name for " + option + ": ");
 		newOptionName = stdIn.readLine();
@@ -260,59 +234,40 @@ public class SelectCarOption {
 		}
 		System.out.println();
 		
-		System.out.print("The edit of option " + optionSet +"."+option + " to " + optionSet+"."+newOptionName);
-		if (autoServer.updateOption(make, model, optionSet, option, newOptionName, newOptionPrice)) {
-			System.out.println(" was successful");
-		} else {
-			System.out.println(" was unsuccessful");
-		}
+		toServer.writeObject("edit option "
+				+ make + " "
+				+ model + " "
+				+ optionSet + " "
+				+ option + " "
+				+ newOptionName + " "
+				+ newOptionPrice);
 	}
 	
-	private void editOptionSetChoice(String make, String model, BuildAuto autoServer) throws IOException {
+	private void editOptionSetChoice(String make, String model) throws IOException {
 		String optionSet, newOptionChoice;
 		
 		System.out.print("Enter name of option set whose choice you want to set: ");
 		optionSet = stdIn.readLine();
 		System.out.println();
 		
-		if (!autoServer.containsOptionSet(make, model, optionSet)) {
-			System.out.println("Error: Option set " + optionSet + " does not exist");
-			return;
-		}
-		
 		System.out.print("Enter name of option from option set " + optionSet + " to set as choice: ");
 		newOptionChoice = stdIn.readLine();
 		System.out.println();
 		
-		System.out.print("The setting of option set " + optionSet + "\'s choice to " + newOptionChoice);
-		if (autoServer.updateOptionChoice(make, model, optionSet, newOptionChoice)) {
-			System.out.println(" was successful");
-		} else {
-			System.out.println(" was unsuccessful");
-		}
+		toServer.writeObject("edit option set choice "+make+" "+model+" "+optionSet+" "+newOptionChoice);
 	}
 	
-	private void deleteOption(String make, String model, BuildAuto autoServer) throws IOException {
+	private void deleteOption(String make, String model) throws IOException {
 		String optionSet, option;
 		
 		System.out.print("Enter name of option set with option you want to delete: ");
 		optionSet = stdIn.readLine();
 		System.out.println();
 		
-		if (!autoServer.containsOptionSet(make, model, optionSet)) {
-			System.out.println("Error: Option set " + optionSet + " does not exist");
-			return;
-		}
-		
 		System.out.print("Enter name of option from option set " + optionSet + " to delete: ");
 		option = stdIn.readLine();
 		System.out.println();
 		
-		System.out.print("The option " + optionSet+"."+option +" ");
-		if (autoServer.deleteOption(make, model, optionSet, option)) {
-			System.out.println(" was deleted");
-		} else {
-			System.out.println(" does not exist or could not be deleted");
-		}
+		toServer.writeObject("delete option "+make+" "+model+" "+optionSet+" "+option);
 	}
 }

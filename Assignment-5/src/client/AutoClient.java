@@ -20,19 +20,29 @@ public class AutoClient {
 	
 	BufferedReader stdIn;
 	
-	public AutoClient() throws IOException {
+	public AutoClient() {
+		// rest of variables are initialized in startClient()
+		stdIn = new BufferedReader(new InputStreamReader(System.in));
+	}
+	
+	public void startClient() throws IOException {
 		clientSocket = new Socket(InetAddress.getLocalHost(), 4444);
 		clientIn = new ObjectInputStream(clientSocket.getInputStream());
 		clientOut = new ObjectOutputStream(clientSocket.getOutputStream());
 		
-		stdIn = new BufferedReader(new InputStreamReader(System.in));
+		this.run(); // not a thread!
 	}
 	
-	public void selectServiceOperation() {		
+	private void run() {		
 		String choice = "";
+		String fromServer = null;
 		
 		while (!choice.equals("0")) {
-			try {
+			if (fromServer != null) {
+				System.out.println("Server: " + fromServer);
+			}
+			
+			try { // try to perform an operation and get server response
 				printMenu();
 				
 				choice = stdIn.readLine();
@@ -41,11 +51,22 @@ public class AutoClient {
 				case "0": clientOut.writeObject("exit"); break;
 				case "1": performOperation(1); break;
 				case "2": performOperation(2); break;
+				case "3":
+					SelectCarOption sco = new SelectCarOption(clientIn, clientOut, stdIn);
+					sco.run();
+					
+					break;
 				default: System.out.println("Invalid operation choice.\n");
 				}
+				
+				fromServer = (String) clientIn.readObject();
 			} catch (IOException ioe) {
-				System.out.println(ioe.toString());
+				ioe.printStackTrace();
+			} catch (ClassNotFoundException cnfe) {
+				cnfe.printStackTrace();
 			}
+			
+			
 		}
 	}
 	
@@ -54,6 +75,7 @@ public class AutoClient {
 		
 		System.out.println("1\tSend automobile to server by default-format file");
 		System.out.println("2\tSend automobile to server by Properties file");
+		System.out.println("3\tSearch/Edit automobiles on server");
 		System.out.println("0\tQuit\n");
 	}
 	
@@ -67,11 +89,11 @@ public class AutoClient {
 			
 			clientOut.writeObject(cmoIO.readData(filename, optionChoice));
 			
-			System.out.println("The file " + filename + " sent!");
+			System.out.println("The file " + filename + " was sent");
 		} catch (FileNotFoundException fnfe) {
-			System.out.println(fnfe.toString());
+			fnfe.printStackTrace();
 		} catch (IOException ioe) {
-			System.out.println(ioe.toString());
+			ioe.printStackTrace();
 		}
 	}
 }

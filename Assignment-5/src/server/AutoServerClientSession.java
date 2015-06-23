@@ -44,6 +44,9 @@ public class AutoServerClientSession extends DefaultSocketClient {
 			handleFileReader((FileReader) input);
 		} else if (input instanceof Properties) {
 			handleProperties((Properties) input);
+		} else {
+			System.out.println("Object from client: " + input);
+			sendOutput("Invalid query");
 		}
 	}
 
