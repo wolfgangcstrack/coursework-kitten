@@ -78,6 +78,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ThreadedUserParser.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="UserDecryptor.h" />
     <ClInclude Include="UserEncryptionInterface.h" />
