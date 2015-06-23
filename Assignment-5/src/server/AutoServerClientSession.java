@@ -3,7 +3,7 @@
  * Author: Wolfgang C. Strack
  * Compiler: Java 8 with Eclipse
  * 
- * This is the AutoSocketClient class.
+ * This is the AutoServerClientSession class.
  */
 package server;
 
@@ -53,11 +53,12 @@ public class AutoServerClientSession extends DefaultSocketClient {
 	private void handleQuery(String query) {
 		if (query.equals("exit")) {
 			sessionOn = false;
-			sendOutput("Bye");
-		} else {
-			System.out.println("Bad query from client: " + query);
-			sendOutput("Invalid query");
+			return;
 		}
+		
+		AutoClientQueryHandler queryHandler = new AutoClientQueryHandler();
+		String serverResponse = queryHandler.handleQuery(query);
+		sendOutput(serverResponse);
 	}
 
 	private void handleFileReader(FileReader input) {
