@@ -7,6 +7,7 @@ This file contains the main application for this lab.
 
 #include "XmlRegexIO.h"
 #include "XmlNode.h"
+#include "UserDecryptor.h"
 #include "User.h"
 #include <iostream>
 #include <memory>
@@ -20,7 +21,7 @@ void decryptUserData(XmlNodeList &nodelist);
 
 int main()
 {
-	const string filename = "../VS-Final-Lab/users_1.xml";
+	const string filename = "users_1.xml";
 	XmlRegexIO xrio("<user>(.|\\n)*?</user>");
 	XmlNodeList nodelist;
 	vector<string> tags;
@@ -58,8 +59,14 @@ void fillList(const vector<string> &tags, XmlNodeList &nodelist)
 
 void displayNodeList(XmlNodeList &nodelist, bool andDelete)
 {
+	UserDecryptor decryptor;
 	for (auto i = nodelist.begin(); i != nodelist.end(); ++i)
 	{
+		cout << "Encrypted version:\n";
+		cout << (*i)->toString() << endl << endl;
+
+		decryptor.convert(*dynamic_cast<User*>(*i));
+		cout << "Decrypted version:\n";
 		cout << (*i)->toString() << endl << endl;
 
 		if (andDelete)

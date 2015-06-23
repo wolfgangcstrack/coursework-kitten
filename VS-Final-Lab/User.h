@@ -18,18 +18,22 @@ private:
 	enum dataLabels {USERNAME, LASTNAME, FIRSTNAME};
 
 	std::string data [3];
+	bool encrypted;
 public:
 	// constructors and destructor
-	User()  {}
+	User()  { encrypted = true; }
 	User(const User &user) { std::copy(user.data, user.data + 3, data); }
 	~User() {}
 	// getters/setters
 	const std::string & getUserName() const       { return data[USERNAME]; }
 	const std::string & getLastName() const       { return data[LASTNAME]; }
 	const std::string & getFirstName() const      { return data[FIRSTNAME]; }
+	bool isEncrypted() const                      { return encrypted; }
 	void setUserName(const std::string &newName)  { data[USERNAME] = newName; }
 	void setLastName(const std::string &newName)  { data[LASTNAME] = newName; }
 	void setFirstName(const std::string &newName) { data[FIRSTNAME] = newName; }
+	void setAsEncrypted()                         { encrypted = true; }
+	void setAsDecrypted()                         { encrypted = false; }
 	// overloaded method from XmlNode
 	void readData(const std::string &data);
 	std::string toString();
