@@ -32,4 +32,9 @@
     <Xml Include="users_7.xml" />
     <Xml Include="users_8.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>
