@@ -37,10 +37,12 @@ public class SelectCarOption {
 			
 			printMenu(1);
 			
+			System.out.print("Enter choice: ");
 			choice = stdIn.readLine();
+			System.out.println();
 			
 			switch (choice) {
-			case "0": break;
+			case "0": serverResponse = null; continue;
 			case "1":
 				System.out.print("Enter make: ");
 				String make = stdIn.readLine();
@@ -48,7 +50,7 @@ public class SelectCarOption {
 				String model = stdIn.readLine();
 				
 				// send server query for requested automobile
-				toServer.writeObject("get auto " + make + " " + model);
+				toServer.writeObject("get auto " + make + ":" + model);
 				
 				break;
 			case "2":
@@ -108,7 +110,7 @@ public class SelectCarOption {
 		System.out.print("Enter model of automobile to edit: ");
 		String model = stdIn.readLine();
 		
-		toServer.writeObject("get auto " + make + " " + model);
+		toServer.writeObject("get auto " + make + ":" + model);
 		String fullAutoDescription = (String) fromServer.readObject();
 		
 		if (fullAutoDescription == null) {
@@ -136,9 +138,13 @@ public class SelectCarOption {
 			System.out.println();
 			
 			switch (choice) {
-			case "0": break;
+			case "0": serverResponse = null; continue;
 			case "1":
+				toServer.writeObject("get auto " + make + ":" + model);
+				fullAutoDescription = (String) fromServer.readObject();
+				
 				System.out.println(fullAutoDescription + '\n');
+				
 				serverResponse = null;
 				
 				continue; // skip to top of while loop
@@ -146,7 +152,7 @@ public class SelectCarOption {
 				System.out.print("Enter new option set name: ");
 				optionSet = stdIn.readLine();
 				
-				toServer.writeObject("add optionSet "+make+" "+model+" "+optionSet);
+				toServer.writeObject("add optionSet "+make+":"+model+":"+optionSet);
 
 				break;
 			case "3":
@@ -169,7 +175,7 @@ public class SelectCarOption {
 				System.out.print("Enter name of option set to delete: ");
 				optionSet = stdIn.readLine();
 				
-				toServer.writeObject("delete optionSet "+make+" "+model+" "+optionSet);
+				toServer.writeObject("delete optionSet "+make+":"+model+":"+optionSet);
 				
 				break;
 			default:
@@ -204,7 +210,7 @@ public class SelectCarOption {
 			return;
 		}
 		
-		toServer.writeObject("add option "+make+" "+model+" "+optionSet+" "+option+" "+optionPrice);
+		toServer.writeObject("add option "+make+":"+model+":"+optionSet+":"+option+":"+optionPrice);
 	}
 	
 	private void editOption(String make, String model) throws IOException {
@@ -233,11 +239,11 @@ public class SelectCarOption {
 		System.out.println();
 		
 		toServer.writeObject("edit option "
-				+ make + " "
-				+ model + " "
-				+ optionSet + " "
-				+ option + " "
-				+ newOptionName + " "
+				+ make + ":"
+				+ model + ":"
+				+ optionSet + ":"
+				+ option + ":"
+				+ newOptionName + ":"
 				+ newOptionPrice);
 	}
 	
@@ -252,7 +258,7 @@ public class SelectCarOption {
 		newOptionChoice = stdIn.readLine();
 		System.out.println();
 		
-		toServer.writeObject("edit option set choice "+make+" "+model+" "+optionSet+" "+newOptionChoice);
+		toServer.writeObject("edit option set choice "+make+":"+model+":"+optionSet+":"+newOptionChoice);
 	}
 	
 	private void deleteOption(String make, String model) throws IOException {
@@ -266,6 +272,6 @@ public class SelectCarOption {
 		option = stdIn.readLine();
 		System.out.println();
 		
-		toServer.writeObject("delete option "+make+" "+model+" "+optionSet+" "+option);
+		toServer.writeObject("delete option "+make+":"+model+":"+optionSet+":"+option);
 	}
 }

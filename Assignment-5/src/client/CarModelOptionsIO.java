@@ -10,22 +10,23 @@ package client;
 import java.io.*;
 import java.util.*;
 
+import util.*;
+
 public class CarModelOptionsIO {
 	/*
 	 * File types:
 	 * 1 - Formatted file (see util.AutoIO)
 	 * 2 - Properties file
 	 */
-	public Object readData(String filename, int fileType) throws FileNotFoundException, IOException {
+	public Object readData(String filename, int fileType) throws AutoException, FileNotFoundException, IOException {
 		switch (fileType) {
 		case 1:
-			FileReader filereader = new FileReader(filename);
-			return filereader;
+			return new AutoIO().buildAutoObject(filename, 1);
 		case 2:
 			FileInputStream fis = new FileInputStream(filename);
 			Properties properties = new Properties();
 			properties.load(fis);
-			return properties;
+			return new AutoIO().buildAutoObject(properties);
 		default:
 			return null;
 		}

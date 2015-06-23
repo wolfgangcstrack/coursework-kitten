@@ -16,5 +16,5 @@ import util.AutoException;
 public interface AutoServer {
 	public Automobile createAuto(FileReader formattedFileReader) throws AutoException;
 	public Automobile createAuto(Properties properties) throws AutoException;
-	public void addAuto(Automobile auto);
+	public boolean addAuto(Automobile auto);
 }

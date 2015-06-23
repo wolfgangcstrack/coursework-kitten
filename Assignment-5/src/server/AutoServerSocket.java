@@ -10,7 +10,10 @@ package server;
 import java.net.*;
 import java.io.*;
 
+import adapter.BuildAuto;
+
 public class AutoServerSocket {
+	protected static BuildAuto autoServer;
 	private ServerSocket serverSocket;
 	
 	public AutoServerSocket(/*int port*/) {
@@ -24,11 +27,13 @@ public class AutoServerSocket {
 	}
 	
 	public void startServer() {
+		System.out.println("Started server\n");
 		while (true) {
 			AutoServerClientSession ascs;
-			
+			System.out.println("Waiting for client socket to connect...");
 			try {
 				Socket soc = serverSocket.accept();
+				System.out.println("Client connected, starting session\n");
 				ascs = new AutoServerClientSession(soc);
 				ascs.start();
 			} catch (IOException ioe) {

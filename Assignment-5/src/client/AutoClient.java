@@ -10,6 +10,8 @@ package client;
 import java.net.*;
 import java.io.*;
 
+import util.AutoException;
+
 public class AutoClient {
 	private Socket clientSocket;
 	// leaving DefaultClientSocket out from here because
@@ -27,13 +29,13 @@ public class AutoClient {
 	
 	public void startClient() throws IOException {
 		clientSocket = new Socket(InetAddress.getLocalHost(), 4444);
-		clientIn = new ObjectInputStream(clientSocket.getInputStream());
 		clientOut = new ObjectOutputStream(clientSocket.getOutputStream());
+		clientIn = new ObjectInputStream(clientSocket.getInputStream());
 		
-		this.run(); // not a thread!
+		this.performOperations(); // not a thread!
 	}
 	
-	private void run() {
+	private void performOperations() {
 		String choice = "";
 		String fromServer = null;
 		
@@ -53,7 +55,9 @@ public class AutoClient {
 			try { // try to perform an operation and get server response
 				printMenu();
 				
+				System.out.print("Enter choice: ");
 				choice = stdIn.readLine();
+				System.out.println();
 				
 				switch (choice) {
 				case "0": clientOut.writeObject("exit"); break;
@@ -62,19 +66,20 @@ public class AutoClient {
 				case "3":
 					SelectCarOption sco = new SelectCarOption(clientIn, clientOut, stdIn);
 					sco.run();
+					fromServer = null;
 					
-					break;
+					continue;
 				default: System.out.println("Invalid operation choice.\n");
 				}
 				
 				fromServer = (String) clientIn.readObject();
 			} catch (IOException ioe) {
-				ioe.printStackTrace();
+//				ioe.printStackTrace();
 			} catch (ClassNotFoundException cnfe) {
-				cnfe.printStackTrace();
+//				cnfe.printStackTrace();
 			}
 			
-			
+			System.out.println(fromServer); // bye
 		}
 	}
 	
@@ -102,6 +107,8 @@ public class AutoClient {
 			fnfe.printStackTrace();
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
+		} catch (AutoException ae) {
+			ae.printStackTrace();
 		}
 	}
 }

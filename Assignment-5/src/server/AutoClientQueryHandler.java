@@ -11,7 +11,7 @@ import adapter.BuildAuto;
 
 public class AutoClientQueryHandler {
 	private String query;
-	BuildAuto autoServer;
+	protected static BuildAuto autoServer = AutoServerSocket.autoServer;
 	
 	protected AutoClientQueryHandler() {
 		query = null;
@@ -43,7 +43,7 @@ public class AutoClientQueryHandler {
 		String autoDescription;
 		
 		if (query.contains("get auto ") && query.length() > 9) {
-			String[] params = query.substring(9).split(" ");
+			String[] params = query.substring(9).split(":");
 			
 			if (params.length < 2) {
 				return "Invalid get query";
@@ -73,7 +73,7 @@ public class AutoClientQueryHandler {
 
 	private String handleAddStatement() {
 		if (query.contains("add optionSet ") && query.length() > 14) {
-			String[] params = query.substring(14).split(" ");
+			String[] params = query.substring(14).split(":");
 			
 			if (params.length < 3) {
 				return "Invalid add query";
@@ -85,7 +85,7 @@ public class AutoClientQueryHandler {
 				return "Unsuccessful add of new option set";
 			}
 		} else if (query.contains("add option ") && query.length() > 11) {
-			String[] params = query.substring(11).split(" ");
+			String[] params = query.substring(11).split(":");
 			
 			if (params.length < 5) {
 				return "Invalid add query";
@@ -110,7 +110,7 @@ public class AutoClientQueryHandler {
 
 	private String handleDeleteStatement() {
 		if (query.contains("delete optionSet ") && query.length() > 17) {
-			String[] params = query.substring(17).split(" ");
+			String[] params = query.substring(17).split(":");
 			
 			if (params.length < 3) {
 				return "Invalid delete query";
@@ -122,7 +122,7 @@ public class AutoClientQueryHandler {
 				return "Unsuccessful delete of option set";
 			}
 		} else if (query.contains("delete option ") && query.length() > 14) {
-			String[] params = query.substring(14).split(" ");
+			String[] params = query.substring(14).split(":");
 			
 			if (params.length < 4) {
 				return "Invalid delete query";
@@ -140,7 +140,7 @@ public class AutoClientQueryHandler {
 
 	private String handleEditStatement() {
 		if (query.contains("edit option set choice ") && query.length() > 23) {
-			String[] params = query.substring(23).split(" ");
+			String[] params = query.substring(23).split(":");
 			
 			if (params.length < 4) {
 				return "Invalid edit query";
@@ -152,7 +152,7 @@ public class AutoClientQueryHandler {
 				return "Unsuccessful edit of option choice";
 			}
 		} else if (query.contains("edit option ") && query.length() > 12) {
-			String[] params = query.substring(12).split(" ");
+			String[] params = query.substring(12).split(":");
 			
 			if (params.length < 6) {
 				return "Invalid edit query";

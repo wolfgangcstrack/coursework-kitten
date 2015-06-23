@@ -25,7 +25,7 @@ public class BuildCarModelOptions implements AutoServer {
 		return new BuildAuto().createAuto(formattedFileReader);
 	}
 	
-	public void addAuto(Automobile auto) {
-		new BuildAuto().addAuto(auto);
+	public boolean addAuto(Automobile auto) {
+		return (new BuildAuto().addAuto(auto));
 	}
 }

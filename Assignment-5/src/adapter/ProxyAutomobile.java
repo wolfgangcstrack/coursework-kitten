@@ -265,7 +265,7 @@ public abstract class ProxyAutomobile {
 		return new AutoIO().buildAutoObject(properties);
 	}
 	
-	public void addAuto(Automobile auto) {
-		fleet.addAutomobile(auto);
+	public boolean addAuto(Automobile auto) {
+		return fleet.addAutomobile(auto);
 	}
 }
