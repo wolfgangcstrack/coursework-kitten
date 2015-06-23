@@ -32,11 +32,12 @@ public:
 	void setFirstName(const std::string &newName) { data[FIRSTNAME] = newName; }
 	// overloaded method from XmlNode
 	void readData(const std::string &data);
+	std::string toString();
 };
 
 void User::readData(const std::string &data)
 {
-	size_t bpos = data.find("<username>") + 9, length = data.find("</username>") - bpos;
+	size_t bpos = data.find("<username>") + 10, length = data.find("</username>") - bpos;
 	this->data[USERNAME] = data.substr(bpos, length);
 
 	bpos = data.find("<last>") + 6, length = data.find("</last>") - bpos;
@@ -44,6 +45,12 @@ void User::readData(const std::string &data)
 
 	bpos = data.find("<first>") + 7, length = data.find("</first>") - bpos;
 	this->data[FIRSTNAME] = data.substr(bpos, length);
+}
+
+std::string User::toString()
+{
+	return "Username: " + data[USERNAME] + '\n'
+		+ "\tName (last, first): " + data[LASTNAME] + ", " + data[FIRSTNAME];
 }
 
 #endif // XML_USER_H_

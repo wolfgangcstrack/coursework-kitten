@@ -18,7 +18,7 @@ parameter and return booleans.
 
 class XmlRegexIO
 {
-private:
+protected:
 	std::string pattern;
 	std::regex rex;
 public:

@@ -9,13 +9,14 @@ chosen for this lab.
 #ifndef _XML_NODE_H
 #define _XML_NODE_H
 
+#include <memory>
 #include <string>
 #include <vector>
 #include <deque>
 #include <regex>
 
 class XmlNode;
-typedef std::deque<XmlNode> XmlNodeList;
+typedef std::deque<XmlNode*> XmlNodeList;
 
 class XmlNode
 {
@@ -44,6 +45,7 @@ public:
 	void setXMLTags(const std::string &newTags) { xmlTags = newTags; }
 	// other methods
 	virtual void readData(const std::string &data) = 0;
+	virtual std::string toString() = 0;
 };
 
 long XmlNode::get_ulong(const std::string &data, const std::string &tagName)
