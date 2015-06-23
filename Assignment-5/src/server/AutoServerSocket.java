@@ -32,7 +32,7 @@ public class AutoServerSocket {
 				ascs = new AutoServerClientSession(soc);
 				ascs.start();
 			} catch (IOException ioe) {
-				System.err.println("Accept failed.");
+				System.err.println("Accept client connection failed.");
 			}
 		}
 	}
