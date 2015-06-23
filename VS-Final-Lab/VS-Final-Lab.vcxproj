@@ -79,6 +79,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="User.h" />
+    <ClInclude Include="UserDecryptor.h" />
+    <ClInclude Include="UserEncryptionInterface.h" />
+    <ClInclude Include="UserEncryptor.h" />
     <ClInclude Include="XmlNode.h" />
     <ClInclude Include="XmlRegexIO.h" />
   </ItemGroup>
