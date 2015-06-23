@@ -33,7 +33,7 @@
     <Xml Include="users_8.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="encryptor.txt">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

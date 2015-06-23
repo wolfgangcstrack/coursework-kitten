@@ -1,0 +1,79 @@
+/*
+Wolfgang C. Strack
+Windows 8 Visual C++ 2013
+
+This file contains the encryptor application for this lab's data
+*/
+
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+	//const string filename = "users_#.xml";
+
+	ifstream ifs(filename);
+	if (!ifs.is_open())
+		cout << "file not open\n";
+
+	int count = 0;
+	string line;
+	vector<string> lines;
+	string temp;
+	string name;
+
+	while (getline(ifs, line))
+	{
+		if (line.find("last") != string::npos)
+		{
+			name = line.substr(line.find("<last>") + 6, line.find("</last>") - (line.find("<last>") + 6));
+			for (int i = 0; i < name.length(); i++)
+			{
+				if (i % 2 == 0)
+				{
+					name[i] -= 33;
+				}
+				else
+				{
+					name[i] += 132;
+				}
+			}
+			temp = line.substr(0, line.find("<last>") + 6);
+			temp += name;
+			temp += line.substr(line.find("</last>"));
+			line = temp;
+		}
+		else if (line.find("first") != string::npos)
+		{
+			name = line.substr(line.find("<first>") + 7, line.find("</first>") - (line.find("<first>") + 7));
+			for (int i = 0; i < name.length(); i++)
+			{
+				if (i % 2 == 0)
+				{
+					name[i] -= 33;
+				}
+				else
+				{
+					name[i] += 132;
+				}
+			}
+			temp = line.substr(0, line.find("<first>") + 7);
+			temp += name;
+			temp += line.substr(line.find("</first>"));
+			line = temp;
+		}
+
+		lines.push_back(line);
+	}
+
+	ofstream ofs(filename);
+
+	for (auto i = lines.begin(); i != lines.end(); ++i) {
+		ofs << *i << endl;
+	}
+
+	return 0;
+}
