@@ -78,6 +78,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="User.h" />
     <ClInclude Include="XmlNode.h" />
     <ClInclude Include="XmlRegexIO.h" />
   </ItemGroup>
@@ -92,7 +93,10 @@
     <Xml Include="users_8.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="encryptor.txt" />
+    <Text Include="encryptor.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

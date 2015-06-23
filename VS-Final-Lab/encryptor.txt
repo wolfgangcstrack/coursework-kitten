@@ -5,14 +5,14 @@ Windows 8 Visual C++ 2013
 This file contains the encryptor application for this lab's data
 */
 
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <vector>
-using namespace std;
+//#include <iostream>
+//#include <string>
+//#include <fstream>
+//#include <vector>
+//using namespace std;
 
-int main()
-{
+//int main()
+//{
 	//const string filename = "users_#.xml";
 
 	ifstream ifs(filename);

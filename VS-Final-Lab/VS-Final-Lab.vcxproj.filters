@@ -21,6 +21,9 @@
     <ClInclude Include="XmlRegexIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="User.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="users_1.xml" />
@@ -33,7 +36,10 @@
     <Xml Include="users_8.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="encryptor.txt">
+    <Text Include="encryptor.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

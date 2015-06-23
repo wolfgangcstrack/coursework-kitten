@@ -11,7 +11,11 @@ chosen for this lab.
 
 #include <string>
 #include <vector>
+#include <deque>
 #include <regex>
+
+class XmlNode;
+typedef std::deque<XmlNode> XmlNodeList;
 
 class XmlNode
 {
