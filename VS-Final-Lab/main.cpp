@@ -16,7 +16,7 @@ This file contains the main application for this lab.
 using namespace std;
 
 vector<string> getFileNames(int numFiles);
-void displayNodeList(XmlNodeList &nodelist, bool andDelete = false);
+void displayNodeList(XmlNodeList &nodelist);
 void decryptUserData(XmlNodeList &nodelist);
 
 int main()
@@ -46,7 +46,7 @@ int main()
 	cout << "Finished decrypting all user data.\n\n\n";
 
 	cout << "\n\nNow displaying user data (decrypted):\n\n";
-	displayNodeList(nodelist, true);
+	displayNodeList(nodelist);
 	
 	cout << "\n\n\nNow exiting...\n\n";
 
@@ -70,14 +70,11 @@ vector<string> getFileNames(int numFiles)
 	return filenames;
 }
 
-void displayNodeList(XmlNodeList &nodelist, bool andDelete)
+void displayNodeList(XmlNodeList &nodelist)
 {
 	for (auto i = nodelist.begin(); i != nodelist.end(); ++i)
 	{
 		cout << (*i)->toString() << endl;
-
-		if (andDelete)
-			delete (*i);
 	}
 }
 

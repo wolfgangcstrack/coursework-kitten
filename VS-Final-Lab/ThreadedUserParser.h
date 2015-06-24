@@ -28,11 +28,20 @@ public:
 	// constructor/destructor
 	ThreadedUserParser() {}
 	ThreadedUserParser(const std::string pattern) : XmlRegexIO(pattern) {}
-	~ThreadedUserParser(){}
+	~ThreadedUserParser();
 	// new methods
 	const XmlNodeList & parseUserFiles(std::vector<std::string> filenames);
 	// other methods used are inherited from XmlRegexIO
 };
+
+ThreadedUserParser::~ThreadedUserParser()
+{
+	for (auto i = nodelist.begin(); i != nodelist.end(); ++i)
+	{
+		if (*i)
+			delete *i;
+	}
+}
 
 // private method used by thread
 void ThreadedUserParser::parseFile(const std::string &filename)
