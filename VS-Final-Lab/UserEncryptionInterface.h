@@ -18,9 +18,9 @@ protected:
 	static const int OFFSET_EVEN = 33;
 	static const int OFFSET_ODD = 132;
 
-	std::string cache;
+	std::string buffer;
 public:
-	virtual const std::string & getCache() { return cache; }
+	virtual const std::string & getCache() const { return buffer; }
 	virtual void convert(User &user) = 0;
 	virtual void convert(std::string &line) = 0;
 };

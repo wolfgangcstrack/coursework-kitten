@@ -17,7 +17,7 @@ decrypted by the UserDecryptor class.
 class UserEncryptor : public UserEncryptionInterface
 {
 private:
-	void encrypt(); // encrypts whatever is stored in this->cache
+	void encrypt(); // encrypts whatever is stored in this->buffer
 public:
 	// constructors and destructor
 	UserEncryptor() {}
@@ -29,33 +29,33 @@ public:
 
 void UserEncryptor::encrypt()
 {
-	for (size_t index = 0; index < cache.length(); index++)
+	for (size_t index = 0; index < buffer.length(); index++)
 	{
 		if (index % 2 == 0)
-			cache[index] -= OFFSET_EVEN;
+			buffer[index] -= OFFSET_EVEN;
 		else
-			cache[index] += OFFSET_ODD;
+			buffer[index] += OFFSET_ODD;
 	}
 }
 
 void UserEncryptor::convert(User &user)
 {
-	cache = user.getLastName();
+	buffer = user.getLastName();
 	this->encrypt();
-	user.setLastName(cache);
+	user.setLastName(buffer);
 
-	cache = user.getFirstName();
+	buffer = user.getFirstName();
 	this->encrypt();
-	user.setFirstName(cache);
+	user.setFirstName(buffer);
 
 	user.setAsEncrypted();
 }
 
 void UserEncryptor::convert(std::string &line)
 {
-	cache = line;
+	buffer = line;
 	this->encrypt();
-	line = cache;
+	line = buffer;
 }
 
 #endif // USER_ENCRYPTOR_H_

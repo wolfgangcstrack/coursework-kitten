@@ -14,7 +14,7 @@ represented by the xml files in this lab.
 class UserDecryptor : public UserEncryptionInterface
 {
 private:
-	void decrypt(); // decrypts whatever is stored in this->cache
+	void decrypt(); // decrypts whatever is stored in this->buffer
 public:
 	// constructors and destructor
 	UserDecryptor() {}
@@ -26,33 +26,33 @@ public:
 
 void UserDecryptor::decrypt()
 {
-	for (size_t index = 0; index < cache.length(); index++)
+	for (size_t index = 0; index < buffer.length(); index++)
 	{
 		if (index % 2 == 0)
-			cache[index] += OFFSET_EVEN;
+			buffer[index] += OFFSET_EVEN;
 		else
-			cache[index] -= OFFSET_ODD;
+			buffer[index] -= OFFSET_ODD;
 	}
 }
 
 void UserDecryptor::convert(User &user)
 {
-	cache = user.getLastName();
+	buffer = user.getLastName();
 	this->decrypt();
-	user.setLastName(cache);
+	user.setLastName(buffer);
 
-	cache = user.getFirstName();
+	buffer = user.getFirstName();
 	this->decrypt();
-	user.setFirstName(cache);
+	user.setFirstName(buffer);
 
 	user.setAsDecrypted();
 }
 
 void UserDecryptor::convert(std::string &line)
 {
-	cache = line;
+	buffer = line;
 	this->decrypt();
-	line = cache;
+	line = buffer;
 }
 
 #endif // USER_DECRYPTOR_H_

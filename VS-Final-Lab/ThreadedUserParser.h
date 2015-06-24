@@ -30,7 +30,7 @@ public:
 	ThreadedUserParser(const std::string pattern) : XmlRegexIO(pattern) {}
 	~ThreadedUserParser();
 	// new methods
-	const XmlNodeList & parseUserFiles(std::vector<std::string> filenames);
+	const XmlNodeList & parseUserFiles(const std::vector<std::string> &filenames);
 	// other methods used are inherited from XmlRegexIO
 };
 
@@ -63,7 +63,7 @@ void ThreadedUserParser::parseFile(const std::string &filename)
 	}
 }
 
-const XmlNodeList & ThreadedUserParser::parseUserFiles(std::vector<std::string> filenames)
+const XmlNodeList & ThreadedUserParser::parseUserFiles(const std::vector<std::string> &filenames)
 {
 	std::list<std::thread> threads;
 
