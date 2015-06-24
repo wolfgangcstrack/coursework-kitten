@@ -87,18 +87,10 @@
     <ClInclude Include="XmlRegexIO.h" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="users_1.xml" />
     <Xml Include="users_1_encrypted.xml" />
-    <Xml Include="users_2.xml" />
     <Xml Include="users_2_encrypted.xml" />
-    <Xml Include="users_3.xml" />
     <Xml Include="users_3_encrypted.xml" />
-    <Xml Include="users_4.xml" />
     <Xml Include="users_4_encrypted.xml" />
-    <Xml Include="users_5.xml" />
-    <Xml Include="users_6.xml" />
-    <Xml Include="users_7.xml" />
-    <Xml Include="users_8.xml" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="encryptor.txt" />

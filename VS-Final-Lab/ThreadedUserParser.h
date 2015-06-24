@@ -61,7 +61,6 @@ const XmlNodeList & ThreadedUserParser::parseUserFiles(std::vector<std::string> 
 	// run separate thread for each file
 	for (auto filename = filenames.begin(); filename != filenames.end(); ++filename)
 	{
-		//parseFile(*filename);
 		threads.push_back(
 			std::thread([this, filename]{ this->parseFile(*filename); }));
 		// parseFile() modified this->nodelist, which

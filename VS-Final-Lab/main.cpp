@@ -21,7 +21,7 @@ void decryptUserData(XmlNodeList &nodelist);
 
 int main()
 {
-	const int NUMBER_OF_FILES = 8; // can change if more than 8 files
+	const int NUMBER_OF_FILES = 4; // can change if more/less than 4 files
 	vector<string> filenames = getFileNames(NUMBER_OF_FILES);
 
 	ThreadedUserParser userParser("<user>(.|\\n)*?</user>");
@@ -33,8 +33,9 @@ int main()
 	XmlNodeList nodelist = userParser.parseUserFiles(filenames);
 
 	clock_t end = clock();
-	cout << "Finished parsing all files. Total time taken to parse: "
-		<< double(end - begin) / CLOCKS_PER_SEC << " seconds\n\n\n";
+	cout << "Finished parsing all files." << endl
+		<< "\nTotal number of users: " << nodelist.size() << endl
+		<< "Total time taken to parse: " << double(end - begin) / CLOCKS_PER_SEC << " seconds\n\n\n";
 
 	cout << "\n\nNow displaying all user data (encrypted):\n\n";
 	displayNodeList(nodelist);
