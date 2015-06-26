@@ -1,0 +1,478 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema 
+  targetNamespace="http://www.pfu.fujitsu.com/imaging/TWUD" 
+  xmlns:mstns="http://www.pfu.fujitsu.com/imaging/TWUD" 
+  xmlns="http://www.pfu.fujitsu.com/imaging/TWUD" 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+  xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" 
+  attributeFormDefault="qualified" 
+  elementFormDefault="qualified">
+
+  <element name="ScanParams" >
+    <complexType>
+        <element name="PaperHandling"  type="unsignedShort" />
+        <element name="PaperSize" >
+          <complexType>
+            <all>
+              <element name="PaperSpecification"  type="unsignedShort" />
+              <element name="StandardName"  type="string" />
+              <element name="Orientation"  type="string" />
+              <element name="Width"  type="unsignedLong" />
+              <element name="Height"  type="unsignedLong" />
+            </all>
+          </complexType>
+        </element>
+        <element name="ExpandPaperSize" >
+          <complexType>
+            <all>
+              <element name="Width"  type="unsignedLong" />
+              <element name="Height"  type="unsignedLong" />
+            </all>
+          </complexType>
+        </element>
+        <element name="ScanningMode"  type="unsignedShort" />
+        <element name="DifferenceMode"  minOccurs="0" maxOccurs="1" >
+          <complexType>
+            <all>
+              <element name="Front"  type="unsignedShort" />
+              <element name="Back"  type="unsignedShort" />
+            </all>
+          </complexType>
+        </element>
+        <element name="NumberOfPageParams"  type="unsignedShort" />
+        <element name="ScanPageParams"  minOccurs="1" maxOccurs="6">
+          <complexType>
+            <all>
+              <element name="Id"  type="unsignedShort" />
+              <element name="Area"  >
+                <complexType>
+                  <all>
+                    <element name="UpperLeftX"  type="unsignedLong" />
+                    <element name="UpperLeftY"  type="unsignedLong" />
+                    <element name="Width"  type="unsignedLong" />
+                    <element name="Height"  type="unsignedLong" />
+                    <element name="SupportedScanAreaType"  type="unsignedLong" />
+                  </all>
+                </complexType>
+              </element>
+              <element name="Resolution"  >
+                <complexType>
+                  <all>
+                    <element name="X"  type="unsignedLong" />
+                    <element name="Y"  type="unsignedLong" />
+                  </all>
+                </complexType>
+              </element>
+              <element name="ImageComposition"  >
+                <complexType>
+                  <all>
+                    <element name="ImageType"  type="string" />
+                    <element name="BitsPerPixel"  type="unsignedShort" />
+                    <element name="Binary"  minOccurs="0" maxOccurs="1">
+                      <complexType>
+                        <all>
+                          <element name="BinaryMethod"  type="unsignedShort" />
+                          <element name="Threshold"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                          <element name="DTCVariance"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                          <element name="Sipc"  minOccurs="0" maxOccurs="1" >
+                            <complexType>
+                              <all>
+                                <element name="SipcIP"  type="unsignedShort" />
+                                <element name="SipcParams"  type="unsignedShort" />
+                                <element name="SipcFilter"  type="unsignedShort" />
+                                <element name="SipcNRS"  type="unsignedShort" />
+                              </all>
+                            </complexType>
+                          </element>
+                          <element name="Hpb"  minOccurs="0" maxOccurs="1">
+                            <complexType>
+                              <all>
+                                <element name="HpbSensitivity"  type="unsignedShort" />
+                                <element name="HpbBGThreshold"  type="unsignedShort" />
+                                <element name="HpbFadeCompensation"  type="unsignedShort" />
+                                <element name="HpbCharWidth"  type="unsignedShort" />
+                                <element name="HpbNRSensitivity"  type="unsignedShort" />
+                                <element name="HpbPatternRemoval"  type="unsignedShort" />
+                              </all>
+                            </complexType>
+                          </element>
+                          <element name="GammaType"  type="unsignedShort" />
+                          <element name="GammaTableId"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                          <element name="GammaValue"  type="xs:float" minOccurs="0" maxOccurs="1" />
+                          <element name="Brightness"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                          <element name="Contrast"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                          <element name="DropoutColor"  type="unsignedShort" />
+                          <element name="DropoutColorSensitivity"  type="unsignedShort" />
+                          <element name="Emphasis"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                          <element name="Extraction"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                        </all>
+                      </complexType>
+                    </element>
+                    <element name="Halftone"  minOccurs="0" maxOccurs="1">
+                      <complexType>
+                        <all>
+                          <element name="HalftoneMethod"  type="unsignedShort" />
+                          <element name="HalftoneType"  type="unsignedShort" />
+                          <element name="ImageAreaSeparation" >
+                            <complexType>
+                              <all>
+                                <element name="Enable"  type="xs:boolean" />
+                                <element name="Threshold"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                              </all>
+                            </complexType>
+                          </element>
+                          <element name="GammaType"  type="unsignedShort" />
+                          <element name="GammaTableId"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                          <element name="GammaValue"  type="xs:float" minOccurs="0" maxOccurs="1" />
+                          <element name="Brightness"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                          <element name="Contrast"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                          <element name="DropoutColor"  type="unsignedShort" />
+                          <element name="DropoutColorSensitivity"  type="unsignedShort" />
+                          <element name="Emphasis"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                          <element name="Extraction"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                        </all>
+                      </complexType>
+                    </element>
+                    <element name="Gray"  minOccurs="0" maxOccurs="1">
+                      <complexType>
+                        <all>
+                          <element name="BackgroundEffect" >
+                            <complexType>
+                              <all>
+                                <element name="BGSmoothingEnable"  type="xs:boolean" />
+                                <element name="BGSmoothingLevel"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                                <element name="BGSmoothingColor"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                              </all>
+                            </complexType>
+                          </element>
+                          <element name="GammaType"  type="unsignedShort" />
+                          <element name="GammaTableId"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                          <element name="GammaValue"  type="xs:float" minOccurs="0" maxOccurs="1" />
+                          <element name="Brightness"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                          <element name="Contrast"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                          <element name="Shadow"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                          <element name="Highlight"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                          <element name="DropoutColor"  type="unsignedShort" />
+                          <element name="DropoutColorSensitivity"  type="unsignedShort" />
+                          <element name="Emphasis"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                          <element name="Extraction"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                        </all>
+                      </complexType>
+                    </element>
+                    <element name="RGBColor"  minOccurs="0" maxOccurs="1">
+                      <complexType>
+                        <all>
+                          <element name="SRGB"  type="xs:boolean" />
+                          <element name="BackgroundEffect" >
+                            <complexType>
+                              <all>
+                                <element name="BGSmoothingEnable"  type="xs:boolean" />
+                                <element name="BGSmoothingLevel"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                                <element name="BGSmoothingColor"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                              </all>
+                            </complexType>
+                          </element>
+                          <element name="SingleColorCorrection"  type="xs:boolean" />
+                          <element name="CommonColorCorrection" >
+                            <complexType>
+                              <all>
+                                <element name="LutType"  type="unsignedShort" />
+                                <element name="LutTableId"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                                <element name="GammaValue"  type="xs:float" minOccurs="0" maxOccurs="1" />
+                                <element name="Brightness"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                                <element name="Contrast"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                                <element name="Shadow"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                                <element name="Highlight"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                              </all>
+                            </complexType>
+                          </element>
+                          <element name="Emphasis"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                            <element name="Extraction"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                            <element name="ColorCorrectionR"  minOccurs="0" maxOccurs="1">
+                            <complexType>
+                              <all>  
+                                <element name="GammaValue"  type="xs:float" />
+                                <element name="Brightness"  type="unsignedShort" />
+                                <element name="Contrast"  type="unsignedShort" />
+                                <element name="Shadow"  type="unsignedShort" />
+                                <element name="Highlight"  type="unsignedShort" />
+                              </all>
+                            </complexType>
+                          </element>
+                          <element name="ColorCorrectionG"  minOccurs="0" maxOccurs="1">
+                            <complexType>
+                              <all>
+                                <element name="GammaValue"  type="xs:float" />
+                                <element name="Brightness"  type="unsignedShort" />
+                                <element name="Contrast"  type="unsignedShort" />
+                                <element name="Shadow"  type="unsignedShort" />
+                                <element name="Highlight"  type="unsignedShort" />
+                              </all>
+                            </complexType>
+                          </element>
+                          <element name="ColorCorrectionB"  minOccurs="0" maxOccurs="1">
+                            <complexType>
+                              <all>
+                                <element name="GammaValue"  type="xs:float" />
+                                <element name="Brightness"  type="unsignedShort" />
+                                <element name="Contrast"  type="unsignedShort" />
+                                <element name="Shadow"  type="unsignedShort" />
+                                <element name="Highlight"  type="unsignedShort" />
+                              </all>
+                            </complexType>
+                          </element>
+                        </all>
+                      </complexType>
+                    </element>
+                  </all>
+                </complexType>
+              </element>
+              <element name="ImageFunction"  >
+                <complexType>
+                  <all>
+                    <element name="ImageReversal"  type="xs:boolean" />
+                    <element name="Mirroring"  type="xs:boolean" />
+                    <element name="WhiteLevelFollowing"  type="unsignedShort" />
+                    <element name="LengthDetection"  type="unsignedShort" />
+                    <element name="Cropping"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                    <element name="DeskewedBackgroundColor"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                    <element name="DeskewMethod"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                    <element name="OverCrop"  type="xs:boolean" minOccurs="0" maxOccurs="1" />
+                    <element name="OverCropSize"  type="xs:long" minOccurs="0" maxOccurs="1" />
+                    <element name="Rotation"  type="unsignedShort" />
+                    <element name="BlackBackground"  type="unsignedShort" />
+                    <element name="ACDMode"  type="unsignedShort" />
+                    <element name="ACDSensitivity"  type="xs:short" />
+                    <element name="ACDThresholdLength"  type="unsignedLong" minOccurs="0" maxOccurs="1" />
+                    <element name="ZoneCrop"  type="xs:boolean" minOccurs="0" maxOccurs="1" />
+                  </all>
+                </complexType>
+              </element>
+              <element name="Compression"  >
+                <complexType>
+                  <all>
+                    <element name="Type"  type="unsignedShort" />
+                    <element name="Argument"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                  </all>
+                </complexType>
+              </element>
+              <element name="ScanningCompression"  >
+                <complexType>
+                  <all>
+                    <element name="Type"  type="unsignedShort" />
+                    <element name="Argument"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                  </all>
+                </complexType>
+              </element>
+            </all>
+          </complexType>
+        </element>
+        <element name="NumberOfScanPages"  type="xs:short" />
+        <element name="ScanFunction" >
+          <complexType>
+            <all>
+              <element name="JobControl" >
+                <complexType>
+                  <all>
+                    <element name="Enable"  type="xs:boolean" />
+                    <element name="Action"  minOccurs="0" maxOccurs="1" >
+                      <complexType>
+                        <all>
+                          <element name="StopEnable"  type="xs:boolean" />
+                          <element name="ImageValid"  type="xs:boolean" />
+                        </all>
+                      </complexType>
+                    </element>
+                    <element name="DetectObject"  minOccurs="0" maxOccurs="1" >
+                      <complexType>
+                        <all>
+                          <element name="SeparationPaper"  type="unsignedShort" />
+                          <element name="PatchCodePaper"  type="unsignedShort" />
+                          <element name="PatchCodeDirection"  type="unsignedShort" />
+                          <element name="DeviceOperation"  type="unsignedShort" />
+                        </all>
+                      </complexType>
+                    </element>
+                  </all>
+                </complexType>
+              </element>
+              <element name="BufferedScan"  type="unsignedShort" />
+              <element name="MultiFeedControl" >
+                <complexType>
+                  <all>
+                    <element name="Type"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                    <element name="Range"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                    <element name="StopEnable"  type="xs:boolean" minOccurs="0" maxOccurs="1" />
+                    <element name="ImageOutput"  type="xs:boolean" minOccurs="0" maxOccurs="1" />
+                    <element name="IgnoreLength"  minOccurs="0" maxOccurs="1">
+                      <complexType>
+                        <all>
+                          <element name="Enable"  type="xs:boolean" />
+                          <element name="Length"  type="unsignedLong" minOccurs="0" maxOccurs="1" />
+                        </all>
+                      </complexType>
+                    </element>
+                  </all>
+                </complexType>
+              </element>
+              <element name="PrepickControl"  type="unsignedShort" />
+              <element name="BlankPageSkipControl" >
+                <complexType>
+                  <all>
+                    <element name="SkipMode"  type="unsignedShort" minOccurs="0" />
+                    <element name="ForBinary"  minOccurs="0" maxOccurs="1">
+                      <complexType>
+                        <all>
+                          <element name="DetectMode"  type="unsignedShort" />
+                          <element name="BlackRatio"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                          <element name="WhiteRatio"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                          <element name="CompressSize"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                        </all>
+                      </complexType>
+                    </element>
+                    <element name="ForColorGray"  minOccurs="0" maxOccurs="1">
+                      <complexType>
+                        <all>
+                          <element name="DetectMode"  type="unsignedShort" />
+                          <element name="Sensitivity"  type="xs:short" minOccurs="0" maxOccurs="1" />
+                          <element name="ColorCompressSize"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                          <element name="GrayCompressSize"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                        </all>
+                      </complexType>
+                    </element>
+                    <element name="ForAllMode"  minOccurs="0" maxOccurs="1">
+                      <complexType>
+                        <all>
+                          <element name="DetectMode"  type="unsignedShort" />
+                          <element name="Sensitivity"  type="xs:short" minOccurs="0" maxOccurs="1" />
+                          <element name="BlackRatio"  type="xs:short" minOccurs="0" maxOccurs="1" />
+                          <element name="WhiteRatio"  type="xs:short" minOccurs="0" maxOccurs="1" />
+                          <element name="IgnoreTabPage"  type="xs:short" minOccurs="0" maxOccurs="1" />
+                          <element name="IgnoreAreaSize"  type="xs:short" minOccurs="0" maxOccurs="1" />
+                        </all>
+                      </complexType>
+                    </element>
+                  </all>
+                </complexType>
+              </element>
+              <element name="PunchedHoleRemoval"  type="unsignedShort" />
+              <element name="AutoImageQualityCheck" >
+                <complexType>
+                  <all>
+                    <element name="CheckType"  type="unsignedShort" />
+                    <element name="MultiFeedType"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                    <element name="MultiFeedRange"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                  </all>
+                </complexType>
+              </element>
+              <element name="PageSeparation"  type="unsignedShort" />
+              <element name="PageComposition"  type="unsignedShort" />
+              <element name="EdgeCorrection" >
+                <complexType>
+                  <all>
+                    <element name="Enable"  type="xs:boolean" />
+                    <element name="Color"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                    <element name="Upper"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                    <element name="Lower"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                    <element name="Left"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                    <element name="Right"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                  </all>
+                </complexType>
+              </element>
+              <element name="TornEdgeCorrection"  type="unsignedShort" />
+              <element name="StreakNoiseReduction"  type="xs:boolean" />
+              <element name="Binding"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+              <element name="StaplerDetection"  type="unsignedShort" />
+              <element name="VerifyScan"  type="unsignedShort" />
+              <element name="PaperProtection"  type="unsignedShort" />
+	      <element name="OverSkewDetection"  type="unsignedShort" />
+              <element name="MultiFeedRetry"  type="unsignedShort" />
+              <element name="PreScan"  type="xs:boolean" />
+              <element name="ToggleScan"  minOccurs="0" maxOccurs="1" >
+                <complexType>
+                  <all>
+                    <element name="Enable"  type="xs:boolean" />
+                    <element name="DetectCode"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                    <element name="ImageMode"  type="xs:short" minOccurs="0" maxOccurs="1" />
+                    <element name="SwitchMode"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                    <element name="FirstImageFront"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                    <element name="FirstImageBack"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+                  </all>
+                </complexType>
+              </element>
+              <element name="BarCodeScan"  minOccurs="1" maxOccurs="1" >
+                <complexType>
+                  <all>
+                    <element name="Enable"  type="xs:boolean" />
+                    <element name="Type"  type="unsignedShort" />
+                    <element name="Direction"  type="unsignedShort" />
+                    <element name="CheckDigit"  type="xs:boolean" minOccurs="0" maxOccurs="1" />
+                    <element name="MaxBarCodes"  type="unsignedShort" />
+                  </all>
+                </complexType>
+              </element>
+              <element name="PatchCodeNotification"  minOccurs="1" maxOccurs="1" >
+                <complexType>
+                  <all>
+                    <element name="Enable"  type="xs:boolean" />
+                    <element name="Type"  type="unsignedShort" />
+                    <element name="Direction"  type="unsignedShort" />
+                  </all>
+                </complexType>
+              </element>
+              <element name="AssistedScan"  type="unsignedShort" />
+              <element name="AssistedScanAvailable"  type="xs:boolean" />
+              <element name="ContinuousScan"  type="xs:boolean" />
+              <element name="AutoScan"  type="unsignedShort" />
+            </all>
+          </complexType>
+        </element>
+        <element name="DigitalEndorser"  minOccurs="0" maxOccurs="1">
+          <complexType>
+            <all>
+              <element name="Enable"  type="xs:boolean" />
+              <element name="ImprinterType"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+              <element name="Offset"  minOccurs="0" maxOccurs="1">
+                <complexType>
+                  <all>
+                    <element name="X"  type="unsignedLong" />
+                    <element name="Y"  type="unsignedLong" />
+                  </all>
+                </complexType>
+              </element>
+              <element name="Font"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+              <element name="Direction"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+              <element name="CountImage"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+              <element name="CounterStep"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+              <element name="CounterMode"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+              <element name="InitialCounter"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+              <element name="String"  type="string" minOccurs="0" maxOccurs="1" />
+            </all>
+          </complexType>
+        </element>
+        <element name="ImprinterControl"  minOccurs="0" maxOccurs="4">
+          <complexType>
+            <all>
+              <element name="Enable"  type="xs:boolean" />
+              <element name="ImprinterType"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+              <element name="Offset"  minOccurs="0" maxOccurs="1">
+                <complexType>
+                  <all>
+                    <element name="X"  type="unsignedLong" />
+                    <element name="Y"  type="unsignedLong" />
+                  </all>
+                </complexType>
+              </element>
+              <element name="Font"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+              <element name="Direction"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+              <element name="CountImage"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+              <element name="CounterStep"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+              <element name="CounterMode"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+              <element name="InitialCounter"  type="unsignedShort" minOccurs="0" maxOccurs="1" />
+              <element name="String"  type="string" minOccurs="0" maxOccurs="1" />
+            </all>
+          </complexType>
+        </element>
+    </complexType>
+  </element>
+</xs:schema>
