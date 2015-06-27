@@ -1,6 +1,7 @@
 # CIS29: Advanced C++ - All Labs
-This repository contains all the labs assigned during De Anza College's CIS29 course for Spring 2015.
-Each lab should contain its own README.md but the following descriptions are summaries of what each lab is about:
+This repository contains all the labs assigned during De Anza College's CIS29 course for Spring 2015. All labs were
+created using Visual Studio Express 2013 for Windows Desktop. Each lab should contain its own README.md but the
+following descriptions are summaries of what each lab is about:
 
 ## <a href="./Lab-0">Lab 0</a>
 For this lab, we were given three different assignment descriptions and were asked to choose one. The lab itself
