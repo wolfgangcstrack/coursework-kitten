@@ -1,0 +1,115 @@
+BCHH-0013-016:High Sierra Curve Backpack:16:8.5 18.5 12.5:19.99:High Sierra:Clothing, Shoes & Jewelry
+BCSS-00b4-007:Skagen Men's SKW6076 Balder Titanium Chronograph Watch:7:4 3.1 3:180.00:Skagen:Clothing, Shoes & Jewelry
+BESS-0072-001:Samsung 850 EVO 250GB 2.5-Inch SATA III Internal SSD (MZ-75E250B/AM):1.9:3.9 0.3 2.8:114.99:Samsung:Electronics
+BCAA-0024-032:adidas Performance Men's Samba Classic Soccer Shoe:32:12.5 7.8 4.4:36.95:adidas:Clothing, Shoes & Jewelry
+BCNN-0012-016:Nautica Baby-Boys Infant 3 Piece Outerwear Set:16:1 1 1:18.95:Nautica:Clothing, Shoes & Jewelry
+BCA1-00d8-001:10k Yellow Gold, Gemstone, and Diamond Drop Earrings:0.8:4.4 3.9 0.4:216.40:Amazon Curated Collection:Clothing, Shoes & Jewelry
+BCCC-000f-004:CamelBak Podium Big Chill Water Bottle:4:10.8 3 3:15.00:CamelBak:Clothing, Shoes & Jewelry
+BCMM-0007-001:Mud Pie Dinosaur Pacifier Clip:0.8:9.9 3.1 0.5:7.27:Mud Pie:Clothing, Shoes & Jewelry
+BBMD-007b-035:Data Structures and Algorithms in Java:35.2:7.5 0.9 9.2:123.72:Michael T.Goodrich:Books
+BBVI-000d-015:Insurgent:15.2:5.3 1.3 8.0:13.81:Veronica Roth:Books
+BBMN-0006-004:Naruto Vol. 1:4.8:5.0 0.2 7.5:6.95:Masashi Kishimoto:Books
+BSGG-0023-001:Garmin City Navigator for Detailed Maps of Italy and Greece:0.48:4 4 0.1:35.98:Garmin:Software
+BSMM-0134-002:Microsoft Visual Studio Pro 2013 Upgrade:2.88:0.8 5.8 5.8:308.84:Microsoft:Software
+BEUF-0052-011:Franklin Merriam Webster Speaking Collegiate Dictionary:11.2:5 2 3:82.88:Unknown:Electronics
+BESS-006c-395:Samsung Xpress SL-M2070FW/XAA Wireless Monochrome Printer with Scanner, Copier and Fax:395.2:14.2 16 12.2:108.00:Samsung:Electronics
+BEHH-00d2-291:HP Scanjet 5590 Document Scanner:291.2:6.38 13.39 19.21:210.50:HP:Electronics
+BEAA-0820-132:Alienware 17 ANW17-6421SLV 17.3-Inch Laptop:132.8:1.35 16.93 11.49:2080.99:Alienware:Electronics
+BESS-0008-001:SanDisk Cruzer Fit CZ33 16GB USB 2.0:0.8:0.8 0.6 0.3:8.99:SanDisk:Electronics
+BESS-0895-111:Samsung UN65HU7250 Curved 65-Inch 4K Ultra HD 120Hz Smart LED TV:1115.2:57.1 11.8 34.7:2197.99:Samsung:Electronics
+BBYY-0030-009:YSL Saharienne 2.5 Eau De Toilette:9.1:2.2 5.8 1.8:48.65:YSL:Beauty
+BBJV-0034-019:Viva La Juicy by Juicy Couture 3.4oz 100ml EDP Spray:19.2:6 5 4:52.79:Juicy Couture:Beauty
+BBII-0063-024:InStyler Max 2-Way Rotating Iron, Pink:24:12 5.5 2.6:99.99:InStyler:Beauty
+BBKK-000b-001:Kyoku for Men Exfoliating Facial Scrub, 3.4 Fluid Ounce:1.6:2 2 5:11.99:Kyoku for Men:Beauty
+BBSS-000e-009:Skip Hop Hug and Hide Activity Toy, Owl:9.6:7 4 8:14.21:Skip Hop:Baby
+BBBB-0138-411:BOB Sport Utility Single Stroller, Orange:411.2:50.2 25 40:312.00:BOB:Baby
+BBHH-002a-217:Huggies Snug and Dry Diapers, Size 4, Economy Plus Pack, 192 Count:217.6:9.2 18 14.4:42.00:Huggies:Baby
+BBEE-000a-064:Evenflo Position and Lock Wood Gate, Tan:64:2.5 25.5 23.5:10.00:Evenflo:Baby
+BBGG-001d-104:Graco Affix Backless Youth Booster Seat with Latch System, Pierce:104:15.5 16.2 8.6:29.93:Graco:Baby
+BPNN-0008-004:New Life Spectrum Marine Fish Formula 1mm Sinking Pellet Fish Food:4.3:3.75 3.75 3.75:8.80:NewLife:Pet Supplies
+BPHH-001a-035:Happy Hen Treats Mealworm Frenzy:35.2:4 12 15:26.81:Happy Hen Treats:Pet Supplies
+BPZZ-0008-011:Zoo Med Terrarium Moss 30 to 40 Gallons:11.2:10.1 7.9 3.7:8.60:Zoo Med:Pet Supplies
+BPSS-0036-176:Solvit PupSTEP for Pets, Plus X-Large:176:28 18 25:54.99:Solvit:Pet Supplies
+BPBB-0034-001:Bayer Advantage II Flea Control Treatment for Cats:0.3:6.5 1 4.2:52.75:Bayer:Pet Supplies
+BPKA-0027-089:Aquarius Aq15005 Aquarius 5 Rounded 5-Gallon Aquarium Kit:89.6:14.2 11.5 10:39.99:Koller-Craft:Pet Supplies
+BIEE-0012-014:Ettore 65000 Professional Progrip Window Cleaning Kit:14.4:2 16.5 13:18.98:Ettore:Industrial & Scientific
+BIHH-0063-128:HFS Brand New Desktop Electric Centrifuge Lab (Timer 0-60min) 0-4000 Rpm Cap-20mlX6 Tube(800-1) 110v:128:8 8 8:99.99:HardwareFactoryStore.com:Industrial & Scientific
+BAPP-0011-060:Plaid PROMOABI Apple Barrel Acrylic Paint, 2-Ounce, Best Selling Colors I:60.8:13.5 9.2 2:17.82:Plaid:Arts, Craft & Sewing
+BAEE-000e-016:EK Tools Circle Punch, 2-Inch:16:6.1 3.1 1.3:14.74:EK Tools:Arts, Craft & Sewing
+BACC-0006-009:Crafty Cuts 2-Yards Cotton Fabric, White Solid:9.6:12.2 5 0.8:6.79:CRAFTY CUTS:Arts, Craft & Sewing
+BASS-0005-003:Scotch Precision Scissor, 8-Inches (1448):3.2:0.7 3.2 10.6:5.72:Scotch:Arts, Craft & Sewing
+BALL-0003-001:LoRan Norwegian Knitting Thimble:0.8:4.7 2.8 1:3.99:LoRan:Arts, Craft & Sewing
+BABB-0003-001:Beadaholique Clear Rubber Bullet Clutch Earring Safety Backs (144):0.3:0.2 0.2 0.2:3.74:Beadaholique:Arts, Craft & Sewing
+BPBB-0009-048:Bounty Big Roll Paper Towels, Prints, 6 Count:48:15.5 11 10:9.59:Bounty:Prime Pantry
+BPPP-0004-111:PureLeaf Iced Tea, Unsweet, 18.5 oz Bottle, 6 Count:111:8.6 8 5.3:4.98:PureLeaf:Prime Pantry
+BPPP-0008-160:Pampers Swaddlers Diapers, Size 1, Jumbo Pack, 35 Count:160:12.6 8.3 4.2:8.97:Pampers:Prime Pantry
+BPOO-0002-015:Oreo Double Stuff Sandwich Cookie:15.35:8.5 7 2:2.98:Oreo:Prime Pantry
+BPPP-0005-064:Pace Mild Chunky Salsa:64:10.7 5.4 4.1:5.68:Pace:Prime Pantry
+BPNN-0003-013:Nutella Hazelnut Spread:13:4 3.1 3.1:3.48:Nutella:Prime Pantry
+BASS-079d-563:Samsung RF28HFEDBSR Energy Star 28 Cu. Ft. French Door Refrigerator:5632:76.6 38.6 36.1:1949.00:Samsung:Appliances
+BANN-004f-142:Nuwave PIC - Precision Induction Cooktop with 9-inch Non-stick Fry Pan:142.4:14.4 15.9 6.3:79.99:NuWave PC:Appliances
+BAWW-001f-032:Whirlpool W10712394 Adjuster KIT:32:11.8 5.7 5.4:31.36:Whirlpool:Appliances
+BAMM-001e-001:Maytag UKF8001 Pur Refrigerator Water Filter 1-Pack:0.3:8.1 2.4 2.4:30.20:Maytag:Appliances
+BAAA-0009-001:AmazonBasics 4.0 Amp Dual USB Car Charger for Apple and Android Devices (High Output):1.6:3.1 1.2 1.3:9.99:AmazonBasics:Automotive
+BAVV-0016-147:Valvoline 813460 SynPower SAE 0W-20 Full Synthetic Motor Oil - 5 Quart:147.2:12.4 8.1 5.1:22.97:Valvoline:Automotive
+BAFF-0031-072:Fuel Helmets SH-FF0015 Full Face Helmet, Gloss Black, Medium:72:10.6 13.8 10.4:49.58:Fuel Helmets:Automotive
+BAEE-0138-009:Edge Products 83830 CTS Insight Monitor:9.3:9.5 6.2 4:312.99:Edge Products:Automotive
+BAK2-0009-001:2 KeylessOption Black Replacement 3 Button Keyless Entry Remote Control Key Fob Clicker:0.3:2 0.8 4:9.95:KeylessOption:Automotive
+BASS-000d-032:Smittybilt 13047 3/4" Stainless Steel D-Ring:32:6 6 6:13.59:Smittybilt:Automotive
+BAAA-0012-010:Autel MaxiScan MS300 CAN Diagnostic Scan Tool for OBDII Vehicles:10.4:6.3 2 9.1:18.42:Autel:Automotive
+BAKX-00eb-577:XD-Series 797 Spy Gloss Black Machined Wheel (20x9"/5x5.5"):577.6:20 20 9:235.49:KMC Wheels:Automotive
+BAMM-0013-001:Mechanix Wear MG-05-005 Original Glove, Black, 3X-Small:1.6:9.7 5.8 0.8:19.99:Mechanix Wear:Automotive
+BPTT-002d-008:TaoTronics LED Plant Grow Light For Hydroponic Garden Greenhouse(TT-GL20, 12W,E27, 3 Bands):8.5:6.2 5.1 4.9:45.99:TaoTronics:Patio, Lawn & Garden
+BPRR-0010-025:Rubbermaid Configurations 3-Handle Lowe-Profile Box, 42-inch, Natural (FG3F19DWNATUR):25.6:5.5 42 18:16.51:Rubbermaid:Patio, Lawn & Garden
+BPRR-0009-004:RENOGY 5 Pair MC4 Male/ Female Solar Panel Cable Connectors Double Seal Rings for Better Waterproof Effect:4:6 4 0.5:9.99:Renogy:Patio, Lawn & Garden
+BPBB-00e4-315:Baracuda G3 W03000 Advanced Suction Side Automatic Pool Cleaner:315.2:41.5 8 18:228.99:Baracuda:Patio, Lawn & Garden
+BPPP-002c-118:Poulan PLN1514 14-Inch 1-1/2 HP Electric Chain Saw:118.4:27 8 7:44.99:Poulan:Patio, Lawn & Garden
+BEAK-00b3-010:Kindle Fire HDX 7" Tablet:10.1:6.7 4.1 0.4:179.00:Amazon Digital Services:Electronics
+BMVV-009f-006:ViewSonic VX2252MH 22-Inch LED-Lit LCD Monitor:6.4:8.8 20.1 15.8:159.50:ViewSonic:Monitors
+BOSS-0010-001:Swingline Stapler, 747, Business, Manual, Desktop, 20 Sheet Capacity, Rio Red (74736):1.0:8.2 5.7 2:16.87:Swingline:Office Products
+BCBB-0095-006:BLU Studio Energy - With 5000 mAH Super Battery - Global GSM- Unlocked Cell Phones (Black):6.4:4.5 7.1 1.1:149.00:BLU:Cell Phones & Accessories
+BESS-0045-002:STREET by 50 Cent Wired Over-Ear Headphones - Black by SMS Audio:2.8:5.2 10 10:69.99:SMS Audio:Electronics
+BBMM-001d-001:Moby Wrap MLB Edition Baby Carrier, Oakland A's:1.8:10.1 4.9 4.9:29.95:Moby Wrap:Baby Products
+BCUU-00de-001:U.S. Polo Assn. Men's Slim Fit Stripe Pique Pocket Polo with Solid Yoke:1.0:1.0 1.0 1.0:222.38:U.S. Polo Assn.:Clothing, Shoes & Jewelry
+BHKK-00b3-022:KitchenAid KPWB100OB Pro Line Waffle Baker, Onyx Black:22.8:11.5 18.9 13.5:179.99:Kitchen Aid:Home & Kitchen
+BEAA-0008-008:AmazonBasics High-Speed HDMI Cable 2-Pack - 6.5 Feet (2 Meters) Supports Ethernet, 3D, and Audio Return:8.1:79.5 1.6 0.5:8.29:AmazonBasics:Electronics
+BPBB-0023-002:Black & Decker HPB18-OPE 18-Volt Slide Pack Battery For 18-Volt Outdoor Cordless Power Tools:2.0:7.7 4.5 6.9:35.65:Black & Decker:Patio, Lawn & Garden
+BPII-0026-002:ICE PocketInverter AERO Power Bank, (White):2.2:3.8 0.3 2.5:38.15:ICE:Portable Audio & Accessories
+BCFF-0001-008:Forum St. Patrick's Day Costume Party Felt Leprechaun Hat:8.0:10.0 8.0 4.0:1.99:Forum:Clothing, Shoes & Jewelry
+BSIT-0027-001:TurboTax Deluxe 2014 Fed + State + Fed Efile Tax Software + Refund Bonus Offer - Win:0.0:0.0 0.0 0.0:39.99:Intuit:Software
+BSHH-0013-001:H&R Block Tax Software Deluxe + State 2014 Win [Download]:0.0:0.0 0.0 0.0:19.99:H&R Block:Software
+BHWW-0025-017:Whitmor 6779-3044 Double Rod Closet, Silver:17.8:68 45.2 19.3:37.99:Whitmor:Home & Kitchen
+BAXX-0021-002:Xyron XRN510 Creative Station Multi-Use Crafting Machine with Permanent-Adhesive Cartridge:2.4:9.5 8.5 6.1:33.04:Xyron:Arts, Crafts & Sewing
+BAMM-000a-012:Martha Stewart Crafts Pom Poms, Pink, 2 Sizes:12.0:0.8 11.4 10.9:10.69:Martha Stewart Crafts:Arts, Crafts & Sewing
+BAAA-0016-003:AmazonBasics Microfiber Cleaning Cloth - 48 Pack:3.0:6.0 13.0 15.0:22.49:AmazonBasics:Automotive
+BBDD-00fe-001:Diono Radian RXT Convertible Car Seat, Shadow:1.6:10.0 17.0 28.5:254.99:Diono:Baby Products
+BHOO-0002-013:Olay Ultra Moisture Moisturizing Body Wash With Shea Butter:13.4:1.7 1.7 8.6:2.84:Olay:Health & Personal Care
+BHOO-0006-003:O'Keeffe's Working Hands Cream:3.4:3.2 3.2 1.3:6.98:O'Keeffe's Company:Home Improvement
+BKSY-0001-001:Younger [Kindle Edition]:0.0:0.0 0.0 0.0:1.99:Suzanne Munshower:Kindle Store
+BBFF-0007-005:Forget Me Not Mass Market Paperback:5.6:4.1 1.0 6.7:7.99:Fern Michaels:Books
+BBDT-000b-001:The Dead Key Paperback:1.2:515 1.0 8.2:11.91:D. M. Pulley:Books
+BCVD-000b-001:Duets, Re-Working The Catalogue:0.0:0.0 0.0 0.0:11.88:Van Morrison:CDs & Vinyl
+BEAA-04eb-003:Acer Aspire R-371T-78GX 13.3-Inch Full HD Convertible 2 in 1 Touchscreen Laptop:3.3:13.54 9.07 0.71:1259.75:Acer:Electronics
+BGNN-0027-012:Nespresso Variety Pack Capsules, 50 Count:12.3:11.8 7.9 1.6:39.99:Nespresso:Grocery & Gourmet Food
+BGAA-0013-008:Amazing Grass Green SuperFood Original, 30 Servings:8.5:3.5 3.5 4.5:19.99:Amazing Grass:Grocery & Gourmet Food
+BGLL-0021-002:Lavazza Super Crema Espresso - Whole Bean Coffee, 2.2-Pound Bag:2.2:4.0 6.0 9.0:33.00:Lavazza:Grocery & Gourmet Food
+BANN-0059-010:Nautica Ahoy 25 Inch Hardside Spinner:10.8:29.2 20.0 13.0:89.99:Nautica:Amazon Fashion
+BASS-0052-003:Samsonite Leather Expandable Briefcase:3.0:7.0 16.8 12.2:82.82:Samsonite:Amazon Fashion
+BALL-0010-010:Lewis N. Clark Automatic Travel Umbrella:10.4:11.0 7.0 3.0:16.19:Lewis N. Clark:Amazon Fashion
+BMFF-0007-001:Food Network Magazine All Access:0.0:0.0 0.0 0.0:7.00:Food Network:Magazine Subscriptions
+BMBB-0077-003:Blue Microphones Yeti USB Microphone - Silver:3.8:5.0 5.5 10.0:119.00:Blue Microphones:Musical Instruments
+BMYY-0257-037:Yamaha P115B Digital Piano:37.7:58.2 16.1 18.8:599.99:Yamaha:Musical Instruments
+BOCC-004f-014:CANON PIXMA MG6620 WIRELESS ALL-IN-ONE COLOR CLOUD Printer:14.0:14.6 18.0 5.9:79.99:Canon:Office Products
+BONN-0006-009:Neenah Exact Vellum Bristol, 67 lb, 8.5 x 11 Inches, 250 Sheets, White, 94 Brightness:9.8:11.0 8.5 2.1:6.96:Neenah:Office Products
+BOII-000f-002:iScholar Gross Pack Pencils, #2, Yellow, Box of 144 (33144):2.0:7.5 5.5 2.5:15.99:iScholar:Office Products
+BOFF-003e-022:Flash Furniture Mid-Back Black Mesh Computer Chair:22.0:21.0 24.0 39.0:62.85:Flash Furniture:Office Products
+BPGG-000d-001:Gerber 22-41578 Gorge Folding Shovel:1.7:13.8 5.0 2.9:13.00:Gerber Blades:Patio, Lawn & Garden
+BPRR-0020-016:Redmon 8.7 Cu. Ft. Compost Bin:16.9:26.0 26.0 30.8:32.99:Redmon:Patio, Lawn & Garden
+BPTT-002e-030:Taste of the Wild Dry Dog Food, Hi Prairie Canine Formula with Roasted Bison & Venison:30.0:18.0 25.0 5.2:46.99:Taste of the Wild:Pet Supplies
+BPMM-0037-012:Midwest Interactive Guinea Habitat Plus:12.5:47.0 24.0 14.0:55.99:Midwest Homes for Pets:Pet Supplies
+BPKT-000b-006:TOM Aquarium Accessories Dip & Pour Multi-Purpose Container, Large:6.4:7.1 3.3 6.1:11.47:Koller-Craft:Pet Supplies
+BPPP-000f-040:Precious Cat Ultra Premium Clumping Cat Litter:40.0:26.0 15.0 4.0:15.57:Precious Cat:Pet Supplies
+BVNN-00a4-008:Nintendo 3DS XL Black/Black - Nintendo 3DS XL:8.2:8.6 1.9 5.3:164.99:Nintendo:Video Games
+BSWW-002f-001:Wilson Evolution Indoor Game Basketball Official:1.5:10.0 9.5 6.5:47.97:Wilson:Sports & Outdoors
+BSCC-0074-029:Curt 18115 Roof Mounted Cargo Rack:29.1:41.5 37.0 4.0:116.57:Curt:Sports & Outdoors
+BHKK-0043-007:Keurig K130/B130 Brewing System:7.2:10.0 7.0 11.0:67.90:Keurig:Home & Kitchen
