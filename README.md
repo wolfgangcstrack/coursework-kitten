@@ -8,4 +8,4 @@ This repository holds the lab assignments for the CIS35B Advanced Java course at
 <br>
 **Author**: Wolfgang C. Strack
 
-**OS/Compiler**: Windows 8/Java 8 with Eclipse
+**Compiler**: Java 8 with Eclipse
