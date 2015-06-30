@@ -50,7 +50,7 @@ public:
   void setY(int newY);
   
   // used by the XML parser
-  void readData(const std::string &data); // pure virtual method inherited from XmlNode (in my design anyway)
+  void readData(const std::string &data) = 0; // pure virtual method inherited from XmlNode (in my design anyway)
 };
 ```
 
