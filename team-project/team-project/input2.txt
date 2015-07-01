@@ -1,0 +1,25 @@
+BALL-0003-001:LoRan Norwegian Knitting Thimble:0.8:4.7 2.8 1:3.99:LoRan:Arts, Craft & Sewing
+BABB-0003-001:Beadaholique Clear Rubber Bullet Clutch Earring Safety Backs (144):0.3:0.2 0.2 0.2:3.74:Beadaholique:Arts, Craft & Sewing
+BPBB-0009-048:Bounty Big Roll Paper Towels, Prints, 6 Count:48:15.5 11 10:9.59:Bounty:Prime Pantry
+BPPP-0004-111:PureLeaf Iced Tea, Unsweet, 18.5 oz Bottle, 6 Count:111:8.6 8 5.3:4.98:PureLeaf:Prime Pantry
+BPPP-0008-160:Pampers Swaddlers Diapers, Size 1, Jumbo Pack, 35 Count:160:12.6 8.3 4.2:8.97:Pampers:Prime Pantry
+BPOO-0002-015:Oreo Double Stuff Sandwich Cookie:15.35:8.5 7 2:2.98:Oreo:Prime Pantry
+BPPP-0005-064:Pace Mild Chunky Salsa:64:10.7 5.4 4.1:5.68:Pace:Prime Pantry
+BPNN-0003-013:Nutella Hazelnut Spread:13:4 3.1 3.1:3.48:Nutella:Prime Pantry
+BASS-079d-563:Samsung RF28HFEDBSR Energy Star 28 Cu. Ft. French Door Refrigerator:5632:76.6 38.6 36.1:1949.00:Samsung:Appliances
+BANN-004f-142:Nuwave PIC - Precision Induction Cooktop with 9-inch Non-stick Fry Pan:142.4:14.4 15.9 6.3:79.99:NuWave PC:Appliances
+BAWW-001f-032:Whirlpool W10712394 Adjuster KIT:32:11.8 5.7 5.4:31.36:Whirlpool:Appliances
+BAMM-001e-001:Maytag UKF8001 Pur Refrigerator Water Filter 1-Pack:0.3:8.1 2.4 2.4:30.20:Maytag:Appliances
+BAAA-0009-001:AmazonBasics 4.0 Amp Dual USB Car Charger for Apple and Android Devices (High Output):1.6:3.1 1.2 1.3:9.99:AmazonBasics:Automotive
+BAVV-0016-147:Valvoline 813460 SynPower SAE 0W-20 Full Synthetic Motor Oil - 5 Quart:147.2:12.4 8.1 5.1:22.97:Valvoline:Automotive
+BAFF-0031-072:Fuel Helmets SH-FF0015 Full Face Helmet, Gloss Black, Medium:72:10.6 13.8 10.4:49.58:Fuel Helmets:Automotive
+BAEE-0138-009:Edge Products 83830 CTS Insight Monitor:9.3:9.5 6.2 4:312.99:Edge Products:Automotive
+BAK2-0009-001:2 KeylessOption Black Replacement 3 Button Keyless Entry Remote Control Key Fob Clicker:0.3:2 0.8 4:9.95:KeylessOption:Automotive
+BASS-000d-032:Smittybilt 13047 3/4" Stainless Steel D-Ring:32:6 6 6:13.59:Smittybilt:Automotive
+BAAA-0012-010:Autel MaxiScan MS300 CAN Diagnostic Scan Tool for OBDII Vehicles:10.4:6.3 2 9.1:18.42:Autel:Automotive
+BAKX-00eb-577:XD-Series 797 Spy Gloss Black Machined Wheel (20x9"/5x5.5"):577.6:20 20 9:235.49:KMC Wheels:Automotive
+BAMM-0013-001:Mechanix Wear MG-05-005 Original Glove, Black, 3X-Small:1.6:9.7 5.8 0.8:19.99:Mechanix Wear:Automotive
+BPTT-002d-008:TaoTronics LED Plant Grow Light For Hydroponic Garden Greenhouse(TT-GL20, 12W,E27, 3 Bands):8.5:6.2 5.1 4.9:45.99:TaoTronics:Patio, Lawn & Garden
+BPRR-0010-025:Rubbermaid Configurations 3-Handle Lowe-Profile Box, 42-inch, Natural (FG3F19DWNATUR):25.6:5.5 42 18:16.51:Rubbermaid:Patio, Lawn & Garden
+BPRR-0009-004:RENOGY 5 Pair MC4 Male/ Female Solar Panel Cable Connectors Double Seal Rings for Better Waterproof Effect:4:6 4 0.5:9.99:Renogy:Patio, Lawn & Garden
+BPBB-00e4-315:Baracuda G3 W03000 Advanced Suction Side Automatic Pool Cleaner:315.2:41.5 8 18:228.99:Baracuda:Patio, Lawn & Garden
