@@ -1,0 +1,132 @@
+Now testing new CreateAuto interface and BuildAuto's LinkedHashMap of Automobiles:
+
+Successfully added the two automobiles, now printing all of them:
+
+Ford Focus Wagon ZTW
+Base Price: $18445.00
+Options:
+	Color
+		Fort Knox Gold Clearcoat Metallic: $0.00
+		Liquid Grey Clearcoat Metallic: $0.00
+		Infra-Red Clearcoat: $0.00
+		Grabber Green Clearcoat Metallic: $0.00
+		Sangria Red Clearcoat Metallic: $0.00
+		French Blue Clearcoat Metallic: $0.00
+		Twilight Blue Clearcoat Metallic: $0.00
+		CD Silver Clearcoat Metallic: $0.00
+		Pitch Black Clearcoat: $0.00
+		Cloud 9 White Clearcoat: $0.00
+	Transmission
+		Automatic: $0.00
+		Manual: -$815.00
+	Brakes/Traction Control
+		Standard: $0.00
+		ABS: $400.00
+		ABS with Advance Trac: $1625.00
+	Side Impact Air Bags
+		Present: $350.00
+		Not Present: $0.00
+	Power Moonroof
+		Present: $595.00
+		Not Present: $0.00
+
+
+No-Name-Make Ugly Bus 6000
+Base Price: $100.00
+Options:
+	Weird Color
+		Tacky Tan: $0.00
+		Wacky White: $0.00
+		Hideous Hibiscus: $0.00
+		Awful Amber: $0.00
+		Repulsive Red: $0.00
+		Sickly Silver: $0.00
+		Vile Violet: $0.00
+		Mystery Color: $0.00
+	Transmission
+		Done4You: $0.00
+		Do-It-Yourself: -$50.00
+	Brakes/Traction Control
+		Standard: $0.00
+		None: $6000.00
+	Oil Type
+		Standard: $0.00
+		Organic: -$100.00
+		Olive: $6000.00
+	Headlights
+		Standard: $0.00
+		LED: $500.00
+		Strobe: $600.00
+		Disco-Strobe: $6000.00
+
+
+
+
+Now testing DeleteAuto interface to delete automobiles from BuildAuto object.
+
+Deletion of automobile from BuildAuto successful
+Now printing all automobiles in testBA:
+Ford Focus Wagon ZTW
+Base Price: $18445.00
+Options:
+	Color
+		Fort Knox Gold Clearcoat Metallic: $0.00
+		Liquid Grey Clearcoat Metallic: $0.00
+		Infra-Red Clearcoat: $0.00
+		Grabber Green Clearcoat Metallic: $0.00
+		Sangria Red Clearcoat Metallic: $0.00
+		French Blue Clearcoat Metallic: $0.00
+		Twilight Blue Clearcoat Metallic: $0.00
+		CD Silver Clearcoat Metallic: $0.00
+		Pitch Black Clearcoat: $0.00
+		Cloud 9 White Clearcoat: $0.00
+	Transmission
+		Automatic: $0.00
+		Manual: -$815.00
+	Brakes/Traction Control
+		Standard: $0.00
+		ABS: $400.00
+		ABS with Advance Trac: $1625.00
+	Side Impact Air Bags
+		Present: $350.00
+		Not Present: $0.00
+	Power Moonroof
+		Present: $595.00
+		Not Present: $0.00
+
+
+
+
+Now testing UpdateAuto interface to update Option choice in an automobile.
+Option Choice of Color updated, now printing Ford Focus Wagon ZTW:
+
+Ford Focus Wagon ZTW
+Base Price: $18445.00
+Options:
+	Color(French Blue Clearcoat Metallic selected)
+		Fort Knox Gold Clearcoat Metallic: $0.00
+		Liquid Grey Clearcoat Metallic: $0.00
+		Infra-Red Clearcoat: $0.00
+		Grabber Green Clearcoat Metallic: $0.00
+		Sangria Red Clearcoat Metallic: $0.00
+		French Blue Clearcoat Metallic: $0.00
+		Twilight Blue Clearcoat Metallic: $0.00
+		CD Silver Clearcoat Metallic: $0.00
+		Pitch Black Clearcoat: $0.00
+		Cloud 9 White Clearcoat: $0.00
+	Transmission
+		Automatic: $0.00
+		Manual: -$815.00
+	Brakes/Traction Control
+		Standard: $0.00
+		ABS: $400.00
+		ABS with Advance Trac: $1625.00
+	Side Impact Air Bags
+		Present: $350.00
+		Not Present: $0.00
+	Power Moonroof
+		Present: $595.00
+		Not Present: $0.00
+
+
+

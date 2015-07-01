@@ -1,0 +1,21 @@
+# Wolfgang C. Strack
+# CIS35B Labs - General Issue Log
+# This file is a simple issue log used to keep track of comments for lost points on each assignment.
+
+##### Assignment 1 #####
+Issue: Driver.java is in default package
+	Solution implemented: put Driver in its own package, driver
+	Date fixed: 4-22-2015
+
+Issue: Model and Util package start with an uppercase letter
+	Solution implemented: changed package names' starts to lowercase
+	Date fixed: 4-22-2015
+
+Issue: UML-Class-Diagram incomplete
+	Solution Implemented: Added full list of methods to all classes, util package, and driver package
+	Date fixed: 4-23-2015
+
+##### Assignment 3 #####
+Issue: static LinkedHashMap in ProxyAuto can/should be a singleton class
+	Solution Implemented: created singleton class named Fleet in model package, complete with CRUD operations
+	Date fixed: 5-24-2015

@@ -1,0 +1,97 @@
+Demonstrating BuildAuto class and API's
+Ford Focus Wagon ZTW
+Base Price: $18445.00
+Options:
+	Color
+		Fort Knox Gold Clearcoat Metallic: $0.00
+		Liquid Grey Clearcoat Metallic: $0.00
+		Infra-Red Clearcoat: $0.00
+		Grabber Green Clearcoat Metallic: $0.00
+		Sangria Red Clearcoat Metallic: $0.00
+		French Blue Clearcoat Metallic: $0.00
+		Twilight Blue Clearcoat Metallic: $0.00
+		CD Silver Clearcoat Metallic: $0.00
+		Pitch Black Clearcoat: $0.00
+		Cloud 9 White Clearcoat: $0.00
+	Transmission
+		Automatic: $0.00
+		Manual: -$815.00
+	Brakes/Traction Control
+		Standard: $0.00
+		ABS: $400.00
+		ABS with Advance Trac: $1625.00
+	Side Impact Air Bags
+		Present: $350.00
+		Not Present: $0.00
+	Power Moonroof
+		Present: $595.00
+		Not Present: $0.00
+
+Reading from file /dev/null/black-hole.FAKE
+util.AutoException: Error in file /dev/null/black-hole.FAKE: file not found
+
+Build Automobile manually? (Y/N): Y
+
+Please enter Automobile name: Basic Auto
+Please enter base price of Basic Auto: 1000
+Enter an option set name (or Q to quit): Color
+Enter an option name for Color (or Q to quit): Red
+Enter the price for the option Red: 0
+Red added!
+
+Enter an option name for Color (or Q to quit): Green
+Enter the price for the option Green: 0
+Green added!
+
+Enter an option name for Color (or Q to quit): Blue
+Enter the price for the option Blue: 0
+Blue added!
+
+Enter an option name for Color (or Q to quit): Silver
+Enter the price for the option Silver: 100
+Silver added!
+
+Enter an option name for Color (or Q to quit): Gold
+Enter the price for the option Gold: 200
+Gold added!
+
+Enter an option name for Color (or Q to quit): q
+
+Enter an option set name (or Q to quit): Transmission
+Enter an option name for Transmission (or Q to quit): Auto
+Enter the price for the option Auto: 0
+Auto added!
+
+Enter an option name for Transmission (or Q to quit): Stick
+Enter the price for the option Stick: -500
+Stick added!
+
+Enter an option name for Transmission (or Q to quit): q
+
+Enter an option set name (or Q to quit): Breaks
+Enter an option name for Breaks (or Q to quit): Standard
+Enter the price for the option Standard: 777
+Standard added!
+
+Enter an option name for Breaks (or Q to quit): None
+Enter the price for the option None: -777
+None added!
+
+Enter an option name for Breaks (or Q to quit): q
+
+Enter an option set name (or Q to quit): q
+Basic Auto
+Base Price: $1000.00
+Options:
+	Color
+		Red: $0.00
+		Green: $0.00
+		Blue: $0.00
+		Silver: $100.00
+		Gold: $200.00
+	Transmission
+		Auto: $0.00
+		Stick: -$500.00
+	Breaks
+		Standard: $777.00
+		None: -$777.00

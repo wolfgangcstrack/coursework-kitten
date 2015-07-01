@@ -1,0 +1,277 @@
+############################# OUTPUT FROM ServerDriver ##################################
+Started server
+
+Waiting for client socket to connect...
+Client connected, starting session
+
+Waiting for client socket to connect...
+Client connected, starting session
+
+Waiting for client socket to connect...
+
+############################# OUTPUT FROM ClientDriver (1) ##############################
+Server: Greetings from AutoServer 0.1!
+Select a service operation below by entering the number of your choice:
+
+1	Send automobile to server by default-format file
+2	Send automobile to server by Properties file
+3	Search/Edit automobiles on server
+0	Quit
+
+Enter choice: 1
+
+Enter name of file to send: UglyCar.txt
+The file UglyCar.txt was sent
+Successfully added automobile to server
+Server: Successfully added automobile to server
+Select a service operation below by entering the number of your choice:
+
+1	Send automobile to server by default-format file
+2	Send automobile to server by Properties file
+3	Search/Edit automobiles on server
+0	Quit
+
+Enter choice: 2
+
+Enter name of file to send: FordZTW.properties
+The file FordZTW.properties was sent
+Successfully added automobile to server
+Server: Successfully added automobile to server
+Select a service operation below by entering the number of your choice:
+
+1	Send automobile to server by default-format file
+2	Send automobile to server by Properties file
+3	Search/Edit automobiles on server
+0	Quit
+
+Enter choice: 3
+
+Select a search/edit operation below by entering the number of your choice:
+
+1	Search for an automobile on server by make and model
+2	List all automobiles on server
+3	Edit an automobile's options
+0	Quit searching/editing automobiles
+
+Enter choice: 3
+
+Enter make of automobile to edit: No-Name-Make
+Enter model of automobile to edit: Ugly Bus 6000
+Server: Automobile with make No-Name-Make and model Ugly Bus 6000 found:
+
+No-Name-Make Ugly Bus 6000
+Base Price: $100.00
+Options:
+	Weird Color
+		Tacky Tan: $0.00
+		Wacky White: $0.00
+		Hideous Hibiscus: $0.00
+		Awful Amber: $0.00
+		Repulsive Red: $0.00
+		Sickly Silver: $0.00
+		Vile Violet: $0.00
+		Mystery Color: $0.00
+	Transmission
+		Done4You: $0.00
+		Do-It-Yourself: -$50.00
+	Brakes/Traction Control
+		Standard: $0.00
+		None: $6000.00
+	Oil Type
+		Standard: $0.00
+		Organic: -$100.00
+		Olive: $6000.00
+	Headlights
+		Standard: $0.00
+		LED: $500.00
+		Strobe: $600.00
+		Disco-Strobe: $6000.00
+
+
+
+Select an editing operation below by entering the number of your choice:
+
+1	Show full list of options for the selected automobile
+2	Add an option set
+3	Add an option to an option set
+4	Edit an existing option
+5	Edit option set choice
+6	Delete an option
+7	Delete an option set
+0	Return to search/edit menu
+
+Enter choice number: 7
+
+Enter name of option set to delete: Headlights
+
+Server: Successful delete of option set
+Select an editing operation below by entering the number of your choice:
+
+1	Show full list of options for the selected automobile
+2	Add an option set
+3	Add an option to an option set
+4	Edit an existing option
+5	Edit option set choice
+6	Delete an option
+7	Delete an option set
+0	Return to search/edit menu
+
+Enter choice number: 1
+
+No-Name-Make Ugly Bus 6000
+Base Price: $100.00
+Options:
+	Weird Color
+		Tacky Tan: $0.00
+		Wacky White: $0.00
+		Hideous Hibiscus: $0.00
+		Awful Amber: $0.00
+		Repulsive Red: $0.00
+		Sickly Silver: $0.00
+		Vile Violet: $0.00
+		Mystery Color: $0.00
+	Transmission
+		Done4You: $0.00
+		Do-It-Yourself: -$50.00
+	Brakes/Traction Control
+		Standard: $0.00
+		None: $6000.00
+	Oil Type
+		Standard: $0.00
+		Organic: -$100.00
+		Olive: $6000.00
+
+
+
+Select an editing operation below by entering the number of your choice:
+
+1	Show full list of options for the selected automobile
+2	Add an option set
+3	Add an option to an option set
+4	Edit an existing option
+5	Edit option set choice
+6	Delete an option
+7	Delete an option set
+0	Return to search/edit menu
+
+Enter choice number: 0
+
+Select a search/edit operation below by entering the number of your choice:
+
+1	Search for an automobile on server by make and model
+2	List all automobiles on server
+3	Edit an automobile's options
+0	Quit searching/editing automobiles
+
+Enter choice: 0
+
+Select a service operation below by entering the number of your choice:
+
+1	Send automobile to server by default-format file
+2	Send automobile to server by Properties file
+3	Search/Edit automobiles on server
+0	Quit
+
+Enter choice: 0
+
+Bye
+
+############################# OUTPUT FROM ClientDriver (2) ##############################
+Server: Greetings from AutoServer 0.1!
+Select a service operation below by entering the number of your choice:
+
+1	Send automobile to server by default-format file
+2	Send automobile to server by Properties file
+3	Search/Edit automobiles on server
+0	Quit
+
+Enter choice: 3
+
+Select a search/edit operation below by entering the number of your choice:
+
+1	Search for an automobile on server by make and model
+2	List all automobiles on server
+3	Edit an automobile's options
+0	Quit searching/editing automobiles
+
+Enter choice: 2
+
+
+Server:
+
+No-Name-Make Ugly Bus 6000
+Base Price: $100.00
+Options:
+	Weird Color
+		Tacky Tan: $0.00
+		Wacky White: $0.00
+		Hideous Hibiscus: $0.00
+		Awful Amber: $0.00
+		Repulsive Red: $0.00
+		Sickly Silver: $0.00
+		Vile Violet: $0.00
+		Mystery Color: $0.00
+	Transmission
+		Done4You: $0.00
+		Do-It-Yourself: -$50.00
+	Brakes/Traction Control
+		Standard: $0.00
+		None: $6000.00
+	Oil Type
+		Standard: $0.00
+		Organic: -$100.00
+		Olive: $6000.00
+	Headlights
+		Standard: $0.00
+		LED: $500.00
+		Strobe: $600.00
+		Disco-Strobe: $6000.00
+
+Ford Focus Wagon ZTW
+Base Price: $18445.00
+Options:
+	Color
+		Pitch Black Clearcoat: $0.00
+		CD Silver Clearcoat Metallic: $0.00
+		Twilight Blue Clearcoat Metallic: $0.00
+		French Blue Clearcoat Metallic: $0.00
+		Sangria Red Clearcoat Metallic: $0.00
+		Grabber Green Clearcoat Metallic: $0.00
+		Infra-Red Clearcoat: $0.00
+		Liquid Grey Clearcoat Metallic: $0.00
+		Fort Knox Gold Clearcoat Metallic: $0.00
+		Cloud 9 White Clearcoat: $0.00
+	Transmission
+		Manual: -$815.00
+		Automatic: $0.00
+	Brakes/Traction Control
+		ABS with Advance Trac: $1625.00
+		ABS: $400.00
+		Standard: $0.00
+	Side Impact Air Bags
+		Not Present: $0.00
+		Present: $350.00
+	Power Moonroof
+		Not Present: $0.00
+		Present: $595.00
+
+
+Select a search/edit operation below by entering the number of your choice:
+
+1	Search for an automobile on server by make and model
+2	List all automobiles on server
+3	Edit an automobile's options
+0	Quit searching/editing automobiles
+
+Enter choice: 0
+
+Select a service operation below by entering the number of your choice:
+
+1	Send automobile to server by default-format file
+2	Send automobile to server by Properties file
+3	Search/Edit automobiles on server
+0	Quit
+
+Enter choice: 0
+
+Bye

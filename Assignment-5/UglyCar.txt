@@ -1,0 +1,37 @@
+No-Name-Make
+Ugly Bus 6000
+100
+Weird Color
+{
+	Tacky Tan|0
+	Wacky White|0
+	Hideous Hibiscus|0
+	Awful Amber|0
+	Repulsive Red|0
+	Sickly Silver|0
+	Vile Violet|0
+	Mystery Color|0
+}
+Transmission
+{
+	Done4You|0
+	Do-It-Yourself|-50
+}
+Brakes/Traction Control
+{
+	Standard|0
+	None|6000
+}
+Oil Type
+{
+	Standard|0
+	Organic|-100
+	Olive|6000
+}
+Headlights
+{
+	Standard|0
+	LED|500
+	Strobe|600
+	Disco-Strobe|6000
+}
