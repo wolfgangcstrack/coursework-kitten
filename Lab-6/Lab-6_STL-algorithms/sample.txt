@@ -1,0 +1,1000 @@
+13038
+<patient>
+	<name>halterhoff,ban</name>
+	<age>33</age>
+	<gender>m</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>1817</income>
+	<dependents>8</dependents>
+</patient>
+13023
+<patient>
+	<name>quader,jay</name>
+	<age>48</age>
+	<gender>m</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>26299</income>
+	<dependents>9</dependents>
+</patient>
+18443
+<patient>
+	<name>rewati,jerry</name>
+	<age>81</age>
+	<gender>f</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>26759</income>
+	<dependents>3</dependents>
+</patient>
+6144
+<patient>
+	<name>thai,stephen</name>
+	<age>22</age>
+	<gender>m</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>9558</income>
+	<dependents>1</dependents>
+</patient>
+6830
+<patient>
+	<name>le,claude</name>
+	<age>100</age>
+	<gender>m</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>9770</income>
+	<dependents>5</dependents>
+</patient>
+23237
+<patient>
+	<name>gogineni,james</name>
+	<age>55</age>
+	<gender>f</gender>
+	<bloodtype>ab</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>11036</income>
+	<dependents>9</dependents>
+</patient>
+26883
+<patient>
+	<name>liu,heidi</name>
+	<age>90</age>
+	<gender>m</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>1171</income>
+	<dependents>0</dependents>
+</patient>
+28757
+<patient>
+	<name>nguyen,brenda</name>
+	<age>33</age>
+	<gender>f</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>30471</income>
+	<dependents>6</dependents>
+</patient>
+1303
+<patient>
+	<name>chow,debby</name>
+	<age>98</age>
+	<gender>m</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>14099</income>
+	<dependents>9</dependents>
+</patient>
+6091
+<patient>
+	<name>larab,brian</name>
+	<age>85</age>
+	<gender>f</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>27916</income>
+	<dependents>9</dependents>
+</patient>
+4217
+<patient>
+	<name>wang,joanne</name>
+	<age>73</age>
+	<gender>m</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>20271</income>
+	<dependents>4</dependents>
+</patient>
+12098
+<patient>
+	<name>daver,anit</name>
+	<age>97</age>
+	<gender>m</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>18297</income>
+	<dependents>1</dependents>
+</patient>
+12509
+<patient>
+	<name>chow,brian</name>
+	<age>65</age>
+	<gender>f</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>11341</income>
+	<dependents>7</dependents>
+</patient>
+11152
+<patient>
+	<name>duc,sarveta</name>
+	<age>67</age>
+	<gender>f</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>1878</income>
+	<dependents>1</dependents>
+</patient>
+18432
+<patient>
+	<name>le,radhika</name>
+	<age>22</age>
+	<gender>m</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>27929</income>
+	<dependents>5</dependents>
+</patient>
+10962
+<patient>
+	<name>tefft,diana</name>
+	<age>91</age>
+	<gender>m</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>25581</income>
+	<dependents>3</dependents>
+</patient>
+3059
+<patient>
+	<name>reynoso,purnima</name>
+	<age>25</age>
+	<gender>f</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>23804</income>
+	<dependents>9</dependents>
+</patient>
+7759
+<patient>
+	<name>chow,trang</name>
+	<age>57</age>
+	<gender>m</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>14907</income>
+	<dependents>8</dependents>
+</patient>
+5534
+<patient>
+	<name>oxford,tan</name>
+	<age>56</age>
+	<gender>f</gender>
+	<bloodtype>ab</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>26282</income>
+	<dependents>4</dependents>
+</patient>
+26626
+<patient>
+	<name>tjahjadi,larry</name>
+	<age>42</age>
+	<gender>m</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>32171</income>
+	<dependents>6</dependents>
+</patient>
+5880
+<patient>
+	<name>gogineni,purnima</name>
+	<age>83</age>
+	<gender>m</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>688</income>
+	<dependents>2</dependents>
+</patient>
+25603
+<patient>
+	<name>weidner,hy</name>
+	<age>30</age>
+	<gender>m</gender>
+	<bloodtype>ab</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>10351</income>
+	<dependents>3</dependents>
+</patient>
+30824
+<patient>
+	<name>heron,sam</name>
+	<age>72</age>
+	<gender>f</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>10307</income>
+	<dependents>1</dependents>
+</patient>
+11583
+<patient>
+	<name>rao,lihong</name>
+	<age>52</age>
+	<gender>m</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>10885</income>
+	<dependents>4</dependents>
+</patient>
+4248
+<patient>
+	<name>liu,william</name>
+	<age>39</age>
+	<gender>f</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>15476</income>
+	<dependents>4</dependents>
+</patient>
+24176
+<patient>
+	<name>somani,jay</name>
+	<age>75</age>
+	<gender>f</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>22994</income>
+	<dependents>8</dependents>
+</patient>
+27963
+<patient>
+	<name>chen,michael</name>
+	<age>61</age>
+	<gender>m</gender>
+	<bloodtype>ab</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>746</income>
+	<dependents>4</dependents>
+</patient>
+2876
+<patient>
+	<name>markett,mark</name>
+	<age>33</age>
+	<gender>f</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>25509</income>
+	<dependents>3</dependents>
+</patient>
+8471
+<patient>
+	<name>day,david</name>
+	<age>28</age>
+	<gender>f</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>3275</income>
+	<dependents>9</dependents>
+</patient>
+23864
+<patient>
+	<name>nguyen,jay</name>
+	<age>87</age>
+	<gender>m</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>14824</income>
+	<dependents>3</dependents>
+</patient>
+26158
+<patient>
+	<name>mattingly,margaret</name>
+	<age>64</age>
+	<gender>f</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>10812</income>
+	<dependents>3</dependents>
+</patient>
+20690
+<patient>
+	<name>cunningham,peng</name>
+	<age>26</age>
+	<gender>f</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>1660</income>
+	<dependents>1</dependents>
+</patient>
+27887
+<patient>
+	<name>daver,michael</name>
+	<age>90</age>
+	<gender>f</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>22933</income>
+	<dependents>5</dependents>
+</patient>
+19922
+<patient>
+	<name>hyson,greg</name>
+	<age>91</age>
+	<gender>m</gender>
+	<bloodtype>ab</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>6193</income>
+	<dependents>9</dependents>
+</patient>
+20175
+<patient>
+	<name>zoller,ted</name>
+	<age>25</age>
+	<gender>f</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>14185</income>
+	<dependents>4</dependents>
+</patient>
+26449
+<patient>
+	<name>nguyen,sam</name>
+	<age>39</age>
+	<gender>f</gender>
+	<bloodtype>ab</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>21666</income>
+	<dependents>6</dependents>
+</patient>
+10653
+<patient>
+	<name>steik,ban</name>
+	<age>27</age>
+	<gender>m</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>28096</income>
+	<dependents>3</dependents>
+</patient>
+8730
+<patient>
+	<name>somani,brenda</name>
+	<age>94</age>
+	<gender>f</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>10229</income>
+	<dependents>3</dependents>
+</patient>
+3843
+<patient>
+	<name>menchaca,sylvester</name>
+	<age>47</age>
+	<gender>f</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>9849</income>
+	<dependents>4</dependents>
+</patient>
+25335
+<patient>
+	<name>lew,tuyen</name>
+	<age>63</age>
+	<gender>m</gender>
+	<bloodtype>ab</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>29652</income>
+	<dependents>5</dependents>
+</patient>
+11512
+<patient>
+	<name>borghi,winston</name>
+	<age>52</age>
+	<gender>m</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>30751</income>
+	<dependents>7</dependents>
+</patient>
+19060
+<patient>
+	<name>borghi,minh</name>
+	<age>73</age>
+	<gender>m</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>154</income>
+	<dependents>3</dependents>
+</patient>
+20099
+<patient>
+	<name>betrozoff,anitha</name>
+	<age>58</age>
+	<gender>f</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>22587</income>
+	<dependents>5</dependents>
+</patient>
+12214
+<patient>
+	<name>davis,bassam</name>
+	<age>27</age>
+	<gender>m</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>27940</income>
+	<dependents>8</dependents>
+</patient>
+31794
+<patient>
+	<name>jones,chau</name>
+	<age>80</age>
+	<gender>f</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>2682</income>
+	<dependents>8</dependents>
+</patient>
+11313
+<patient>
+	<name>huang,khanh</name>
+	<age>51</age>
+	<gender>m</gender>
+	<bloodtype>ab</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>7668</income>
+	<dependents>8</dependents>
+</patient>
+20933
+<patient>
+	<name>pham,markus</name>
+	<age>36</age>
+	<gender>f</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>4221</income>
+	<dependents>2</dependents>
+</patient>
+30607
+<patient>
+	<name>smith,jay</name>
+	<age>66</age>
+	<gender>m</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>11762</income>
+	<dependents>4</dependents>
+</patient>
+32195
+<patient>
+	<name>le,tsung</name>
+	<age>69</age>
+	<gender>m</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>6979</income>
+	<dependents>1</dependents>
+</patient>
+5187
+<patient>
+	<name>reynoso,jayasree</name>
+	<age>86</age>
+	<gender>f</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>24364</income>
+	<dependents>2</dependents>
+</patient>
+5339
+<patient>
+	<name>halterhoff,joseph</name>
+	<age>50</age>
+	<gender>f</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>30941</income>
+	<dependents>1</dependents>
+</patient>
+10027
+<patient>
+	<name>nguyen,genway</name>
+	<age>45</age>
+	<gender>f</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>2152</income>
+	<dependents>2</dependents>
+</patient>
+26103
+<patient>
+	<name>lozito,jayasree</name>
+	<age>91</age>
+	<gender>m</gender>
+	<bloodtype>ab</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>1431</income>
+	<dependents>2</dependents>
+</patient>
+24311
+<patient>
+	<name>liu,genway</name>
+	<age>23</age>
+	<gender>m</gender>
+	<bloodtype>ab</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>1975</income>
+	<dependents>9</dependents>
+</patient>
+1104
+<patient>
+	<name>lemere,michael</name>
+	<age>79</age>
+	<gender>m</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>7337</income>
+	<dependents>1</dependents>
+</patient>
+17916
+<patient>
+	<name>wang,vibha</name>
+	<age>99</age>
+	<gender>f</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>12540</income>
+	<dependents>6</dependents>
+</patient>
+14807
+<patient>
+	<name>thai,kevin</name>
+	<age>43</age>
+	<gender>f</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>1898</income>
+	<dependents>3</dependents>
+</patient>
+12103
+<patient>
+	<name>lum,michaeo</name>
+	<age>96</age>
+	<gender>m</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>16137</income>
+	<dependents>5</dependents>
+</patient>
+5504
+<patient>
+	<name>yu,greg</name>
+	<age>48</age>
+	<gender>m</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>27935</income>
+	<dependents>6</dependents>
+</patient>
+2880
+<patient>
+	<name>wong,michaeo</name>
+	<age>45</age>
+	<gender>f</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>16963</income>
+	<dependents>8</dependents>
+</patient>
+28629
+<patient>
+	<name>chow,john</name>
+	<age>29</age>
+	<gender>m</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>17239</income>
+	<dependents>8</dependents>
+</patient>
+14651
+<patient>
+	<name>chow,sangeeta</name>
+	<age>73</age>
+	<gender>f</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>4318</income>
+	<dependents>0</dependents>
+</patient>
+28627
+<patient>
+	<name>chow,radhika</name>
+	<age>80</age>
+	<gender>f</gender>
+	<bloodtype>ab</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>15932</income>
+	<dependents>5</dependents>
+</patient>
+26731
+<patient>
+	<name>larab,phuong</name>
+	<age>67</age>
+	<gender>m</gender>
+	<bloodtype>ab</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>14526</income>
+	<dependents>6</dependents>
+</patient>
+22847
+<patient>
+	<name>kim,yoga</name>
+	<age>24</age>
+	<gender>m</gender>
+	<bloodtype>ab</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>16319</income>
+	<dependents>1</dependents>
+</patient>
+17710
+<patient>
+	<name>halterhoff,timotius</name>
+	<age>89</age>
+	<gender>m</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>27793</income>
+	<dependents>2</dependents>
+</patient>
+12238
+<patient>
+	<name>nesbitt,vao</name>
+	<age>53</age>
+	<gender>f</gender>
+	<bloodtype>ab</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>18624</income>
+	<dependents>8</dependents>
+</patient>
+10462
+<patient>
+	<name>chen,tom</name>
+	<age>92</age>
+	<gender>m</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>30335</income>
+	<dependents>0</dependents>
+</patient>
+7888
+<patient>
+	<name>davis,bassam</name>
+	<age>53</age>
+	<gender>f</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>26503</income>
+	<dependents>2</dependents>
+</patient>
+7562
+<patient>
+	<name>dooling,dawn</name>
+	<age>57</age>
+	<gender>f</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>9633</income>
+	<dependents>7</dependents>
+</patient>
+31532
+<patient>
+	<name>davis,margaret</name>
+	<age>87</age>
+	<gender>f</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>10510</income>
+	<dependents>2</dependents>
+</patient>
+20272
+<patient>
+	<name>muehler,lihong</name>
+	<age>65</age>
+	<gender>f</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>16495</income>
+	<dependents>1</dependents>
+</patient>
+4007
+<patient>
+	<name>lum,rita</name>
+	<age>91</age>
+	<gender>m</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>2257</income>
+	<dependents>1</dependents>
+</patient>
+14599
+<patient>
+	<name>menchaca,purnima</name>
+	<age>65</age>
+	<gender>f</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>29582</income>
+	<dependents>8</dependents>
+</patient>
+6076
+<patient>
+	<name>veeraraghavan,ed</name>
+	<age>63</age>
+	<gender>f</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>24496</income>
+	<dependents>5</dependents>
+</patient>
+16329
+<patient>
+	<name>chow,phuong</name>
+	<age>57</age>
+	<gender>m</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>16622</income>
+	<dependents>1</dependents>
+</patient>
+11426
+<patient>
+	<name>lam,debby</name>
+	<age>83</age>
+	<gender>f</gender>
+	<bloodtype>ab</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>21986</income>
+	<dependents>1</dependents>
+</patient>
+24680
+<patient>
+	<name>zoller,phuong</name>
+	<age>56</age>
+	<gender>f</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>29018</income>
+	<dependents>3</dependents>
+</patient>
+21043
+<patient>
+	<name>lam,anitha</name>
+	<age>69</age>
+	<gender>f</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>20781</income>
+	<dependents>6</dependents>
+</patient>
+25991
+<patient>
+	<name>vu,tuyet</name>
+	<age>29</age>
+	<gender>m</gender>
+	<bloodtype>ab</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>1123</income>
+	<dependents>2</dependents>
+</patient>
+24915
+<patient>
+	<name>bobbett,raymond</name>
+	<age>100</age>
+	<gender>f</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>25926</income>
+	<dependents>8</dependents>
+</patient>
+11274
+<patient>
+	<name>somani,brian</name>
+	<age>22</age>
+	<gender>f</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>7953</income>
+	<dependents>1</dependents>
+</patient>
+14936
+<patient>
+	<name>wang,minh</name>
+	<age>96</age>
+	<gender>f</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>17841</income>
+	<dependents>7</dependents>
+</patient>
+22706
+<patient>
+	<name>huang,jay</name>
+	<age>52</age>
+	<gender>m</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>32021</income>
+	<dependents>4</dependents>
+</patient>
+22407
+<patient>
+	<name>ryan,tina</name>
+	<age>23</age>
+	<gender>f</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>12817</income>
+	<dependents>0</dependents>
+</patient>
+9324
+<patient>
+	<name>leonardi,anitha</name>
+	<age>84</age>
+	<gender>m</gender>
+	<bloodtype>ab</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>24607</income>
+	<dependents>1</dependents>
+</patient>
+25178
+<patient>
+	<name>jones,rich</name>
+	<age>41</age>
+	<gender>m</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>27046</income>
+	<dependents>5</dependents>
+</patient>
+25182
+<patient>
+	<name>duc,calvin</name>
+	<age>39</age>
+	<gender>m</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>32824</income>
+	<dependents>5</dependents>
+</patient>
+31288
+<patient>
+	<name>mattingly,phu</name>
+	<age>52</age>
+	<gender>f</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>6603</income>
+	<dependents>3</dependents>
+</patient>
+25333
+<patient>
+	<name>hyson,jayasree</name>
+	<age>74</age>
+	<gender>m</gender>
+	<bloodtype>b</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>31628</income>
+	<dependents>5</dependents>
+</patient>
+2298
+<patient>
+	<name>nesbitt,angus</name>
+	<age>55</age>
+	<gender>f</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>20011</income>
+	<dependents>5</dependents>
+</patient>
+7078
+<patient>
+	<name>riu,michael</name>
+	<age>29</age>
+	<gender>f</gender>
+	<bloodtype>ab</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>18154</income>
+	<dependents>7</dependents>
+</patient>
+11896
+<patient>
+	<name>leon,timotius</name>
+	<age>98</age>
+	<gender>m</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>24495</income>
+	<dependents>3</dependents>
+</patient>
+31762
+<patient>
+	<name>davis,bassam</name>
+	<age>63</age>
+	<gender>m</gender>
+	<bloodtype>ab</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>7436</income>
+	<dependents>3</dependents>
+</patient>
+32263
+<patient>
+	<name>kim,sudha</name>
+	<age>67</age>
+	<gender>f</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>26380</income>
+	<dependents>8</dependents>
+</patient>
+16165
+<patient>
+	<name>rewati,long</name>
+	<age>95</age>
+	<gender>m</gender>
+	<bloodtype>a</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>28467</income>
+	<dependents>6</dependents>
+</patient>
+8111
+<patient>
+	<name>tseng,hong</name>
+	<age>42</age>
+	<gender>f</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>single</maritalstatus>
+	<income>10738</income>
+	<dependents>6</dependents>
+</patient>
+30566
+<patient>
+	<name>lum,joanne</name>
+	<age>60</age>
+	<gender>f</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>21555</income>
+	<dependents>0</dependents>
+</patient>
+3331
+<patient>
+	<name>chen,charles</name>
+	<age>85</age>
+	<gender>m</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>married</maritalstatus>
+	<income>3330</income>
+	<dependents>5</dependents>
+</patient>
+18263
+<patient>
+	<name>lu,seema</name>
+	<age>21</age>
+	<gender>f</gender>
+	<bloodtype>o</bloodtype>
+	<maritalstatus>separated</maritalstatus>
+	<income>31251</income>
+	<dependents>8</dependents>
+</patient>
