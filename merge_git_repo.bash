@@ -49,7 +49,7 @@ mergeRepo ()
 {
 	git remote add $1 $2
 	git fetch $1
-	git merge -m "Merge remote-tracking branch \'$1/master\'" $1/master
+	git merge -m "Merge remote-tracking branch '$1/master'" $1/master
 }
 
 moveRepoToDir ()
@@ -63,9 +63,17 @@ moveRepoToDir ()
 	done
 }
 
+pushAllChanges ()
+{
+	git add -A
+	git commit -am "Merged $1"
+	git push
+}
+
 ##### Main ###############################################################
 checkArgs $@
 hideFiles # hides files in current directory to ensure no files are overwritten
 mergeRepo $@
 moveRepoToDir $1
+pushAllChanges $1
 unhideFiles
