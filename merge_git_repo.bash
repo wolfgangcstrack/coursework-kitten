@@ -67,6 +67,7 @@ pushAllChanges ()
 {
 	git add -A
 	git commit -am "Merged $1"
+	echo;echo
 	git push
 }
 
