@@ -21,13 +21,27 @@ checkArgs () # takes the $@ variable as an argument
 hideFiles ()
 {
 	mkdir $hideDir
-	mv -t $hideDir * .* 2> /dev/null
+	
+	for file in $(ls -a); do
+		if [ "$file" != ".git" -a "$file" != "$hideDir" -a "$file" != "." -a "$file" != ".." ]; then
+			mv -t $hideDir/ $file # &> /dev/null
+		fi
+	done
 }
 
 unhideFiles ()
 {
-	mv -t ./ $hideDir/* $hideDir/.* 2> /dev/null
+	# mv -t ./ $hideDir/* $hideDir/.* # &> /dev/null
+	for file in $(ls -a $hideDir); do
+		if [ "$file" != "." -a "$file" != ".." ]; then
+			mv -t ./ $hideDir/$file # &>/dev/null
+		fi
+	done
+
 	rmdir $hideDir
+	
+	echo;echo;echo
+
 	ls -alF --color=tty
 }
 
@@ -41,9 +55,10 @@ mergeRepo ()
 moveRepoToDir ()
 {
 	mkdir $1
+	
 	for file in $(ls -a); do
-		if [ "$file" != "$hideDir" ]; then
-			mv -t $1/ $file
+		if [ "$file" != ".git" -a "$file" != "$1" -a "$file" != "$hideDir" -a "$file" != "." -a "$file" != ".." ]; then
+			mv -t $1/ $file # &> /dev/null
 		fi
 	done
 }
