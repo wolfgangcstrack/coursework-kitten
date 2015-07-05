@@ -49,7 +49,7 @@ mergeRepo ()
 {
 	git remote add $1 $2
 	git fetch $1
-	git merge $1/master
+	git merge -q $1/master
 }
 
 moveRepoToDir ()
