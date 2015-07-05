@@ -1,5 +1,5 @@
 # CS149 Perl: Final Project
-CS149 Winter 2015 - Final Project
+Ohlone College CS149 Winter 2015 - Final Project
 ## Background
 Ohlone's Multimedia Festival, which runs every Spring, has been using a program, mostly written by students from the perl
 class, over the years. There has been a request from those running the festival to make available an option to allow the
