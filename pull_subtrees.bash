@@ -13,7 +13,7 @@ pullSubtrees ()
 {
 	echo
 	for remote in ${remoteNames[@]}; do
-		git pull -s subtree $remote master
+		git pull --no-edit -s subtree $remote master
 		echo
 	done
 }
