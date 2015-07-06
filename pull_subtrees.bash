@@ -11,15 +11,21 @@ remoteNames=()
 pullSubtrees ()
 {
 	echo
-	for remote in ${remoteNames[@]}; do
+
+	for remote in ${remoteNames[@]}; do # for each subtree
 		git fetch $remote master
 		git subtree --prefix $remote pull $remote master --squash
+		
+		echo;echo
+
 		if [[ $? != 0 ]]; then
-			echo; echo "Pull failed"
+			"Pull failed"
 			exit 2;
 		fi
-		git add -A
+		
+		git add -A # resolve merge conflicts
 		git commit
+		
 		echo
 	done
 }
