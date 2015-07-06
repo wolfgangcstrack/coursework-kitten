@@ -17,7 +17,7 @@ pullSubtrees ()
 		git add -A
 		git commit -m "Subtree $remote removed for pull-refresh"
 
-		echo;echo
+		echo
 
 		git fetch $remote master
 		git subtree --prefix $remote add $remote master --squash

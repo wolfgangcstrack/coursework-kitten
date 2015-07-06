@@ -9,7 +9,7 @@ usageMessage="Usage: $0 repo_name repo_remote_path"
 ##### Functions ##########################################################
 addSubtree ()
 {
-	git remote add -f $1 $2
+	git remote add -f $1 $2 # add subtree remote shortcut
 	git subtree --prefix $1 add $1 --squash
 }
 
@@ -20,7 +20,7 @@ if [ $# -ne 2 ]; then # check number of args
 fi
 
 if [ ! -d '.git' ]; then # check if current dir is a git repo
-	echo "Error, current repository is not a git repository."
+	echo "Error, current repository is not a git repository"
 	exit 2
 fi
 
