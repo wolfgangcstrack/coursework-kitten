@@ -13,23 +13,19 @@ pullSubtrees ()
 	echo
 
 	for remote in ${remoteNames[@]}; do # for each subtree
-		rm -rf $remote/
-		
-		git fetch $remote master
-		git subtree --prefix $remote pull $remote master --squash
-		
+		rm -rf $remote/ # handles merge conflicts by git-subtree
+		git add -A
+		git commit -m "Subtree $remote removed for pull-refresh"
+
 		echo;echo
 
+		git fetch $remote master
+		git subtree --prefix $remote pull $remote master --squash
+
 		if [[ $? != 0 ]]; then
-			"Pull failed"
+			echo;echo "Pull failed"
 			exit 2;
 		fi
-		
-		echo "Resolving merge conflicts";echo
-		git add -vA
-		git commit
-		
-		echo
 	done
 }
 
