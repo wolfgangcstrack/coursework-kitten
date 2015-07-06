@@ -13,7 +13,11 @@ pullSubtrees ()
 	echo
 	for remote in ${remoteNames[@]}; do
 		git fetch $remote master
-		git subtree --prefix $remote pull $remote master --squash 2> /dev/null
+		git subtree --prefix $remote pull $remote master --squash
+		if [[ $? != 0 ]]; then
+			echo; echo "Pull failed"
+			exit 2;
+		fi
 		git add -A
 		git commit
 		echo
