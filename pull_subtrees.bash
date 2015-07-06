@@ -13,6 +13,8 @@ pullSubtrees ()
 	echo
 
 	for remote in ${remoteNames[@]}; do # for each subtree
+		rm -rf $remote/
+		
 		git fetch $remote master
 		git subtree --prefix $remote pull $remote master --squash
 		
@@ -23,7 +25,8 @@ pullSubtrees ()
 			exit 2;
 		fi
 		
-		git add -A # resolve merge conflicts
+		echo "Resolving merge conflicts";echo
+		git add -vA
 		git commit
 		
 		echo
@@ -31,10 +34,10 @@ pullSubtrees ()
 }
 
 ##### Main ###############################################################
-if [ $# -ne 0 ]; then
+if [ $# -ne 0 ]; then # check args
 	echo $usageMessage
 	exit 1
 fi
 
-remoteNames=($(git remote | grep -v origin))
+remoteNames=($(git remote | grep -v origin)) # get all remotes, excluding origin
 pullSubtrees

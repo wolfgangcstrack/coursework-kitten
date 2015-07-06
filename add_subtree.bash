@@ -10,7 +10,7 @@ usageMessage="Usage: $0 repo_name repo_remote_path"
 addSubtree ()
 {
 	git remote add -f $1 $2
-	git subtree add --prefix=$1/ $1 --squash
+	git subtree --prefix $1 add $1 --squash
 }
 
 ##### Main ###############################################################
