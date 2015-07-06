@@ -20,7 +20,7 @@ pullSubtrees ()
 		echo;echo
 
 		git fetch $remote master
-		git subtree --prefix $remote pull $remote master --squash
+		git subtree --prefix $remote add $remote master --squash
 
 		if [[ $? != 0 ]]; then
 			echo;echo "Pull failed"
