@@ -13,7 +13,7 @@ pullSubtrees ()
 	echo
 	for remote in ${remoteNames[@]}; do
 		git fetch $remote master
-		git subtree --prefix=$remote/ $remote master --squash
+		git subtree pull --prefix=$remote/ $remote master --squash
 		echo
 	done
 }
