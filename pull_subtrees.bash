@@ -23,10 +23,14 @@ pullSubtrees ()
 		git subtree --prefix $remote add $remote master --squash
 
 		if [[ $? != 0 ]]; then
-			echo;echo "Pull failed"
+			echo;echo "Pull for $remote failed"
 			exit 2;
 		fi
 	done
+
+	echo;echo
+
+	echo "Pull successful"
 }
 
 ##### Main ###############################################################
