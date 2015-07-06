@@ -1,18 +1,16 @@
 #!/bin/bash
 # Author: Wolfgang C. Strack
-# This script merges a git repository as a subdirectory of the current git
-# repository that the script is in
+# This script adds a subtree in a subdirectory of the git repository that
+# this script is run in.
 
 ##### Initialize some stuff ##############################################
 usageMessage="Usage: $0 repo_name repo_remote_path"
 
 ##### Functions ##########################################################
-mergeRepo ()
+addSubtree ()
 {
 	git remote add -f $1 $2
-	git merge -s ours --no-commit $1/master
-	git read-tree --prefix=$1/ -u $1/master
-	git commit -m "Merge git repo '$1' into subdirectory '$1/'"
+	git subtree add --prefix=$1/ $1 --squash
 }
 
 ##### Main ###############################################################
@@ -26,4 +24,4 @@ if [ ! -d '.git' ]; then # check if current dir is a git repo
 	exit 2
 fi
 
-mergeRepo $@
+addSubtree $@

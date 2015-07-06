@@ -1,8 +1,7 @@
 #!/bin/bash
 # Author: Wolfgang C. Strack
 # This script pulls all subtrees that were merged into the current git
-# repository using the merge_git_repo.bash script method of merging
-# subtrees.
+# repository and is coupled with the 'add_subtree.bash' script.
 
 ##### Initialize some stuff ##############################################
 usageMessage="Usage: $0 # no args"
@@ -13,7 +12,8 @@ pullSubtrees ()
 {
 	echo
 	for remote in ${remoteNames[@]}; do
-		git pull --no-edit -s subtree $remote master
+		git fetch $remote master
+		git subtree --prefix=$remote/ $remote master --squash
 		echo
 	done
 }
