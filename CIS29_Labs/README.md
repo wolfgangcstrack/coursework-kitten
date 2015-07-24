@@ -11,9 +11,9 @@ of the lab, which involved designing a Date class that could have arithmetic ope
 I.E.:
 
 ```
-01/01/2015 + 1D = 01/02/2015<br/>
-01/01/2015 + 1M = 02/01/2015<br/>
-01/01/2015 + 1Y = 01/01/2016<br/>
+01/01/2015 + 1D = 01/02/2015
+01/01/2015 + 1M = 02/01/2015
+01/01/2015 + 1Y = 01/01/2016
 ```
 
 ## <a href="./Lab-1">Lab 1</a>
