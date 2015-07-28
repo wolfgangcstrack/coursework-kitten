@@ -29,7 +29,7 @@ Relationships - will be represented in Crow Notation
   ->zero or more Section(child)
   ->zero or more Student_Fee(child)
 - Location(parent) has
-  ->zero or more College(child)
+  ->zero or more Department(child)
 - Payment(parent) has
   ->one Student_Fee(child)
 - Fee_Schedule(parent) has
