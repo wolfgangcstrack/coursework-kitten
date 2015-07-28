@@ -1,0 +1,31 @@
+Entity/Attributes
+
+[PARENT]
+User - id(pk), Firstname, Lastname, Address, Email, Telno, ResidentId, Type
+[PARENT] 
+Location - id(pk), Location Name 
+[PARENT] 
+Payment - id(pk), PaymentName  //Payment - visa/mc/cash - optional
+[PARENT] 
+Resident - id(pk), ResiName, Feeschedule   //Resident/Non-Resident
+[PARENT] 
+College id(pk),Name, Address, Telno
+[CHILD of College]  
+Department - id(pk), Name, Locid, Collegeid(fk)
+[CHILD of Department]  
+Course - id(pk), CourseNo, CourseName, Prereq, Deptid(fk)
+[CHILD of Course, User(instructor) and Location]  
+Section - id(pk), SectionNo, Courseid(fk), Locationid(fk), starttime, endtime, startdate, enddate, userid(fk)
+
+[Child of User, Section, Payment] 
+StudentRegistration - id(pk), StudentID(fk), SectionId(fk)_, FeeStatus, Paymentid(fk)
+
+//student-section
+Catalog - view (query - Department, Course, Section, Location)
+
+Relationships
+1. College(parent) can have zero or more department(child)
+2. Department(parent) has zero or more courses
+// other relationship listings
+
+Use Crow Notation Representation
