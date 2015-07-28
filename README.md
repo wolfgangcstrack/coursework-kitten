@@ -7,12 +7,14 @@ This repository contains work from various courses I have taken in the past. Eac
 ## Course List
 While the table below briefly lists information about what each course directory contains, more in-depth descriptions about each course can be found by simply viewing the `README.md` in each course directory.
 
+Courses are sorted by Year and Season:
+
 | Course        | Title                           | Season | Year |
 |:------------- |:-------------------------------:|:------:| ----:|
 | CIS 22C       | Data Abstraction and Structures | Winter | 2015 |
+| CS 149        | PERL Programming                | Winter | 2015 |
 | CIS 29        | Advanced C++ Programming        | Spring | 2015 |
 | CIS 35B       | Advanced Java Programming       | Spring | 2015 |
-| CS 149        | PERL Programming                | Winter | 2015 |
 
 ## Other things
 **Why the kitten?**  
