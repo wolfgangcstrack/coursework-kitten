@@ -32,8 +32,8 @@ If you have the following XML node `<example>`:
 
 ```
 <example>
-  <x>1000\</x>
-  <y>2000\</y>
+  <x>1000</x>
+  <y>2000</y>
 </example>
 ```
 
