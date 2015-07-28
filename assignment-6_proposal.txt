@@ -6,4 +6,4 @@ Dean of Admission at DeAnza College has hired you to do the database design for 
 4. College has locations (Room Sem 5 etc.)
 5. Students register for a section from a catalog (which is composed of Departments, Courses, Sections, Location.)
 6. Students have to pay for the course they take. You may want to think about resident, non resident.
-7. Their status is updated based on their registration.  A document to help you remind the symbols for DB Schema is posted in the notes area for Session 1 - called "Introduction to RDBMS.doc".
+7. Their status is updated based on their registration.
