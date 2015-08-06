@@ -39,5 +39,5 @@ Because kittens.
 [CS 149]: ./CS149_Final-Project
 [CIS 29]: ./CIS29_Labs
 [CIS 35B]: ./CIS35B_Labs
-[CIS 64B]: https://github.com/vulfgang/CIS64B_Labs
+[CIS 64B]: ./CIS64B_Labs
 [T.O.P.]: https://github.com/vulfgang/odin-ocelot
