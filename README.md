@@ -13,6 +13,7 @@ Courses are sorted by Year and Season:
 |:------------- |:------------------------------------:|:--------------------:| ----:|
 | [CIS 22C]     | Data Abstraction and Structures      | Winter               | 2015 |
 | [CS 149]      | PERL Programming                     | Winter               | 2015 |
+| [CIS 18C]     | Shell Programming                    | Spring               | 2015 |
 | [CIS 29]      | Advanced C++ Programming             | Spring               | 2015 |
 | [CIS 35B]     | Advanced Java Programming            | Spring               | 2015 |
 | [CIS 64B]     | Introduction to SQL                  | Summer               | 2015 |  
@@ -37,6 +38,7 @@ Because kittens.
 
 [CIS 22C]: ./CIS22C_Team-Project
 [CS 149]: ./CS149_Final-Project
+[CIS 18C]: ./CIS18C_Labs
 [CIS 29]: ./CIS29_Labs
 [CIS 35B]: ./CIS35B_Labs
 [CIS 64B]: ./CIS64B_Labs
