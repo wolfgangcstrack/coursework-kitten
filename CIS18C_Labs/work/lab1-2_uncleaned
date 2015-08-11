@@ -1,0 +1,19 @@
+Script started on Sun Apr 19 18:14:54 2015
+]0;vulfgang@voyager:~[vulfgang@voyager ~]$ ls -l | head -2
+total 44
+lrwxrwxrwx 1 vulfgang unixStudent   33 Apr 11 15:33 CIS18C -> /home/distribution/cnguyen/cis18c
+]0;vulfgang@voyager:~[vulfgang@voyager ~]$ echo "Found `whom ami` among `wc -l /etc/passwd | cut -d' '  -f1` entries of /etc/passwd"
+Found vulfgang among 2002 entries of /etc/passwd
+]0;vulfgang@voyager:~[vulfgang@voyager ~]$ which ksh
+/bin/ksh
+]0;vulfgang@voyager:~[vulfgang@voyager ~]$ ls -a | grep -c '6 ^\.'
+11
+]0;vulfgang@voyager:~[vulfgang@voyager ~]$ cp ~/CIS18C/clean.sed
+cp: missing destination file operand after `/home/student/vulfgang/CIS18C/clean.sed'
+Try `cp --help' for more information.
+]0;vulfgang@voyager:~[vulfgang@voyager ~]$ cp ~/CIS18C/clean.sed .
+]0;vulfgang@voyager:~[vulfgang@voyager ~]$ echo 's/^.*$/#&/' >> clean.sed
+]0;vulfgang@voyager:~[vulfgang@voyager ~]$ exit
+exit
+
+Script done on Sun Apr 19 18:16:35 2015

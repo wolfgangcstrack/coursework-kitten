@@ -1,0 +1,126 @@
+#!/bin/bash
+# Author: Wolfgang C. Strack
+# CIS18C Lab7-8, Module 7-8 script
+
+########## initialize some global variables
+
+shadowfile="lab7_shadow"
+shadowswap=".lab7_shadow.doge"
+# shadowswap is used to save changes to shadowfile
+# script only overwrites shadowfile if exited normally
+
+########## functions
+
+getID ()
+{
+	uid=" "
+
+	# keep prompting until user enters a user id without whitespace
+	read -p "Please enter a user id: " uid
+	while [[ "$uid" =~ '.*?\s.*?' ]]; do
+		echo "Error, whitespace not allowed!"
+		read -p "Please enter a user id: " uid
+	done
+
+	line=$(grep "^$uid:" $shadowswap)
+	fields=($(echo $line | tr ':' ' ')) # load global array of fields
+
+	# return true if grep matched a line
+	# else return false
+	if [ ! -z "$line" ]; then
+		return 0 # true
+	else
+		return 1 # false
+	fi
+}
+
+lock ()
+{
+	getID
+	if [ $? -eq 1 ]; then
+		echo "Error, user id $uid does not exist"
+		echo
+		return 1
+	fi
+
+	if [[ "${fields[1]}" =~ '^\*' ]]; then
+		# sed -ri "s/^$uid:\*(.*?):/$uid:\1:/" $shadowswap
+		# echo "$uid account unlocked"
+		### The two previous commands were originally intended to be a feature that unlocks the user account specified
+		echo "$uid account is already locked"
+	else
+		sed -ri "s/^$uid:(.*?):/$uid:*\1:/" $shadowswap
+		echo "$uid account locked"
+	fi
+
+	echo
+}
+
+display ()
+{
+	getID
+	if [ $? -eq 1 ]; then
+		echo "Error, user id $uid does not exist"
+		echo
+		return 1
+	fi
+
+	if [[ "${fields[1]}" =~ '^\*' ]]; then
+		fields[1]="L"
+	else
+		fields[1]="P"
+	fi
+
+	fields[2]=$(date -d @`echo -n ${fields[2]}` +%d/%m/%Y)
+
+	echo ${fields[@]}
+	echo
+}
+
+########## signal handling
+
+trap '' TSTP TERM # silently ignore signal from ctrl-z as well as 'kill PID' command run from different terminal
+trap "rm $shadowswap; echo; exit 1" INT # ensures that no changes are made to shadowfile if ctrl-c is used to exit script
+
+########## main
+
+if [ -f "$shadowswap" ]; then
+	echo "There is a newer version of the shadow file $shadowfile"
+	
+	read -p "Would you like to use the newer version? [Y/N]: " choice
+	
+	until [[ "$choice" =~ '^[yYnN]$' ]]; do
+		read -p "Invalid choice. Please enter either y or n only: " choice
+	done
+
+	if [[ "$choice" =~ '[nN]' ]]; then
+		cp $shadowfile $shadowswap # load shadowfile into shadowswap for temporary changes
+	fi # else do nothing and use the current shadowswap file
+else
+	cp $shadowfile $shadowswap # load shadowfile into shadowswap for temporary changes
+fi
+
+until [[ $choice -eq 3 ]]; do
+	echo "1. Lock user account"
+	echo "2. Show user password status"
+	echo "3. Quit"
+	echo
+	read -p "Your choice: " choice
+
+	if [ "$choice" == "1" ]; then
+		lock
+	elif [ "$choice" == "2" ]; then
+		display
+	elif [ "$choice" == "3" ]; then
+		# overrite shadowfile with changes made
+		# then remove the temporary file used to log changes
+		cp $shadowswap $shadowfile
+		rm $shadowswap
+	else
+		echo "Error, invalid option entered."
+		echo
+	fi
+done
+
+echo
+echo Goodbye

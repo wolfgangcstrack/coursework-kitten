@@ -1,0 +1,63 @@
+#!/bin/tcsh
+# Author: Wolfgang C. Strack
+# CIS18C Lab 10 script
+
+############### initialize some global variables
+set usageMessage = "Usage: $0 directoryName"
+
+############### main
+if ( $#argv != 1 ) then
+	echo $usageMessage
+	exit 1
+endif
+
+########## checkIfValidDir "function"
+if ( ! -d "$1" ) then
+	echo "Error: $1 is not a directory"
+	exit 1
+endif
+
+# cd to directory argument
+cd $1
+
+pwd -P | egrep "/home/(student|staff)/$USER" > /dev/null
+
+if ( $status != 0 ) then
+	echo "Error: `pwd -P` is not your home directory or any of its subdirectories"
+	exit 1
+endif
+########## end checkIfValidDir
+
+########## getListOfMatchingFiles "function"
+set listOfMatchingFiles = ()
+
+foreach file (`ls`)
+	if ( -f $file ) head -1 $file | egrep '\#\!/bin/bash' > /dev/null
+	if ( $status == 0 ) then
+		set listOfMatchingFiles = ($listOfMatchingFiles $file)
+	endif
+end
+########## end getListOfMatchingFiles
+
+if ( $#listOfMatchingFiles == 0 ) then
+	echo "No files in $(pwd -P) are bash scripts"
+	exit
+endif
+
+########## printMatchingFiles "function"
+onintr - # disable ctrl-c signal
+
+echo "Total number of files in `pwd -P` : `ls | wc -l`"
+echo "Total number of files in `pwd -P` that are bash scripts: $#listOfMatchingFiles"
+echo "Now printing names of files that are bash scripts:"
+echo
+
+foreach filename ($listOfMatchingFiles)
+	echo $filename
+	sleep 3
+end
+
+onintr # reset default handling
+########## end printMatchingFiles
+
+cd - > /dev/null

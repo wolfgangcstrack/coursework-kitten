@@ -1,0 +1,16 @@
+#Script started on Sun Apr 19 18:14:54 2015
+#[vulfgang@voyager ~]$ ls -l | head -2
+#total 44
+#lrwxrwxrwx 1 vulfgang unixStudent   33 Apr 11 15:33 CIS18C -> /home/distribution/cnguyen/cis18c
+#[vulfgang@voyager ~]$ echo "Found `whoami` among `wc -l /etc/passwd | cut -d' '  -f1` entries of /etc/passwd"
+#Found vulfgang among 2002 entries of /etc/passwd
+#vulfgang@voyager ~]$ which ksh
+#/bin/ksh
+#vulfgang@voyager ~]$ ls -a | grep -c '^\.'
+#11
+#vulfgang@voyager ~]$ cp ~/CIS18C/clean.sed .
+#vulfgang@voyager ~]$ echo 's/^.*$/#&/' >> clean.sed
+#vulfgang@voyager ~]$ exit
+#exit
+#
+#Script done on Sun Apr 19 18:16:35 2015

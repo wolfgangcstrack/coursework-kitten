@@ -1,0 +1,7 @@
+-v dirA
+dirB
+-c dirA
+-v junk test
+test junk
+-v Exercises mbox
+-vasf junk test

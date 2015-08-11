@@ -1,0 +1,67 @@
+#!/bin/ksh
+# Author: Wolfgang C. Strack
+# CIS18C Lab 9 script
+
+########## initialize some global variables
+usageMessage="Usage: $0 directoryName"
+
+########## functions
+checkIfValidDir () # takes a filename as an argument
+{
+	if [ ! -d "$1" ]; then
+		echo "Error: $1 is not a directory"
+		exit 1
+	fi
+
+	# cd to directory argument
+	cd $1
+
+	if [ ! $(pwd -P | egrep "/home/(student|staff)/$USER" &> /dev/null) ]; then
+		echo "Error: `pwd -P` is not your home directory or any of its subdirectories"
+		exit 1
+	fi
+}
+
+# decided to make this a function
+# so there's less clutter in main
+getListOfMatchingFiles ()
+{
+	for file in *; do
+		head -1 $file 2> /dev/null | egrep '#!/bin/bash' > /dev/null
+		if [ $? -eq 0 ]; then
+			listOfMatchingFiles=(${listOfMatchingFiles[@]} $file)
+		fi
+	done
+}
+
+printMatchingFiles () # takes an array of matching file names as arguments
+{
+	trap '' SIGINT
+
+	echo "Total number of files in $(pwd -P) : $(ls | wc -l)"
+	echo "Total number of files in $(pwd -P) that are bash scripts: $#"
+	echo "Now printing names of files that are bash scripts:"
+	echo
+
+	for filename in "$@"; do
+		echo $filename
+		sleep 3
+	done
+
+	trap - SIGINT # reset signal handling to default
+}
+
+########## main
+if [ $# -ne 1 ]; then
+	echo $usageMessage
+	exit 1
+fi
+
+checkIfValidDir $1 # changes to directory if valid, else exits script
+getListOfMatchingFiles # see function above
+
+if [ ${#listOfMatchingFiles[@]} -eq 0 ]; then
+	echo "No files in $(pwd -P) are bash scripts"
+else
+	printMatchingFiles ${listOfMatchingFiles[@]}
+fi

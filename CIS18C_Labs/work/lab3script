@@ -1,0 +1,25 @@
+#!/bin/bash
+# Wolfgang C. Strack
+# CIS18C
+# This script is for lab 3 and copies old files from
+# a source directory into a destination directory.
+
+read -p "Please enter a source directory or hit enter to use current directory: " temp
+source=${temp:-'.'}
+
+read -p "Please enter the destination directory or hit enter to use the directory name \"old\": " temp
+destination=${temp:-'./old'}
+
+mkdir $destination
+
+read -p "In the format mo/dd/yyyy hh:mm, please enter the day and time: " day time
+date -d "$day $time" +"Epoch time equivalent of time entered: %s seconds"
+
+echo "Files in destination directory:"
+ls $source
+
+read -p "Please choose a file: " filechosen
+stat -c "Epoch time for $filechosen: +%Y seconds" $filechosen
+
+echo "Copying $filechosen into $destination"
+cp $filechosen $destination
