@@ -14,4 +14,3 @@ The course provides an introduction to topics including Oracle, SQL, DML, proces
 - Define database security policy and create different levels of user access and variables in database schema.
 - Use control structures to implement decision making constructs in RDBMS.
 - Demonstrate usage of database utilities used for importing and exporting data from databases.
->>>>>>> CIS64B_Labs/master
