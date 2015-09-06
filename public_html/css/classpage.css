@@ -6,19 +6,24 @@
 
 #header {
   margin-top: -20px;
-  padding: 20px;
+  padding: 45px 20px 35px 20px;
   background-color: #FFFFFF;
   overflow: auto;
   position: relative; 
 }
 
-#header-title {
+.header-text {
   color: #555555;
   float: left;
   width: 50%;
 }
 
-a#header-title:hover {
+.header-text.header-name {
+  float: right !important;
+  text-align: right;
+}
+
+a .header-text:hover {
   color: #333333 !important;
 }
 

@@ -1,6 +1,5 @@
 (function($) {
   $(document).ready(function() {
-    // $('#navbar').affix({offset: {top: 150} });
     $(window).scroll(function(event) {
       var height = $(window).scrollTop();
       $nav = $('#navbar');
