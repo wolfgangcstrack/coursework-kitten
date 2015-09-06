@@ -82,12 +82,12 @@ div.right-column {
     width:50%;
 }
 
-div.content-column-center {
+.content-column-center {
   margin: auto;
   text-align: center;
 }
 
-div.content-column-center h1 {
+.content-column-center h1 {
   margin-top: 50px;
 }
 
