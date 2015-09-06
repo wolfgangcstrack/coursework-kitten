@@ -72,6 +72,16 @@ div {
   text-align: initial;
 }
 
+div.left-column {
+    float:left;
+    width:45%;
+}
+
+div.right-column {
+    float:right;
+    width:50%;
+}
+
 div.content-column-center {
   margin: auto;
   text-align: center;
@@ -101,6 +111,12 @@ p {
   display: block;
 }
 
+hr {
+  margin: 0px 0px !important;
+  border-width: 3px !important;
+  border-color: #AEAEAE !important;
+}
+
 footer {
   background-color: #FFFFFF !important;
   overflow: hidden;
@@ -111,11 +127,15 @@ footer > div {
   padding: 15px 0px;
 }
 
-footer a:link, footer a:visited {
-  color: #848484 !important;
+.text-right {
+  text-align: right;
 }
 
-footer a:hover {
-  color: #8CC43F !important;
-  text-decoration: none !important;
+.text-bold {
+  font-weight: bold;
 }
+
+.text-gray {
+  color: #848484;
+}
+
