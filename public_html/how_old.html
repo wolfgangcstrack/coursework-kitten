@@ -5,43 +5,40 @@
   <title>Calculate age based on year of birth</title>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <script>
-      //prompt username into variable 'name'
-    var name = prompt("What is your name?");
-      //Code below checks for a blank input on variable 'name'
+      var name = prompt("What is your name?");
       if (name.length <= 0) {
-      alert ("name is empty");  
-    }
-    //prompt user for year of birth into variable 'birth_year'
-    
-        //use an if statement as above to check for blank variable birth_year
+        alert("Name is empty, using 'friend' as a placeholder");
+        name = 'friend';
+      }
 
-    //Use the parseInt() method on birth_year to convert string into an integer
+      var birth_year = prompt("What year were you born?");
+      if (birth_year.length <= 0) {
+        alert("Birth year is empty, using '1970' as a placeholder");
+        birth_year = 1970;
+      }
+      birth_year = parseInt(birth_year);
 
-    //create a date object into variable 'today' (information in fig 3-3)
+      var today = new Date();
+      var current_year = today.getFullYear();
 
-    //extract the year from the 'today' date object into variable 'current_year'
+      if (birth_year > current_year) {
+        alert("Error, birth year is greater than current year");
+      }
 
-    //check (with if statement) that birth_year is not greater than current year
-    //  if so, alert the user of that fact 
+      var how_old = current_year - birth_year;
 
-    //calculate years based on current_year and birth_year and save value into
-    //  variable 'how_old'
+      var output_string = "Hi " + name + ", you were born in "+birth_year +
+          ". This year (" + current_year + "), you will be (or already are) " +
+          how_old + ".";
 
-    //Concatenate strings and values into variable 'output_string' to produce the 
-    //result as something like this:
-    // "Hi Fred, you were born in 1990. This year (2015), you will be 25"
-
-    //alert the variable 'output_string'
-
-
+      alert(output_string);
     </script>
 </head>
 <body>
     <section>
         <h1>Again in the HTML body</h1>
         <script>
-          //within this script tag, issue a document.write() method to output the
-          //  output_string variable once again
+          document.write("<p>" + output_string + "</p>");
         </script>
     </section>
 </body>
