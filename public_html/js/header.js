@@ -39,5 +39,5 @@ to fixed when the window scrolls down far enough.
     });
   }
 
-  defer_jQuery(main);
+  defer_jQuery(main); // global function in common-includes.js
 })();

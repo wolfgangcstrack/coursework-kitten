@@ -1,10 +1,4 @@
 (function() {
-  // function defer_jQuery(method) {
-  //   if (window.jQuery)
-  //      method(jQuery);
-  //   else
-  //     setTimeout(function() { defer_jQuery(method); }, 50);
-  // }
   function main($) {
     $(document).ready(function() {
       $('body').append(
@@ -35,5 +29,5 @@
     });
   }
 
-  defer_jQuery(main);
+  defer_jQuery(main); // global function in common-includes.js
 })();

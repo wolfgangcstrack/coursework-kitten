@@ -22,11 +22,11 @@ function defer_jQuery(method) {
   ];
 
   var jsURLs = [
-    // remote
-    'https://code.jquery.com/jquery-2.1.4.min.js',
     // local
     'js/header.js',
-    'js/footer.js'
+    'js/footer.js',
+    // remote
+    'https://code.jquery.com/jquery-2.1.4.min.js'
   ];
 
   var loadCSS = function(url) {
