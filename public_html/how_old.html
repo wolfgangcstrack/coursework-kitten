@@ -1,45 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">  
-  <title>Calculate age based on year of birth</title>
-    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <script>
-      var name = prompt("What is your name?");
-      if (name.length <= 0) {
-        alert("Name is empty, using 'friend' as a placeholder");
-        name = 'friend';
-      }
+  <meta charset="UTF-8">
+  <!-- see common-includes.js for all common <link> and <script> tag includes -->
+  <script src="js/common-includes.js" type="text/javascript" charset="utf-8" defer></script>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <script>
+    var name = prompt("What is your name?");
+    if (name.length <= 0) {
+      alert("Name is empty, using 'friend' as a placeholder");
+      name = 'friend';
+    }
 
-      var birth_year = prompt("What year were you born?");
-      if (birth_year.length <= 0) {
-        alert("Birth year is empty, using '1970' as a placeholder");
-        birth_year = 1970;
-      }
-      birth_year = parseInt(birth_year);
+    var birth_year = prompt("What year were you born?");
+    if (birth_year.length <= 0) {
+      alert("Birth year is empty, using '1970' as a placeholder");
+      birth_year = 1970;
+    }
+    birth_year = parseInt(birth_year);
 
-      var today = new Date();
-      var current_year = today.getFullYear();
+    var today = new Date();
+    var current_year = today.getFullYear();
 
-      if (birth_year > current_year) {
-        alert("Error, birth year is greater than current year");
-      }
+    if (birth_year > current_year) {
+      alert("Error, birth year is greater than current year");
+    }
 
-      var how_old = current_year - birth_year;
+    var how_old = current_year - birth_year;
 
-      var output_string = "Hi " + name + ", you were born in "+birth_year +
-          ". This year (" + current_year + "), you will be (or already are) " +
-          how_old + ".";
+    var output_string = "Hi " + name + ", you were born in "+birth_year +
+        ". This year (" + current_year + "), you will be (or already are) " +
+        how_old + ".";
 
-      alert(output_string);
-    </script>
+    alert(output_string);
+  </script>
 </head>
 <body>
-    <section>
-        <h1>Again in the HTML body</h1>
-        <script>
-          document.write("<p>" + output_string + "</p>");
-        </script>
+  <div class="content-container">
+    <section class="content-column-center">
+      <h1>Again in the HTML body</h1>
+      <script>
+        document.write("<p>" + output_string + "</p>");
+      </script>
     </section>
+  </div>
 </body>
 </html>

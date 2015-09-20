@@ -6,13 +6,6 @@ to fixed when the window scrolls down far enough.
 */
 
 (function() {
-  function defer(method) {
-    if (window.jQuery)
-       method(jQuery);
-    else
-      setTimeout(function() { defer(method); }, 50);
-  }
-
   function main($) {
     $(document).ready(function() {
       $('body').prepend(
@@ -37,7 +30,7 @@ to fixed when the window scrolls down far enough.
       $(window).scroll(function(event) {
         var height = $(window).scrollTop();
         $nav = $('#navbar');
-        if (height >= 100) {
+        if (height >= 150) {
           $nav.addClass('navbar-fixed-top');
         } else {
           $nav.removeClass('navbar-fixed-top');
@@ -46,5 +39,5 @@ to fixed when the window scrolls down far enough.
     });
   }
 
-  defer(main);
+  defer_jQuery(main);
 })();

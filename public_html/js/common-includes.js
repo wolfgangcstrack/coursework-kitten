@@ -4,21 +4,29 @@ script tags (considering this class is not about using a dynamic backend
 language like Python or PHP).
 */
 
+function defer_jQuery(method) {
+  if (window.jQuery)
+     method(jQuery);
+  else
+    setTimeout(function() { defer_jQuery(method); }, 50);
+}
+
 (function() {
   var cssURLs = [
-    // remote
-    'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
-    'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
     // local
     'css/theme.css',
-    'css/bootstrap-social.css'
+    'css/bootstrap-social.css',
+    // remote
+    'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
+    'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'
   ];
 
   var jsURLs = [
     // remote
     'https://code.jquery.com/jquery-2.1.4.min.js',
     // local
-    'js/header.js'
+    'js/header.js',
+    'js/footer.js'
   ];
 
   var loadCSS = function(url) {
