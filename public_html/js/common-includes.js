@@ -6,19 +6,19 @@ language like Python or PHP).
 
 (function() {
   var cssURLs = [
-    // local
-    'css/theme.css',
-    'css/bootstrap-social.css',
     // remote
     'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
-    'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'
+    'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
+    // local
+    'css/theme.css',
+    'css/bootstrap-social.css'
   ];
 
   var jsURLs = [
-    // local
-    'js/navbar-scroll.js',
     // remote
-    'https://code.jquery.com/jquery-2.1.4.min.js'
+    'https://code.jquery.com/jquery-2.1.4.min.js',
+    // local
+    'js/header.js'
   ];
 
   var loadCSS = function(url) {
@@ -34,8 +34,10 @@ language like Python or PHP).
     script.src = url;
     script.type = 'text/javascript';
     script.charset = 'utf-8';
-    document.getElementsByTagName('head')[0].appendChild(script);
+    script.defer = true;
+    document.head.appendChild(script);
   };
 
   cssURLs.forEach(function(url) { loadCSS(url); });
+  jsURLs.forEach(function(url) { loadJS(url); });
 })();
