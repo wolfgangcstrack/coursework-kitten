@@ -19,10 +19,10 @@ to fixed when the window scrolls down far enough.
             '</a>' +
           '</div>' +
           '<div id="navbar">' +
-            '<a class="nav-link" href="#">Home</a>' +
-            '<a class="nav-link" href="#assignments">Assignments</a>' +
-            '<a class="nav-link" href="#about">About</a>' +
-            '<a class="nav-link" href="#contact">Contact</a>' +
+            '<a class="nav-link" href="./classpage.html">Home</a>' +
+            '<a class="nav-link" href="./classpage.html#assignments">Assignments</a>' +
+            '<a class="nav-link" href="./classpage.html#about">About</a>' +
+            '<a class="nav-link" href="./classpage.html#contact">Contact</a>' +
           '</div>' +
         '</header>'
       );
