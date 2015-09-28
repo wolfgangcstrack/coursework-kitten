@@ -64,6 +64,24 @@
     var $ = function(id) {
       return document.getElementById(id);
     };
+
+    var writeSentence = function() {
+      var sentence = $("sentence").value;
+      if (sentence.length > 0) {
+        $("onBoard").appendChild(document.createTextNode(sentence));
+        $("onBoard").appendChild(document.createElement("br"));
+      }
+    };
+
+    var eraseBoard = function() {
+      $("onBoard").innerHTML = '';
+    };
+
+    window.onload = function() {
+      $("writeSentence").onclick = writeSentence;
+      $("eraseBoard").onclick = eraseBoard;
+      $("sentence").focus();
+    };
   </script>
 </head>
 <body>
@@ -76,9 +94,9 @@
     <span class="red" id="sentence_error">*</span><br>
     <label>&nbsp;</label>
     <input type="button" id="writeSentence" value="Click to Write">
-    <input type="button" id="eraseBoard" value="Erase Board"><p>
+    <input type="button" id="eraseBoard" value="Erase Board"><br><br>
     <span class="board" id="onBoard">
-    </span><p>
+    </span><br>
     
   </section>
   <footer>
