@@ -127,6 +127,10 @@ footer > div {
   padding: 15px 0px;
 }
 
+.btn-social-icon {
+  margin: 2px;
+}
+
 .text-right {
   text-align: right;
 }
