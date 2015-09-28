@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>I will not chew gum in class</title>
+  <style>
+    body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+    margin: 10px auto;
+  }
+  header {
+    background-color:#ffffcc;
+    width: 650px;
+      margin:  0 auto;
+      padding: 15px;
+    border-left: 2px solid navy;
+    border-top: 2px solid navy;
+    border-right: 2px solid navy;
+  }
+  section {
+    background-color: #ffffcc;
+      width: 650px;
+      margin:  0 auto;
+      padding: 15px;
+    border-left: 2px solid navy;
+    border-bottom: 2px solid navy;
+    border-right: 2px solid navy;   
+  }
+  label {
+    float: left;
+      width: 10em;
+      text-align: right;
+      padding-bottom: .5em;
+  }
+  input {
+      margin-left: 1em;
+      margin-bottom: .5em;
+    }
+  h1 {
+    color:green;
+    text-align:center;
+    font-size:30px;
+  }
+  h2 {
+    color:rgb(92,84,254);
+    text-align:center;
+    font-size:20px;
+  }
+  p.center {
+    color:rgb(11,1,213);
+    text-align:center;
+    font-size:20px;
+  }
+  hr {
+    background-color: red; border: none; height: 3px;
+  }
+  .long {
+      width: 20em;
+  }
+  </style>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <script>
+    var $ = function(id) {
+      return document.getElementById(id);
+    };
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Classroom Board</h1>
+  </header>
+  <section>
+    <label for="sentence">What to write:</label>
+    <input class="long" type="text" id="sentence">
+    <span class="red" id="sentence_error">*</span><br>
+    <label>&nbsp;</label>
+    <input type="button" id="writeSentence" value="Click to Write">
+    <input type="button" id="eraseBoard" value="Erase Board"><p>
+    <span class="board" id="onBoard">
+    </span><p>
+    
+  </section>
+  <footer>
+  </footer>
+</body>
+</html>
