@@ -1,0 +1,11 @@
+Connect using your userid and password. 
+Then run the following scripts in the exact order to create the desired schema for Assignments.
+@@hr_cre
+@@hr_popul
+@@hr_idx
+@@hr_code
+@@hr_comnt
+
+To drop everything - 
+run 
+@@hr_drop
