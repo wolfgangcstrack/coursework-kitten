@@ -1,0 +1,42 @@
+-- Intro to PL/SQL
+-- Lab Assignment 1
+-- Wolfgang C. Strack
+-- Student ID#: ****7355
+-- Due Date: 02 October 2015
+-- Date Handed In: 02 October 2015
+
+---------- Practice 1
+
+----- 1. Evaluate each of the following declarations. Determine which of them are not legal and explain why.
+
+--- a.
+DECLARE
+  v_id NUMBER(4);
+
+--- b.
+DECLARE
+  v_x, v_y, v_z VARCHAR2(10);
+
+--- c.
+DECLARE
+  v_birthdate DATE NOT NULL;
+
+--- d.
+DECLARE
+  v_in_stock BOOLEAN := 1;
+
+----- 2. In each of the following assignments, indicate whether the statement is valid and what the valid data type of the result will be.
+
+--- a. v_days_to_go := v_due_date - SYSDATE;
+
+--- b. v_sender := USER || ': ' || TO_CHAR(v_dept_no);
+
+--- c. v_sum := $100,000 + $250,000;
+
+--- d. v_flag := TRUE;
+
+--- e. v_n1 := v_n2 > (2 * v_n3);
+
+--- f. v_value := NULL;
+
+----- 3. Create an anonymous block to output the phrase "My PL/SQL Block Works" to the screen.
