@@ -1,0 +1,101 @@
+-- Intro to PL/SQL
+-- Lab Assignment 1
+-- Wolfgang C. Strack
+-- Student ID#: ****7355
+-- Due Date: 02 October 2015
+-- Date Handed In: 02 October 2015
+
+---------- Practice 1
+
+----- 1. Evaluate each of the following declarations. Determine which of them are not legal and explain why.
+
+--- a.
+DECLARE
+  v_id NUMBER(4);
+BEGIN
+  v_id := 10000;
+  DBMS_OUTPUT.PUT_LINE(v_id);
+END;
+/
+
+--- b.
+DECLARE
+  v_x, v_y, v_z VARCHAR2(10);
+
+--- c.
+DECLARE
+  v_birthdate DATE NOT NULL := '25-JUL-1996';
+BEGIN
+  DBMS_OUTPUT.PUT_LINE(v_birthdate);
+END;
+/
+
+--- d.
+DECLARE
+  v_in_stock BOOLEAN := FALSE;
+BEGIN
+  DBMS_OUTPUT.PUT_LINE(USER);
+END;
+/
+
+----- 2. In each of the following assignments, indicate whether the statement is valid and what the valid data type of the result will be.
+
+--- a.
+DECLARE
+  v_due_date DATE := '02-OCT-2015';
+  v_days_to_go VARCHAR2(100);
+BEGIN
+  v_days_to_go := v_due_date - SYSDATE;
+  DBMS_OUTPUT.PUT_LINE(v_days_to_go);
+END;
+/
+
+---b.
+DECLARE
+  v_sender VARCHAR2(100);
+  v_dept_no NUMBER := 69;
+BEGIN
+  v_sender := USER || ': ' || TO_CHAR(v_dept_no);
+  DBMS_OUTPUT.PUT_LINE(v_sender);
+END;
+/
+
+--- c.
+DECLARE
+  v_sum NUMBER;
+BEGIN
+  v_sum := $100,000 + $250,000;
+  DBMS_OUTPUT.PUT_LINE(v_sum);
+END;
+/
+
+--- d.
+DECLARE
+  v_flag BOOLEAN;
+BEGIN
+  v_flag := FALSE;
+  DBMS_OUTPUT.PUT_LINE(case when v_flag then 'wow' else 'doge' end);
+END;
+/
+
+--- e.
+DECLARE
+  v_n1 BOOLEAN;
+  v_n2 NUMBER := 71;
+  v_n3 NUMBER := 35;
+BEGIN
+  v_n1 := v_n2 > (2 * v_n3);
+  DBMS_OUTPUT.PUT_LINE(case when v_n1 then 'wow' else 'doge' end);
+END;
+/
+
+--- f.
+DECLARE
+  v_value NUMBER := 69;
+BEGIN
+  v_value := NULL;
+  DBMS_OUTPUT.PUT_LINE(v_value);
+END;
+/
+
+----- 3. Create an anonymous block to output the phrase "My PL/SQL Block Works" to the screen.
