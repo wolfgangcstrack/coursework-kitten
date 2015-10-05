@@ -9,11 +9,20 @@
 ----- table. Write a PL/SQL block to insert numbers into the MESSAGES table.
 
 --- a. Insert the numbers 1 to 10, excluding 6 and 8.
+--& b. Commit before the end of the block.
+--& c. Select from the MESSAGES table to verify that your PL/SQL block worked.
+BEGIN
+  FOR counter IN 1..10 LOOP
+    IF counter != 6 AND counter != 8 THEN
+      INSERT INTO messages(results) VALUES(counter);
+    END IF;
+  END LOOP;
 
---- b. Commit before the end of the block.
+  COMMIT;
+END;
+/
 
---- c. Select from the MESSAGES table to verify that your PL/SQL block worked.
-
+SELECT * FROM messages;
 
 -----
 
@@ -23,26 +32,44 @@
 
 --- a. Use the DEFINE command to provide the employee ID. Pass the value to the
 --- PL/SQL block through iSQL*Plus substitution variable. DEFINE p_empno = 100
-
---- b. If the employee's salary is less than $5,000, display the bonus amount
+--& b. If the employee's salary is less than $5,000, display the bonus amount
 --- for the employee as 10% of the salary.
-
---- c. If the employee's salary is less than $5,000 and $10,000, display the
+--& c. If the employee's salary is less than $5,000 and $10,000, display the
 --- bonus amount for the employee as 15% of the salary.
-
---- d. If the employee's salary exceeds $10,000, display the bonus amount for
+--& d. If the employee's salary exceeds $10,000, display the bonus amount for
 --- the employee as 20% of the salary.
-
---- e. If the employee's salary is NULL, display the bonus amount for the
+--& e. If the employee's salary is NULL, display the bonus amount for the
 --- employee as 0.
-
---- f. Test the PL/SQL block for each case using the following test cases, and
+--& f. Test the PL/SQL block for each case using the following test cases, and
 --- check each bonus amount.
+SET VERIFY OFF;
+SET SERVEROUTPUT ON;
 
+DEFINE p_empno = 100;
+DECLARE
+  v_emp_salary employees.salary%TYPE;
+BEGIN
+  SELECT employees.salary
+  INTO v_emp_salary
+  FROM employees
+  WHERE employees.employee_id = &p_empno;
+
+  DBMS_OUTPUT.PUT('The bonus is: $');
+  IF v_emp_salary < 5000 THEN
+    DBMS_OUTPUT.PUT_LINE(v_emp_salary * 0.1);
+  ELSIF v_emp_salary < 10000 THEN
+    DBMS_OUTPUT.PUT_LINE(v_emp_salary * 0.15);
+  ELSIF v_emp_salary >= 10000 THEN
+    DBMS_OUTPUT.PUT_LINE(v_emp_salary * 0.2);
+  ELSIF v_emp_salary IS NULL THEN
+    DBMS_OUTPUT.PUT_LINE('0');
+  END IF;
+END;
+/
 
 -----
 
------ 3. Create and EMP table that is a replica of the EMPLOYEES table. You can
+----- 3. Create an EMP table that is a replica of the EMPLOYEES table. You can
 ----- do this by executing the script lab04_3.sql. Add a new column, STARS, of
 ----- VARCHAR2 data type and length of 50 to the EMP table for storing asterisk
 ----- (*).
