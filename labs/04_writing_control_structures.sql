@@ -1,9 +1,11 @@
 -- Intro to PL/SQL
--- Lab Assignment 2
+-- Lab Assignment 4, Problems 1-3
 -- Wolfgang C. Strack
 -- Student ID#: ****7355
 -- Due Date: 05 October 2015
 -- Date Handed In: 05 October 2015
+
+-----
 
 ----- 1. Execute the command in the file lab04_1.sql to create the MESSAGES
 ----- table. Write a PL/SQL block to insert numbers into the MESSAGES table.
@@ -50,9 +52,9 @@ DECLARE
   v_emp_salary employees.salary%TYPE;
 BEGIN
   SELECT employees.salary
-  INTO v_emp_salary
-  FROM employees
-  WHERE employees.employee_id = &p_empno;
+    INTO v_emp_salary
+    FROM employees
+    WHERE employees.employee_id = &p_empno;
 
   DBMS_OUTPUT.PUT('The bonus is: $');
   IF v_emp_salary < 5000 THEN
@@ -73,7 +75,7 @@ END;
 ----- do this by executing the script lab04_3.sql. Add a new column, STARS, of
 ----- VARCHAR2 data type and length of 50 to the EMP table for storing asterisk
 ----- (*).
-
+ALTER TABLE emp ADD stars VARCHAR2(50);
 
 -----
 
@@ -85,20 +87,16 @@ END;
 
 --- a. Use the DEFINE command to provide the employee ID. Pass the value to the
 --- PL/SQL block through a iSQL*Plus substitution variable. DEFINE p_empno=104
-
---- b.  Initialize a v_asterisk variable that contains a NULL.
-
---- c.  Append an asterisk to the string for every $1000 of the salary amount.
+--& b.  Initialize a v_asterisk variable that contains a NULL.
+--& c.  Append an asterisk to the string for every $1000 of the salary amount.
 --- For example, if the employee has a salary amount of $8000, the string of
 --- asterisks should contain eight asterisks. If the employee has a salary
 --- amount of $12500, the string of asterisks should contain 13 asterisks.
-
---- d.  Update the STARS column for the employee with the string of asterisks.
-
---- e.  Commit.
-
---- f.  Test the block for the following values:
+--& d.  Update the STARS column for the employee with the string of asterisks.
+--& e.  Commit.
+--& f.  Test the block for the following values:
 -- DEFINE p_empno=174
 -- DEFINE p_empno=176
+--& g.  Display the rows from the EMP table to verify whether your PL/SQL block has executed successfully.
 
---- g.  Display the rows from the EMP table to verify whether your PL/SQL block has executed successfully.
+--*** SEE OTHER ATTACHED FILE "p4q4.sql" FOR MY ANSWER TO QUESTION 4. ***
