@@ -17,6 +17,26 @@
 --& d. Execute and test the PL/SQL block for the countries with the IDs CA, DE,
 --- UK, US.
 
+SET VERIFY OFF;
+SET SERVEROUTPUT ON;
+
+DEFINE v_country_id = 'CA';
+-- DEFINE v_country_id = 'DE';
+-- DEFINE v_country_id = 'UK';
+-- DEFINE v_country_id = 'US';
+
+DECLARE
+  country_rec countries%ROWTYPE;
+BEGIN
+  SELECT * INTO country_rec
+  FROM countries WHERE country_id = '&v_country_id';
+
+  DBMS_OUTPUT.PUT('Country ID: ' || country_rec.country_id);
+  DBMS_OUTPUT.PUT('; Country Name: ' || country_rec.country_name);
+  DBMS_OUTPUT.PUT_LINE('; Region: ' || country_rec.region_id);
+END;
+/
+
 -----
 
 ----- 2. SEE p5q2.sql
@@ -37,20 +57,60 @@
 /*
 COUNTER DEPARTMENT_ID
 
-1 1 0
+1       10
 
-2 2 0
+2       20
 
-3 5 0
+3       50
 
-4 6 0
+4       60
 
-5 8 0
+5       80
 
-6 9 0
+6       90
 
-7 110
+7       110
 */
 --& c. Using another loop, retrieve the department information from the INDEX
 --- BY table and print it to the screen, using DBMS_OUTPUT.PUT_LINE. A sample
 --- output is shown.
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+  -- a:
+  TYPE dept_table_type IS TABLE OF
+    departments%ROWTYPE
+    INDEX BY BINARY_INTEGER;
+
+  my_dept_table dept_table_type;
+BEGIN
+  -- b:
+  /*
+  -- I think the following loop might be a better alternative to what is asked
+  -- for in the assignment specification simply because it does not need to
+  -- know how the department_id is structured (in this case,s the format is
+  -- hard-coded to be multiples of 10) nor how many records there are (27 is
+  -- also hard-coded in this case):
+  FOR v_dept IN (
+    SELECT * FROM DEPARTMENTS
+  ) LOOP
+    my_dept_table(v_dept.department_id) := v_dept.department_name;
+  END LOOP;
+  */
+  -- Loop for assignment specification:
+  FOR v_dept IN 1..27 LOOP
+    SELECT * INTO my_dept_table(v_dept * 10)
+      FROM departments WHERE department_id = v_dept * 10;
+  END LOOP;
+
+  -- c:
+  FOR v_id IN my_dept_table.FIRST..my_dept_table.LAST LOOP
+    IF my_dept_table.EXISTS(v_id) THEN
+      DBMS_OUTPUT.PUT('Department Number: ' || my_dept_table(v_id).department_id);
+      DBMS_OUTPUT.PUT('; Department Name: ' || my_dept_table(v_id).department_name);
+      DBMS_OUTPUT.PUT_LINE('; Location ID: ' || my_dept_table(v_id).location_id);
+    END IF;
+  END LOOP;
+END;
+/

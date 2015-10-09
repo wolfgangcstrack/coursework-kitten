@@ -39,3 +39,28 @@ COUNTER DEPARTMENT_ID
 --- table and print them to the screen, using DBMS_OUTPUT.PUT_LINE. The output
 --- from the program is shown on the [assignment specification].
 
+SET SERVEROUTPUT ON;
+
+DECLARE
+  -- a:
+  TYPE dept_table_type IS TABLE OF
+    departments.department_name%TYPE
+    INDEX BY BINARY_INTEGER;
+
+  my_dept_table dept_table_type;
+BEGIN
+  -- b:
+  FOR v_dept IN (
+    SELECT department_id, department_name FROM DEPARTMENTS
+  ) LOOP
+    my_dept_table(v_dept.department_id) := v_dept.department_name;
+  END LOOP;
+
+  -- c:
+  FOR v_id IN my_dept_table.FIRST..my_dept_table.LAST LOOP
+    IF my_dept_table.EXISTS(v_id) THEN
+      DBMS_OUTPUT.PUT_LINE(my_dept_table(v_id));
+    END IF;
+  END LOOP;
+END;
+/
