@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>cis89text1 | Wolfgang C. Strack</title>
+  <style>
+    body {
+      font-family: Arial, sans;
+      color: white; /* white text */
+      background: #172E45;
+    }
+    div.content-container {
+      margin: 5% 15% 5% 15%; /* Centers content div vertically and horizontally */
+      padding: 15px 20px 15px 20px; /* Leave room between div border and content */
+      border-radius: 5px; /* Make corners of div a little more rounded */
+      border: 3px double #aaa;
+    }
+    /* In this case, this div divides the header/title and the paragraphs */
+    div.content-divider {
+      /* Center divider horizontally */
+      margin: auto;
+      height: 2px;
+      border-radius: 100%; /* gives the color fading effect */
+      background-color: white;
+    }
+    h1, h2, h3 {
+      text-align: center;
+    }
+    h1#article-title {
+      font-size: xx-large;
+    }
+    /* center all images */
+    img {
+      margin: auto;
+      clear: both;
+      display: block;
+    }
+    a {
+      color: white;
+    }
+    a:hover {
+      color: #aaa; /* Change color of link when hovering over it */
+    }
+    pre {
+      white-space: pre-wrap; /* Gives text in pre tags proper line wrapping */
+    }
+  </style>
+</head>
+<body>
+  <div class="content-container" align="justify">
+    <article>
+      <header>
+        <h1 id="article-title">Understanding Pac-Man Ghost Behavior</h1>
+<pre>
+Taken from <a href="http://gameinternals.com/post/2072558330/understanding-pac-man-ghost-behavior">this article</a>. Note that this info is being used solely for demonstrating HTML/CSS formatting techniques. In other words, <big><strong>please don't sue me!</strong></big><!--this text is big and strong! (giggles)-->
+        
+- Wolfgang C. Strack
+</pre>
+      </header>
+      <br>
+      <div class="content-divider"></div>
+      <section id="about-the-game">
+        <h2>About The Game</h2>
+        <p>Pac-Man is one of the most iconic video games of all time, and most people (even non-gamers) have at least a passing familiarity with it. The purpose of the game is very simple &mdash; the player is placed in a maze filled with food (depicted as pellets or dots) and needs to eat all of it to advance to the next level. This task is made difficult by four ghosts that pursue Pac-Man through the maze. If Pac-Man makes contact with any of the ghosts, the player loses a life and the positions of Pac-Man and the ghosts are reset back to their starting locations, though any dots that were eaten remain so. Other than simply avoiding them, Pac-Man&rsquo;s only defense against the ghosts are the four larger "energizer&rdquo; pellets located at the corners of the maze. Eating one causes the ghosts to become frightened and retreat for a short time, and in the early levels of the game Pac-Man can even eat the ghosts for bonus points during this period. An eaten ghost is not completely eliminated, but is returned to its starting position before resuming its pursuit. Other than eating dots and ghosts, the only other source of points are the two pieces of fruit which appear during each level near the middle of the maze. The first fruit appears when Pac-Man has eaten 70 of the dots in the maze, and the second when 170 have been eaten.
+        </p>
+
+        <img class="right" src="http://media.gameinternals.com/pacman-ghosts/initial-playfield.png">
+        <p>Every level of Pac-Man uses the same maze layout, containing 240 regular &ldquo;food&rdquo; dots and 4 energizers. The tunnels that lead off of the left and right edges of the screen act as shortcuts to the opposite side of the screen, and are usable by both Pac-Man and the ghosts, though the ghosts&rsquo; speed is greatly reduced while they are in the tunnel. Even though the layout is always the same, the levels become increasingly difficult due to modifications to Pac-Man&rsquo;s speed, as well as changes to both the speed and behavior of the ghosts. After reaching level 21, no further changes to the game&rsquo;s mechanics are made, and every level from 21 onwards is effectively identical.</p>
+      </section>
+      <br>
+      <div class="content-divider"></div>
+      <section id="individual-ghost-personalities">
+        <h2>Individual Ghost Personalities</h2>
+        <blockquote>
+        <i>&ldquo;This is the heart of the game. I wanted each ghostly enemy to have a specific character and its own particular movements, so they weren&rsquo;t all just chasing after Pac Man in single file, which would have been tiresome and flat.&rdquo;</i>
+        <br><br>
+        <strong>- Toru Iwatani, Pac-Man creator</strong>
+        </blockquote>
+        <br>
+
+        <img src="http://media.gameinternals.com/pacman-ghosts/ghost-names.png">
+        <p>As has been previously mentioned, the only differences between the ghosts are their methods of selecting target tiles in Chase and Scatter modes. The only official description of each ghost&rsquo;s personality comes from the one-word &ldquo;character&rdquo; description shown in the game&rsquo;s attract mode. We&rsquo;ll first take a look at how the ghosts behave in Scatter mode, since it&rsquo;s extremely straightforward, and then look at each ghost&rsquo;s approach to targeting in Chase mode.</p>
+
+        <h3>Scatter Mode</h3>
+
+        <img src="http://media.gameinternals.com/pacman-ghosts/scatter-targets.png">
+        <p>Each ghost has a pre-defined, fixed target tile while in this mode, located just outside the corners of the maze. When Scatter mode begins, each ghost will head towards their &ldquo;home&rdquo; corner using their regular path-finding methods. However, since the actual target tiles are inaccessible and the ghosts cannot stop moving or reverse direction, they are forced to continue past the target, but will turn back towards it as soon as possible. This results in each ghost&rsquo;s path eventually becoming a fixed loop in their corner. If left in Scatter mode, each ghost would remain in its loop indefinitely. In practice, the duration of Scatter mode is always quite short, so the ghosts often do not have time to even reach their corner or complete a circuit of their loop before reverting back to Chase mode. The diagram shows each ghost&rsquo;s target tile and eventual looping path, color-coded to match their own color.</p>
+
+        <h3>The Red Ghost</h3>
+
+        <img src="http://media.gameinternals.com/pacman-ghosts/blinky-targeting.png">
+        <p>The red ghost starts outside of the ghost house, and is usually the first one to be seen as a threat, since he makes a beeline for Pac-Man almost immediately. He is referred to as &ldquo;Blinky&rdquo;, and the game describes his personality as <em>shadow</em>. In Japanese, his personality is referred to as &#36861;&#12356;&#12363;&#12369;, <em>oikake</em>, which translates as &ldquo;pursuer&rdquo; or &ldquo;chaser&rdquo;. Both languages&rsquo; descriptions are accurate, since Blinky&rsquo;s target tile in Chase mode is defined as Pac-Man&rsquo;s current tile. This ensures that Blinky almost always follows directly behind Pac-Man, unless the short-sighted decision-making causes him to take an inefficient path.</p>
+
+        <p>Even though Blinky&rsquo;s targeting method is very simple, he does have one idiosyncrasy that the other ghosts do not; at two defined points in each level (based on the number of dots remaining), his speed increases by 5% and his behavior in Scatter mode changes. The timing of the speed change varies based on the level, with the change occurring earlier and earlier as the player progresses. The change to Scatter targeting is perhaps more significant than the speed increases, since it causes Blinky&rsquo;s target tile to remain as Pac-Man&rsquo;s position even while in Scatter mode, instead of his regular fixed tile in the upper-right corner. This effectively keeps Blinky in Chase mode permanently, though he will still be forced to reverse direction as a result of a mode switch. When in this enhanced state, Blinky is generally referred to as &ldquo;Cruise Elroy&rdquo;, though the origin of this term seems to be unknown. Not even the almighty Pac-Man Dossier has an answer here. If Pac-Man dies while Blinky is in Cruise Elroy mode, he reverts back to normal behavior temporarily, but returns to Elroy mode as soon as all other ghosts have exited the ghost house.</p>
+
+        <h3>The Pink Ghost</h3>
+        <img src="http://media.gameinternals.com/pacman-ghosts/pinky-targeting2.png">
+        <p>The pink ghost starts inside the ghost house, but always exits immediately, even in the first level. His nickname is &ldquo;Pinky&rdquo;, and his personality is described as <em>speedy</em>. This is a considerable departure from his Japanese personality description, which is &#24453;&#12385;&#20239;&#12379;, <em>machibuse</em>, which translates as &ldquo;ambusher&rdquo;. The Japanese version is much more appropriate, since Pinky does not move faster than any of the other ghosts (and slower than Blinky in Cruise Elroy mode), but his targeting scheme attempts to move him to the place where Pac-Man is going, instead of where he currently is. Pinky&rsquo;s target tile in Chase mode is determined by looking at Pac-Man&rsquo;s current position and orientation, and selecting the location four tiles straight ahead of Pac-Man. At least, this was the intention, and it works when Pac-Man is facing to the left, down, or right, but when Pac-Man is facing upwards, an <a href="http://en.wikipedia.org/wiki/Arithmetic_overflow" target="_blank">overflow error</a> in the game&rsquo;s code causes Pinky&rsquo;s target tile to actually be set as four tiles ahead of Pac-Man <em>and</em> four tiles to the left of him. I don&rsquo;t wish to frighten off non-programmers, but if you&rsquo;re interested in the technical details behind this bug, <a href="http://donhodges.com/pacman_pinky_explanation.htm" target="_blank">Don Hodges has written a great explanation</a> (<a href="http://webcache.googleusercontent.com/search?hl=en&amp;client=firefox-a&amp;hs=c3M&amp;gl=us&amp;q=cache%3Awww.donhodges.com%2Fpacman_pinky_explanation.htm&amp;btnG=Search" target="_blank">Google cache link</a>, since the traffic keeps killing his server), including the actual assembly code for Pinky&rsquo;s targeting, as well as a fixed version.</p>
+
+        <img src="http://media.gameinternals.com/pacman-ghosts/pinky-chicken.png">
+        <p>One important implication of Pinky&rsquo;s targeting method is that Pac-Man can often win a game of &ldquo;chicken&rdquo; with him. Since his target tile is set four tiles in front of Pac-Man, if Pac-Man heads directly towards him, Pinky&rsquo;s target tile will actually be <em>behind</em> himself once they are less than four tiles apart. This will cause Pinky to choose to take any available turn-off in order to loop back around to his target. Because of this, it is a common strategy to momentarily &ldquo;fake&rdquo; back towards Pinky if he starts following closely. This will often send him off in an entirely different direction.</p>
+
+        <h3>The Blue Ghost</h3>
+
+        <img src="http://media.gameinternals.com/pacman-ghosts/inky-targeting.png">
+        <p>The blue ghost is nicknamed Inky, and remains inside the ghost house for a short time on the first level, not joining the chase until Pac-Man has managed to consume at least 30 of the dots. His English personality description is <em>bashful</em>, while in Japanese he is referred to as &#27671;&#32027;&#12428;, <em>kimagure</em>, or &ldquo;whimsical&rdquo;. Inky is difficult to predict, because he is the only one of the ghosts that uses a factor other than Pac-Man&rsquo;s position/orientation when determining his target tile. Inky actually uses both Pac-Man&rsquo;s position/facing as well as Blinky&rsquo;s (the red ghost&rsquo;s) position in his calculation. To locate Inky&rsquo;s target, we first start by selecting the position two tiles in front of Pac-Man in his current direction of travel, similar to Pinky&rsquo;s targeting method. From there, imagine drawing a vector from Blinky&rsquo;s position to this tile, and then doubling the length of the vector. The tile that this new, extended vector ends on will be Inky&rsquo;s actual target.</p>
+
+        <p>As a result, Inky&rsquo;s target can vary wildly when Blinky is not near Pac-Man, but if Blinky is in close pursuit, Inky generally will be as well. Note that Inky&rsquo;s &ldquo;two tiles in front of Pac-Man&rdquo; calculation suffers from exactly the same overflow error as Pinky&rsquo;s four-tile equivalent, so if Pac-Man is heading upwards, the endpoint of the initial vector from Blinky (before doubling) will actually be two tiles up and two tiles left of Pac-Man.</p>
+
+        <h3>The Orange Ghost</h3>
+
+        <img src="http://media.gameinternals.com/pacman-ghosts/clyde-targeting2.png">
+        <p>The orange ghost, &ldquo;Clyde&rdquo;, is the last to leave the ghost house, and does not exit at all in the first level until over a third of the dots have been eaten. Clyde&rsquo;s English personality description is <em>pokey</em>, whereas the Japanese description is &#12362;&#24794;&#12369;, <em>otoboke</em> or &ldquo;feigning ignorance&rdquo;. As is typical, the Japanese version is more accurate, since Clyde&rsquo;s targeting method can give the impression that he is just &ldquo;doing his own thing&rdquo;, without concerning himself with Pac-Man at all. The unique feature of Clyde&rsquo;s targeting is that it has two separate modes which he constantly switches back and forth between, based on his proximity to Pac-Man. Whenever Clyde needs to determine his target tile, he first calculates his distance from Pac-Man. If he is <em>farther</em> than eight tiles away, his targeting is identical to Blinky&rsquo;s, using Pac-Man&rsquo;s current tile as his target. However, as soon as his distance to Pac-Man becomes <em>less</em> than eight tiles, Clyde&rsquo;s target is set to the same tile as his fixed one in Scatter mode, just outside the bottom-left corner of the maze.</p>
+
+        <img src="http://media.gameinternals.com/pacman-ghosts/clyde-targeting3.png">
+        <p>The combination of these two methods has the overall effect of Clyde alternating between coming directly towards Pac-Man, and then changing his mind and heading back to his corner whenever he gets too close. On the diagram above, the X marks on the path represent the points where Clyde&rsquo;s mode switches. If Pac-Man somehow managed to remain stationary in that position, Clyde would indefinitely loop around that T-shaped area. As long as the player is not in the lower-left corner of the maze, Clyde can be avoided completely by simply ensuring that you do not block his &ldquo;escape route&rdquo; back to his corner. While Pac-Man is within eight tiles of the lower-left corner, Clyde&rsquo;s path will end up in exactly the same loop as he would eventually maintain in Scatter mode.</p>
+      </section>
+    </article>
+  </div>
+</body>
+</html>
