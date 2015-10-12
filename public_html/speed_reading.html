@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <title>Speed Reading</title>
+  <link rel="shortcut icon" href="images/favicon.ico">
+  <style>
+      /* type selectors */
+    article, aside, figure, figcaption, footer, header, nav, section {
+        display: block;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 87.5%;
+      width: 650px;
+      margin: 0 auto;
+      //border: 3px solid blue;
+    }
+    aside {
+      background-color:#c7e1f2;
+      margin: 20px 20px 10px 0;
+      width: 400px;
+      float: right;
+       font-size: 100%;
+    }
+    aside.closed {
+      display: none;
+    }
+    aside.open {
+      display: block;
+    }
+    #story {
+      background-color:#c7e1f6;
+    }
+    div.closed {
+      display: none;
+    }
+    div.open {
+      display: block;
+    }
+    section {
+      padding: 15px 25px;
+    }
+    h1 { 
+      font-size: 120%;
+      color: blue;
+    }
+    h2 {
+      font-size: 100%;
+      padding: .25em 0 .25em 25px;
+      cursor: pointer;
+      color: blue;
+    }
+    h2.plus {
+      background: url(images/plus.png) no-repeat left center; 
+    }
+    h2.minus {
+      background: url(images/minus.png) no-repeat left center;
+    }
+    div.closed {
+      display: none;
+    }
+    div.open {
+      display: block;
+    }
+    ul {
+      padding-left: 45px;
+    }
+    li {
+      padding-bottom: .25em;
+    }
+  </style>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script>
+        var $ = function (id) {
+      return document.getElementById(id);
+    }
+    // the window.onload function
+      /* as in page 167
+      get the list (array) of h2 elements under categories section
+      loop through the h2 elements array
+        assign the current h2 element to a variable (like headingNode)
+        assign a function to the onclick event for headingNode
+          (in the function be sure to assign 'this' to a new variable for the node)
+          change the attributes class from closed to open and
+            from open to closed, including the next DOM siblings
+        end function
+      end loop
+      */
+  
+      // Set-up 'li' element, id 'mary' link to open the aside element of class 
+      //  'story_area'
+
+
+      // Set-up an anonymous function from the start_reading.onclick button
+      //  to open the div element of class  'story' 
+
+  
+      // Add to the last function above an interval timer that updates 
+      //    a counter (make it global)    
+    
+    
+        // Set-up the stop_button to display the time in alert statement - page 185
+
+
+    //end window.online function
+  </script>
+</head>
+
+<body>
+  <aside id="story_area" class="closed">
+    The True Story Of "Mary Had A Little Lamb"
+    <p><br>
+    <input type="button" id="start_reading" value="Start Reading">
+    <p><br>
+    <div id="story" class="closed">
+      Mary had a little lamb whose fleece was white as snow, and everywhere that Mary went the lamb was shore to go.
+      <p><br>
+      Did you know that this rhyme is based on a true incident?
+      <p><br>
+      Mary Elizabeth Sawyer was born and lived in a farmhouse about one mile from the center village of Sterling,
+      Massachusetts.
+      <p><br>
+      etc. - Enter your own story
+      <input type="button" id="stop_timer" value="Stop Timer">
+  
+      </div>  
+    </aside>
+  <section id="categories">
+    <h1> Speed Reading</h1>
+    <h2 class="plus">Read a Story</h2>
+    <div class="closed">
+      <ul id="stories">
+          <li id="mary"><a href="#">Mary Had a Little Lamb</a></li>
+        </ul> 
+    </div>
+    <h2 class="plus">Edit Stories</h2>
+    <div class="closed">
+      <ul id="options">
+          <li>Mary Had a Little Lamb</li>
+        </ul> 
+    </div>
+    <div>
+    <h2> Enter a Story</h2>
+    </div>
+  </section>
+</body>
+</html>
