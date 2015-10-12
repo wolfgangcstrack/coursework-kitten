@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,38 +77,58 @@
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   <script>
-        var $ = function (id) {
+    var $ = function (id) {
       return document.getElementById(id);
-    }
-    // the window.onload function
-      /* as in page 167
-      get the list (array) of h2 elements under categories section
-      loop through the h2 elements array
-        assign the current h2 element to a variable (like headingNode)
-        assign a function to the onclick event for headingNode
-          (in the function be sure to assign 'this' to a new variable for the node)
-          change the attributes class from closed to open and
-            from open to closed, including the next DOM siblings
-        end function
-      end loop
-      */
-  
-      // Set-up 'li' element, id 'mary' link to open the aside element of class 
-      //  'story_area'
+    };
 
+    var timer, counter; // global timer and counter variables
 
-      // Set-up an anonymous function from the start_reading.onclick button
-      //  to open the div element of class  'story' 
+    window.onload = function() {
+      var story_area = $("story_area");
+      var story = $("story");
+      var categories = $("categories");
+      var h2Elements = categories.getElementsByTagName("h2");
 
-  
-      // Add to the last function above an interval timer that updates 
-      //    a counter (make it global)    
-    
-    
-        // Set-up the stop_button to display the time in alert statement - page 185
+      var h2NodeClick = function() {
+        var h2 = this;
+        var h2Next = h2.nextElementSibling;
 
+        if (h2.getAttribute("class") === "plus") {
+          h2.setAttribute("class", "minus");
+          h2Next.setAttribute("class", "open");
+        } else {
+          h2.setAttribute("class", "plus");
+          h2Next.setAttribute("class", "closed");
 
-    //end window.online function
+          story.setAttribute("class", "closed");
+          story_area.setAttribute("class", "closed");
+        }
+      };
+
+      for (var i = 0; i < h2Elements.length; i++) {
+        var h2Node = h2Elements[i];
+        h2Node.onclick = h2NodeClick;
+      }
+
+      $("mary").onclick = function() {
+        if (story_area.getAttribute("class") == "closed") {
+          story_area.setAttribute("class", "open");
+        }
+      };
+
+      $("start_reading").onclick = function() {
+        if (story.getAttribute("class") == "closed") {
+          story.setAttribute("class", "open");
+          counter = 0;
+          timer = setInterval(function(){counter++;}, 1000);
+        }
+      };
+
+      $("stop_timer").onclick = function() {
+        clearInterval(timer);
+        alert("Timer: " + counter + " seconds");
+      };
+    };
   </script>
 </head>
 
@@ -133,12 +152,12 @@
       </div>  
     </aside>
   <section id="categories">
-    <h1> Speed Reading</h1>
+    <h1>Speed Reading</h1>
     <h2 class="plus">Read a Story</h2>
     <div class="closed">
       <ul id="stories">
-          <li id="mary"><a href="#">Mary Had a Little Lamb</a></li>
-        </ul> 
+          <li id="mary"><a href="#story_area">Mary Had a Little Lamb</a></li>
+      </ul> 
     </div>
     <h2 class="plus">Edit Stories</h2>
     <div class="closed">
@@ -147,7 +166,7 @@
         </ul> 
     </div>
     <div>
-    <h2> Enter a Story</h2>
+      <h2>Enter a Story</h2>
     </div>
   </section>
 </body>
