@@ -1,5 +1,5 @@
 -- Intro to PL/SQL
--- Lab Assignment 3, Practice 06
+-- Lab Assignment 4, Practice 06
 -- Wolfgang C. Strack
 -- Student ID#: ****7355
 -- Due Date: 12 October 2015
@@ -96,3 +96,26 @@ END;
 --- script.
 --& d. Test the PL/SQL block for the following cases [in the assignment
 --- specification].
+
+SET VERIFY OFF;
+SET SERVEROUTPUT ON;
+
+DEFINE dpt_id = 10;
+-- DEFINE dpt_id = 20;
+-- DEFINE dpt_id = 50;
+-- DEFINE dpt_id = 80;
+
+DECLARE
+  CURSOR c_employees IS
+    SELECT last_name, salary, manager_id, department_id
+    FROM employees WHERE department_id = &dpt_id;
+BEGIN
+  FOR v_emp IN c_employees LOOP
+    IF v_emp.salary < 5000 AND v_emp.manager_id IN (101, 124) THEN
+      DBMS_OUTPUT.PUT_LINE(v_emp.last_name || ' due for a raise');
+    ELSE
+      DBMS_OUTPUT.PUT_LINE(v_emp.last_name || ' not due for a raise');
+    END IF;
+  END LOOP;
+END;
+/
