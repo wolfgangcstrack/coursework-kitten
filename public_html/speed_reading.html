@@ -12,6 +12,7 @@
     * {
       margin: 0;
       padding: 0;
+      color: black !important;
     }
     body {
       font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -21,7 +22,7 @@
       //border: 3px solid blue;
     }
     aside {
-      background-color:#c7e1f2;
+      background-color: #CCCCCC;
       margin: 20px 20px 10px 0;
       width: 400px;
       float: right;
@@ -34,7 +35,7 @@
       display: block;
     }
     #story {
-      background-color:#c7e1f6;
+      background-color: #CCCCCC;
     }
     div.closed {
       display: none;
@@ -110,7 +111,7 @@
         h2Node.onclick = h2NodeClick;
       }
 
-      $("mary").onclick = function() {
+      $("fox-and-hare").onclick = function() {
         if (story_area.getAttribute("class") == "closed") {
           story_area.setAttribute("class", "open");
         }
@@ -134,36 +135,35 @@
 
 <body>
   <aside id="story_area" class="closed">
-    The True Story Of "Mary Had A Little Lamb"
+    The Fox and The Hare
     <p><br>
     <input type="button" id="start_reading" value="Start Reading">
     <p><br>
     <div id="story" class="closed">
-      Mary had a little lamb whose fleece was white as snow, and everywhere that Mary went the lamb was shore to go.
-      <p><br>
-      Did you know that this rhyme is based on a true incident?
-      <p><br>
-      Mary Elizabeth Sawyer was born and lived in a farmhouse about one mile from the center village of Sterling,
-      Massachusetts.
-      <p><br>
-      etc. - Enter your own story
+      A hare was staring at a fox in admiration.<br>
+      The fox asked, "What are you staring at?" <br>
+      The hare said in an anxious voice, “I was wondering about you". <br>
+      The fox asked, "What is the wonder with me?" <br>
+      The hare said "Are you really as cunning as people say?" <br>
+      The fox looked at the hare with a thoughtful look and replied after some silent moments, "Well! Why don't you do one thing? Come tonight and join me for dinner. We shall discuss the matter".<br>
+      The hare went to the fox's house at night. On the dining table were laid plates and bowls. But there was no food at all. The hare thought, "Oh! What a fool I am! The fox has planned to eat me" and he ran away.<br>
+      <br>
       <input type="button" id="stop_timer" value="Stop Timer">
-  
-      </div>  
-    </aside>
+    </div>  
+  </aside>
   <section id="categories">
     <h1>Speed Reading</h1>
     <h2 class="plus">Read a Story</h2>
     <div class="closed">
       <ul id="stories">
-          <li id="mary"><a href="#story_area">Mary Had a Little Lamb</a></li>
+          <li id="fox-and-hare"><a href="#story_area">The Fox and The Hare</a></li>
       </ul> 
     </div>
     <h2 class="plus">Edit Stories</h2>
     <div class="closed">
       <ul id="options">
-          <li>Mary Had a Little Lamb</li>
-        </ul> 
+        <li>The Fox and The Hare</li>
+      </ul> 
     </div>
     <div>
       <h2>Enter a Story</h2>
