@@ -2,8 +2,8 @@
 -- Lab Assignment 6, Practice 08
 -- Wolfgang C. Strack
 -- Student ID#: ****7355
--- Due Date: 15 October 2015
--- Date Handed In: 15 October 2015
+-- Due Date: 19 October 2015
+-- Date Handed In: 19 October 2015
 
 -----
 
@@ -26,6 +26,43 @@
 --- MESSAGES table to check whether the PL/SQL block has executed successfully.
 --- Some sample output is [in the assignment specification].
 
+SET VERIFY OFF;
+SET SERVEROUTPUT ON;
+
+-- a/f:
+-- DEFINE p_sal = 6000;
+-- DEFINE p_sal = 5000;
+-- DEFINE p_sal = 7000;
+-- DEFINE p_sal = 2000;
+DEFINE p_sal = 24000;
+
+DECLARE
+  v_emp employees%ROWTYPE;
+BEGIN
+  SELECT * INTO v_emp
+  FROM employees
+  WHERE salary = &p_sal;
+
+  -- d:
+  INSERT INTO messages(results) VALUES(
+    v_emp.first_name || ' ' || v_emp.last_name ||
+    ' is the only employee with a salary of ' || &p_sal
+  );
+EXCEPTION
+  -- b:
+  WHEN TOO_MANY_ROWS THEN
+    INSERT INTO messages(results)
+      VALUES('More than one employee with a salary of ' || &p_sal);
+  -- c:
+  WHEN NO_DATA_FOUND THEN
+    INSERT INTO messages(results)
+      VALUES('No employee with a salary of ' || &p_sal);
+  -- e:
+  WHEN OTHERS THEN
+    INSERT INTO messages(results) VALUES('Some other error occurred');
+END;
+/
+
 -----
 
 ----- 2. Modify the code in p3q3.sql to add an exception handler.
@@ -36,6 +73,53 @@
 --- that the specified department does not exist. Use a bind variable to pass
 --- the message to the user.
 --& c. Execute the PL/SQL block by entering a department that does not exist.
+
+SET VERIFY OFF;
+SET SERVEROUTPUT ON;
+
+DEFINE p_dept_name = 'Education';
+
+/* -- PL/SQL block to INSERT new department and display (for reference)
+DECLARE
+  v_max_dept_id NUMBER;
+BEGIN
+  SELECT MAX(department_id) INTO v_max_dept_id FROM departments;
+  INSERT INTO departments(department_id, department_name, location_id) VALUES(v_max_dept_id + 10, '&p_dept_name', NULL);
+END;
+/
+SELECT * FROM departments WHERE department_id = (SELECT MAX(department_id) FROM departments);
+*/
+
+-- a:
+-- DEFINE p_dept_id = 280;
+--& c (department 500 should not exist):
+DEFINE p_dept_id = 500;
+DEFINE p_dept_loc_id = 1700;
+
+VARIABLE g_message VARCHAR2(50);
+
+DECLARE
+  e_invalid_department_id EXCEPTION;
+BEGIN
+  UPDATE departments
+  SET location_id = &p_dept_loc_id
+  WHERE department_id = &p_dept_id;
+
+  IF SQL%NOTFOUND THEN
+    RAISE e_invalid_department_id;
+  END IF;
+
+  :g_message := 'Update successful';
+-- b:
+EXCEPTION
+  WHEN e_invalid_department_id THEN
+    :g_message := 'Department ' || &p_dept_id || ' does not exist.';
+  WHEN OTHERS THEN
+    DBMS_OUTPUT.PUT_LINE('Some other error occurred');
+END;
+/
+
+PRINT g_message;
 
 
 -----
@@ -50,3 +134,38 @@
 --- indicate how many employees are in that salary range.
 --& c. Handle any other exception with an appropriate exception handler. The
 --- message should indicate that some other error occurred.
+
+SET VERIFY OFF;
+SET SERVEROUTPUT ON;
+
+DEFINE p_sal = 7000;
+-- DEFINE p_sal = 2500;
+-- DEFINE p_sal = 6500;
+
+DECLARE
+  v_emp_count NUMBER;
+  v_lower_bound NUMBER := &p_sal - 100;
+  v_upper_bound NUMBER := &p_sal + 100;
+BEGIN
+  SELECT COUNT(employee_id) INTO v_emp_count
+  FROM employees
+  WHERE salary BETWEEN (v_lower_bound) AND (v_upper_bound);
+
+  -- b:
+  DBMS_OUTPUT.PUT_LINE(
+    'There is/are ' || v_emp_count ||
+    ' employee(s) with a salary between ' ||
+    v_lower_bound || ' and ' || v_upper_bound
+  );
+EXCEPTION
+  -- a:
+  WHEN NO_DATA_FOUND THEN
+    DBMS_OUTPUT.PUT_LINE(
+      'There are no employees with a salary between ' ||
+      v_lower_bound || ' and ' || v_upper_bound
+    );
+  -- c:
+  WHEN OTHERS THEN
+    DBMS_OUTPUT.PUT_LINE('Some other error occurred');
+END;
+/
