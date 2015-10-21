@@ -45,7 +45,8 @@ $RECYCLE.BIN/
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -68,3 +69,6 @@ Temporary Items
 
 # KDE directory preferences
 .directory
+
+###Project-Specific###
+murach-stuff/
