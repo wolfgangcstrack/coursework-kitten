@@ -1,24 +1,31 @@
 $(document).ready(function() {
-	var img_array = [];
+	var img_elements = $("#image_scroll img");
+	var src_array = [];
 
+	// store all image src in an array
+	for (var i = 0; i < img_elements.length; i++) {
+		var offset_index = i + img_elements.length;
+		src_array[i] = $(img_elements[i]).attr('src');
+		src_array[offset_index] = $(img_elements[i]).attr('id');
+	}
+
+	// set images in proper (different) format for scrolling
 	$("#image_scroll img").each(function(index) {
-		img_array[index] = {};
-		img_array[index][$(this).attr("src")] = $(this).attr("id");
+		$(this).attr('src', src_array[index]);
+		$(this).attr('id', "scroll-image-"+index);
 	});
 
+	// scrolling power!!!!!!!
 	$("#right-scroll-button").click(function() {
-		$img1 = $("#image_scroll img:eq(0)");
-		$img2 = $("#image_scroll img:eq(1)");
-		$img3 = $("#image_scroll img:eq(2)");
+		$("#image_scroll img").each(function(index) {
+			var img_num = parseInt($(this).attr('id').slice(-1)) + 1;
+			
+			if (img_num >= src_array.length) {
+				img_num = 0;
+			}
 
-		var first_src = $img1.attr("src");
-		var first_id = $img1.attr("id");
-
-		$img1.attr("src", $img2.attr("src"));
-		$img1.attr("id",  $img2.attr("id"));
-		$img2.attr("src", $img3.attr("src"));
-		$img2.attr("id",  $img3.attr("id"));
-		$img3.attr("src", first_id);
-		$img3.attr("id",  first_src);
+			$(this).attr('src', src_array[img_num]);
+			$(this).attr('id', "scroll-image-"+img_num);
+		});
 	});
 });
