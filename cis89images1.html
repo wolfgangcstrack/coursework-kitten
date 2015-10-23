@@ -5,10 +5,30 @@
   <script src="js/common-includes.js" type="text/javascript" charset="utf-8"></script>
   <style type="text/css">
     #wide-img img {
-      float: left;
       width: 340px;
       height: 250px;
       margin: 5px;
+    }
+    #big-img {
+      padding: 10px;
+    }
+    #big-img img {
+      float: left;
+      margin-left: 10px;
+    }
+    #big-img figure * {
+      margin: 20px;
+    }
+    figcaption {
+      margin: 20px;
+    }
+    #map-img img {
+      display: inline-block;
+      border: 1px solid #DDFFFF;
+    }
+    figcaption {
+      font-style: italic;
+      text-align: justify;
     }
   </style>
 </head>
@@ -16,22 +36,43 @@
   <div class="content-container">
     <section id="wide-img" class="content-column-center">
       <h1>.gif | .jpg | .png</h1><br>
-      <a href="http://gifs.gifme.io/i/1fef91f4d0.gif" title="doge-clerk"><img src="http://gifs.gifme.io/i/1fef91f4d0.gif" alt="http://houndhub.com/wp-content/uploads/2014/10/Shiba-Inu-Dog-Greets-Customers.jpg"></a>
-      <a href="https://upload.wikimedia.org/wikipedia/commons/b/b5/Miinitraaleri_%22Virsaitis%22_vrakk.jpg" title="virsaitis"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Miinitraaleri_%22Virsaitis%22_vrakk.jpg"></a>
-      <a href="https://upload.wikimedia.org/wikipedia/commons/0/05/Vulcano_bransfield-strait_hg.png" title="bransfield"><img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Vulcano_bransfield-strait_hg.png"></a>
+      <figure>
+        <a href="http://gifs.gifme.io/i/1fef91f4d0.gif"><img title="Doge Clerk" src="http://gifs.gifme.io/i/1fef91f4d0.gif" alt="http://houndhub.com/wp-content/uploads/2014/10/Shiba-Inu-Dog-Greets-Customers.jpg"></a>
+        <a href="https://upload.wikimedia.org/wikipedia/commons/b/b5/Miinitraaleri_%22Virsaitis%22_vrakk.jpg"><img title="virsaitis" src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Miinitraaleri_%22Virsaitis%22_vrakk.jpg"></a>
+        <a href="https://upload.wikimedia.org/wikipedia/commons/0/05/Vulcano_bransfield-strait_hg.png"><img title="bransfield" src="https://upload.wikimedia.org/wikipedia/commons/0/05/Vulcano_bransfield-strait_hg.png"></a>
+        <br>
+        <br>
+        <figcaption>
+          Sources: <br>
+          <a href="http://gifs.gifme.io/i/1fef91f4d0.gif">http://gifs.gifme.io/i/1fef91f4d0.gif</a><br>
+          <a href="https://upload.wikimedia.org/wikipedia/commons/b/b5/Miinitraaleri_%22Virsaitis%22_vrakk.jpg">https://upload.wikimedia.org/wikipedia/commons/b/b5/Miinitraaleri_%22Virsaitis%22_vrakk.jpg</a><br>
+          <a href="https://upload.wikimedia.org/wikipedia/commons/0/05/Vulcano_bransfield-strait_hg.png">https://upload.wikimedia.org/wikipedia/commons/0/05/Vulcano_bransfield-strait_hg.png</a>
+        </figcaption>
+      </figure>
     </section>
     <section id="big-img" class="content-column-center">
       <h1>Visual Story</h1>
-      <a href="http://www.nhm.ac.uk/resources/visit/wpy/2015/medium/16.jpg" title="tale-of-two-foxes"><img src="http://www.nhm.ac.uk/resources/visit/wpy/2015/medium/16.jpg" width="1000px" height="750px"></a>
+      <figure>
+        <a href="http://www.nhm.ac.uk/resources/visit/wpy/2015/medium/16.jpg"><img title="A Tale of Two Foxes" src="http://www.nhm.ac.uk/resources/visit/wpy/2015/medium/16.jpg" width="50%" height="50%"></a>
+        <figcaption>
+          <p>From a distance, Don could see that the red fox was chasing something across the snow. As he got closer, he realised the prey, now dead, was an Arctic fox. For three hours in temperatures of -30 degrees Centigrade Don stayed at the scene, until the red fox, finally sated, picked up the eviscerated carcass and dragged it away to store for later. In the Canadian tundra, global warming is extending the range of red foxes northwards, where they increasingly cross paths with their smaller relatives, the Arctic fox. For Arctic foxes, red foxes now represent not just their main competitor - both hunt small animals such as lemmings - but also their main predator. Few actual kills by red foxes have been witnessed so far, but it is likely that conflicts between the two mammals will become more common.</p>
+          Source: <a href="http://www.nhm.ac.uk/visit/wpy/gallery/2015/images/mammals/4965/a-tale-of-two-foxes.html">http://www.nhm.ac.uk/visit/wpy/gallery/2015/images/mammals/4965/a-tale-of-two-foxes.html</a>
+        </figcaption>
+      </figure>
     </section>
     <section id="map-img" class="content-column-center">
-      <h1>Image Map</h1>
-      <img src="images/shapes.png" usemap="#shape-map">
-      <map name="shape-map" id="shape-map">
-        <area alt="Pyramid" title="Pyramid" href="https://en.wikipedia.org/wiki/Pyramid" shape="poly" coords="153,31,58,238,83,364,245,311,244,218,272,177" />
-        <area alt="Sphere" title="Sphere" href="https://en.wikipedia.org/wiki/Sphere" shape="poly" coords="403,117,318,145,278,191,259,231,261,278,265,320,287,358,316,389,372,415,423,421,477,404,506,382,508,303,562,276,552,218,525,172,477,137" />
-        <area alt="Cube" title="Cube" href="https://en.wikipedia.org/wiki/Cube" shape="poly" coords="712,237,522,309,521,552,735,670,914,564,943,319" />
-      </map>
+      <figure>
+        <h1>Image Map</h1>
+        <img title="3D Shapes" src="images/shapes.png" usemap="#shape-map">
+        <map name="shape-map" id="shape-map">
+          <area alt="Pyramid" title="Pyramid" href="https://en.wikipedia.org/wiki/Pyramid" shape="poly" coords="153,31,58,238,83,364,245,311,244,218,272,177" />
+          <area alt="Sphere" title="Sphere" href="https://en.wikipedia.org/wiki/Sphere" shape="poly" coords="403,117,318,145,278,191,259,231,261,278,265,320,287,358,316,389,372,415,423,421,477,404,506,382,508,303,562,276,552,218,525,172,477,137" />
+          <area alt="Cube" title="Cube" href="https://en.wikipedia.org/wiki/Cube" shape="poly" coords="712,237,522,309,521,552,735,670,914,564,943,319" />
+        </map>
+        <figcaption>
+          Source: <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Basic_shapes.svg/2000px-Basic_shapes.svg.png">https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Basic_shapes.svg/2000px-Basic_shapes.svg.png</a>
+        </figcaption>
+      </figure>
     </section>
   </div>
 </body>
