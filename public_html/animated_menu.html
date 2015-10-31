@@ -1,46 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=windows-1252">
-  <title>Animation</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width">
-  <script src="animated_menu_files/html5.js"></script>
-  <script src="animated_menu_files/jquery-latest.js"></script>
-  <script src="animated_menu_files/jquery-ui.js"></script>
+  <title>Animated Menu</title>
+  <!-- common-includes.js also loads jQuery -->
+  <script src="http://toolkit.cs.ohlone.edu/~gen246/js/common-includes.js" type="text/javascript" charset="utf-8"></script>
 
   <script>
+    (function() {
+      function main($) {
+        $(document).ready(function() {
+          $("#slides li").hover(function() {
+            $(this).animate({
+              fontSize: "100px",
+              opacity: 1,
+              margin: "50px"
+            }, 100);
+          }, function() {
+            $(this).animate({
+              fontSize: "50px",
+              opacity: 0.25,
+              margin: "0px"
+            }, 100);
+          });
+        });
+      }
 
+      function defer_jQuery(method) {
+        if (window.jQuery)
+           method(jQuery);
+        else
+          setTimeout(function() { defer_jQuery(method); }, 50);
+      }
+
+      // don't run main until jQuery is loaded
+      defer_jQuery(main);
+    })();
   </script>
 
   <style>
-    li {
-      position: relative;
+    #slides li {
       list-style-type: none;
-      float: left;
-      padding: 25px;
+      display: inline;
+      padding: 20px;
       opacity: .25;
       font-style: bold;
-      font-size: 15px;
+      font-size: 50px;
     }
   </style>
 </head>
 <body>
-  <section id="faqs">
-    <p>&nbsp;</p>
-    <p></p>
-    <div id="slides">
-      <li>1</li>
-      <li>2</li>
-      <li>3</li>
-      <li>4</li>
-      <li>5</li>
-      <li>6</li>
-      <li>7</li>
-      <li>8</li>
-      <li>9</li>
-      <li>0</li>
-    </div>
-  </section>
+  <div class="content-container">
+    <section id="faqs">
+      <p>&nbsp;</p>
+      <p></p>
+      <div id="slides" class="content-column-center" style="margin-top: 50px">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>0</li>
+      </div>
+    </section>
+  </div>
 </body>
 </html>
