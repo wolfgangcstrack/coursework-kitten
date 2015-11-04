@@ -14,8 +14,8 @@ function defer_jQuery(method) {
 (function() {
   var cssURLs = [
     // local
-    'css/theme.css',
-    'css/bootstrap-social.css',
+    'https://toolkit.cs.ohlone.edu/~gen246/css/theme.css',
+    'https://toolkit.cs.ohlone.edu/~gen246/css/bootstrap-social.css',
     // remote
     'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
     'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'
@@ -23,8 +23,8 @@ function defer_jQuery(method) {
 
   var jsURLs = [
     // local
-    'js/header.js',
-    'js/footer.js',
+    'https://toolkit.cs.ohlone.edu/~gen246/js/header.js',
+    'https://toolkit.cs.ohlone.edu/~gen246/js/footer.js',
     // remote
     'https://code.jquery.com/jquery-2.1.4.min.js'
   ];
