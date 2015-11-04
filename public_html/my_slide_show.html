@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Slide Show | CS 175</title>
+  <!-- <link rel="stylesheet" href="image_scroll.css"> -->
+  <style type="text/css">
+    /* type selectors */
+    article, aside, figure, footer, header, nav, section {
+        display: block;
+    }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0 auto;
+      padding: 20px;
+      width: 760px;
+      border: 3px solid blue;
+    } 
+    h1, ul {
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      padding-bottom: .5em;
+    }
+    img {
+      height: 180px;
+      width: 240px;
+    }
+    li {
+      padding-right: 10px;
+      display: inline;
+    }
+  </style>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+  <!-- <script src="image_scroll.js"></script> -->
+  <script defer>
+    $(document).ready(function() {
+      var img_elements = $("#image_scroll img");
+      var src_array = [];
+
+      // store all image src in an array
+      for (var i = 0; i < img_elements.length; i++) {
+        var offset_index = i + img_elements.length;
+        src_array[i] = $(img_elements[i]).attr('src');
+        src_array[offset_index] = $(img_elements[i]).attr('id');
+      }
+
+      // set images in proper (different) format for scrolling
+      $("#image_scroll img").each(function(index) {
+        $(this).attr('src', src_array[index]);
+        $(this).attr('id', "scroll-image-"+index);
+      });
+
+      // scrolling power!!!!!!!
+      $("#right-scroll-button").click(function() {
+        $("#image_scroll img").each(function(index) {
+          var img_num = parseInt($(this).attr('id').slice(-1)) + 1;
+          
+          if (img_num >= src_array.length) {
+            img_num = 0;
+          }
+
+          $(this).attr('src', src_array[img_num]);
+          $(this).attr('id', "scroll-image-"+img_num);
+        });
+      });
+    });
+  </script>
+  <!-- <script src="js/common-includes.js" type="text/javascript" charset="utf-8" defer></script> -->
+</head>
+<body>
+  <div class="content-container">
+    <section class="content-column-center">
+      <h1>jQuery Image Scroll Test</h1>
+      <ul id="image_scroll">
+        <li><img src="http://toolkit.cs.ohlone.edu/~gen246/images/h1.jpg" alt="" id="http://toolkit.cs.ohlone.edu/~gen246/images/h4.jpg"></li>
+        <li><img src="http://toolkit.cs.ohlone.edu/~gen246/images/h2.jpg" alt="" id="http://toolkit.cs.ohlone.edu/~gen246/images/h5.jpg"></li>
+        <li><img src="http://toolkit.cs.ohlone.edu/~gen246/images/h3.jpg" alt="" id="http://toolkit.cs.ohlone.edu/~gen246/images/h6.jpg"></li>
+      </ul>
+      <input type="button" id="right-scroll-button" value="Scroll to the right">
+    </section>
+  </div>
+</body>
+</html>
