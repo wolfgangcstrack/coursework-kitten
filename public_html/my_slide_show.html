@@ -3,83 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <title>My Slide Show | CS 175</title>
-  <!-- <link rel="stylesheet" href="image_scroll.css"> -->
+
+  <!-- NOTE: All src/href are absolute to preserve work when submitting to the dropbox -->
+
   <style type="text/css">
-    /* type selectors */
-    article, aside, figure, footer, header, nav, section {
-        display: block;
-    }
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      margin: 0 auto;
-      padding: 20px;
-      width: 760px;
-      border: 3px solid blue;
-    } 
-    h1, ul {
-      margin: 0;
-      padding: 0;
-    }
-    h1 {
-      padding-bottom: .5em;
-    }
     img {
-      height: 180px;
-      width: 240px;
+      height: 360px;
+      width: 480px;
     }
-    li {
-      padding-right: 10px;
-      display: inline;
+    #slides img {
+      display: none;
     }
   </style>
+
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-  <!-- <script src="image_scroll.js"></script> -->
+
   <script defer>
     $(document).ready(function() {
-      var img_elements = $("#image_scroll img");
-      var src_array = [];
-
-      // store all image src in an array
-      for (var i = 0; i < img_elements.length; i++) {
-        var offset_index = i + img_elements.length;
-        src_array[i] = $(img_elements[i]).attr('src');
-        src_array[offset_index] = $(img_elements[i]).attr('id');
+      // pre-load all the images
+      var imgs = $("#slides img");
+      var image_obj = new Image();
+      for (var i = 0; i < imgs.length; i++) {
+        image_obj.src = imgs[i].src;
       }
+      
+      // save current slide
+      var curr_slide = $("#slides img:eq(0)");
+      // gets called with a timer
+      var run_slide_show = function() {
+        $("#slide-caption").fadeOut(1000);
 
-      // set images in proper (different) format for scrolling
-      $("#image_scroll img").each(function(index) {
-        $(this).attr('src', src_array[index]);
-        $(this).attr('id', "scroll-image-"+index);
-      });
-
-      // scrolling power!!!!!!!
-      $("#right-scroll-button").click(function() {
-        $("#image_scroll img").each(function(index) {
-          var img_num = parseInt($(this).attr('id').slice(-1)) + 1;
-          
-          if (img_num >= src_array.length) {
-            img_num = 0;
+        $("#slide").fadeOut(1000, function () {
+          if (curr_slide.next().length === 0) {
+            curr_slide = $("#slides img:first-child");
+          } else {
+            curr_slide = curr_slide.next();
           }
 
-          $(this).attr('src', src_array[img_num]);
-          $(this).attr('id', "scroll-image-"+img_num);
+          $("#slide").attr("src", curr_slide.attr("src")).fadeIn(1000);
+          $("#slide-caption").text(curr_slide.attr("alt")).fadeIn(1000);
         });
+      };
+
+      var timer = null;
+      $("#slides-button").click(function() {
+        if (timer !== null) {
+          clearInterval(timer);
+          timer = null;
+          // change button icon to a bootstrap "play" icon
+          // and text to "Play"
+          $("#slides-button span").
+              attr("class", "glyphicon glyphicon-play").
+              text(" Play ");
+        }
+        else {
+          timer = setInterval(run_slide_show, 3000);
+          // change button icon to a bootstrap "stop" icon
+          // and text to "Stop"
+          $("#slides-button span").
+              attr("class", "glyphicon glyphicon-stop").
+              text(" Stop ");
+        }
       });
     });
   </script>
-  <!-- <script src="js/common-includes.js" type="text/javascript" charset="utf-8" defer></script> -->
+
+  <script src="http://toolkit.cs.ohlone.edu/~gen246/js/common-includes.js" type="text/javascript" charset="utf-8" defer></script>
 </head>
 <body>
   <div class="content-container">
     <section class="content-column-center">
-      <h1>jQuery Image Scroll Test</h1>
-      <ul id="image_scroll">
-        <li><img src="http://toolkit.cs.ohlone.edu/~gen246/images/h1.jpg" alt="" id="http://toolkit.cs.ohlone.edu/~gen246/images/h4.jpg"></li>
-        <li><img src="http://toolkit.cs.ohlone.edu/~gen246/images/h2.jpg" alt="" id="http://toolkit.cs.ohlone.edu/~gen246/images/h5.jpg"></li>
-        <li><img src="http://toolkit.cs.ohlone.edu/~gen246/images/h3.jpg" alt="" id="http://toolkit.cs.ohlone.edu/~gen246/images/h6.jpg"></li>
-      </ul>
-      <input type="button" id="right-scroll-button" value="Scroll to the right">
+      <h2 id="slide-caption">JQuery Slide Show Demonstration</h2>
+      <br>
+      <img id="slide" src="http://toolkit.cs.ohlone.edu/~gen246/images/h1.jpg"/>
+      <div id="slides">
+        <img src="http://toolkit.cs.ohlone.edu/~gen246/images/h1.jpg" alt="Monogatari Series: Eikou Cram School (Morning)"/>
+        <img src="http://toolkit.cs.ohlone.edu/~gen246/images/h2.jpg" alt="Legend of Zelda: The Triforce"/>
+        <img src="http://toolkit.cs.ohlone.edu/~gen246/images/h3.jpg" alt="残響のテロル: VON"/>
+        <img src="http://toolkit.cs.ohlone.edu/~gen246/images/h4.jpg" alt="Grumpy Cat"/>
+        <img src="http://toolkit.cs.ohlone.edu/~gen246/images/h5.jpg" alt="DOGE"/>
+        <img src="http://toolkit.cs.ohlone.edu/~gen246/images/h6.jpg" alt="Monogatari Series: Eikou Cram School (Night)"/>
+      </div>
+      <button type="button" id="slides-button" class="btn btn-primary">
+        <span class="glyphicon glyphicon-play">
+          Play
+        </span>
+      </button>
     </section>
   </div>
 </body>
