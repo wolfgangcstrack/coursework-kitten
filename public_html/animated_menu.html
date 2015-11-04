@@ -4,23 +4,24 @@
   <title>Animated Menu</title>
   <!-- common-includes.js also loads jQuery -->
   <script src="http://toolkit.cs.ohlone.edu/~gen246/js/common-includes.js" type="text/javascript" charset="utf-8"></script>
+  <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 
   <script>
     (function() {
       function main($) {
         $(document).ready(function() {
-          $("#slides li").hover(function() {
+          $("#slides li img").hover(function() {
             $(this).animate({
-              fontSize: "100px",
-              opacity: 1,
-              margin: "50px"
-            }, 100);
+              width: "480px",
+              height: "360px",
+              opacity: 1
+            }, 500, "easeOutElastic");
           }, function() {
             $(this).animate({
-              fontSize: "50px",
-              opacity: 0.25,
-              margin: "0px"
-            }, 100);
+              width: "240px",
+              height: "180px",
+              opacity: 0.25
+            }, 50, "easeOutElastic");
           });
         });
       }
@@ -41,29 +42,23 @@
     #slides li {
       list-style-type: none;
       display: inline;
-      padding: 20px;
-      opacity: .25;
       font-style: bold;
       font-size: 50px;
+    }
+    img {
+      opacity: .25;
+      height: 180px;
+      width: 240px;
     }
   </style>
 </head>
 <body>
   <div class="content-container">
     <section id="faqs">
-      <p>&nbsp;</p>
-      <p></p>
       <div id="slides" class="content-column-center" style="margin-top: 50px">
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>6</li>
-        <li>7</li>
-        <li>8</li>
-        <li>9</li>
-        <li>0</li>
+        <li><img src="http://toolkit.cs.ohlone.edu/~gen246/images/h1.jpg"></li>
+        <li><img src="http://toolkit.cs.ohlone.edu/~gen246/images/h2.jpg"></li>
+        <li><img src="http://toolkit.cs.ohlone.edu/~gen246/images/h3.jpg"></li>
       </div>
     </section>
   </div>
