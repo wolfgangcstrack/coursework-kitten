@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>cis89lists1 | Wolfgang C. Strack</title>
+  <script src="js/common-includes.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    (function() {
+      function defer_jQuery(method) {
+        if (window.jQuery)
+           method(jQuery);
+        else
+          setTimeout(function() { defer_jQuery(method); }, 50);
+      }
+
+      function main($) {
+        $(document).ready(function() {
+          var ordered_list_styles = [
+            'armenian', 'cjk-ideographic', 'decimal',
+            'georgian', 'hiragana', 'hiragana-iroha', 'katakana',
+            'katakana-iroha', 'lower-alpha', 'lower-greek',
+            'lower-roman', 'upper-alpha', 'upper-roman'
+          ];
+
+          var unordered_list_styles = [
+            'square', 'circle', 'disc'
+          ];
+
+          var i_o = 0;
+          var i_u = 0;
+
+          // every half second, change the ordered list list-style-type
+          // to the next style type in the array and loop indefinitely
+          window.setInterval(function() {
+            $("#assignment-lists ol").css("list-style-type", ordered_list_styles[i_o++]);
+            if (i_o >= ordered_list_styles.length) { i_o = 0; }
+            $("#assignment-lists ol ul").css("list-style-type", unordered_list_styles[i_u++]);
+            if (i_u >= unordered_list_styles.length) { i_u = 0; }
+          }, 500);
+        });
+      }
+
+      defer_jQuery(main);
+    })();
+  </script>
+  <style>
+    #assignment-lists ol {
+      list-style-type: katakana;
+    }
+    #assignment-lists ul {
+      list-style-type: none;
+      list-style-image: url(./images/plus.png);
+    }
+    #assignment-lists ol ul {
+      list-style-type: none;
+      list-style-image: none;
+    }
+    dd { 
+      display: block;
+      margin-left: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="content-container">
+    <section id="assignment-lists" class="content-column-left">
+      <h2>Ordered list with nested unordered lists:</h2>
+      <ol>
+        <li>much order</li>
+        <ul>
+          <li>hello world</li>
+          <li>rock star tech</li>
+        </ul>
+        <li>such list</li>
+        <li>very change</li>
+        <ul>
+          <li>waow so list</li>
+          <li>i kant</li>
+        </ul>
+        <li>so ol</li>
+        <li>wowe</li>
+        <ul>
+          <li>pls help</li>
+          <li>so html</li>
+        </ul>
+      </ol>
+      <br>
+      <h2>List with customized bullets:</h2>
+      <ul>
+        <li>such unorder</li>
+        <li>so plus</li>
+        <li>very url</li>
+        <li>waow</li>
+        <li>much custom</li>
+      </ul>
+      <br>
+      <h2>Description List:</h2>
+      <dl>
+        <dt>Doge</dt>
+        <dd><i><a href="https://upload.wikimedia.org/wikipedia/commons/2/20/Shiba_Inu.jpg" title="is Love">is Love</a></i></dd>
+        <dt>Doge</dt>
+        <dd><i><a href="https://upload.wikimedia.org/wikipedia/commons/5/58/Shiba_inu_taiki.jpg" title="is Life">is Life</a></i></dd>
+      </dl>
+    </section>
+  </div>
+</body>
+</html>
