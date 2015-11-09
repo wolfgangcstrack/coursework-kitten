@@ -87,6 +87,11 @@ div.right-column {
   text-align: center;
 }
 
+.content-column-left {
+  margin: 50px;
+  text-align: left;
+}
+
 .content-column-center h1 {
   margin-top: 50px;
 }
