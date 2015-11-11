@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Membership Signup with phone validation</title>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+
+	<style>
+	/* type selectors */
+article, aside, figure, footer, header, nav, section {
+    display: block;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+    margin: 0 auto;
+    width: 800px;
+    border: 3px solid blue;
+    padding: 10px 20px;
+}
+h1 {
+	color: blue;
+}
+span {
+	color: red;
+}
+section {
+    padding: 0 2em 1em;
+}
+label {
+	float: left;
+    width: 11em;
+    text-align: right;
+}
+input, select {
+    width: 14em;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-bottom: .5em;
+}
+#buttons input {
+	width: 7em;
+}
+label.error {
+	float: none;
+	color: red;
+	font-size: 87.5%;
+}
+fieldset {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding-top: .5em;
+}
+legend {
+    color: blue;
+    font-weight: bold;
+    font-size: 85%;
+    margin-bottom: .5em;
+}
+#expiry_month {
+	width: 3em;
+}
+#expiry_year {
+	width: 4em;
+	margin: 0;
+}
+
+</style>
+<script>
+$(document).ready(function() {
+	// add span element after each input text element
+	
+	// move focus to first text box
+
+	// the handler for the click event of a regular button
+	$("#mm_webinput").submit(
+		function(event) {
+			var isValid = true;
+			
+			// validate the email entry with a regular expression
+			// and check for equality with email_2
+			var emailPattern = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}\b/;
+
+			// trim and validate the first name entry
+			
+			// trim and validate the last name entry
+
+			// validate the phone number ( with regular expression)
+			var phonePattern = /\b\d\d\d-\d\d\d-\d\d\d\d\b/;
+
+			// validate the ID_number entry(for length and isNaN)
+
+			// trim and validate the instructor entry
+			
+			// trim and validate the software entry
+
+			// prevent the submission of the form if any entries are invalid 
+
+		} // end function
+	);	// end submiy
+}); // end ready	
+</script>
+</head>
+<body>
+    <section>
+        <h1>Enter your Data for the Multimedia Festival:</h1>
+        <form id="mm_webinput" name="mm_webinput" action="feedback.html" method="get">
+	        <label for="first">First Name:</label>
+	        <input type="text" id="first" name="first"><br>
+	        	        
+			<label for="last">Last Name:</label>
+	        <input type="text" id="last" name="last"><br>
+	        	        
+			<label for="ID_number">Student ID:</label>
+	        <input type="text" id="ID_number" name="ID_number"><br>
+	        	        
+	        <label for="email">Email Address:</label>
+	        <input type="text" id="email" name="email"><br>
+	        	        
+	        <label for="email_2">Re-enter Email Address:</label>
+	        <input type="text" id="email_2" name="email_2"><br>
+	        	        
+	        <label for="phone">Phone:</label>
+	        <input type="text" id="phone" name="phone"><br>
+	        	        
+	        <label for="class">Class for the project:</label>
+			<select name="class" id="class">
+				<option value="select selected="selected"">Select</option>
+			    <option value="mm102A">mm102A</option>
+			    <option value="mm102B">mm102B</option>            
+			    <option value="mm103A">mm103A</option>
+			    <option value="mm103B">mm103B</option>
+			</select><br>
+			
+	        <label for="semester">Semester:</label>
+			<select name="semester" id="semester">
+			    <option value="select" selected="selected">Select</option>
+			    <option value="Fall">Fall</option>
+			    <option value="Spring">Spring</option>            
+			    <option value="Summer">Summer</option>
+			</select><br>
+
+	        <label for="year">Year:</label>
+			<select name="year" id="year">
+				<option value="select" selected="selected">Select</option>
+			    <option value="2014">2014</option>
+			    <option value="2013">2013</option>            
+			    <option value="2012">2012</option>
+			    <option value="2011">2011</option>
+			</select><br>
+			
+			<label for="instructor">Instructor:</label>
+	        <input type="text" id="instructor" name="instructor"><br>
+
+			<label for="software">Software:</label>
+	        <input type="text" id="software" name="software"><br>
+	        	        
+	        <label>&nbsp;</label>
+	        <input type="submit" id="submit" name="submit" value="Submit">
+	        <input type="reset" id="reset" name="reset" value="Reset"><br>
+	    </form>
+    </section>
+</body>
+</html>
