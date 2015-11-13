@@ -84,15 +84,29 @@ EXECUTE analyze_object('TABLE', 'sqluser35', 'employees');
 --- a. Schedule ANALYZE_OBJECT by using DBMS_JOB. Analyze the DEPARTMENTS table,
 --- and schedule the job to run in five minutes time from now. (To start the
 --- job in five minutes from now, set the parameter NEXT_DATE = 5/(24*60) = 1/288.)
---& b. Confirm that the job has been scheduled by using USER_JOBS.
+SET SERVEROUTPUT ON;
 
+VARIABLE v_dbms_job_no NUMBER;
+
+BEGIN
+  DBMS_JOB.SUBMIT(
+    :v_dbms_job_no,
+    'analyze_object(''TABLE'', ''sqluser35'', ''departments'');',
+    SYSDATE + (5 / (24 * 60))
+  );
+
+  DBMS_OUTPUT.PUT_LINE('Job no.: ' || :v_dbms_job_no);
+END;
+/
+
+--- b. Confirm that the job has been scheduled by using USER_JOBS.
+SELECT job FROM user_jobs WHERE job = :v_dbms_job_no;
 
 -----
 
 ----- 5. Create a procedure called CROSS_AVGSAL that generates a text file
 ----- report of employees who have exceeded the average salary of their
 ----- department. The partial code is provided for you in the file lab14_5.sql.
-
 --- a. Your program should accept two parameters. The first parameter
 --- identifies the output directory. The second parameter identifies the text
 --- file name to which your procedure writes. 
@@ -117,3 +131,41 @@ Marvis 40 $6,500.00
 
 *** END OF REPORT ***
 */
+
+CREATE OR REPLACE PROCEDURE cross_avgsal
+ (p_filedir IN VARCHAR2,  p_filename1 IN VARCHAR2)
+IS
+ v_fh_1 UTL_FILE.FILE_TYPE;
+ CURSOR cross_avg IS
+   SELECT last_name, department_id, salary
+     FROM employees outer
+     WHERE salary > (SELECT AVG(salary)
+         FROM   employees inner
+             GROUP BY outer.department_id)
+   ORDER BY department_id;
+BEGIN
+  v_fh_1 := UTL_FILE.FOPEN(p_filedir, p_filename1,'w');
+ 
+  UTL_FILE.PUTF(v_fh_1, 'Employees who earn more than average salary: \n');
+  UTL_FILE.PUTF(v_fh_1, 'REPORT GENERATED ON  %s\n\n', SYSDATE);
+  FOR v_emp_info IN cross_avg LOOP
+    UTL_FILE.PUTF(v_fh_1, '%s   %s \n', 
+    RPAD(v_emp_info.last_name, 30, ' '),
+    LPAD(TO_CHAR(v_emp_info.salary, '$99,999.00'), 12, ' '));
+  END LOOP;  
+  UTL_FILE.NEW_LINE(v_fh_1);
+  UTL_FILE.PUT_LINE(v_fh_1, '*** END OF REPORT ***');
+  UTL_FILE.FCLOSE(v_fh_1);
+
+EXCEPTION
+  WHEN UTL_FILE.INVALID_FILEHANDLE THEN
+    RAISE_APPLICATION_ERROR (-20001, 'Invalid File.');
+    UTL_FILE.FCLOSE_ALL;
+  WHEN UTL_FILE.WRITE_ERROR THEN
+    RAISE_APPLICATION_ERROR (-20002,
+                             'Unable to write to file');
+    UTL_FILE.FCLOSE_ALL;
+END cross_avgsal;
+/
+
+EXECUTE cross_avgsal('/home/student/vulfgang/doge', 'sal_rpt35.txt');
