@@ -104,6 +104,7 @@ SELECT job FROM user_jobs WHERE job = :v_dbms_job_no;
 
 -----
 
+/*
 ----- 5. Create a procedure called CROSS_AVGSAL that generates a text file
 ----- report of employees who have exceeded the average salary of their
 ----- department. The partial code is provided for you in the file lab14_5.sql.
@@ -116,7 +117,7 @@ SELECT job FROM user_jobs WHERE job = :v_dbms_job_no;
 --& c. Add an exception handling section to handle errors that may be
 --- encountered from using the UTL_FILE package.
 ---Sample output from this file follows:
-/*
+
 EMPLOYEES OVER THE AVERAGE SALARY OF THEIR DEPARTMENT: 
 
 REPORT GENERATED ON 26-FEB-01
@@ -130,7 +131,7 @@ Marvis 40 $6,500.00
 ...
 
 *** END OF REPORT ***
-*/
+
 
 CREATE OR REPLACE PROCEDURE cross_avgsal
  (p_filedir IN VARCHAR2,  p_filename1 IN VARCHAR2)
@@ -168,4 +169,6 @@ EXCEPTION
 END cross_avgsal;
 /
 
-EXECUTE cross_avgsal('/home/student/vulfgang/doge', 'sal_rpt35.txt');
+-- TODO: substitute path to directory UTL_FILE (currently unknown)
+EXECUTE cross_avgsal('', 'sal_rpt35.txt');
+*/
