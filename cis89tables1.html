@@ -3,11 +3,124 @@
 <head>
   <title>cis89tables1 | Wolfgang C. Strack</title>
   <script src="js/common-includes.js" type="text/javascript" charset="utf-8"></script>
+  <style>
+    table.cis89, th, td {
+      border: 1px solid gray;
+      padding: 30px;
+      margin: 25px;
+      text-align: center;
+    }
+    #style-demonstration {
+      float: left;
+      width: 20%;
+      margin-left: 50px;
+    }
+    #style-demonstration, #style-demonstration th, #style-demonstration td {
+      padding: 20px;
+    }
+    #style-demonstration tr {
+      height: 100px;
+    }
+    #format-demonstration {
+      float: right;
+      width: 45%;
+      margin-right: 50px;
+    }
+    #format-demonstration tr {
+      height: 100px;
+    }
+    #format-demonstration tbody tr {
+      height: 400px;
+    }
+    #format-demonstration #image-td {
+      height: 400px;
+      width: 1000px;
+      background-image: url('https://i.chzbgr.com/full/7866515456/h9D9C675A/');
+      background-size: contain;
+    }
+    #tic-tac-toe {
+      margin: 50px auto;
+    }
+    #tic-tac-toe td {
+      padding: 100px;
+    }
+  </style>
 </head>
 <body>
   <div class="content-container">
     <section class="content-column-center">
-      
+      <table id="style-demonstration" class="cis89">
+        <caption>This table demonstrates cell padding, spacing, and alignment.</caption>
+        <thead>
+          <tr>
+            <th>One column</th>
+            <th colspan="2">Two columns</th>
+            <th colspan="3">Three columns</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>one row</td>
+            <td rowspan="2">two rows</td>
+            <td rowspan="2">two rows</td>
+            <td rowspan="3">three rows</td>
+            <td rowspan="3">three rows</td>
+            <td rowspan="3">three rows</td>
+          </tr>
+          <tr>
+            <td>one row</td>
+          </tr>
+          <tr>
+            <td>one row</td>
+            <td colspan="2">two columns</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="6"><strong>Six columns</strong></td>
+          </tr>
+        </tfoot>
+      </table>
+      <table id="format-demonstration" class="cis89">
+        <caption>This table demonstrates formatting of page content.</caption>
+        <thead>
+          <tr>
+            <th colspan="6">Such Header</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="2">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua.
+            </td>
+            <td colspan="4" id="image-td"></td>
+          </tr>
+        </tbody>
+      </table>
+      <table id="tic-tac-toe" class="cis89">
+        <caption>This table demonstrates a "Tic-Tac-Toe" display</caption>
+        <tbody>
+          <colgroup>
+            <col span="3" style="background-color: #EEEEFF"
+          </colgroup>
+          <tr>
+            <td style="background-image: url('http://vignette2.wikia.nocookie.net/specops/images/2/2f/PS_X.png/revision/latest?cb=20120105182549'); background-size: contain; background-repeat: no-repeat"></td>
+            <td style="background-image: url('http://i268.photobucket.com/albums/jj6/SK_CRISIS/Emblem%20BG%20PNGs/Circle.png'); background-size: contain; background-repeat: no-repeat"></td>
+            <td style="background-image: url('http://vignette2.wikia.nocookie.net/specops/images/2/2f/PS_X.png/revision/latest?cb=20120105182549'); background-size: contain; background-repeat: no-repeat"></td>
+          </tr>
+          <tr>
+            <td style="background-image: url('http://i268.photobucket.com/albums/jj6/SK_CRISIS/Emblem%20BG%20PNGs/Circle.png'); background-size: contain; background-repeat: no-repeat"></td>
+            <td style="background-image: url('http://i268.photobucket.com/albums/jj6/SK_CRISIS/Emblem%20BG%20PNGs/Circle.png'); background-size: contain; background-repeat: no-repeat"></td>
+            <td style="background-image: url('http://vignette2.wikia.nocookie.net/specops/images/2/2f/PS_X.png/revision/latest?cb=20120105182549'); background-size: contain; background-repeat: no-repeat"></td>
+          </tr>
+          <tr>
+            <td style="background-image: url('http://vignette2.wikia.nocookie.net/specops/images/2/2f/PS_X.png/revision/latest?cb=20120105182549'); background-size: contain; background-repeat: no-repeat"></td>
+            <td></td>
+            <td style="background-image: url('http://i268.photobucket.com/albums/jj6/SK_CRISIS/Emblem%20BG%20PNGs/Circle.png'); background-size: contain; background-repeat: no-repeat"></td>
+          </tr>
+        </tbody>
+      </table>
     </section>
   </div>
 </body>
