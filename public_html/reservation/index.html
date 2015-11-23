@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Reservation request</title>
+	<link rel="stylesheet" href="main.css">
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+	<script src="reservation.js"></script>
+</head>
+	
+<body>
+	<h1>Reservation Request</h1>
+	<form action="response.html" method="get"
+    	name="reservation_form" id="reservation_form">
+		<fieldset>
+        	<legend>General Information</legend>
+        	<label for="arrival_date">Arrival date:</label>
+        	<input type="text" name="arrival_date" id="arrival_date" autofocus><br>
+        	<label for="nights">Nights:</label>
+        	<input type="text" name="nights" id="nights"><br>
+        	<label>Adults:</label>
+        	<select name="adults" id="adults">
+        		<option value="1">1</option>
+        		<option value="2">2</option>
+        		<option value="3">3</option>
+        		<option value="4">4</option>        		        		        		
+        	</select><br>
+        	<label>Children:</label>
+        	<select name="children" id="children">
+        		<option value="0">0</option>
+        		<option value="1">1</option>
+        		<option value="2">2</option>
+        		<option value="3">3</option>
+        		<option value="4">4</option>        		        		        		
+        	</select><br>        	
+		</fieldset>
+		<fieldset>
+        	<legend>Preferences</legend>
+        	<label>Room type:</label>
+			<input type="radio" name="room" id="standard" class="left" checked>Standard&nbsp;&nbsp;&nbsp;	        	
+			<input type="radio" name="room" id="business" class="left">Business&nbsp;&nbsp;&nbsp;
+			<input type="radio" name="room" id="suite" class="left last">Suite<br>
+        	<label>Bed type:</label>
+			<input type="radio" name="bed" id="king" class="left" checked>King&nbsp;&nbsp;&nbsp;
+			<input type="radio" name="bed" id="double" class="left last">Double Double<br>
+			<input type="checkbox" name="smoking" id="smoking">Smoking<br>
+		</fieldset>		
+		<fieldset>
+    		<legend>Contact Information</legend>
+    		<label for="name">Name:</label>
+			<input type="text" name="name" id="name"><br>
+        	<label for="email">Email:</label>
+        	<input type="text" name="email" id="email"><br>
+			<label for="phone">Phone:</label>
+			<input type="text" name="phone" id="phone" placeholder="999-999-9999"><br>
+		</fieldset>
+
+    	<fieldset>
+    		<input type="button" id="policies" value="View Cancellation Policies">
+			<input type="submit" id="submit" value="Submit Request">
+			<div id="dialog" title="Cancellation Policies" style="display: none;">
+				<p>Notification of cancellation or arrival date change must be 
+				received more than three days (72 hours) prior to the confirmed arrival date for the 
+				reservation deposit to be refundable. Email notification is acceptable, and a cancellation
+				confirmation will be sent to you. Failure to check-in on the scheduled arrival date 
+				will result in the cancellation of the reservation including any remaining nights, 
+				and the reservation deposit shall be forfeited.</p>
+			</div><br>    		
+    	</fieldset>
+
+	</form>
+</body>
+</html>
