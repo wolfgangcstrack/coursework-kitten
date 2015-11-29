@@ -27,15 +27,15 @@ to fixed when the window scrolls down far enough.
         '</header>'
       );
 
-      $(window).scroll(function(event) {
-        var height = $(window).scrollTop();
-        $nav = $('#navbar');
-        if (height >= 150) {
-          $nav.addClass('navbar-fixed-top');
-        } else {
-          $nav.removeClass('navbar-fixed-top');
-        }
-      });
+      // $(window).scroll(function(event) {
+      //   var height = $(window).scrollTop();
+      //   $nav = $('#navbar');
+      //   if (height >= 150) {
+      //     $nav.addClass('navbar-fixed-top');
+      //   } else {
+      //     $nav.removeClass('navbar-fixed-top');
+      //   }
+      // });
     });
   }
 
