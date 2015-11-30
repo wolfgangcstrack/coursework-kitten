@@ -11,7 +11,7 @@ to fixed when the window scrolls down far enough.
       $('body').prepend(
         '<header>' +
           '<div id="header">' +
-            '<a href="./index.html">' +
+            '<a href="#">' +
               '<h2 class="header-text">De Anza College | CIS 89A | Fall 2015</h2>' +
             '</a>' +
             '<a href="https://www.linkedin.com/in/wolfgangcstrack">' +
@@ -19,10 +19,10 @@ to fixed when the window scrolls down far enough.
             '</a>' +
           '</div>' +
           '<div id="navbar">' +
-            '<a class="nav-link" href="./index.html">Home</a>' +
-            '<a class="nav-link" href="./index.html#assignments">Favorites</a>' +
-            '<a class="nav-link" href="./index.html#about">About</a>' +
-            '<a class="nav-link" href="./index.html#contact">Contact</a>' +
+            '<a class="nav-link" href="#">Home</a>' +
+            '<a class="nav-link" href="#">Favorites</a>' +
+            '<a class="nav-link" href="#">About</a>' +
+            '<a class="nav-link" href="#">Contact</a>' +
           '</div>' +
         '</header>'
       );
