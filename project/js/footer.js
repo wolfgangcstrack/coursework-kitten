@@ -5,20 +5,20 @@
         '<footer>' +
           '<hr class="divider">' +
           '<p class="email">' +
-            '<div class="left-column text-bold vertical-center">Email Me: <a href="mailto:wolfgangcstrack@gmail.com">wolfgangcstrack@gmail.com</a></div>' +
+            '<div class="left-column text-bold vertical-center">Questions? <a href="#contact">Contact.</a></div>' +
           '</p>' +
           '<div class="right-column text-right text-gray text-bold">' +
             '<p>' +
-              '<a href="https://www.linkedin.com/in/wolfgangcstrack" class="btn btn-social-icon btn-linkedin" title="LinkedIn">' +
+              '<a href="#" class="btn btn-social-icon btn-linkedin" title="LinkedIn">' +
                 '<i class="fa fa-linkedin"></i>' +
               '</a>' +
-              '<a href="https://github.com/vulfgang" class="btn btn-social-icon btn-github" title="GitHub">' +
+              '<a href="#" class="btn btn-social-icon btn-github" title="GitHub">' +
                 '<i class="fa fa-github"></i>' +
               '</a>' +
-              '<a href="https://bitbucket.org/vulfgang/" class="btn btn-social-icon btn-bitbucket" title="BitBucket">' +
+              '<a href="#" class="btn btn-social-icon btn-bitbucket" title="BitBucket">' +
                 '<i class="fa fa-bitbucket"></i>' +
               '</a>' +
-              '<a href="https://www.facebook.com/wolfgangchristian.strack" class="btn btn-social-icon btn-facebook" title="Facebook">' +
+              '<a href="#" class="btn btn-social-icon btn-facebook" title="Facebook">' +
                 '<i class="fa fa-facebook"></i>' +
               '</a>' +
             '</p>' +
