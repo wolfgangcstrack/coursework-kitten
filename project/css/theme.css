@@ -30,7 +30,7 @@ a .header-text:hover {
 #navbar {
   text-align: center !important;
   height: 50px !important;
-  background-color: #476BB2;
+  background-color: #F24440;
   padding: 12px 0px !important;
   font-size: large !important;
   font-weight: bold !important;
@@ -38,6 +38,14 @@ a .header-text:hover {
 
 #navbar a:link, #navbar a:focus, #navbar a:visited {
     color: #FFFFFF !important;
+}
+
+a {
+  color: #F24440 !important;
+}
+
+footer a[class*='btn'] {
+  color: #FFFFFF !important;
 }
 
 .content-list-item a:hover, #navbar a:hover, #currentPage {
