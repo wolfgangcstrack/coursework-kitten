@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>cis89project | Wolfgang C. Strack</title>
+  <meta name="description" content="CIS89A Final Project">
+  <meta name="keywords" content="CIS89A,De Anza College,HTML,CSS,HTML5,CSS3,front-end">
+  <meta name="author" content="Wolfgang C. Strack">
+  <!-- Custom styles -->
+  <style>
+    /* CSS FOR GENERAL SITE THEME */
+    #header, #navbar, .content-container, footer {
+      margin-right: auto;
+      margin-left: auto;
+      width: 1100px;
+    }
+    #header {
+      margin-top: -20px;
+      padding: 45px 20px 35px 20px;
+      background-color: #FFFFFF;
+      overflow: auto;
+      position: relative; 
+    }
+    .header-text {
+      color: #555555;
+      float: left;
+      width: 50%;
+    }
+    .header-text.header-name {
+      float: right !important;
+      text-align: right;
+    }
+    a .header-text:hover {
+      color: #333333 !important;
+    }
+    #navbar {
+      text-align: center !important;
+      height: 50px !important;
+      background-color: #F24440;
+      padding: 12px 0px !important;
+      font-size: large !important;
+      font-weight: bold !important;
+    }
+    #navbar a:link, #navbar a:focus, #navbar a:visited {
+        color: #FFFFFF !important;
+    }
+    a {
+      color: #F24440 !important;
+    }
+    footer a[class*='btn'] {
+      color: #FFFFFF !important;
+    }
+    .content-list-item a:hover, #navbar a:hover, #currentPage {
+        color: #333333 !important;
+        text-decoration: none !important;
+    }
+    .nav-link {
+        margin: 0px 50px;
+    }
+    body {
+      background-color: #CCCCCC !important;
+      font-family: Verdana, Arial, Helvetica, sans-serif;
+      font-size: 1em;
+      margin-right: auto;
+      margin-left: auto;
+    }
+    .content-container {
+        text-align: justify;
+        min-height: 500px;
+        background-color: white;
+        overflow: auto;
+    }
+    .content-container div {
+        padding: 10px;
+    }
+    div {
+      text-align: initial;
+    }
+    div.left-column {
+        float:left;
+        width:45%;
+    }
+    div.right-column {
+        float:right;
+        width:50%;
+    }
+    .content-column-center {
+      margin: auto;
+      text-align: center;
+    }
+    .content-column-left {
+      margin: 50px;
+      text-align: left;
+    }
+    .content-column-center h1 {
+      margin-top: 50px;
+    }
+    .content-item, .content-list-item {
+      font-size: 20px;
+    }
+    .content-item {
+      margin-left: 25px !important;
+      margin-right: 25px !important;
+      text-align: justify;
+    }
+    ul#assignment-list {
+      list-style: none;
+      padding-left: 0;
+    }
+    p {
+      margin: 5px 0px !important;
+      display: block;
+    }
+    hr {
+      margin: 0px 0px !important;
+      border-width: 3px !important;
+      border-color: #AEAEAE !important;
+    }
+    footer {
+      background-color: #FFFFFF !important;
+      overflow: hidden;
+      padding: 10px;
+    }
+    footer > div {
+      padding: 15px 0px;
+    }
+    .btn-social-icon {
+      margin: 2px;
+    }
+    .text-right {
+      text-align: right;
+    }
+    .text-bold {
+      font-weight: bold;
+    }
+    .text-gray {
+      color: #848484;
+    }
+
+    /* CSS FOR CONTENT (All "pages") */
+    div.section-splitter {
+      padding: 0px !important;
+      background-color: #CCCCCC;
+      width: 100%;
+      height: 5px;
+    }
+    .content-column-center > * {
+      padding-left: 50px;
+      padding-right: 50px;
+      text-align: justify;
+    }
+    .content-column-center li {
+      margin-left: 30px;
+    }
+    .content-column-center p {
+      font-size: large;
+    }
+    table, th, td {
+      padding: 30px !important;
+      margin: 25px;
+      text-align: justify;
+    }
+    #home-page tr {
+      border-top: 1px solid #CCCCCC;
+      border-bottom: 1px solid #CCCCCC;
+    }
+    #favorites-page td {
+      border: 1px solid #CCCCCC;
+    }
+  </style>
+
+  <!-- Bootstrap styles, fonts, and social logos -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-social.css">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+<body>
+  <!-- Header includes navbar and anchor links -->
+  <header>
+    <div id="header">
+      <a href="#" style="margin-left: 35%">
+        <img src="images/fake-logo.png" alt="Fake Logo">
+      </a>
+    </div>
+    <div id="navbar">
+      <a class="nav-link" href="#home-page">Home</a>
+      <a class="nav-link" href="#favorites-page">Favorites</a>
+      <a class="nav-link" href="#">About</a>
+      <a class="nav-link" href="#">Contact</a>
+    </div>
+  </header>
+
+  <!-- This is where each "page" of the project will be in (the whitespace below the navbar) -->
+  <div class="content-container">
+  </div>
+
+  <!-- Footer will include social network buttons (most will be dummies) that link to the actual project's sites -->
+  <footer>
+    <hr class="divider">
+    <p class="email">
+      <div class="left-column text-bold vertical-center">Questions? <a href="#contact">Contact.</a></div>
+    </p>
+    <div class="right-column text-right text-gray text-bold">
+      <p>
+        <a href="#" class="btn btn-social-icon btn-linkedin" title="LinkedIn">
+          <i class="fa fa-linkedin"></i>
+        </a>
+        <a href="#" class="btn btn-social-icon btn-github" title="GitHub">
+          <i class="fa fa-github"></i>
+        </a>
+        <a href="#" class="btn btn-social-icon btn-bitbucket" title="BitBucket">
+          <i class="fa fa-bitbucket"></i>
+        </a>
+        <a href="#" class="btn btn-social-icon btn-facebook" title="Facebook">
+          <i class="fa fa-facebook"></i>
+        </a>
+      </p>
+    </div>
+  </footer>
+<br><br>
+</body>
+</html>
