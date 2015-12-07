@@ -8,13 +8,12 @@
   <!-- Custom styles -->
   <style>
     /* CSS FOR GENERAL SITE THEME */
-    #header, #navbar, .content-container, footer {
+    header, .aid-navbar, .content-container, footer {
       margin-right: auto;
       margin-left: auto;
       width: 1100px;
     }
-    #header {
-      margin-top: -20px;
+    header {
       padding: 45px 20px 35px 20px;
       background-color: #FFFFFF;
       overflow: auto;
@@ -32,7 +31,7 @@
     a .header-text:hover {
       color: #333333 !important;
     }
-    #navbar {
+    .aid-navbar {
       text-align: center !important;
       height: 50px !important;
       background-color: #F24440;
@@ -40,7 +39,7 @@
       font-size: large !important;
       font-weight: bold !important;
     }
-    #navbar a:link, #navbar a:focus, #navbar a:visited {
+    .aid-navbar a:link, .aid-navbar a:focus, .aid-navbar a:visited {
         color: #FFFFFF !important;
     }
     a {
@@ -49,7 +48,7 @@
     footer a[class*='btn'] {
       color: #FFFFFF !important;
     }
-    .content-list-item a:hover, #navbar a:hover, #currentPage {
+    .content-list-item a:hover, .aid-navbar a:hover, #currentPage {
         color: #333333 !important;
         text-decoration: none !important;
     }
@@ -141,7 +140,7 @@
       padding: 0px !important;
       background-color: #CCCCCC;
       width: 100%;
-      height: 5px;
+      height: 10px;
     }
     .content-column-center > * {
       padding-left: 50px;
@@ -166,28 +165,34 @@
     #favorites-page td {
       border: 1px solid #CCCCCC;
     }
+    iframe {
+      margin: 10px;
+    }
   </style>
 
   <!-- Bootstrap styles, fonts, and social logos -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap-social.css">
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    $("document").ready(function() {
+      var navbar_links = '<a class="nav-link" href="#home-page">Home</a>' +
+                         '<a class="nav-link" href="#favorites-page">Favorites</a>' +
+                         '<a class="nav-link" href="#about-page">About</a>' +
+                         '<a class="nav-link" href="#contact-page">Contact</a>';
+      $('.aid-navbar').html(navbar_links);
+    });
+  </script>
 </head>
 <body>
   <!-- Header includes navbar and anchor links -->
   <header>
-    <div id="header">
-      <a href="#" style="margin-left: 35%">
-        <img src="images/fake-logo.png" alt="Fake Logo">
-      </a>
-    </div>
-    <div id="navbar">
-      <a class="nav-link" href="#home-page">Home</a>
-      <a class="nav-link" href="#favorites-page">Favorites</a>
-      <a class="nav-link" href="#">About</a>
-      <a class="nav-link" href="#">Contact</a>
-    </div>
+    <a href="#" style="margin-left: 35%">
+      <img src="images/fake-logo.png" alt="Fake Logo">
+    </a>
   </header>
+  <div class="aid-navbar"></div>
 
   <!-- This is where each "page" of the project will be in (the whitespace below the navbar) -->
   <div class="content-container">
@@ -224,13 +229,36 @@
       </table>
       <br>
       <p>
-        <a href="https://github.com/vulfgang/AID">"AID: Assist ImproveD"</a> (or just AID) is an ambitious attempt at improving the functionality of <a href="http://www.assist.org/">ASSIST</a>. From its site, "ASSIST is an online student-transfer information system that shows how course credits earned at one public California college or university can be applied when transferred to another. ASSIST is the official repository of articulation for California’s public colleges and universities and provides the most accurate and up-to-date information about student transfer in California." <b>Note that AID is not affiliated with ASSIST in any way.</b>
+        <a href="https://github.com/vulfgang/AID">"AID: Assist ImproveD"</a> (or just AID) is an ambitious attempt at improving the functionality of <a href="http://www.assist.org/">ASSIST</a>. <a href="#about-page">Click here</a> to find out more about this project, including its full purpose, information on how it works, and information on how its components work.
       </p>
-      <p>
-        While AID started out as a project with goals only to make a website with a prettier/easier-to-use interface (as opposed to ASSIST's current interface), plans have since been proposed to add more useful functionality that ASSIST currently does not provide. The ultimate goal of this project is to provide a better experience for students, counselors, and anyone who uses ASSIST.
-      </p>
+      <br>
     </section>
-    <br><div class="section-splitter"></div>
+  </div>
+  <!-- Footer will include social network buttons (most will be dummies) that link to the actual project's sites -->
+  <footer>
+    <hr class="divider">
+    <p class="email">
+      <div class="left-column text-bold vertical-center">Questions? <a href="#contact">Contact.</a></div>
+    </p>
+    <div class="right-column text-right text-gray text-bold">
+      <p>
+        <a href="https://github.com/vulfgang/AID" class="btn btn-social-icon btn-github" title="GitHub">
+          <i class="fa fa-github"></i>
+        </a>
+        <a href="#" class="btn btn-social-icon btn-bitbucket" title="BitBucket">
+          <i class="fa fa-bitbucket"></i>
+        </a>
+      </p>
+    </div>
+  </footer>
+  <div class="content-container">
+    <div class="section-splitter"></div>
+    <header>
+    <a href="#" style="margin-left: 35%">
+      <img src="images/fake-logo.png" alt="Fake Logo">
+    </a>
+    </header>
+    <div class="aid-navbar"></div>
     <section id="favorites-page" class="content-column-center">
       <h1>Favorites</h1>
       <br>
@@ -294,8 +322,6 @@
       </table>
     </section>
   </div>
-
-  <!-- Footer will include social network buttons (most will be dummies) that link to the actual project's sites -->
   <footer>
     <hr class="divider">
     <p class="email">
@@ -303,17 +329,47 @@
     </p>
     <div class="right-column text-right text-gray text-bold">
       <p>
-        <a href="#" class="btn btn-social-icon btn-linkedin" title="LinkedIn">
-          <i class="fa fa-linkedin"></i>
-        </a>
-        <a href="#" class="btn btn-social-icon btn-github" title="GitHub">
+        <a href="https://github.com/vulfgang/AID" class="btn btn-social-icon btn-github" title="GitHub">
           <i class="fa fa-github"></i>
         </a>
         <a href="#" class="btn btn-social-icon btn-bitbucket" title="BitBucket">
           <i class="fa fa-bitbucket"></i>
         </a>
-        <a href="#" class="btn btn-social-icon btn-facebook" title="Facebook">
-          <i class="fa fa-facebook"></i>
+      </p>
+    </div>
+  </footer>
+  <div class="content-container">
+    <div class="section-splitter"></div>
+    <header>
+    <a href="#" style="margin-left: 35%">
+      <img src="images/fake-logo.png" alt="Fake Logo">
+    </a>
+    </header>
+    <div class="aid-navbar"></div>
+    <section id="about-page" class="content-column-center">
+      <h1>About</h1>
+      <br>
+      <p>
+        >"AID: Assist ImproveD"</a> (or just AID) is an ambitious attempt at improving the functionality of <a href="http://www.assist.org/">ASSIST</a>. From its site, "ASSIST is an online student-transfer information system that shows how course credits earned at one public California college or university can be applied when transferred to another. ASSIST is the official repository of articulation for California’s public colleges and universities and provides the most accurate and up-to-date information about student transfer in California." <b>Note that AID is not affiliated with ASSIST in any way.</b>
+      </p>
+      <iframe width="680" height="420" src="https://www.youtube.com/embed/HAMarJd_Xgg" frameborder="0" allowfullscreen></iframe>
+      <p>
+        While AID started out as a project with goals only to make a website with a prettier/easier-to-use interface (as opposed to ASSIST's current interface), plans have since been proposed to add more useful functionality that ASSIST currently does not provide. The ultimate goal of this project is to provide a better experience for students, counselors, and anyone who uses ASSIST.
+      </p>
+    </section>
+  </div>
+  <footer>
+    <hr class="divider">
+    <p class="email">
+      <div class="left-column text-bold vertical-center">Questions? <a href="#contact">Contact.</a></div>
+    </p>
+    <div class="right-column text-right text-gray text-bold">
+      <p>
+        <a href="https://github.com/vulfgang/AID" class="btn btn-social-icon btn-github" title="GitHub">
+          <i class="fa fa-github"></i>
+        </a>
+        <a href="#" class="btn btn-social-icon btn-bitbucket" title="BitBucket">
+          <i class="fa fa-bitbucket"></i>
         </a>
       </p>
     </div>
