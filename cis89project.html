@@ -162,11 +162,21 @@
       border-top: 1px solid #CCCCCC;
       border-bottom: 1px solid #CCCCCC;
     }
-    #favorites-page td {
+    #favorites-page td, #about-page td {
       border: 1px solid #CCCCCC;
     }
     iframe {
       margin: 10px;
+    }
+    #form_table {
+      width: 60% !important;
+    }
+    #form_table td {
+      padding: 5px 10px !important;
+    }
+    label.error {
+      color: red;
+      margin-left: 5px;
     }
   </style>
 
@@ -175,6 +185,8 @@
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
+  <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
   <script>
     $("document").ready(function() {
       var navbar_links = '<a class="nav-link" href="#home-page">Home</a>' +
@@ -183,7 +195,18 @@
                          '<a class="nav-link" href="#contact-page">Contact</a>';
       $('.aid-navbar').html(navbar_links);
     });
+    $(document).ready(function() {
+      $("#cis89a-form").validate({
+        rules: {
+          first:        { required: true },
+          last:         { required: true },
+          email:        { required: true },
+          question:     { required: true }
+        }
+      });
+    });
   </script>
+
 </head>
 <body>
   <!-- Header includes navbar and anchor links -->
@@ -192,14 +215,14 @@
       <img src="images/fake-logo.png" alt="Fake Logo">
     </a>
   </header>
-  <div class="aid-navbar"></div>
+  <div class="aid-navbar"><!-- DYNAMICALLY INSERTED LINKS --></div>
 
-  <!-- This is where each "page" of the project will be in (the whitespace below the navbar) -->
+  <!-- START OF Home PAGE -->
   <div class="content-container">
     <section id="home-page" class="content-column-center">
       <h1>Home</h1>
       <br>
-      <form class="form-inline" action="#" method="post" accept-charset="utf-8">
+      <form class="form-inline" action="#" method="post">
         <label for="home-search-bar">Search</label>
         <input class="form-control" type="search" size="50" name="home-search-bar" placeholder="Search For Articulations">
       </form>
@@ -238,7 +261,7 @@
   <footer>
     <hr class="divider">
     <p class="email">
-      <div class="left-column text-bold vertical-center">Questions? <a href="#contact">Contact.</a></div>
+      <div class="left-column text-bold vertical-center">Questions? <a href="#contact-page">Contact.</a></div>
     </p>
     <div class="right-column text-right text-gray text-bold">
       <p>
@@ -251,6 +274,8 @@
       </p>
     </div>
   </footer>
+
+  <!-- START OF Favorites PAGE -->
   <div class="content-container">
     <div class="section-splitter"></div>
     <header>
@@ -258,7 +283,7 @@
       <img src="images/fake-logo.png" alt="Fake Logo">
     </a>
     </header>
-    <div class="aid-navbar"></div>
+    <div class="aid-navbar"><!-- DYNAMICALLY INSERTED LINKS --></div>
     <section id="favorites-page" class="content-column-center">
       <h1>Favorites</h1>
       <br>
@@ -325,7 +350,7 @@
   <footer>
     <hr class="divider">
     <p class="email">
-      <div class="left-column text-bold vertical-center">Questions? <a href="#contact">Contact.</a></div>
+      <div class="left-column text-bold vertical-center">Questions? <a href="#contact-page">Contact.</a></div>
     </p>
     <div class="right-column text-right text-gray text-bold">
       <p>
@@ -338,6 +363,8 @@
       </p>
     </div>
   </footer>
+
+  <!-- START OF About PAGE -->
   <div class="content-container">
     <div class="section-splitter"></div>
     <header>
@@ -345,23 +372,65 @@
       <img src="images/fake-logo.png" alt="Fake Logo">
     </a>
     </header>
-    <div class="aid-navbar"></div>
+    <div class="aid-navbar"><!-- DYNAMICALLY INSERTED LINKS --></div>
     <section id="about-page" class="content-column-center">
       <h1>About</h1>
       <br>
       <p>
-        >"AID: Assist ImproveD"</a> (or just AID) is an ambitious attempt at improving the functionality of <a href="http://www.assist.org/">ASSIST</a>. From its site, "ASSIST is an online student-transfer information system that shows how course credits earned at one public California college or university can be applied when transferred to another. ASSIST is the official repository of articulation for California’s public colleges and universities and provides the most accurate and up-to-date information about student transfer in California." <b>Note that AID is not affiliated with ASSIST in any way.</b>
-      </p>
-      <iframe width="680" height="420" src="https://www.youtube.com/embed/HAMarJd_Xgg" frameborder="0" allowfullscreen></iframe>
+        <a href="https://github.com/vulfgang/AID">"AID: Assist ImproveD"</a> (or just AID) is an ambitious attempt at improving the functionality of <a href="http://www.assist.org/">ASSIST</a>. From its site, "ASSIST is an online student-transfer information system that shows how course credits earned at one public California college or university can be applied when transferred to another. ASSIST is the official repository of articulation for California’s public colleges and universities and provides the most accurate and up-to-date information about student transfer in California." <b>Note that AID is not affiliated with ASSIST in any way.</b>
+      </p><br>
+      <!-- Embeds a video tag with an src of a video from youtube -->
+      <iframe width="680" height="420" src="https://www.youtube.com/embed/HAMarJd_Xgg" frameborder="0" allowfullscreen></iframe><br>
       <p>
         While AID started out as a project with goals only to make a website with a prettier/easier-to-use interface (as opposed to ASSIST's current interface), plans have since been proposed to add more useful functionality that ASSIST currently does not provide. The ultimate goal of this project is to provide a better experience for students, counselors, and anyone who uses ASSIST.
-      </p>
+      </p><br>
+      <h4 style="display:inline"> A discussion on transfer students and ASSIST.org: </h4>
+      <audio autobuffer autoloop loop controls>
+        <source src="https://upload.wikimedia.org/wikipedia/en/d/d0/Rick_Astley_-_Never_Gonna_Give_You_Up.ogg" type="audio/ogg">
+        Your browser does not support the HTML5 audio tag.
+      </audio><br><br>
+      <h2>More Information</h2>
+      <table>
+        <tbody>
+          <tr>
+            <td><a href="https://github.com/DevelopersGuild/Assistscrape">AssistScrape</a></td>
+            <td>One of the biggest obstacles to this project was (and will continue to be) the collection of ASSIST's data for the project's own use. Unfortunately, ASSIST does not provide an API to their data and, on top of that, individual articulations are not always uniform in structure.<br><br>This project's answer to that is <a href="https://github.com/DevelopersGuild/Assistscrape">AssistScrape</a>, a separate project being used as a component to fill AID's database.</td>
+          </tr>
+          <tr>
+            <td><a href="https://github.com/DevelopersGuild/AndroidAssist">AndroidAssist</a></td>
+            <td>With goals to bring a similar experience to the mobile app platform, AndroidAssist is a project also being developed alongside AID. Where AID is a web app that targets PC users, <a href="https://github.com/DevelopersGuild/AndroidAssist">AndroidAssist</a> aims to bring the same functionality to Android mobile devices.</td>
+          </tr>
+          <tr>
+            <td>For all code contributors</td>
+            <td>
+              <ul style="padding-left: 0px">
+                <li><h4>Models:</h4>
+                  In a little more depth, the database this project uses is MySQL and Sequelize provides a high-level ORM to interact with that database. If you're looking for a quick peek at the DB schema, take a look at <a href="/vulfgang/AID/blob/master/db/schema.sql">db/schema.sql</a>, which reflects the original schema design before Sequelize was considered. Models and migrations should be designed using Sequelize's syntax; an easier way to get going with this would be to install <a href="http://docs.sequelizejs.com/en/latest/docs/migrations/#the-cli">sequelize-cli</a> for commands that give access to automatic generation of model skeletons. Migrations can also be generated using sequelize-cli and, in fact, are generated automatically when generating a new model. Consult the Sequelize <a href="http://docs.sequelizejs.com/en/latest/api/sequelize/">API</a> for more help on designing models and migrations.
+                </li><br>
+                <li><h4>Views</h4>
+                  Again, AID uses Express' default view functionality. Call/render views in their respectful controllers (and NOT in a routes file). This separates the logic from the middleware that handles requests.
+                </li><br>
+                <li><h4>Controllers</h4>
+                  As for controllers, if one is being designed and uses a specific model, be sure to name the file of that controller the plural of its model's filename (i.e. models/user.js -&gt; controllers/users.js). As of the time of this writing, controllers are currently designed only as basic JavaScript classes with the intention of having RESTful methods. This may change in the future to something that still incorporates REST practices, but is a little more refined.
+                </li><br>
+                <li><h4>Routes</h4>
+                  For each RESTful controller, add a route file that matches its controller's filename in the routes directory and specify which method of the controller should be called for each route. The point of keeping the handling of routes separate from the controllers is, again, to separate the controller's logic from the router code to handle requests. Separation results in a much lower possibility of others witnessing twisted, evil, destructive, spaghetti code mashed together or in, put briefly, cleaner code.
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>License</td>
+            <td>This project is licensed under the MIT License. The license can be found <a href="https://github.com/vulfgang/AID/blob/master/LICENSE.txt" title="license">here</a> for more details.</td>
+          </tr>
+        </tbody>
+      </table>
     </section>
   </div>
   <footer>
     <hr class="divider">
     <p class="email">
-      <div class="left-column text-bold vertical-center">Questions? <a href="#contact">Contact.</a></div>
+      <div class="left-column text-bold vertical-center">Questions? <a href="#contact-page">Contact.</a></div>
     </p>
     <div class="right-column text-right text-gray text-bold">
       <p>
@@ -374,6 +443,5 @@
       </p>
     </div>
   </footer>
-<br><br>
 </body>
 </html>
