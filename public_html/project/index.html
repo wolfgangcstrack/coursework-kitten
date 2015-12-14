@@ -2,33 +2,24 @@
 <html>
 <head>
   <title>cis89project | Wolfgang C. Strack</title>
-  <!-- Bootstrap styles, fonts, and social logos -->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap-social.css">
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-  <script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
-  <script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
-  <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
-  <script>
-    $("document").ready(function() {
-      var navbar_links = '<a class="nav-link" href="#home-page">Home</a>' +
-                         '<a class="nav-link" href="#favorites-page">Favorites</a>' +
-                         '<a class="nav-link" href="#about-page">About</a>' +
-                         '<a class="nav-link" href="#contact-page">Contact</a>';
-      $('.aid-navbar').html(navbar_links);
-    });
-    $(document).ready(function() {
-      $("#cis89a-form").validate({
-        rules: {
-          first:        { required: true },
-          last:         { required: true },
-          email:        { required: true },
-          question:     { required: true }
-        }
-      });
-    });
-  </script>
+  <!--
+      Custom stylesheets
+  -->
+  <link rel="stylesheet" type="text/css" href="css/theme.css">
+  <link rel="stylesheet" type="text/css" href="css/custom.css">
 
+  <!--
+      Imported tools from 3rd-party sources
+  -->
+  <!-- Bootstrap styles, fonts, and social logos -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-social.css"><link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"><link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <!-- jQuery and jQuery addons (validate, validate-additional-methods) -->
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script><script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script><script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+
+  <!--
+      Custom Javascripts
+  -->
+  <script src="./js/index.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
   <!-- Header includes navbar and anchor links -->
