@@ -1,10 +1,4 @@
-#tabs-list, #tabs-list li {
-  list-style-type: none;
-  display: inline;
-}
-
-
-/* CSS FOR CONTENT (All "pages") */
+/* DEFAULT CSS */
 div.section-splitter {
   padding: 0px !important;
   background-color: #CCCCCC;
@@ -49,4 +43,19 @@ label.error {
 }
 .btn-danger {
   background-color: #F24440 !important;
+}
+
+/* jQuery CSS */
+#tabs-list, #tabs-list li {
+  list-style-type: none;
+  display: inline;
+}
+
+.tr_focus {
+  border-top: 2px solid #555555 !important;
+  border-bottom: 1px solid #555555 !important;
+}
+
+.nav_link_focus {
+  font-size: 19px !important;
 }

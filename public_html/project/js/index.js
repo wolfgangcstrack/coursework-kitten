@@ -12,6 +12,7 @@
     $(document).ready(function() {
       execute_jquery_ui();
       execute_jquery_validation();
+      execute_jquery_other();
     });
   }
 
@@ -62,6 +63,26 @@
         email:        { required: true },
         question:     { required: true }
       }
+    });
+  }
+
+  /**
+   * This function executes any other related jQuery functionality that is
+   * not covered in its own function above. Everything else related to
+   * jQuery that is not in the functions above should executed within
+   * here.
+   */
+  function execute_jquery_other() {
+    $('#home tr').hover(function() {
+      $(this).addClass('tr_focus');
+    }, function() {
+      $(this).removeClass('tr_focus');
+    });
+
+    $('.nav-link').hover(function() {
+      $(this).addClass('nav_link_focus');
+    }, function() {
+      $(this).removeClass('nav_link_focus');
     });
   }
 
