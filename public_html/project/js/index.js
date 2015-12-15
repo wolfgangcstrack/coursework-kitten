@@ -23,10 +23,10 @@
    */
   function insert_common_includes() {
     var cssURLs = [
-    './css/theme.css',
-    './css/bootstrap-social.css',
-    'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
-    'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'
+      './css/theme.css',
+      './css/bootstrap-social.css',
+      'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
+      'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'
     ];
 
     function append_css(data) {
