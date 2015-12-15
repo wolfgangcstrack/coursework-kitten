@@ -1,3 +1,9 @@
+#tabs-list, #tabs-list li {
+  list-style-type: none;
+  display: inline;
+}
+
+
 /* CSS FOR CONTENT (All "pages") */
 div.section-splitter {
   padding: 0px !important;
@@ -21,11 +27,11 @@ table, th, td {
   margin: 25px;
   text-align: justify;
 }
-#home-page tr {
+#home tr {
   border-top: 1px solid #CCCCCC;
   border-bottom: 1px solid #CCCCCC;
 }
-#favorites-page td, #about-page td {
+#favorites td, #about td {
   border: 1px solid #CCCCCC;
 }
 iframe {
