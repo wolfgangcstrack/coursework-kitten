@@ -21,21 +21,10 @@ to fixed when the window scrolls down far enough.
           '<div id="navbar">' +
             '<a class="nav-link" href="./classpage.html">Home</a>' +
             '<a class="nav-link" href="./classpage.html#assignments">Assignments</a>' +
-            '<a class="nav-link" href="./classpage.html#about">About</a>' +
-            '<a class="nav-link" href="./classpage.html#contact">Contact</a>' +
+            '<a class="nav-link" href="./final/">Project</a>' +
           '</div>' +
         '</header>'
       );
-
-      $(window).scroll(function(event) {
-        var height = $(window).scrollTop();
-        $nav = $('#navbar');
-        if (height >= 150) {
-          $nav.addClass('navbar-fixed-top');
-        } else {
-          $nav.removeClass('navbar-fixed-top');
-        }
-      });
     });
   }
 
