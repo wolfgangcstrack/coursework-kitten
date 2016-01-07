@@ -1,0 +1,121 @@
+-- Intro to PL/SQL
+-- Lab Assignment 1
+-- Wolfgang C. Strack
+-- Student ID#: ****7355
+-- Due Date: 02 October 2015
+-- Date Handed In: 02 October 2015
+
+---------- Practice 1
+
+----- 1. Evaluate each of the following declarations. Determine which of them
+----- are not legal and explain why.
+
+--- a.
+DECLARE
+  v_id NUMBER(4);
+---
+This is a legal declaration. A variable identified as "v_id" is declared with
+the datatype NUMBER(4) meaning a number of up to 4 digits.
+
+--- b.
+DECLARE
+  v_x, v_y, v_z VARCHAR2(10);
+---
+This is an illegal declaration. You can only have one variable declaration per
+statement or else PL/SQL will give you an exception. In this case, the
+exception is that PL/SQL was expecting a datatype instead of a comma.
+
+--- c.
+DECLARE
+  v_birthdate DATE NOT NULL;
+---
+This is an illegal declaration as well. If a variable is declared as NOT NULL,
+it must also have an initialization assignment where it is declared. It makes
+sense that this declaration is illegal because it declares v_birthdate as NOT
+NULL but no value was assigned to it to fulfill that constraint.
+
+--- d.
+DECLARE
+  v_in_stock BOOLEAN := 1;
+---
+This is an illegal declaration because the initialization assignment in the
+declaration of v_in_stock is not of the BOOLEAN datatype. BOOLEAN datatypes are
+either TRUE or FALSE.
+
+-----
+
+----- 2. In each of the following assignments, indicate whether the statement
+----- is valid and what the valid data type of the result will be.
+
+--- a.
+v_days_to_go := v_due_date - SYSDATE;
+---
+This statement is valid. Assuming that v_due_date is the datatype DATE and is
+not null, the subtraction of v_due_date and SYSDATE should be a floating-point
+number indicating the number of days between the two dates. The valid data type
+of the result should in this case then be NUMBER.
+
+--- b.
+v_sender := USER || ': ' || TO_CHAR(v_dept_no);
+---
+This statement is valid. The || operator concatenates each string into a single
+string and then assigns that string to v_sender. In other words, the valid
+datatype of the result would be a string or VARCHAR.
+
+--- c.
+v_sum := $100,000 + $250,000;
+---
+This statement is invalid. PL/SQL throws an error for this statement because
+the '$' symbol is invalid syntax. When specifying a monetary value, there is
+no specific datatype; rather, the datatype NUMBER would suffice.
+
+--- d.
+v_flag := TRUE;
+---
+This statement is valid. The valid datatype of the result would be BOOLEAN.
+
+--- e.
+v_n1 := v_n2 > (2 * v_n3);
+---
+This statement is also valid. The valid datatype of the result is also BOOLEAN.
+
+--- f.
+v_value := NULL;
+---
+This statement is valid as well. The valid datatype of the result would the
+same datatype as the one that was specified in the declaration of v_value.
+
+-----
+
+----- 3. Create an anonymous block to output the phrase "My PL/SQL Block Works"
+----- to the screen.
+-- SET SERVEROUTPUT ON;
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('My PL/SQL Block Works');
+END;
+/
+
+-----
+
+----- 4. Create a block that declares two variables. Assign the value of these
+----- PL/SQL variables to iSQL*Plus host variables and print the results of the
+----- PL/SQL variables to the screen. Execute your PL/SQL block. Save your
+----- PL/SQL block in a file named p1q4.sql, by clicking the Save Script
+----- button. Remember to save the script with a .sql extension.
+
+-- Also in my p1q4.sql file I have attached.
+VARIABLE vchar VARCHAR2(50);
+VARIABLE vnum NUMBER;
+
+DECLARE
+  v_char VARCHAR2(50);
+  v_num NUMBER;
+BEGIN
+  :vchar := '42 is the answer';
+  :vnum := TO_NUMBER(SUBSTR(:vchar, 1, 2));
+  v_char := :vchar;
+  v_num := :vnum;
+  DBMS_OUTPUT.PUT_LINE(v_char);
+  DBMS_OUTPUT.PUT_LINE(v_num);
+END;
+/
