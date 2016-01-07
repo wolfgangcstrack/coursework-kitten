@@ -1,0 +1,66 @@
+/* type selectors */
+article, aside, figure, footer, header, nav, section {
+    display: block;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 87.5%;
+    color: blue;
+    background-color: lightgray;
+    margin: 0 auto;
+    width: 600px;
+    border: 3px solid red;
+    padding: 10px 20px;
+}
+legend {
+    color: blue;
+    font-weight: bold;
+    margin-bottom: .8em;
+}
+label {
+  float: left;
+    width: 95px;
+}
+input, select {
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-bottom: .5em;
+}
+input {
+    width: 14em;  
+}
+input.left {
+  width: 1em;
+  padding-left: 0;
+}
+fieldset {
+  border: none;
+  margin-left: 0;
+  margin-top: 1em;
+  padding: 0;
+}
+input.last {
+  margin-bottom: 1em;
+}
+#adults, #children {
+  width: 35px;
+}
+#smoking {
+  width: 1em;
+  margin-left: 0;
+}
+#policies {
+  margin-left: 0;
+  width: 15em;
+}
+#submit {
+  width: 10em;
+}
+#dialog p {
+  font-size: 85%;
+}
+.error {
+  float: none;
+  color: red;
+  font-size: 85%;
+}

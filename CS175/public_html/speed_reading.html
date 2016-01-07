@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <title>Speed Reading</title>
+  <link rel="shortcut icon" href="images/favicon.ico">
+  <style>
+      /* type selectors */
+    article, aside, figure, figcaption, footer, header, nav, section {
+        display: block;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      color: black !important;
+    }
+    body {
+      font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 87.5%;
+      width: 650px;
+      margin: 0 auto;
+      //border: 3px solid blue;
+    }
+    aside {
+      background-color: #CCCCCC;
+      margin: 20px 20px 10px 0;
+      width: 400px;
+      float: right;
+       font-size: 100%;
+    }
+    aside.closed {
+      display: none;
+    }
+    aside.open {
+      display: block;
+    }
+    #story {
+      background-color: #CCCCCC;
+    }
+    div.closed {
+      display: none;
+    }
+    div.open {
+      display: block;
+    }
+    section {
+      padding: 15px 25px;
+    }
+    h1 { 
+      font-size: 120%;
+      color: blue;
+    }
+    h2 {
+      font-size: 100%;
+      padding: .25em 0 .25em 25px;
+      cursor: pointer;
+      color: blue;
+    }
+    h2.plus {
+      background: url(images/plus.png) no-repeat left center; 
+    }
+    h2.minus {
+      background: url(images/minus.png) no-repeat left center;
+    }
+    div.closed {
+      display: none;
+    }
+    div.open {
+      display: block;
+    }
+    ul {
+      padding-left: 45px;
+    }
+    li {
+      padding-bottom: .25em;
+    }
+  </style>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script>
+    var $ = function (id) {
+      return document.getElementById(id);
+    };
+
+    var timer, counter; // global timer and counter variables
+
+    window.onload = function() {
+      var story_area = $("story_area");
+      var story = $("story");
+      var categories = $("categories");
+      var h2Elements = categories.getElementsByTagName("h2");
+
+      var h2NodeClick = function() {
+        var h2 = this;
+        var h2Next = h2.nextElementSibling;
+
+        if (h2.getAttribute("class") === "plus") {
+          h2.setAttribute("class", "minus");
+          h2Next.setAttribute("class", "open");
+        } else {
+          h2.setAttribute("class", "plus");
+          h2Next.setAttribute("class", "closed");
+
+          story.setAttribute("class", "closed");
+          story_area.setAttribute("class", "closed");
+        }
+      };
+
+      for (var i = 0; i < h2Elements.length; i++) {
+        var h2Node = h2Elements[i];
+        h2Node.onclick = h2NodeClick;
+      }
+
+      $("fox-and-hare").onclick = function() {
+        if (story_area.getAttribute("class") == "closed") {
+          story_area.setAttribute("class", "open");
+        }
+      };
+
+      $("start_reading").onclick = function() {
+        if (story.getAttribute("class") == "closed") {
+          story.setAttribute("class", "open");
+          counter = 0;
+          timer = setInterval(function(){counter++;}, 1000);
+        }
+      };
+
+      $("stop_timer").onclick = function() {
+        clearInterval(timer);
+        alert("Timer: " + counter + " seconds");
+      };
+    };
+  </script>
+</head>
+
+<body>
+  <aside id="story_area" class="closed">
+    The Fox and The Hare
+    <p><br>
+    <input type="button" id="start_reading" value="Start Reading">
+    <p><br>
+    <div id="story" class="closed">
+      A hare was staring at a fox in admiration.<br>
+      The fox asked, "What are you staring at?" <br>
+      The hare said in an anxious voice, “I was wondering about you". <br>
+      The fox asked, "What is the wonder with me?" <br>
+      The hare said "Are you really as cunning as people say?" <br>
+      The fox looked at the hare with a thoughtful look and replied after some silent moments, "Well! Why don't you do one thing? Come tonight and join me for dinner. We shall discuss the matter".<br>
+      The hare went to the fox's house at night. On the dining table were laid plates and bowls. But there was no food at all. The hare thought, "Oh! What a fool I am! The fox has planned to eat me" and he ran away.<br>
+      <br>
+      <input type="button" id="stop_timer" value="Stop Timer">
+    </div>  
+  </aside>
+  <section id="categories">
+    <h1>Speed Reading</h1>
+    <h2 class="plus">Read a Story</h2>
+    <div class="closed">
+      <ul id="stories">
+          <li id="fox-and-hare"><a href="#story_area">The Fox and The Hare</a></li>
+      </ul> 
+    </div>
+    <h2 class="plus">Edit Stories</h2>
+    <div class="closed">
+      <ul id="options">
+        <li>The Fox and The Hare</li>
+      </ul> 
+    </div>
+    <div>
+      <h2>Enter a Story</h2>
+    </div>
+  </section>
+</body>
+</html>

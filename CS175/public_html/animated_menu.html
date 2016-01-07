@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Animated Menu</title>
+  <!-- common-includes.js also loads jQuery -->
+  <script src="http://toolkit.cs.ohlone.edu/~gen246/js/common-includes.js" type="text/javascript" charset="utf-8"></script>
+  <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+
+  <script>
+    (function() {
+      function main($) {
+        $(document).ready(function() {
+          $("#slides li img").hover(function() {
+            $(this).animate({
+              width: "480px",
+              height: "360px",
+              opacity: 1
+            }, 500, "easeOutElastic");
+          }, function() {
+            $(this).animate({
+              width: "240px",
+              height: "180px",
+              opacity: 0.25
+            }, 50, "easeOutElastic");
+          });
+        });
+      }
+
+      function defer_jQuery(method) {
+        if (window.jQuery)
+           method(jQuery);
+        else
+          setTimeout(function() { defer_jQuery(method); }, 50);
+      }
+
+      // don't run main until jQuery is loaded
+      defer_jQuery(main);
+    })();
+  </script>
+
+  <style>
+    #slides li {
+      list-style-type: none;
+      display: inline;
+      font-style: bold;
+      font-size: 50px;
+    }
+    img {
+      opacity: .25;
+      height: 180px;
+      width: 240px;
+    }
+  </style>
+</head>
+<body>
+  <div class="content-container">
+    <section id="faqs">
+      <div id="slides" class="content-column-center" style="margin-top: 50px">
+        <li><img src="http://toolkit.cs.ohlone.edu/~gen246/images/h1.jpg"></li>
+        <li><img src="http://toolkit.cs.ohlone.edu/~gen246/images/h2.jpg"></li>
+        <li><img src="http://toolkit.cs.ohlone.edu/~gen246/images/h3.jpg"></li>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

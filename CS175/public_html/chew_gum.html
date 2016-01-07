@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chew Gum</title>
+  <!-- see common-includes.js for all common <link> and <script> tag includes -->
+  <script src="js/common-includes.js" type="text/javascript" charset="utf-8" defer></script>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>  
+    <script>
+    do {
+      var times = prompt("How many times do I need to write on the board?");
+      if (times === '' || isNaN(times)) {
+        alert("A number was not entered");
+      }
+    } while (times === '' || isNaN(times));
+    
+    times = parseInt(times);
+    var final_string = '';
+    for (var i = 0; i < times; i++) {
+      final_string += "Line " + (i + 1) + ": I will not chew gum in class.\n";
+    }
+
+    alert(final_string);
+    </script>
+</head>
+<body>
+  <div class="content-container">
+    <section class="content-column-center">
+      <br><br>
+      <h3>If you must chew gum, make it sugar-free and good for your breath.</h3>
+    </section>
+  </div>
+</body>
+</html>
+

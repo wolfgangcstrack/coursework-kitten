@@ -1,0 +1,55 @@
+/* DEFAULT CSS */
+.content-column-center > * {
+  padding-left: 50px;
+  padding-right: 50px;
+  text-align: justify;
+}
+.content-column-center li {
+  margin-left: 30px;
+}
+.content-column-center p {
+  font-size: large;
+}
+table, th, td {
+  padding: 30px !important;
+  margin: 25px;
+  text-align: justify;
+}
+#home tr {
+  border-top: 1px solid #CCCCCC;
+  border-bottom: 1px solid #CCCCCC;
+}
+#favorites td, #about td {
+  border: 1px solid #CCCCCC;
+}
+iframe {
+  margin: 10px;
+}
+#form_table {
+  width: 60% !important;
+}
+#form_table td {
+  padding: 5px 10px !important;
+}
+label.error {
+  color: red;
+  margin-left: 5px;
+}
+.btn-danger {
+  background-color: #F24440 !important;
+}
+
+/* jQuery CSS */
+#tabs-list, #tabs-list li {
+  list-style-type: none;
+  display: inline;
+}
+
+.tr_focus {
+  border-top: 2px solid #555555 !important;
+  border-bottom: 1px solid #555555 !important;
+}
+
+.nav_link_focus {
+  font-size: 19px !important;
+}
