@@ -17,8 +17,10 @@ Courses are sorted by Year and Season:
 | [CIS 29]      | Advanced C++ Programming             | Spring               | 2015 |
 | [CIS 35B]     | Advanced Java Programming            | Spring               | 2015 |
 | [CIS 64B]     | Introduction to SQL                  | Summer               | 2015 |  
-| [T.O.P.]      | The Odin Project (Entire Curriculum) | Summer - In Progress | 2015 |
-
+| [T.O.P.]      | The Odin Project (Entire Curriculum) | Summer - IP          | 2015 |
+| [CIS 64C]     | Introduction to PL/SQL               | Fall                 | 2015 |
+| [CIS 89A]     | Web Page Development                 | Fall                 | 2015 |
+| [CS 175]      | From JavaScript to AJAX              | Fall                 | 2015 |
 
 ## Other things
 **Why the kitten?**  
@@ -36,10 +38,13 @@ Yes. I make it a point, out of respect, to ask for permission from the course in
 **Why the kitten???**  
 Because kittens.
 
-[CIS 22C]: ./CIS22C_Team-Project
-[CS 149]: ./CS149_Final-Project
-[CIS 18C]: ./CIS18C_Labs
-[CIS 29]: ./CIS29_Labs
-[CIS 35B]: ./CIS35B_Labs
-[CIS 64B]: ./CIS64B_Labs
+[CIS 22C]: ./CIS22C
+[CS 149]: ./CS149
+[CIS 18C]: ./CIS18C
+[CIS 29]: ./CIS29
+[CIS 35B]: ./CIS35B
+[CIS 64B]: ./CIS64B
 [T.O.P.]: https://github.com/vulfgang/odin-ocelot
+[CIS 64C]: ./CIS64C
+[CIS 89A]: ./CIS89A
+[CS 175]: ./CS175
