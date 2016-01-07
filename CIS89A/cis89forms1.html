@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>cis89forms1 | Wolfgang C. Strack</title>
+  <script src="js/common-includes.js" type="text/javascript" charset="utf-8"></script>
+  <script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
+  <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+  <script>
+    (function() {
+      function defer_jQuery(method) {
+        if (window.jQuery)
+           method(jQuery);
+        else
+          setTimeout(function() { defer_jQuery(method); }, 50);
+      }
+
+      function main($) {
+        $(document).ready(function() {
+          $("#cis89a_input").validate({
+            rules: {
+              first:        { required: true },
+              last:         { required: true },
+              email:        { required: true },
+              date:         { required: true },
+              college_year: { required: true },
+              major:        { required: true }
+            }
+          }); // end validate
+
+          var meter_update = 0;
+          var required_fields = {
+            first:        false,
+            last:         false,
+            email:        false,
+            date:         false,
+            college_year: false,
+            major:        false
+          };
+
+          $('#cis89a_input_meter').attr('max', Object.keys(required_fields).length);
+
+          $('input').on('ready change', function(event) {
+            var name = $(this).attr('name');
+            meter_update = 0;
+
+            if (Object.keys(required_fields).indexOf(name) > -1) {
+              required_fields[name] = ($(this).val() ? true : false);
+            }
+
+            for (var key in required_fields) {
+              meter_update = (required_fields[key] ? meter_update + 1 : meter_update);
+            }
+
+            $('#cis89a_input_meter').attr('value', meter_update);
+          });
+        }); // end ready
+
+        
+      } // end main
+
+      defer_jQuery(main);
+    })();
+
+  </script>
+  <style>
+    #form_table {
+      width: 60%;
+    }
+    #form_table td {
+      padding: 10px;
+    }
+
+    label.error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="content-container">
+    <section class="content-column-center">
+      <div id="cis89a_form" style="padding-left: 5%">
+        <br>
+        <form id="cis89a_input" name="cis89a_input" action="MAILTO:email@example.com" method="POST">
+          <table id="form_table">
+            <thead>
+              <tr>
+                <th><h3>How are you doing in CIS89A?</h3></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><label for="first">First Name:</label></td>
+                <td><input type="text" name="first" placeholder="Doge" maxlength="50" size="30" tabindex="1"></td>
+              </tr>
+              <tr>
+                <td><label for="last">Last Name:</label></td>
+                <td><input type="text" name="last" placeholder="Shibe" maxlength="50" size="30" tabindex="2"></td>
+              </tr>
+              <tr>
+                <td><label for="email">Email:</label></td>
+                <td><input type="email" name="email" placeholder="dogeshibe@shibainu.wow" pattern="^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)*(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$" maxlength="50" size="30" tabindex="3"></td>
+              </tr>
+              <tr>
+                <td><label for="homepage">Homepage:</label></td>
+                <td><input type="url" name="homepage" placeholder="http://shibainu.wow" maxlength="100" size="30" tabindex="4"></td>
+              </tr>
+              <tr>
+                <td><label for="favorite_file">Upload your favorite file:</label></td>
+                <td><input type="file" name="favorite_file" tabindex="5"></td>
+              </tr>
+              <tr>
+                <td>
+                  <label for="hidden_field">I'm a hidden field - what value do I hold?</label>
+                  <input type="hidden" name="hidden_field" value="a_doge_of_course">
+                </td>
+              </tr>
+              <tr>
+                <td><label for="date">Current date:</label></td>
+                <td><input type="datetime" name="date" placeholder="MM-DD-YYYY" tabindex="6"></td>
+              </tr>
+              <tr>
+                <td><label for="college_year">Current year in college:</label></td>
+                <td><input type="number" name="college_year" value="1" step="1" tabindex="6"></td>
+              </tr>
+              <tr>
+                <td><label for="major">Are you majoring in Computer Science?</label></td>
+                <td>
+                  <input type="radio" name="major" value="yes" checked tabindex="7">&nbsp;Yes
+                  &nbsp;&nbsp;<input type="radio" name="major" value="no">&nbsp;No
+                </td>
+              </tr>
+              <tr>
+                <td><label for="grade">Expected Grade:</label></td>
+                <td>
+                  <select name="grade" id="grade" tabindex="8">
+                    <option value="" selected="selected">Select</option>
+                    <option value="A+">A+</option>
+                    <option value="A">A</option>            
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B">B</option>
+                    <option value="B-">B-</option>
+                    <option value="C+">C+</option>
+                    <option value="C">C</option>
+                    <option value="C-">C-</option>
+                    <option value="D">D</option>
+                    <option value="F">F</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label for="cis89a_topics[]">What CIS89A topic weeks are you now confident in?</label><br>
+                  <small><i>
+                    In other words, check the boxes for each week where you were able to understand the topics very well and still understand/retain currently.
+                  </i></small>
+                </td>
+                <td>
+                  <fieldset>
+                    <input type="checkbox" name="cis89a_topics[]" value="week2" tabindex="9">&nbsp;Week 2 - HTML Basics<br>
+                    <input type="checkbox" name="cis89a_topics[]" value="week3" tabindex="10">&nbsp;Week 3 - Text<br>
+                    <input type="checkbox" name="cis89a_topics[]" value="week4" tabindex="11">&nbsp;Week 4 - Links<br>
+                    <input type="checkbox" name="cis89a_topics[]" value="week5" tabindex="12">&nbsp;Week 5 - Images<br>
+                    <input type="checkbox" name="cis89a_topics[]" value="week6" tabindex="13">&nbsp;Week 6 - Multimedia<br>
+                    <input type="checkbox" name="cis89a_topics[]" value="week7" tabindex="14">&nbsp;Week 7 - Lists<br>
+                    <input type="checkbox" name="cis89a_topics[]" value="week8" tabindex="15">&nbsp;Week 8 - Tables<br>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+                <td><label for="favorite_color_hex">What is your favorite CSS color hex code?</label></td>
+                <td><input type="color" name="favorite_color_hex" value="#476BB2" tabindex="16"></td>
+              </tr>
+              <tr>
+                <td><label for="other_comments">Do you have anything else to say about your CIS89A experience?</label></td>
+                <td><textarea name="other_comments" form="cis89a_input" style="width: 270px; height: 100px; overflow: auto" maxlength="500" tabindex="17"></textarea></td>
+              </tr>
+            </tbody>
+            <!-- Submit/Reset buttons -->
+            <tfoot>
+              <tr>
+                <td><meter id="cis89a_input_meter" form="cis89a_input" style="width: 300px"></meter></td>
+              </tr>
+              <tr>
+                <td><input class="btn btn-primary" type="submit" id="submit" name="submit" value="Submit" tabindex="18"></td>
+              </tr>
+              <tr>
+                <td><input class="btn" type="reset" id="reset" name="reset" value="Reset" tabindex="19"></td>
+              </tr>
+            </tfoot>
+          </table>
+        </form>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
