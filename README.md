@@ -1,6 +1,5 @@
 # coursework-kitten
-<img src="http://cdn1.theodysseyonline.com/files/2015/06/08/6356938644488566691013182599_grumpy-cat.jpg" width="1000" height="550" />  
-*Photo from: <http://theodysseyonline.com/clemson/goodbye-grumpy-cat-hello-lil-bub/109103>*
+<img src="./meditating-kittens.jpeg" />
 
 This repository contains work from various courses I have taken in the past. Each directory at the top level contains work from a single course and all work from a single course (usually) used to be in its own git repository before being merged to this one.
 
@@ -17,7 +16,7 @@ Courses are sorted by Year and Season:
 | [CIS 29]      | Advanced C++ Programming             | Spring               | 2015 |
 | [CIS 35B]     | Advanced Java Programming            | Spring               | 2015 |
 | [CIS 64B]     | Introduction to SQL                  | Summer               | 2015 |  
-| [T.O.P.]      | The Odin Project (Entire Curriculum) | Summer - IP          | 2015 |
+| [T.O.P.]      | The Odin Project (Entire Curriculum) | Summer               | 2015 |
 | [CIS 64C]     | Introduction to PL/SQL               | Fall                 | 2015 |
 | [CIS 89A]     | Web Page Development                 | Fall                 | 2015 |
 | [CS 175]      | From JavaScript to AJAX              | Fall                 | 2015 |
@@ -44,7 +43,7 @@ Because kittens.
 [CIS 29]: ./CIS29
 [CIS 35B]: ./CIS35B
 [CIS 64B]: ./CIS64B
-[T.O.P.]: https://github.com/vulfgang/odin-ocelot
+[T.O.P.]: https://github.com/wolfgangcstrack/odin-ocelot
 [CIS 64C]: ./CIS64C
 [CIS 89A]: ./CIS89A
 [CS 175]: ./CS175
